@@ -1,0 +1,113 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "mat-table-exporter": {
+      "root": "projects/mat-table-exporter",
+      "sourceRoot": "projects/mat-table-exporter/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mat-table-exporter/tsconfig.lib.json",
+            "project": "projects/mat-table-exporter/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mat-table-exporter/src/test.ts",
+            "tsConfig": "projects/mat-table-exporter/tsconfig.spec.json",
+            "karmaConfig": "projects/mat-table-exporter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mat-table-exporter/tsconfig.lib.json",
+              "projects/mat-table-exporter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "cdk-table-exporter": {
+      "root": "projects/cdk-table-exporter",
+      "sourceRoot": "projects/cdk-table-exporter/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/cdk-table-exporter/tsconfig.lib.json",
+            "project": "projects/cdk-table-exporter/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cdk-table-exporter/src/test.ts",
+            "tsConfig": "projects/cdk-table-exporter/tsconfig.spec.json",
+            "karmaConfig": "projects/cdk-table-exporter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cdk-table-exporter/tsconfig.lib.json",
+              "projects/cdk-table-exporter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mat-table-filter": {
+      "root": "projects/mat-table-filter",
+      "sourceRoot": "projects/mat-table-filter/src",
+      "projectType": "library",
+      "prefix": "mat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mat-table-filter/tsconfig.lib.json",
+            "project": "projects/mat-table-filter/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mat-table-filter/src/test.ts",
+            "tsConfig": "projects/mat-table-filter/tsconfig.spec.json",
+            "karmaConfig": "projects/mat-table-filter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mat-table-filter/tsconfig.lib.json",
+              "projects/mat-table-filter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "cdktable-exporter"
+}

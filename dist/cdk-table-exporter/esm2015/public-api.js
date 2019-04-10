@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * Public API Surface of cdk-table-exporter
+ */
+export { CdkTableExporterModule } from './lib/cdk-table-exporter.module';
+export { CdkTableExporter } from './lib/cdk-table-exporter';
+export { JsonExporterService } from './lib/json-exporter.service';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2Nkay10YWJsZS1leHBvcnRlci8iLCJzb3VyY2VzIjpbInB1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUlBLHVDQUFjLGlDQUFpQyxDQUFDO0FBQ2hELE9BQU8sRUFBQyxnQkFBZ0IsRUFBQyxNQUFNLDBCQUEwQixDQUFDO0FBQzFELE9BQU8sRUFBQyxtQkFBbUIsRUFBQyxNQUFNLDZCQUE2QixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBjZGstdGFibGUtZXhwb3J0ZXJcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9jZGstdGFibGUtZXhwb3J0ZXIubW9kdWxlJztcbmV4cG9ydCB7Q2RrVGFibGVFeHBvcnRlcn0gZnJvbSAnLi9saWIvY2RrLXRhYmxlLWV4cG9ydGVyJztcbmV4cG9ydCB7SnNvbkV4cG9ydGVyU2VydmljZX0gZnJvbSAnLi9saWIvanNvbi1leHBvcnRlci5zZXJ2aWNlJztcbiJdfQ==

@@ -1,0 +1,45 @@
+{
+  "name": "cdk-table-exporter",
+  "version": "0.0.6",
+  "description": "Abstract CdkTable Exporter",
+  "author": "Halit Talha Türe",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HalitTalha/cdk-table-exporter.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/cdk": "~7.3.5"
+  },
+  "dependencies": {
+    "xlsx": "^0.14.1",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "@angular/cdk": "~7.3.5",
+    "goodparts": "^1.2.1"
+  },
+  "keywords": [
+    "cdktable",
+    "angular",
+    "material",
+    "mattable",
+    "table",
+    "export",
+    "paginated",
+    "table",
+    "excel"
+  ],
+  "main": "bundles/cdk-table-exporter.umd.js",
+  "module": "fesm5/cdk-table-exporter.js",
+  "es2015": "fesm2015/cdk-table-exporter.js",
+  "esm5": "esm5/cdk-table-exporter.js",
+  "esm2015": "esm2015/cdk-table-exporter.js",
+  "fesm5": "fesm5/cdk-table-exporter.js",
+  "fesm2015": "fesm2015/cdk-table-exporter.js",
+  "typings": "cdk-table-exporter.d.ts",
+  "metadata": "cdk-table-exporter.metadata.json",
+  "sideEffects": false
+}

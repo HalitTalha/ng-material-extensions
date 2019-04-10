@@ -1,0 +1,46 @@
+{
+  "name": "mat-table-exporter",
+  "version": "0.0.6",
+  "license": "Apache-2.0",
+  "description": "Provides excel exporting support for @angular/material tables",
+  "author": "Halit Talha Türe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HalitTalha/mat-table-exporter.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/material": "^7.3.5",
+    "@angular/cdk": "~7.3.5"
+  },
+  "dependencies": {
+    "cdk-table-exporter": "~0.0.5",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "@angular/cdk": "~7.3.5",
+    "@angular/material": "^7.3.5",
+    "goodparts": "^1.2.1"
+  },
+  "keywords": [
+    "angular",
+    "material",
+    "mattable",
+    "table",
+    "export",
+    "paginated",
+    "table",
+    "excel"
+  ],
+  "main": "bundles/mat-table-exporter.umd.js",
+  "module": "fesm5/mat-table-exporter.js",
+  "es2015": "fesm2015/mat-table-exporter.js",
+  "esm5": "esm5/mat-table-exporter.js",
+  "esm2015": "esm2015/mat-table-exporter.js",
+  "fesm5": "fesm5/mat-table-exporter.js",
+  "fesm2015": "fesm2015/mat-table-exporter.js",
+  "typings": "mat-table-exporter.d.ts",
+  "metadata": "mat-table-exporter.metadata.json",
+  "sideEffects": false
+}

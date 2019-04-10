@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * Public API Surface of mat-table-exporter
+ */
+export { MatTableExporterModule } from './lib/mat-table-exporter.module';
+export { MatTableExporterDirective } from './lib/mat-table-exporter.directive';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL21hdC10YWJsZS1leHBvcnRlci8iLCJzb3VyY2VzIjpbInB1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUlBLHVDQUFjLGlDQUFpQyxDQUFDO0FBQ2hELE9BQU8sRUFBQyx5QkFBeUIsRUFBQyxNQUFNLG9DQUFvQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBtYXQtdGFibGUtZXhwb3J0ZXJcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9tYXQtdGFibGUtZXhwb3J0ZXIubW9kdWxlJztcbmV4cG9ydCB7TWF0VGFibGVFeHBvcnRlckRpcmVjdGl2ZX0gZnJvbSAnLi9saWIvbWF0LXRhYmxlLWV4cG9ydGVyLmRpcmVjdGl2ZSc7XG4iXX0=

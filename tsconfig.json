@@ -1,0 +1,54 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "cdktable-exporter": [
+        "dist/cdktable-exporter"
+      ],
+      "cdktable-exporter/*": [
+        "dist/cdktable-exporter/*"
+      ],
+      "mattable-exporter": [
+        "dist/mattable-exporter"
+      ],
+      "mattable-exporter/*": [
+        "dist/mattable-exporter/*"
+      ],
+      "mat-table-exporter": [
+        "dist/mat-table-exporter"
+      ],
+      "mat-table-exporter/*": [
+        "dist/mat-table-exporter/*"
+      ],
+      "cdk-table-exporter": [
+        "dist/cdk-table-exporter"
+      ],
+      "cdk-table-exporter/*": [
+        "dist/cdk-table-exporter/*"
+      ],
+      "mat-table-filter": [
+        "dist/mat-table-filter"
+      ],
+      "mat-table-filter/*": [
+        "dist/mat-table-filter/*"
+      ]
+    }
+  }
+}
