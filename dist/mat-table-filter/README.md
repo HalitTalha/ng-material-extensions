@@ -1,5 +1,7 @@
 # Material Table Filter (matTableFilter Directive)
 
+[![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")  [![Node version](https://img.shields.io/npm/v/mat-table-filter.svg?style=flat)](https://www.npmjs.com/package/mat-table-filter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-filter.svg)
+
 Provides filtering support for @angular/material tables. Table filtering is done by using the directive matTableFilter. This project is inspired by Hibernate's example api.
 By employing this directive you will end up with having
 * Less code, less complicated logic for filtering
@@ -12,12 +14,13 @@ By employing this directive you will end up with having
 npm install --save mat-table-filter
 ```
 
+After installing mat-table-filter import MatTableFilterModule in your ngModule
+
 ## Usage
 
 A datasource of a simple array won't work. In order to use matTableFilter, your table's datasource must be created as MatTableDataSource, see the example below.
 
 ```
-displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 dataSource = new MatTableDataSource(ELEMENT_DATA);
 ```
 1. Add matTableFilter directive as a property to your material table. Assign the table's template referance to it.
@@ -140,3 +143,19 @@ matTableFilter is the directive selector
 | `@Input` | filterType | `FilterType` |(Optional) Defines the filtering strategy. Default value is `FilterType.ANYWHERE` |
 | `@Input` | debounceTime | `number` | (Optional) Defines debounce time in milliseconds. Default value is `400` |
 | `@Input` | caseSensitive | `boolean` | (Optional) Default value is `false` |
+
+
+## Contributing
+This project is a library project inside mat-table-extensions angular workspace. If you are interested in the source code of this particular library you can get ready and build the project by applying the steps below:
+
+1. Do ```npm install``` in ```mat-table-extensions``` directory
+2. Do ```npm install``` in ```mat-table-extensions\projects\mat-table-filter``` directory
+3. Go to ```mat-table-extensions``` directory
+4. Build it:
+```
+ng build mat-table-filter
+```
+
+## Licence
+
+Apache-2.0

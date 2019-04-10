@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "cdktable-exporter"
+  "defaultProject": "cdk-table-exporter"
 }

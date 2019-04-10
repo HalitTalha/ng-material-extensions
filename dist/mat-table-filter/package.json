@@ -4,9 +4,9 @@
   "author": "Halit Talha Türe",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HalitTalha/mat-table-filter.git"
+    "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-filter"
   },
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Provides filtering support for @angular/material tables",
   "peerDependencies": {
     "@angular/common": "^7.2.0",

@@ -1,12 +1,12 @@
 {
   "name": "cdk-table-exporter",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "Abstract CdkTable Exporter",
   "author": "Halit Talha Türe",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HalitTalha/cdk-table-exporter.git"
+    "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/cdk-table-exporter"
   },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
