@@ -1,6 +1,7 @@
 import { MatTableModule } from '@angular/material';
 import { Directive, Renderer2, NgModule } from '@angular/core';
 import { CdkTableExporter, JsonExporterService } from 'cdk-table-exporter';
+export { JsonExporterService } from 'cdk-table-exporter';
 
 /**
  * @fileoverview added by tsickle
@@ -22,20 +23,22 @@ class MatTableExporterDirective extends CdkTableExporter {
      */
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        this.exportStarted.subscribe((/**
-         * @param {?} _
-         * @return {?}
-         */
-        _ => {
-            this.enablePaginator(false);
-        }));
-        this.exportCompleted.subscribe((/**
-         * @param {?} _
-         * @return {?}
-         */
-        _ => {
-            this.enablePaginator(true);
-        }));
+        if (this.getPaginator()) {
+            this.exportStarted.subscribe((/**
+             * @param {?} _
+             * @return {?}
+             */
+            _ => {
+                this.enablePaginator(false);
+            }));
+            this.exportCompleted.subscribe((/**
+             * @param {?} _
+             * @return {?}
+             */
+            _ => {
+                this.enablePaginator(true);
+            }));
+        }
     }
     /**
      * MatTable implementation of getPageCount

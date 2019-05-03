@@ -23,8 +23,8 @@ After installing cdk-table-exporter import CdkTableExporterModule in your ngModu
 CdkTableExporter class defines the common functionality that an exporter directive should have.
 By extending it an implementing the abstract methods you will have an exporter of your own.
 Thus the usage is simply as follows:
-1- Generate a directive class
-2- Extend CdkTableExporter class implement the abstract methods
+1. Generate a directive class
+2. Extend CdkTableExporter class implement the abstract methods
 
 
 ## Contributing

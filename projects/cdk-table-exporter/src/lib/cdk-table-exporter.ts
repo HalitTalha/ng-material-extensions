@@ -84,7 +84,7 @@ export abstract class CdkTableExporter implements AfterViewInit {
 
   private exportSinglePage() {
     this.extractDataOnCurrentPage();
-    this.jsonExporter.exportExcel(this.extractExcelHeaderRow(), this._data, this.fileName, this.sheetName);
+    this.exportExtractedData();
   }
 
   private extractDataOnCurrentPage() {

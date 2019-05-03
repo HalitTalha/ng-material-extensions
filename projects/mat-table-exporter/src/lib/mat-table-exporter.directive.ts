@@ -13,12 +13,14 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
  */
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
-    this.exportStarted.subscribe(_ => {
-      this.enablePaginator(false);
-    });
-    this.exportCompleted.subscribe(_ => {
-      this.enablePaginator(true);
-    });
+    if (this.getPaginator()) {
+      this.exportStarted.subscribe(_ => {
+        this.enablePaginator(false);
+      });
+      this.exportCompleted.subscribe(_ => {
+        this.enablePaginator(true);
+      });
+    }
   }
 
   constructor(protected renderer: Renderer2, protected jsonExporter: JsonExporterService) {

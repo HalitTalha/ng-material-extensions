@@ -59,18 +59,20 @@
             function () {
                 var _this = this;
                 _super.prototype.ngAfterViewInit.call(this);
-                this.exportStarted.subscribe(( /**
-                 * @param {?} _
-                 * @return {?}
-                 */function (_) {
-                    _this.enablePaginator(false);
-                }));
-                this.exportCompleted.subscribe(( /**
-                 * @param {?} _
-                 * @return {?}
-                 */function (_) {
-                    _this.enablePaginator(true);
-                }));
+                if (this.getPaginator()) {
+                    this.exportStarted.subscribe(( /**
+                     * @param {?} _
+                     * @return {?}
+                     */function (_) {
+                        _this.enablePaginator(false);
+                    }));
+                    this.exportCompleted.subscribe(( /**
+                     * @param {?} _
+                     * @return {?}
+                     */function (_) {
+                        _this.enablePaginator(true);
+                    }));
+                }
             };
         /**
          * MatTable implementation of getPageCount
@@ -212,6 +214,7 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
+    exports.JsonExporterService = cdkTableExporter.JsonExporterService;
     exports.MatTableExporterDirective = MatTableExporterDirective;
     exports.MatTableExporterModule = MatTableExporterModule;
 

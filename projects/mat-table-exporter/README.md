@@ -22,7 +22,7 @@ After installing mat-table-exporter import MatTableExporterModule in your ngModu
 Install cdk-table-exporter if you are not using angular material in your project. In this case you have to implement your version of CdkTableExporter abstract class to use as your directive.
 
 ```
-npm install cdk-table-exporter
+npm install --save cdk-table-exporter
 ```
 After installing cdk-table-exporter import CdkTableExporterModule in your ngModules
 
@@ -82,8 +82,10 @@ Exports excel file by employing xlsx sheetjs
 ## Contributing
 This project is a library project inside mat-table-extensions angular workspace. If you are interested in the source code of this particular library you can build it inside the workspace directory as explained below:
 
-1. Go to ```mat-table-extensions``` directory
-2. Build it:
+1. Do ```npm install``` in ```mat-table-extensions``` directory
+2. Do ```npm install``` in ```mat-table-extensions\projects\mat-table-exporter``` directory
+3. Go to ```mat-table-extensions``` directory
+4. Build it:
 ```
 ng build mat-table-exporter
 ```

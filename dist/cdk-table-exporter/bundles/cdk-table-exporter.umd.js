@@ -100,7 +100,7 @@
          */
             function () {
                 this.extractDataOnCurrentPage();
-                this.jsonExporter.exportExcel(this.extractExcelHeaderRow(), this._data, this.fileName, this.sheetName);
+                this.exportExtractedData();
             };
         /**
          * @private

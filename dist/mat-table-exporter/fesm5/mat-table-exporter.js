@@ -2,6 +2,7 @@ import { MatTableModule } from '@angular/material';
 import { __extends } from 'tslib';
 import { Directive, Renderer2, NgModule } from '@angular/core';
 import { CdkTableExporter, JsonExporterService } from 'cdk-table-exporter';
+export { JsonExporterService } from 'cdk-table-exporter';
 
 /**
  * @fileoverview added by tsickle
@@ -29,20 +30,22 @@ var MatTableExporterDirective = /** @class */ (function (_super) {
     function () {
         var _this = this;
         _super.prototype.ngAfterViewInit.call(this);
-        this.exportStarted.subscribe((/**
-         * @param {?} _
-         * @return {?}
-         */
-        function (_) {
-            _this.enablePaginator(false);
-        }));
-        this.exportCompleted.subscribe((/**
-         * @param {?} _
-         * @return {?}
-         */
-        function (_) {
-            _this.enablePaginator(true);
-        }));
+        if (this.getPaginator()) {
+            this.exportStarted.subscribe((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) {
+                _this.enablePaginator(false);
+            }));
+            this.exportCompleted.subscribe((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) {
+                _this.enablePaginator(true);
+            }));
+        }
     };
     /**
      * MatTable implementation of getPageCount
