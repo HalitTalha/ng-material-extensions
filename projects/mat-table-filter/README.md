@@ -36,6 +36,8 @@ dataSource = new MatTableDataSource(ELEMENT_DATA);
 That's all. When you populate the exampleObject's properties, the filter will automatically work just fine with the default debounce support.
 You can change the debounce time also.
 
+### Stackblitz demo [mat-table-filter-example](https://jvmibnny.github.stackblitz.io)
+
 ## Full Example
 We rename our "exampleObject" as filterEntity in this example.
 
