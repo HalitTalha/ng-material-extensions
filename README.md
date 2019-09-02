@@ -173,7 +173,7 @@ You can change the debounce time also.
 
 &nbsp;
 
-### Stackblitz demo [mat-table-filter-example](https://jvmibnny.github.stackblitz.io)
+### Stackblitz demo [mat-table-filter-example](https://stackblitz.com/github/jvmibnny)
 
 ### Full Example
 We rename our "exampleObject" as filterEntity in this example.
