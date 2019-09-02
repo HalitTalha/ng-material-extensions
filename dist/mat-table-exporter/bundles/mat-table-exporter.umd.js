@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/material'), require('@angular/core'), require('cdk-table-exporter')) :
-    typeof define === 'function' && define.amd ? define('mat-table-exporter', ['exports', '@angular/material', '@angular/core', 'cdk-table-exporter'], factory) :
-    (factory((global['mat-table-exporter'] = {}),global.ng.material,global.ng.core,global.cdkTableExporter));
-}(this, (function (exports,material,core,cdkTableExporter) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/material'), require('cdk-table-exporter')) :
+    typeof define === 'function' && define.amd ? define('mat-table-exporter', ['exports', '@angular/core', '@angular/material', 'cdk-table-exporter'], factory) :
+    (factory((global['mat-table-exporter'] = {}),global.ng.core,global.ng.material,global.cdkTableExporter));
+}(this, (function (exports,core,material,cdkTableExporter) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -39,11 +39,8 @@
      */
     var MatTableExporterDirective = /** @class */ (function (_super) {
         __extends(MatTableExporterDirective, _super);
-        function MatTableExporterDirective(renderer, jsonExporter) {
-            var _this = _super.call(this, renderer, jsonExporter) || this;
-            _this.renderer = renderer;
-            _this.jsonExporter = jsonExporter;
-            return _this;
+        function MatTableExporterDirective(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
+            return _super.call(this, renderer, serviceLocator, dataExtractor, table, viewContainerRef) || this;
         }
         /**
          * Overriding ngAfterViewInit of TableExporter
@@ -58,21 +55,18 @@
          */
             function () {
                 var _this = this;
-                _super.prototype.ngAfterViewInit.call(this);
-                if (this.getPaginator()) {
-                    this.exportStarted.subscribe(( /**
-                     * @param {?} _
-                     * @return {?}
-                     */function (_) {
-                        _this.enablePaginator(false);
-                    }));
-                    this.exportCompleted.subscribe(( /**
-                     * @param {?} _
-                     * @return {?}
-                     */function (_) {
-                        _this.enablePaginator(true);
-                    }));
-                }
+                this.exportStarted.subscribe(( /**
+                 * @param {?} _
+                 * @return {?}
+                 */function (_) {
+                    _this.enablePaginator(false);
+                }));
+                this.exportCompleted.subscribe(( /**
+                 * @param {?} _
+                 * @return {?}
+                 */function (_) {
+                    _this.enablePaginator(true);
+                }));
             };
         /**
          * MatTable implementation of getPageCount
@@ -167,19 +161,26 @@
          * @return {?}
          */
             function (value) {
-                this.getPaginator().disabled = !value;
-                this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+                if (this.getPaginator()) {
+                    this.getPaginator().disabled = !value;
+                    this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+                }
             };
         MatTableExporterDirective.decorators = [
             { type: core.Directive, args: [{
-                        selector: '[ngxMatTableExporter]'
+                        selector: '[ngxMatTableExporter], [matTableExporter]',
+                        // renamed selector but kept old version for backwards compat.
+                        exportAs: 'matTableExporter'
                     },] }
         ];
         /** @nocollapse */
         MatTableExporterDirective.ctorParameters = function () {
             return [
                 { type: core.Renderer2 },
-                { type: cdkTableExporter.JsonExporterService }
+                { type: cdkTableExporter.ServiceLocatorService },
+                { type: cdkTableExporter.DataExtractorService },
+                { type: material.MatTable, decorators: [{ type: core.Host }, { type: core.Self }, { type: core.Optional }] },
+                { type: core.ViewContainerRef }
             ];
         };
         return MatTableExporterDirective;
@@ -196,7 +197,8 @@
             { type: core.NgModule, args: [{
                         declarations: [MatTableExporterDirective],
                         imports: [
-                            material.MatTableModule
+                            material.MatTableModule,
+                            cdkTableExporter.CdkTableExporterModule
                         ],
                         exports: [MatTableExporterDirective]
                     },] }
@@ -214,7 +216,40 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
+    exports.ɵa = cdkTableExporter.ɵa;
+    exports.CdkTableExporter = cdkTableExporter.CdkTableExporter;
     exports.JsonExporterService = cdkTableExporter.JsonExporterService;
+    exports.TxtExporterService = cdkTableExporter.TxtExporterService;
+    exports.XlsExporterService = cdkTableExporter.XlsExporterService;
+    exports.XlsxExporterService = cdkTableExporter.XlsxExporterService;
+    exports.CsvExporterService = cdkTableExporter.CsvExporterService;
+    exports.ExportType = cdkTableExporter.ExportType;
+    exports.ServiceLocatorService = cdkTableExporter.ServiceLocatorService;
+    exports.DataExtractorService = cdkTableExporter.DataExtractorService;
+    exports.Mime = cdkTableExporter.Mime;
+    exports.FileUtil = cdkTableExporter.FileUtil;
+    exports.CdkTableExporterModule = cdkTableExporter.CdkTableExporterModule;
+    exports.MAT_TABLE_EXPORTER = cdkTableExporter.MAT_TABLE_EXPORTER;
+    exports.TYPE_ARRAY = cdkTableExporter.TYPE_ARRAY;
+    exports.CHAR_SET_UTF = cdkTableExporter.CHAR_SET_UTF;
+    exports.CHAR_SET_UTF_8 = cdkTableExporter.CHAR_SET_UTF_8;
+    exports.CHAR_SET_UTF_16 = cdkTableExporter.CHAR_SET_UTF_16;
+    exports.CONTENT_TYPE_TEXT = cdkTableExporter.CONTENT_TYPE_TEXT;
+    exports.CONTENT_TYPE_APPLICATION = cdkTableExporter.CONTENT_TYPE_APPLICATION;
+    exports.CONTENT_TYPE_EXCEL = cdkTableExporter.CONTENT_TYPE_EXCEL;
+    exports.P = cdkTableExporter.P;
+    exports.EXTENSION_XLS = cdkTableExporter.EXTENSION_XLS;
+    exports.EXTENSION_XLSX = cdkTableExporter.EXTENSION_XLSX;
+    exports.EXTENSION_CSV = cdkTableExporter.EXTENSION_CSV;
+    exports.EXTENSION_JSON = cdkTableExporter.EXTENSION_JSON;
+    exports.EXTENSION_TEXT = cdkTableExporter.EXTENSION_TEXT;
+    exports.MIME_EXCEL_XLS = cdkTableExporter.MIME_EXCEL_XLS;
+    exports.MIME_EXCEL_XLSX = cdkTableExporter.MIME_EXCEL_XLSX;
+    exports.MIME_JSON = cdkTableExporter.MIME_JSON;
+    exports.MIME_TXT = cdkTableExporter.MIME_TXT;
+    exports.MIME_CSV = cdkTableExporter.MIME_CSV;
+    exports.REF = cdkTableExporter.REF;
+    exports.XLS_REGEX = cdkTableExporter.XLS_REGEX;
     exports.MatTableExporterDirective = MatTableExporterDirective;
     exports.MatTableExporterModule = MatTableExporterModule;
 

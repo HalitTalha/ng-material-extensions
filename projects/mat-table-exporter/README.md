@@ -1,10 +1,15 @@
-# Angular Material Table Exporter (MatTable Exporter)
+# Angular Material Table Exporter
 
 [![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")  [![Node version](https://img.shields.io/npm/v/mat-table-exporter.svg?style=flat)](https://www.npmjs.com/package/mat-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-exporter.svg)
 
-mat-table-exporter is mainly for making MatTable components exportable as excel files. This is done through using a directive, however you can inject and directly use the service class responsible for data exporting. This project employs xlsx sheetjs, which is a great library and mature enough, for the excel creation itself.
-mat-table-exporter is a cdk-table-exporter subtype and provides support for angular material's cdkTable which is MatTable.
-cdk-table-exporter facilitates the common functionalities for CdkTable implementations abstracting the behavior that can change among different CdkTable implementations.
+This package is to make MatTable components exportable in ***excel, csv, txt*** and ***json*** formats. ***Pagination is also supported***. This package is used by employing the MatTableExporter directive for your MatTables. However you can inject and directly use the service classes responsible for data exporting. You can also implement your own exporter and use it for your custom exporting requirements.
+
+This project employs <a href="https://github.com/SheetJS/js-xlsx" target="_blank">xlsx sheetjs</a>, which is a great library and mature enough for the excel creation itself. In order to achieve a cross-browser file saving capability <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaverjs</a> is employed.
+
+The MatTableExporter directive inside this package is a cdk-table-exporter subtype and provides support for angular material's cdkTable.
+cdk-table-exporter facilitates the common exporting related functionalities for CdkTable implementations abstracting the behavior that can change among different CdkTables.
+
+&nbsp;
 
 ## Getting Started
 
@@ -28,21 +33,27 @@ After installing cdk-table-exporter import CdkTableExporterModule in your ngModu
 
 You can find more detail under the corresponding title of Usage section
 
+&nbsp;
+
 ## Usage
 ### Angular Material Users
 
-`ngxMatTableExporter` is the directive selector.
+`matTableExporter` is the directive selector.
 ```html
-<mat-table [dataSource]="dataSource" #mytable matSort ngxMatTableExporter [cdkTable]="mytable" [exporterButton]="exportButton" sheetName="someSheetName" fileName="someFileName">
+<mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
 ```
 
 ```html
-<button #exportButton mat-button></button>
+<button mat-button (click)="exporter.exportTable('csv')"></button>
 ```
 
-### Other than Angular Material
+&nbsp;
 
-Will be updated soon
+##### * For further demonstration of all the features please see the <a href="https://stackblitz.com" target="_blank">mat-table-exporter-examples</a>.
+
+##### * This example demonstrates how to implement and use a custom exporter <a href="https://stackblitz.com" target="_blank">mte-cex-demo</a>.
+
+&nbsp;
 
 ## API
 
@@ -54,41 +65,57 @@ Hence the below public API description for mat-table-export is inherited from Cd
 
 | Input/Output | Property | Type | Description |
 | --- | --- | --- | --- |
-| `@Input` | cdkTable | `any` | Template-referance of CdkTable that's to be exported |
-| `@Input` | exporterButton | `any` | Template-referance of the button that's used to trigger the export |
-| `@Input` | sheetName | `string` | (Optional) The name of the sheet that keeps the exported data  |
-| `@Input` | fileName | `string` | (Optional) Exported excel file's name |
 | `@Input` | hiddenColumns | `Array<number>` | (Optional) The indexes of the columns that are not wanted in the excel file |
+| `@Input` | exporter | `Exporter<Options>` | (Optional) The actual exporting implementation that defines the strategy to be applied to the rows extracted from MatTable. |
 | `@Output` | exportStarted | `EventEmitter<void>` | (Optional) Event that's fired when the export started |
 | `@Output` | exportCompleted | `EventEmitter<void>` | (Optional) Event that's fired when the export completed |
 
-### JsonExporterService
-
-JsonExporterService is published in cdk-table-exporter project. CdkTableExporter employs this service, hence through inheritance MatTableExporterDirective does too.
-
-#### exportExcel Method
-
-Exports excel file by employing xlsx sheetjs
-
-| Parameter | Type | Description |
-| --- | --- | --- |
-| header | `any` | Any json object that holds the header information of the exported excel file aka the first row of the excel |
-| rows | `Array<any>` | Any json array that will be the rows of the exported excel | 
-| fileName | `string` | Exported excel file's name | 
-| sheetName | `string` | The name of the sheet that keeps the exported data | 
-| hiddenColumns | `Array<string>` | Properties that are wanted to be hidden, i.e. id, createdDate, auditable properties etc. | 
+&nbsp;
 
 
-## Contributing
-This project is a library project inside mat-table-extensions angular workspace. If you are interested in the source code of this particular library you can build it inside the workspace directory as explained below:
+| Method | Description    |
+|----------|-------------|
+| `exportTable(exportType?: ExportType, options?: Options)`   | Called to trigger the export of MatTable|
 
-1. Do ```npm install``` in ```mat-table-extensions``` directory
-2. Do ```npm install``` in ```mat-table-extensions\projects\mat-table-exporter``` directory
-3. Go to ```mat-table-extensions``` directory
-4. Build it:
+&nbsp;
+
+### ExportType
+
+```js
+export enum ExportType {
+  XLS = 'xls',
+  XLSX = 'xlsx',
+  CSV = 'csv',
+  TXT = 'txt',
+  JSON = 'json',
+  OTHER = 'other'
+}
 ```
-ng build mat-table-exporter
-```
+&nbsp;
+
+### Options
+
+
+| Property | Type   | Description |
+|----------|--------|-------------|
+| fileName | `string` |(Optional) Name of the exported file|
+
+&nbsp;
+
+### ExcelOptions
+ExcelOptions wraps the WritingOptions of sheetjs library. All other export types share the common Options interface. In the next releases, options will be enriched for the other export types.
+
+| Property | Type   | Description |
+|----------|--------|-------------|
+| fileName | `string` |(Optional) Name of the exported file|
+| type | `'base64', 'binary', 'buffer', 'file', 'array', 'string'` |(Optional) Output data encoding|
+| bookSST | `boolean` |(Optional) Generate Shared String Table @default false|
+| sheet | `string` |(Optional) Name of the exported sheet|
+| compression | `boolean` |(Optional) Use ZIP compression for ZIP-based formats @default false|
+| ignoreEC | `boolean` |(Optional) Suppress "number stored as text" errors in generated files @default true|
+| Props | `Properties` |(Optional) Workbook properties like *Author, Title, Subject* etc.|
+
+&nbsp;
 
 ## Licence
 

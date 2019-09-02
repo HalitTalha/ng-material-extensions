@@ -1,20 +1,86 @@
 import { DataRowOutlet } from '@angular/cdk/table';
-import { AfterViewInit, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
-import { Observable } from 'rxjs';
-import { JsonExporterService } from './json-exporter.service';
+import { EventEmitter, Input, Output, Renderer2, ViewContainerRef } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { ExportType } from './export-type';
+import { FileUtil } from './file-util';
+import { ExcelOptions, Options } from './options';
+import { DataExtractorService } from './services/data-extractor.service';
+import { Exporter } from './services/exporters/exporter';
+import { ServiceLocatorService } from './services/service-locator.service';
+
 
 /**
- * Excel exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
+ * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  */
-export abstract class CdkTableExporter implements AfterViewInit {
+export abstract class CdkTableExporter {
 
-  @Input() cdkTable: any;
-  @Input() exporterButton: any;
-  @Input() sheetName = 'Sheet1';
-  @Input() fileName = 'export.xlsx';
-  @Input() hiddenColumns: Array<number>;
-  @Output() exportCompleted = new EventEmitter<void>();
-  @Output() exportStarted = new EventEmitter<void>();
+
+  @Input() hiddenColumns?: Array<number>;
+  @Input() exporter?: Exporter<Options>;
+  @Output() exportCompleted ?= new EventEmitter<void>();
+  @Output() exportStarted ?= new EventEmitter<void>();
+
+  private _cdkTable: any;
+
+  get cdkTable(): any {
+    return this._cdkTable;
+  }
+
+/**
+ * @deprecated
+ */
+  @Input()
+  set cdkTable(value: any) {
+    console.warn('cdkTable input is deprecated!');
+    this._cdkTable = value;
+  }
+
+  private _exporterButton: any;
+
+  get exporterButton(): any {
+    return this._exporterButton;
+  }
+
+  /**
+   * @deprecated
+   */
+  @Input()
+  set exporterButton(value: any) {
+    console.warn('exporterButton input is deprecated!');
+    this._exporterButton = value;
+    this.setButtonListener();
+  }
+
+  private _fileName: string;
+
+  get fileName(): string {
+    return this._fileName;
+  }
+
+/**
+ * @deprecated
+ */
+  @Input()
+  set fileName(value: string) {
+    console.warn('fileName input is deprecated!');
+    this._fileName = value;
+  }
+
+  private _sheetName: string;
+
+  get sheetName(): string {
+    return this._sheetName;
+  }
+
+/**
+ * @deprecated
+ */
+  @Input()
+  set sheetName(value: string) {
+    console.warn('sheetName input is deprecated!');
+    this._sheetName = value;
+  }
+
 
   /**
    * Data array which is extracted from nativeTable
@@ -27,8 +93,16 @@ export abstract class CdkTableExporter implements AfterViewInit {
 
   private _isExporting: boolean;
 
-  constructor(protected renderer: Renderer2, protected jsonExporter: JsonExporterService) {
+  private _subscription: Subscription;
 
+  private _options?: Options;
+
+  constructor(protected renderer: Renderer2,
+              private serviceLocator: ServiceLocatorService,
+              private dataExtractor: DataExtractorService,
+              protected table: any,
+              protected viewContainerRef: ViewContainerRef) {
+    this.initCdkTable();
   }
 
   /**
@@ -52,126 +126,110 @@ export abstract class CdkTableExporter implements AfterViewInit {
    */
   public abstract getPageChangeObservable(): Observable<any>;
 
-  ngAfterViewInit(): void {
-    this.renderer.listen(this.exporterButton._elementRef.nativeElement, 'click', (evt) => {
-     this.exportTable();
-    });
+  private initCdkTable() {
+    // tslint:disable-next-line:no-string-literal
+    const table = this.viewContainerRef['_data'].componentView.component;
+    if (table) {
+      this._cdkTable = table;
+    } else if (this.table) {
+      this._cdkTable = this.table;
+    } else {
+      throw new Error('Unsupported Angular version');
+    }
   }
 
+  private initExporterService(exportType?: ExportType) {
+    if (exportType !== ExportType.OTHER) {
+      this.exporter = this.serviceLocator.getService(exportType);
+    }
+  }
 
-/**
- * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
- */
-  exportTable() {
+  private setButtonListener() {
+    if (this._exporterButton) {
+      this.renderer.listen(this._exporterButton._elementRef.nativeElement, 'click', (evt) => {
+        const options = {fileName: this._fileName, sheet: this._sheetName} as ExcelOptions;
+        this.exportTable(FileUtil.identifyExportType(this._fileName), options); // this is to support deprecated way of exporting
+      });
+    }
+  }
+
+  /**
+   * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
+   */
+  exportTable(exportType?: ExportType, options?: Options) {
+    this.initExporterService(exportType);
+    this._options = options;
     this.exportStarted.emit();
     this._isIterating = true;
     this._isExporting = true;
     this._data = new Array<any>();
     this.enableExportButton(false);
+    this.extractTableHeader();
     try {
       this.exportWithPagination();
     } catch (notPaginated) {
       this.exportSinglePage();
     }
-
   }
 
   private exportWithPagination() {
     this._initialPageIndex = this.getCurrentPageIndex();
-    this.initPageHandler(); // to make sure datasource is not null during export
+    this.initPageHandler();
     this.goToPage(0);
   }
 
   private exportSinglePage() {
     this.extractDataOnCurrentPage();
+    this.extractTableFooter();
     this.exportExtractedData();
   }
 
   private extractDataOnCurrentPage() {
-    this._data = this._data.concat(this.extractExcelRows());
+    this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
   }
 
-
   private initPageHandler(): void {
-    this.getPageChangeObservable().subscribe(_ => {
-      setTimeout(() => {
-        if (this._isIterating) {
-          this.extractDataOnCurrentPage();
-          if (this.hasNextPage()) {
-            this.nextPage();
-          } else {
-            this._isIterating = false;
-            this.goToPage(this._initialPageIndex);
+    if (!this._subscription) {
+      this._subscription = this.getPageChangeObservable().subscribe(() => {
+        setTimeout(() => {
+          if (this._isIterating) {
+            this.extractDataOnCurrentPage();
+            if (this.hasNextPage()) {
+              this.nextPage();
+            } else {
+              this._isIterating = false;
+              this.goToPage(this._initialPageIndex);
+            }
+          } else if (this._isExporting) {
+            this._isExporting = false;
+            this.extractTableFooter();
+            this.exportExtractedData();
           }
-        } else if (this._isExporting) {
-          this._isExporting = false;
-          this.exportExtractedData();
-        }
+        });
       });
-    });
+    }
   }
 
   private exportExtractedData() {
-    this.jsonExporter.exportExcel(this.extractExcelHeaderRow(), this._data, this.fileName, this.sheetName);
+    this.exporter.export(this._data, this._options);
     this._data = new Array<any>();
     this.enableExportButton(true);
     this.exportCompleted.emit();
   }
 
-
-  private extractExcelRows() {
-    return this.convertToJsonArray(this.getRenderedRows(this.cdkTable._rowOutlet));
-  }
-
-  private extractExcelHeaderRow() {
-    return this.convertToJsonArray(this.getRenderedRows(this.cdkTable._headerRowOutlet))[0];
-  }
-
-  private getRenderedRows(outlet: DataRowOutlet): HTMLTableRowElement[] {
-    const result = this.cdkTable._getRenderedRows(outlet) as HTMLTableRowElement[];
-    return result;
-
-  }
-
-  private convertToJsonArray(rows: HTMLTableRowElement[]): Array<any> {
-    const result = new Array<any>();
-
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < rows.length; i++) {
-      const row: Array<string> = this.convertRow(rows[i]);
-      this.customizeRow(row);
-      result.push(this.createExcelItem(row));
-    }
-    return result;
-  }
-
-  private convertRow(row: HTMLTableRowElement): Array<string> {
-    const result = new Array<string>();
-    const cells: any = row.children;
-    for (let i = 0; i < cells.length; i++) {
-      if (this.shouldHide(i)) {
-        continue;
-      }
-      const element = cells.item(i).innerText;
-      result.push(element);
-    }
-    return result;
-  }
-
-  private shouldHide(columnIndex: number) {
-    if (this.hiddenColumns && this.hiddenColumns.includes(columnIndex)) {
-      return true;
-    } else {
-      return false;
+  private extractSpecialRow(outlet: DataRowOutlet) {
+    const row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
+    if (row) {
+      this._data.push(row);
     }
   }
 
-  public customizeRow(row: Array<string>): Array<string> {
-    return row;
+  private extractTableHeader() {
+    this.extractSpecialRow(this._cdkTable._headerRowOutlet);
   }
 
-  private createExcelItem(row: Array<string>): any {
-    return Object.assign({}, row);
+  private extractTableFooter() {
+    this.extractSpecialRow(this._cdkTable._footerRowOutlet);
   }
 
   public hasNextPage(): boolean {
@@ -181,12 +239,15 @@ export abstract class CdkTableExporter implements AfterViewInit {
       return false;
     }
   }
+
   public nextPage(): void {
     this.goToPage(this.getCurrentPageIndex() + 1);
   }
 
   private enableExportButton(value: boolean) {
-      this.renderer.setProperty(this.exporterButton._elementRef.nativeElement, 'disabled', value ? null : 'true');
+    if (this._exporterButton) {
+      this.renderer.setProperty(this._exporterButton._elementRef.nativeElement, 'disabled', value ? null : 'true');
+    }
   }
 }
 

@@ -20,34 +20,34 @@
     ],
     "paths": {
       "cdktable-exporter": [
-        "dist/cdktable-exporter"
+        "node_modules/cdktable-exporter"
       ],
       "cdktable-exporter/*": [
-        "dist/cdktable-exporter/*"
+        "node_modules/cdktable-exporter/*"
       ],
       "mattable-exporter": [
-        "dist/mattable-exporter"
+        "node_modules/mattable-exporter"
       ],
       "mattable-exporter/*": [
-        "dist/mattable-exporter/*"
+        "node_modules/mattable-exporter/*"
       ],
       "mat-table-exporter": [
-        "dist/mat-table-exporter"
+        "node_modules/mat-table-exporter"
       ],
       "mat-table-exporter/*": [
-        "dist/mat-table-exporter/*"
+        "node_modules/mat-table-exporter/*"
       ],
       "cdk-table-exporter": [
-        "dist/cdk-table-exporter"
+        "node_modules/cdk-table-exporter"
       ],
       "cdk-table-exporter/*": [
-        "dist/cdk-table-exporter/*"
+        "node_modules/cdk-table-exporter/*"
       ],
       "mat-table-filter": [
-        "dist/mat-table-filter"
+        "node_modules/mat-table-filter"
       ],
       "mat-table-filter/*": [
-        "dist/mat-table-filter/*"
+        "node_modules/mat-table-filter/*"
       ]
     }
   }

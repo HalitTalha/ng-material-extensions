@@ -1,62 +1,62 @@
-import { AfterViewInit, Directive, Renderer2 } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { CdkTableExporter, JsonExporterService } from 'cdk-table-exporter';
+import { AfterViewInit, Directive, Host, Renderer2, Self, Optional, ViewContainerRef } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
+import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
-
 @Directive({
-  selector: '[ngxMatTableExporter]'
+  selector: '[ngxMatTableExporter], [matTableExporter]', // renamed selector but kept old version for backwards compat.
+  exportAs: 'matTableExporter'
 })
 export class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
 
-/**
- * Overriding ngAfterViewInit of TableExporter
- */
+  /**
+   * Overriding ngAfterViewInit of TableExporter
+   */
   ngAfterViewInit(): void {
-    super.ngAfterViewInit();
-    if (this.getPaginator()) {
-      this.exportStarted.subscribe(_ => {
-        this.enablePaginator(false);
-      });
-      this.exportCompleted.subscribe(_ => {
-        this.enablePaginator(true);
-      });
-    }
+    this.exportStarted.subscribe(_ => {
+      this.enablePaginator(false);
+    });
+    this.exportCompleted.subscribe(_ => {
+      this.enablePaginator(true);
+    });
   }
 
-  constructor(protected renderer: Renderer2, protected jsonExporter: JsonExporterService) {
-    super(renderer, jsonExporter);
+  constructor(renderer: Renderer2,
+              serviceLocator: ServiceLocatorService,
+              dataExtractor: DataExtractorService,
+              @Host() @Self() @Optional() table: MatTable<any>,
+              viewContainerRef: ViewContainerRef) {
+              super(renderer, serviceLocator, dataExtractor, table, viewContainerRef);
   }
 
-
-/**
- * MatTable implementation of getPageCount
- * @override
- */
+  /**
+   * MatTable implementation of getPageCount
+   * @override
+   */
   public getPageCount(): number {
     return this.getPaginator().getNumberOfPages();
   }
 
-/**
- * MatTable implementation of getCurrentPageIndex
- * @override
- */
+  /**
+   * MatTable implementation of getCurrentPageIndex
+   * @override
+   */
   public getCurrentPageIndex(): number {
     return this.getPaginator().pageIndex;
   }
 
-/**
- * MatTable implementation of goToPage
- * @override
- */
+  /**
+   * MatTable implementation of goToPage
+   * @override
+   */
   public goToPage(index: number): void {
     this.getPaginator().pageIndex = index;
     this.getPaginator()._changePageSize(this.getPaginator().pageSize);
   }
 
-/**
- * MatTable implementation of getPageChangeObservable
- * @override
- */
+  /**
+   * MatTable implementation of getPageChangeObservable
+   * @override
+   */
   public getPageChangeObservable(): Observable<any> {
     return this.getPaginator().page;
   }
@@ -67,8 +67,10 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   }
 
   private enablePaginator(value: boolean) {
+    if (this.getPaginator()) {
       this.getPaginator().disabled = !value;
       this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+    }
   }
 
 }

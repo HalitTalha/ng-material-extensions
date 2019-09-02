@@ -1,19 +1,43 @@
-import { AfterViewInit, EventEmitter, Renderer2 } from '@angular/core';
+import { EventEmitter, Renderer2, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JsonExporterService } from './json-exporter.service';
+import { ExportType } from './export-type';
+import { Options } from './options';
+import { DataExtractorService } from './services/data-extractor.service';
+import { Exporter } from './services/exporters/exporter';
+import { ServiceLocatorService } from './services/service-locator.service';
 /**
- * Excel exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
+ * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  */
-export declare abstract class CdkTableExporter implements AfterViewInit {
+export declare abstract class CdkTableExporter {
     protected renderer: Renderer2;
-    protected jsonExporter: JsonExporterService;
+    private serviceLocator;
+    private dataExtractor;
+    protected table: any;
+    protected viewContainerRef: ViewContainerRef;
+    hiddenColumns?: Array<number>;
+    exporter?: Exporter<Options>;
+    exportCompleted?: EventEmitter<void>;
+    exportStarted?: EventEmitter<void>;
+    private _cdkTable;
+    /**
+    * @deprecated
+    */
     cdkTable: any;
+    private _exporterButton;
+    /**
+    * @deprecated
+    */
     exporterButton: any;
-    sheetName: string;
+    private _fileName;
+    /**
+    * @deprecated
+    */
     fileName: string;
-    hiddenColumns: Array<number>;
-    exportCompleted: EventEmitter<void>;
-    exportStarted: EventEmitter<void>;
+    private _sheetName;
+    /**
+    * @deprecated
+    */
+    sheetName: string;
     /**
      * Data array which is extracted from nativeTable
      */
@@ -21,7 +45,9 @@ export declare abstract class CdkTableExporter implements AfterViewInit {
     private _isIterating;
     private _initialPageIndex;
     private _isExporting;
-    constructor(renderer: Renderer2, jsonExporter: JsonExporterService);
+    private _subscription;
+    private _options?;
+    constructor(renderer: Renderer2, serviceLocator: ServiceLocatorService, dataExtractor: DataExtractorService, table: any, viewContainerRef: ViewContainerRef);
     /**
      * Must return the number of pages of the table
      */
@@ -39,24 +65,21 @@ export declare abstract class CdkTableExporter implements AfterViewInit {
      * Must return an observable that notifies the subscribers about page changes
      */
     abstract getPageChangeObservable(): Observable<any>;
-    ngAfterViewInit(): void;
+    private initCdkTable;
+    private initExporterService;
+    private setButtonListener;
     /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
      */
-    exportTable(): void;
+    exportTable(exportType?: ExportType, options?: Options): void;
     private exportWithPagination;
     private exportSinglePage;
     private extractDataOnCurrentPage;
     private initPageHandler;
     private exportExtractedData;
-    private extractExcelRows;
-    private extractExcelHeaderRow;
-    private getRenderedRows;
-    private convertToJsonArray;
-    private convertRow;
-    private shouldHide;
-    customizeRow(row: Array<string>): Array<string>;
-    private createExcelItem;
+    private extractSpecialRow;
+    private extractTableHeader;
+    private extractTableFooter;
     hasNextPage(): boolean;
     nextPage(): void;
     private enableExportButton;

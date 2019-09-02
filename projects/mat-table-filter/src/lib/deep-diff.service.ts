@@ -1,4 +1,4 @@
-import { Injectable, KeyValueDiffers, KeyValueDiffer } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DeepDiffService {
       return true;
     }
     for (const key in oldObject) {
-      if (oldObject.hasOwnProperty(key)) {
+      if (newObject.hasOwnProperty(key)) {
         const oldValue = oldObject[key];
         const newValue = newObject[key];
         if (typeof oldValue === 'string' || typeof oldValue === 'number') {
@@ -30,7 +30,4 @@ export class DeepDiffService {
     }
     return false;
   }
-
-
-
 }

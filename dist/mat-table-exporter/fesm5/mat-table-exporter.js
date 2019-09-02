@@ -1,8 +1,8 @@
-import { MatTableModule } from '@angular/material';
 import { __extends } from 'tslib';
-import { Directive, Renderer2, NgModule } from '@angular/core';
-import { CdkTableExporter, JsonExporterService } from 'cdk-table-exporter';
-export { JsonExporterService } from 'cdk-table-exporter';
+import { Directive, Host, Renderer2, Self, Optional, ViewContainerRef, NgModule } from '@angular/core';
+import { MatTable, MatTableModule } from '@angular/material';
+import { CdkTableExporter, DataExtractorService, ServiceLocatorService, CdkTableExporterModule } from 'cdk-table-exporter';
+export { ɵa, CdkTableExporter, JsonExporterService, TxtExporterService, XlsExporterService, XlsxExporterService, CsvExporterService, ExportType, ServiceLocatorService, DataExtractorService, Mime, FileUtil, CdkTableExporterModule, MAT_TABLE_EXPORTER, TYPE_ARRAY, CHAR_SET_UTF, CHAR_SET_UTF_8, CHAR_SET_UTF_16, CONTENT_TYPE_TEXT, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, P, EXTENSION_XLS, EXTENSION_XLSX, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, MIME_CSV, REF, XLS_REGEX } from 'cdk-table-exporter';
 
 /**
  * @fileoverview added by tsickle
@@ -10,11 +10,8 @@ export { JsonExporterService } from 'cdk-table-exporter';
  */
 var MatTableExporterDirective = /** @class */ (function (_super) {
     __extends(MatTableExporterDirective, _super);
-    function MatTableExporterDirective(renderer, jsonExporter) {
-        var _this = _super.call(this, renderer, jsonExporter) || this;
-        _this.renderer = renderer;
-        _this.jsonExporter = jsonExporter;
-        return _this;
+    function MatTableExporterDirective(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
+        return _super.call(this, renderer, serviceLocator, dataExtractor, table, viewContainerRef) || this;
     }
     /**
      * Overriding ngAfterViewInit of TableExporter
@@ -29,23 +26,20 @@ var MatTableExporterDirective = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        _super.prototype.ngAfterViewInit.call(this);
-        if (this.getPaginator()) {
-            this.exportStarted.subscribe((/**
-             * @param {?} _
-             * @return {?}
-             */
-            function (_) {
-                _this.enablePaginator(false);
-            }));
-            this.exportCompleted.subscribe((/**
-             * @param {?} _
-             * @return {?}
-             */
-            function (_) {
-                _this.enablePaginator(true);
-            }));
-        }
+        this.exportStarted.subscribe((/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) {
+            _this.enablePaginator(false);
+        }));
+        this.exportCompleted.subscribe((/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) {
+            _this.enablePaginator(true);
+        }));
     };
     /**
      * MatTable implementation of getPageCount
@@ -140,18 +134,25 @@ var MatTableExporterDirective = /** @class */ (function (_super) {
      * @return {?}
      */
     function (value) {
-        this.getPaginator().disabled = !value;
-        this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+        if (this.getPaginator()) {
+            this.getPaginator().disabled = !value;
+            this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+        }
     };
     MatTableExporterDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[ngxMatTableExporter]'
+                    selector: '[ngxMatTableExporter], [matTableExporter]',
+                    // renamed selector but kept old version for backwards compat.
+                    exportAs: 'matTableExporter'
                 },] }
     ];
     /** @nocollapse */
     MatTableExporterDirective.ctorParameters = function () { return [
         { type: Renderer2 },
-        { type: JsonExporterService }
+        { type: ServiceLocatorService },
+        { type: DataExtractorService },
+        { type: MatTable, decorators: [{ type: Host }, { type: Self }, { type: Optional }] },
+        { type: ViewContainerRef }
     ]; };
     return MatTableExporterDirective;
 }(CdkTableExporter));
@@ -167,7 +168,8 @@ var MatTableExporterModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     declarations: [MatTableExporterDirective],
                     imports: [
-                        MatTableModule
+                        MatTableModule,
+                        CdkTableExporterModule
                     ],
                     exports: [MatTableExporterDirective]
                 },] }

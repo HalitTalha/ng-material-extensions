@@ -1,14 +1,13 @@
-import { AfterViewInit, Renderer2 } from '@angular/core';
-import { CdkTableExporter, JsonExporterService } from 'cdk-table-exporter';
+import { AfterViewInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { MatTable } from '@angular/material';
+import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
 export declare class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
-    protected renderer: Renderer2;
-    protected jsonExporter: JsonExporterService;
     /**
      * Overriding ngAfterViewInit of TableExporter
      */
     ngAfterViewInit(): void;
-    constructor(renderer: Renderer2, jsonExporter: JsonExporterService);
+    constructor(renderer: Renderer2, serviceLocator: ServiceLocatorService, dataExtractor: DataExtractorService, table: MatTable<any>, viewContainerRef: ViewContainerRef);
     /**
      * MatTable implementation of getPageCount
      * @override

@@ -6,6 +6,7 @@
   },
   "whitelistedNonPeerDependencies": [
     "xlsx",
-    "angular/cdk"
+    "angular/cdk",
+    "file-saver"
   ]
 }
