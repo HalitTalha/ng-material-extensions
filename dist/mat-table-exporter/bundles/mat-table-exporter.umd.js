@@ -216,11 +216,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    exports.ɵa = cdkTableExporter.ɵa;
     exports.CdkTableExporter = cdkTableExporter.CdkTableExporter;
     exports.JsonExporterService = cdkTableExporter.JsonExporterService;
     exports.TxtExporterService = cdkTableExporter.TxtExporterService;
     exports.XlsExporterService = cdkTableExporter.XlsExporterService;
+    exports.WorksheetExporter = cdkTableExporter.WorksheetExporter;
     exports.XlsxExporterService = cdkTableExporter.XlsxExporterService;
     exports.CsvExporterService = cdkTableExporter.CsvExporterService;
     exports.ExportType = cdkTableExporter.ExportType;

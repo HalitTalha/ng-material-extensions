@@ -1054,6 +1054,7 @@
     exports.JsonExporterService = JsonExporterService;
     exports.TxtExporterService = TxtExporterService;
     exports.XlsExporterService = XlsExporterService;
+    exports.WorksheetExporter = WorksheetExporter;
     exports.XlsxExporterService = XlsxExporterService;
     exports.CsvExporterService = CsvExporterService;
     exports.ExportType = ExportType;
@@ -1083,7 +1084,6 @@
     exports.MIME_CSV = MIME_CSV;
     exports.REF = REF;
     exports.XLS_REGEX = XLS_REGEX;
-    exports.ɵa = WorksheetExporter;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

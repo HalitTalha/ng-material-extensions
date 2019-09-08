@@ -2,7 +2,7 @@
 
 [![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")  [![Node version](https://img.shields.io/npm/v/mat-table-exporter.svg?style=flat)](https://www.npmjs.com/package/mat-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-exporter.svg)
 
-This package is to make MatTable components exportable in ***excel, csv, txt*** and ***json*** formats. ***Pagination is also supported***. This package is used by employing the MatTableExporter directive for your MatTables. However you can inject and directly use the service classes responsible for data exporting. You can also implement your own exporter and use it for your custom exporting requirements.
+This package is to make MatTable components exportable in ***excel, csv, txt*** and ***json*** formats. ***Pagination is also supported***. Applying MatTableExporter directive to your MatTable is enough to make it exportable. The directive uses different exporter services for different exporting types. You can also implement your own exporter and use it for your custom exporting requirements.
 
 This project employs <a href="https://github.com/SheetJS/js-xlsx" target="_blank">xlsx sheetjs</a>, which is a great library and mature enough for the excel creation itself. In order to achieve a cross-browser file saving capability <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaverjs</a> is employed.
 
@@ -49,9 +49,9 @@ You can find more detail under the corresponding title of Usage section
 
 &nbsp;
 
-##### * For further demonstration of all the features please see the <a href="https://stackblitz.com" target="_blank">mat-table-exporter-examples</a>.
+##### * Stackblitz demo: <a href="https://stackblitz.com/edit/mte-demo" target="_blank">mte-demo</a>.
 
-##### * This example demonstrates how to implement and use a custom exporter <a href="https://stackblitz.com" target="_blank">mte-cex-demo</a>.
+##### * Stackblitz demo of custom exporter <a href="https://stackblitz.com/edit/mte-cex-demo" target="_blank">mte-cex-demo</a>.
 
 &nbsp;
 
@@ -65,7 +65,7 @@ Hence the below public API description for mat-table-export is inherited from Cd
 
 | Input/Output | Property | Type | Description |
 | --- | --- | --- | --- |
-| `@Input` | hiddenColumns | `Array<number>` | (Optional) The indexes of the columns that are not wanted in the excel file |
+| `@Input` | hiddenColumns | `Array<number>` | (Optional) The indexes of the columns that are not wanted in the output file |
 | `@Input` | exporter | `Exporter<Options>` | (Optional) The actual exporting implementation that defines the strategy to be applied to the rows extracted from MatTable. |
 | `@Output` | exportStarted | `EventEmitter<void>` | (Optional) Event that's fired when the export started |
 | `@Output` | exportCompleted | `EventEmitter<void>` | (Optional) Event that's fired when the export completed |
