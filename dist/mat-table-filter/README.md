@@ -36,6 +36,8 @@ dataSource = new MatTableDataSource(ELEMENT_DATA);
 That's all. When you populate the exampleObject's properties, the filter will automatically work just fine with the default debounce support.
 You can change the debounce time also.
 
+### Stackblitz demo [mat-table-filter-example](https://stackblitz.com/github/HalitTalha/mat-table-filter-example)
+
 ## Full Example
 We rename our "exampleObject" as filterEntity in this example.
 
@@ -138,7 +140,6 @@ matTableFilter is the directive selector
 
 | Input | Property | Type | Description |
 | --- | --- | --- | --- |
-| `@Input` | matTableFilter | `any` | Directive selector. Takes template-referance of MatTable as input |
 | `@Input` | exampleEntity | `any` | The example entity that is used to filter the table |
 | `@Input` | filterType | `FilterType` |(Optional) Defines the filtering strategy. Default value is `FilterType.ANYWHERE` |
 | `@Input` | debounceTime | `number` | (Optional) Defines debounce time in milliseconds. Default value is `400` |

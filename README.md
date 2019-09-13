@@ -188,7 +188,6 @@ matTableFilter is the directive selector
 
 | Input | Property | Type | Description |
 | --- | --- | --- | --- |
-| `@Input` | matTableFilter | `any` | Directive selector. Takes template-referance of MatTable as input |
 | `@Input` | exampleEntity | `any` | The example entity that is used to filter the table |
 | `@Input` | filterType | `FilterType` |(Optional) Defines the filtering strategy. Default value is `FilterType.ANYWHERE` |
 | `@Input` | debounceTime | `number` | (Optional) Defines debounce time in milliseconds. Default value is `400` |

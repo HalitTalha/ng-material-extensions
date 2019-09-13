@@ -1,23 +1,26 @@
-import { DoCheck } from '@angular/core';
-import { DeepDiffService } from './deep-diff.service';
+import { DoCheck, ViewContainerRef } from '@angular/core';
+import { MatTable } from '@angular/material';
 import { MatTableFilter } from './mat-table-filter.enum';
 import { MatTableFilterService } from './mat-table-filter.service';
 export declare class MatTableFilterDirective implements DoCheck {
-    private filterService;
-    private _deepDiffService;
+    private _filterService;
+    private _injectedTable;
+    private _viewContainerRef;
     private _oldExampleEntity;
-    private _exampleEntity;
     exampleEntity: any;
     /**
      * in millis
      */
+    private _table;
     debounceTime: number;
     filterType: MatTableFilter;
-    matTableFilter: any;
     caseSensitive: boolean;
     private _exampleEntitySubject;
-    constructor(filterService: MatTableFilterService, _deepDiffService: DeepDiffService);
+    constructor(_filterService: MatTableFilterService, _injectedTable: MatTable<any>, _viewContainerRef: ViewContainerRef);
     ngDoCheck(): void;
+    private isExampleEntityChanged;
+    private toPlainJson;
+    private initCdkTable;
     private initDebounceSubject;
     private updateFilterPredicate;
     private getMatDataSource;

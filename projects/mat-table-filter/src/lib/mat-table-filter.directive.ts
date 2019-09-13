@@ -1,43 +1,66 @@
-import { Directive, DoCheck, Input } from '@angular/core';
+import { Directive, DoCheck, Input, ViewContainerRef, Host, Self, Optional } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DeepDiffService } from './deep-diff.service';
 import { MatTableFilter } from './mat-table-filter.enum';
 import { MatTableFilterService } from './mat-table-filter.service';
-
+import * as LODASH from 'lodash';
 @Directive({
-  selector: '[matTableFilter]'
+  selector: '[matTableFilter]',
+  exportAs: 'matTableFilter'
 })
 export class MatTableFilterDirective implements DoCheck {
 
   private _oldExampleEntity: any;
 
-  private _exampleEntity: any;
+  @Input() exampleEntity: any;
 
-  @Input()
-  set exampleEntity(value: any) {
-    this._oldExampleEntity = this._exampleEntity;
-    this._exampleEntity = value;
-  }
   /**
    * in millis
    */
+  private _table: any;
   @Input() debounceTime = 400;
   @Input() filterType: MatTableFilter = MatTableFilter.ANYWHERE;
-  @Input() matTableFilter: any;
   @Input() caseSensitive = false;
 
   private _exampleEntitySubject: BehaviorSubject<void>;
 
 
-  constructor(private filterService: MatTableFilterService, private _deepDiffService: DeepDiffService) {
-    this.initDebounceSubject();
+  constructor(private _filterService: MatTableFilterService,
+              @Host() @Self() @Optional() private _injectedTable: MatTable<any>,
+              private _viewContainerRef: ViewContainerRef) {
+              this.initCdkTable();
+              this.initDebounceSubject();
   }
 
   ngDoCheck(): void {
-    if (this._deepDiffService.isDifferent(this._oldExampleEntity, this._exampleEntity)) {
-        this._exampleEntitySubject.next();
+    if (this.isExampleEntityChanged()) {
+      this._oldExampleEntity = this.toPlainJson(this.exampleEntity);
+      this._exampleEntitySubject.next();
+    }
+  }
+
+  private isExampleEntityChanged(): boolean {
+    return !LODASH.isEqual(this._oldExampleEntity, this.toPlainJson(this.exampleEntity));
+  }
+
+  private toPlainJson(object: any): JSON {
+    if (object) {
+      return JSON.parse(JSON.stringify(object));
+    } else {
+      return undefined;
+    }
+  }
+
+  private initCdkTable() {
+    // tslint:disable-next-line:no-string-literal
+    const table = this._viewContainerRef['_data'].componentView.component;
+    if (table) {
+      this._table = table;
+    } else if (this._injectedTable) {
+      this._table = this._injectedTable;
+    } else {
+      throw new Error('Unsupported Angular version');
     }
   }
 
@@ -55,18 +78,15 @@ export class MatTableFilterDirective implements DoCheck {
     if (matDataSource) {
       const _this = this;
       matDataSource.filterPredicate = (data): boolean => {
-        return _this.filterService.filterPredicate(_this._exampleEntity, data, _this.filterType, _this.caseSensitive);
+        return _this._filterService.filterPredicate(_this.exampleEntity, data, _this.filterType, _this.caseSensitive);
       }
-      matDataSource.filter = this._exampleEntity as any;
+      matDataSource.filter = this.exampleEntity as any;
     }
 
   }
 
   private getMatDataSource(): MatTableDataSource<any> {
-    const matTable = this.matTableFilter as MatTable<any>;
-    if (matTable.dataSource && !(matTable.dataSource instanceof MatTableDataSource)) {
-      throw new Error('Use MatTableDataSource, example: dataSource = new MatTableDataSource(dataArray)');
-    }
+    const matTable = this._table as MatTable<any>;
     return (matTable.dataSource as MatTableDataSource<any>);
   }
 

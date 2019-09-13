@@ -1,62 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/material'), require('rxjs'), require('rxjs/operators'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('mat-table-filter', ['exports', '@angular/material', 'rxjs', 'rxjs/operators', '@angular/core'], factory) :
-    (factory((global['mat-table-filter'] = {}),global.ng.material,global.rxjs,global.rxjs.operators,global.ng.core));
-}(this, (function (exports,material,rxjs,operators,i0) { 'use strict';
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var DeepDiffService = /** @class */ (function () {
-        function DeepDiffService() {
-        }
-        /**
-         * @param {?} oldObject
-         * @param {?} newObject
-         * @return {?}
-         */
-        DeepDiffService.prototype.isDifferent = /**
-         * @param {?} oldObject
-         * @param {?} newObject
-         * @return {?}
-         */
-            function (oldObject, newObject) {
-                if (!oldObject && newObject) {
-                    return true;
-                }
-                for (var key in oldObject) {
-                    if (oldObject.hasOwnProperty(key)) {
-                        /** @type {?} */
-                        var oldValue = oldObject[key];
-                        /** @type {?} */
-                        var newValue = newObject[key];
-                        if (typeof oldValue === 'string' || typeof oldValue === 'number') {
-                            if (oldValue !== newValue) {
-                                return true;
-                            }
-                        }
-                        else if (typeof oldValue === 'object') {
-                            /** @type {?} */
-                            var result = this.isDifferent(oldValue, newValue);
-                            if (result) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-                return false;
-            };
-        DeepDiffService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root'
-                    },] }
-        ];
-        /** @nocollapse */
-        DeepDiffService.ctorParameters = function () { return []; };
-        /** @nocollapse */ DeepDiffService.ngInjectableDef = i0.defineInjectable({ factory: function DeepDiffService_Factory() { return new DeepDiffService(); }, token: DeepDiffService, providedIn: "root" });
-        return DeepDiffService;
-    }());
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/material'), require('rxjs'), require('rxjs/operators'), require('@angular/core'), require('lodash')) :
+    typeof define === 'function' && define.amd ? define('mat-table-filter', ['exports', '@angular/material', 'rxjs', 'rxjs/operators', '@angular/core', 'lodash'], factory) :
+    (factory((global['mat-table-filter'] = {}),global.ng.material,global.rxjs,global.rxjs.operators,global.ng.core,global.LODASH));
+}(this, (function (exports,material,rxjs,operators,i0,LODASH) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -227,28 +173,16 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MatTableFilterDirective = /** @class */ (function () {
-        function MatTableFilterDirective(filterService, _deepDiffService) {
-            this.filterService = filterService;
-            this._deepDiffService = _deepDiffService;
-            /**
-             * in millis
-             */
+        function MatTableFilterDirective(_filterService, _injectedTable, _viewContainerRef) {
+            this._filterService = _filterService;
+            this._injectedTable = _injectedTable;
+            this._viewContainerRef = _viewContainerRef;
             this.debounceTime = 400;
             this.filterType = MatTableFilter.ANYWHERE;
             this.caseSensitive = false;
+            this.initCdkTable();
             this.initDebounceSubject();
         }
-        Object.defineProperty(MatTableFilterDirective.prototype, "exampleEntity", {
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */ function (value) {
-                this._oldExampleEntity = this._exampleEntity;
-                this._exampleEntity = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
         /**
          * @return {?}
          */
@@ -256,8 +190,60 @@
          * @return {?}
          */
             function () {
-                if (this._deepDiffService.isDifferent(this._oldExampleEntity, this._exampleEntity)) {
+                if (this.isExampleEntityChanged()) {
+                    this._oldExampleEntity = this.toPlainJson(this.exampleEntity);
                     this._exampleEntitySubject.next();
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        MatTableFilterDirective.prototype.isExampleEntityChanged = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                return !LODASH.isEqual(this._oldExampleEntity, this.toPlainJson(this.exampleEntity));
+            };
+        /**
+         * @private
+         * @param {?} object
+         * @return {?}
+         */
+        MatTableFilterDirective.prototype.toPlainJson = /**
+         * @private
+         * @param {?} object
+         * @return {?}
+         */
+            function (object) {
+                if (object) {
+                    return JSON.parse(JSON.stringify(object));
+                }
+                else {
+                    return undefined;
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        MatTableFilterDirective.prototype.initCdkTable = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                // tslint:disable-next-line:no-string-literal
+                /** @type {?} */
+                var table = this._viewContainerRef['_data'].componentView.component;
+                if (table) {
+                    this._table = table;
+                }
+                else if (this._injectedTable) {
+                    this._table = this._injectedTable;
+                }
+                else {
+                    throw new Error('Unsupported Angular version');
                 }
             };
         /**
@@ -297,9 +283,9 @@
                      * @param {?} data
                      * @return {?}
                      */function (data) {
-                        return _this_2.filterService.filterPredicate(_this_2._exampleEntity, data, _this_2.filterType, _this_2.caseSensitive);
+                        return _this_2._filterService.filterPredicate(_this_2.exampleEntity, data, _this_2.filterType, _this_2.caseSensitive);
                     });
-                    matDataSource.filter = ( /** @type {?} */(this._exampleEntity));
+                    matDataSource.filter = ( /** @type {?} */(this.exampleEntity));
                 }
             };
         /**
@@ -312,29 +298,27 @@
          */
             function () {
                 /** @type {?} */
-                var matTable = ( /** @type {?} */(this.matTableFilter));
-                if (matTable.dataSource && !(matTable.dataSource instanceof material.MatTableDataSource)) {
-                    throw new Error('Use MatTableDataSource, example: dataSource = new MatTableDataSource(dataArray)');
-                }
+                var matTable = ( /** @type {?} */(this._table));
                 return (( /** @type {?} */(matTable.dataSource)));
             };
         MatTableFilterDirective.decorators = [
             { type: i0.Directive, args: [{
-                        selector: '[matTableFilter]'
+                        selector: '[matTableFilter]',
+                        exportAs: 'matTableFilter'
                     },] }
         ];
         /** @nocollapse */
         MatTableFilterDirective.ctorParameters = function () {
             return [
                 { type: MatTableFilterService },
-                { type: DeepDiffService }
+                { type: material.MatTable, decorators: [{ type: i0.Host }, { type: i0.Self }, { type: i0.Optional }] },
+                { type: i0.ViewContainerRef }
             ];
         };
         MatTableFilterDirective.propDecorators = {
             exampleEntity: [{ type: i0.Input }],
             debounceTime: [{ type: i0.Input }],
             filterType: [{ type: i0.Input }],
-            matTableFilter: [{ type: i0.Input }],
             caseSensitive: [{ type: i0.Input }]
         };
         return MatTableFilterDirective;
@@ -372,7 +356,6 @@
     exports.MatTableFilterService = MatTableFilterService;
     exports.MatTableFilter = MatTableFilter;
     exports.MatTableFilterModule = MatTableFilterModule;
-    exports.ɵb = DeepDiffService;
     exports.ɵa = MatTableFilterDirective;
 
     Object.defineProperty(exports, '__esModule', { value: true });

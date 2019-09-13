@@ -1,54 +1,8 @@
-import { MatTableDataSource, MatTableModule } from '@angular/material';
+import { MatTable, MatTableModule } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Injectable, Directive, Input, NgModule, defineInjectable } from '@angular/core';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class DeepDiffService {
-    constructor() { }
-    /**
-     * @param {?} oldObject
-     * @param {?} newObject
-     * @return {?}
-     */
-    isDifferent(oldObject, newObject) {
-        if (!oldObject && newObject) {
-            return true;
-        }
-        for (const key in oldObject) {
-            if (oldObject.hasOwnProperty(key)) {
-                /** @type {?} */
-                const oldValue = oldObject[key];
-                /** @type {?} */
-                const newValue = newObject[key];
-                if (typeof oldValue === 'string' || typeof oldValue === 'number') {
-                    if (oldValue !== newValue) {
-                        return true;
-                    }
-                }
-                else if (typeof oldValue === 'object') {
-                    /** @type {?} */
-                    const result = this.isDifferent(oldValue, newValue);
-                    if (result) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-}
-DeepDiffService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-DeepDiffService.ctorParameters = () => [];
-/** @nocollapse */ DeepDiffService.ngInjectableDef = defineInjectable({ factory: function DeepDiffService_Factory() { return new DeepDiffService(); }, token: DeepDiffService, providedIn: "root" });
+import { Injectable, Directive, Input, ViewContainerRef, Host, Self, Optional, NgModule, defineInjectable } from '@angular/core';
+import { isEqual } from 'lodash';
 
 /**
  * @fileoverview added by tsickle
@@ -193,34 +147,65 @@ MatTableFilterService.ctorParameters = () => [];
  */
 class MatTableFilterDirective {
     /**
-     * @param {?} filterService
-     * @param {?} _deepDiffService
+     * @param {?} _filterService
+     * @param {?} _injectedTable
+     * @param {?} _viewContainerRef
      */
-    constructor(filterService, _deepDiffService) {
-        this.filterService = filterService;
-        this._deepDiffService = _deepDiffService;
-        /**
-         * in millis
-         */
+    constructor(_filterService, _injectedTable, _viewContainerRef) {
+        this._filterService = _filterService;
+        this._injectedTable = _injectedTable;
+        this._viewContainerRef = _viewContainerRef;
         this.debounceTime = 400;
         this.filterType = MatTableFilter.ANYWHERE;
         this.caseSensitive = false;
+        this.initCdkTable();
         this.initDebounceSubject();
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set exampleEntity(value) {
-        this._oldExampleEntity = this._exampleEntity;
-        this._exampleEntity = value;
     }
     /**
      * @return {?}
      */
     ngDoCheck() {
-        if (this._deepDiffService.isDifferent(this._oldExampleEntity, this._exampleEntity)) {
+        if (this.isExampleEntityChanged()) {
+            this._oldExampleEntity = this.toPlainJson(this.exampleEntity);
             this._exampleEntitySubject.next();
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    isExampleEntityChanged() {
+        return !isEqual(this._oldExampleEntity, this.toPlainJson(this.exampleEntity));
+    }
+    /**
+     * @private
+     * @param {?} object
+     * @return {?}
+     */
+    toPlainJson(object) {
+        if (object) {
+            return JSON.parse(JSON.stringify(object));
+        }
+        else {
+            return undefined;
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    initCdkTable() {
+        // tslint:disable-next-line:no-string-literal
+        /** @type {?} */
+        const table = this._viewContainerRef['_data'].componentView.component;
+        if (table) {
+            this._table = table;
+        }
+        else if (this._injectedTable) {
+            this._table = this._injectedTable;
+        }
+        else {
+            throw new Error('Unsupported Angular version');
         }
     }
     /**
@@ -253,9 +238,9 @@ class MatTableFilterDirective {
              * @return {?}
              */
             (data) => {
-                return _this.filterService.filterPredicate(_this._exampleEntity, data, _this.filterType, _this.caseSensitive);
+                return _this._filterService.filterPredicate(_this.exampleEntity, data, _this.filterType, _this.caseSensitive);
             });
-            matDataSource.filter = (/** @type {?} */ (this._exampleEntity));
+            matDataSource.filter = (/** @type {?} */ (this.exampleEntity));
         }
     }
     /**
@@ -264,28 +249,26 @@ class MatTableFilterDirective {
      */
     getMatDataSource() {
         /** @type {?} */
-        const matTable = (/** @type {?} */ (this.matTableFilter));
-        if (matTable.dataSource && !(matTable.dataSource instanceof MatTableDataSource)) {
-            throw new Error('Use MatTableDataSource, example: dataSource = new MatTableDataSource(dataArray)');
-        }
+        const matTable = (/** @type {?} */ (this._table));
         return ((/** @type {?} */ (matTable.dataSource)));
     }
 }
 MatTableFilterDirective.decorators = [
     { type: Directive, args: [{
-                selector: '[matTableFilter]'
+                selector: '[matTableFilter]',
+                exportAs: 'matTableFilter'
             },] }
 ];
 /** @nocollapse */
 MatTableFilterDirective.ctorParameters = () => [
     { type: MatTableFilterService },
-    { type: DeepDiffService }
+    { type: MatTable, decorators: [{ type: Host }, { type: Self }, { type: Optional }] },
+    { type: ViewContainerRef }
 ];
 MatTableFilterDirective.propDecorators = {
     exampleEntity: [{ type: Input }],
     debounceTime: [{ type: Input }],
     filterType: [{ type: Input }],
-    matTableFilter: [{ type: Input }],
     caseSensitive: [{ type: Input }]
 };
 
@@ -315,6 +298,6 @@ MatTableFilterModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MatTableFilterService, MatTableFilter, MatTableFilterModule, DeepDiffService as ɵb, MatTableFilterDirective as ɵa };
+export { MatTableFilterService, MatTableFilter, MatTableFilterModule, MatTableFilterDirective as ɵa };
 
 //# sourceMappingURL=mat-table-filter.js.map
