@@ -13,12 +13,26 @@ export class MatTableFilterService {
       const exampleColumn = exampleEntityObjectKeys[i];
       const exampleColumnValue = exampleEntity[exampleColumn];
       const itemColumnValue = item[exampleColumn];
-      if (!exampleColumnValue || exampleColumnValue instanceof Array) {
+      if (!exampleColumnValue && typeof exampleColumnValue !== 'boolean') {
         // if example entity's property is undefined/null/empty then it means the caller wants all the data
         // also if there is an array property we are skipping
         continue;
       }
-      if (itemColumnValue) {
+      if(exampleColumnValue instanceof Array){
+        if(exampleColumnValue.length === 0 || typeof exampleColumnValue[0] === 'object' || typeof exampleColumnValue[0] === 'function' 
+          || !itemColumnValue || itemColumnValue.length === 0){
+          continue; // undefined/null/empty arrays mean the caller wants all the data. Also, skip non-primitives.
+        }
+        for (let j = 0; j < exampleColumnValue.length; j++) {
+          if (!exampleColumnValue[j]) {
+            continue;
+          }
+          if(itemColumnValue.indexOf(exampleColumnValue[j]) === -1){
+            return false;
+          }
+        }
+      }
+      else if (itemColumnValue !== undefined && itemColumnValue !== null) {
         // if example entity has additional columns then search fails
         if (this.isAlphaNumeric(itemColumnValue)) {
           if (!this.filterPredicateAlphaNumeric(exampleColumnValue, itemColumnValue, filterType, caseSensitive)) {
