@@ -1,11 +1,11 @@
 import { CdkTableModule } from '@angular/cdk/table';
+import { NgModule, EventEmitter, Input, Output, Injectable, ɵɵdefineInjectable, Injector, ɵɵinject, INJECTOR } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { utils, write } from 'xlsx';
-import { NgModule, EventEmitter, Input, Output, Injectable, Injector, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CdkTableExporterModule {
 }
@@ -21,7 +21,7 @@ CdkTableExporterModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const ExportType = {
@@ -35,7 +35,7 @@ const ExportType = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class Mime {
     /**
@@ -47,10 +47,16 @@ class Mime {
         this.contentTypeHeader = contentTypeHeader;
     }
 }
+if (false) {
+    /** @type {?} */
+    Mime.prototype.extension;
+    /** @type {?} */
+    Mime.prototype.contentTypeHeader;
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MAT_TABLE_EXPORTER = 'mat-table-exporter';
@@ -97,7 +103,7 @@ const XLS_REGEX = P + '*\.' + ExportType.XLS + '$';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FileUtil {
     /**
@@ -146,12 +152,13 @@ class FileUtil {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  * @abstract
  */
+// @Directive()
 class CdkTableExporter {
     /**
      * @param {?} renderer
@@ -278,11 +285,13 @@ class CdkTableExporter {
     }
     /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
-     * @param {?=} exportType
+     * @param {?=} exportTypeParam
      * @param {?=} options
      * @return {?}
      */
-    exportTable(exportType, options) {
+    exportTable(exportTypeParam, options) {
+        /** @type {?} */
+        const exportType = this.correctExportType(exportTypeParam);
         this.initExporterService(exportType);
         this._options = options;
         this.exportStarted.emit();
@@ -296,6 +305,32 @@ class CdkTableExporter {
         }
         catch (notPaginated) {
             this.exportSinglePage();
+        }
+    }
+    /**
+     * @private
+     * @param {?=} exportTypeParam
+     * @return {?}
+     */
+    correctExportType(exportTypeParam) {
+        if (exportTypeParam && typeof exportTypeParam === 'string') {
+            switch (exportTypeParam) {
+                case ExportType.CSV:
+                    return ExportType.CSV;
+                case ExportType.JSON:
+                    return ExportType.JSON;
+                case ExportType.OTHER:
+                    return ExportType.OTHER;
+                case ExportType.TXT:
+                    return ExportType.TXT;
+                case ExportType.XLS:
+                    return ExportType.XLS;
+                case ExportType.XLSX:
+                    return ExportType.XLSX;
+            }
+        }
+        else {
+            return (/** @type {?} */ (exportTypeParam));
         }
     }
     /**
@@ -430,10 +465,121 @@ CdkTableExporter.propDecorators = {
     fileName: [{ type: Input }],
     sheetName: [{ type: Input }]
 };
+if (false) {
+    /** @type {?} */
+    CdkTableExporter.prototype.hiddenColumns;
+    /** @type {?} */
+    CdkTableExporter.prototype.exporter;
+    /** @type {?} */
+    CdkTableExporter.prototype.exportCompleted;
+    /** @type {?} */
+    CdkTableExporter.prototype.exportStarted;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._cdkTable;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._exporterButton;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._fileName;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._sheetName;
+    /**
+     * Data array which is extracted from nativeTable
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._data;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._isIterating;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._initialPageIndex;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._isExporting;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._subscription;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._options;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CdkTableExporter.prototype.renderer;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype.serviceLocator;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype.dataExtractor;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CdkTableExporter.prototype.table;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CdkTableExporter.prototype.viewContainerRef;
+    /**
+     * Must return the number of pages of the table
+     * @abstract
+     * @return {?}
+     */
+    CdkTableExporter.prototype.getPageCount = function () { };
+    /**
+     * Must return the index of the current page that's displayed
+     * @abstract
+     * @return {?}
+     */
+    CdkTableExporter.prototype.getCurrentPageIndex = function () { };
+    /**
+     * When called, the CdkTable should render the rows inside the page whose index given as parameter
+     * @abstract
+     * @param {?} index page index
+     * @return {?}
+     */
+    CdkTableExporter.prototype.goToPage = function (index) { };
+    /**
+     * Must return an observable that notifies the subscribers about page changes
+     * @abstract
+     * @return {?}
+     */
+    CdkTableExporter.prototype.getPageChangeObservable = function () { };
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class JsonExporterService {
     constructor() {
@@ -456,11 +602,11 @@ JsonExporterService.decorators = [
 ];
 /** @nocollapse */
 JsonExporterService.ctorParameters = () => [];
-/** @nocollapse */ JsonExporterService.ngInjectableDef = defineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
+/** @nocollapse */ JsonExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An angular service class that is used to create files out of json object arrays.
@@ -497,10 +643,24 @@ class WorksheetExporter {
         FileUtil.save(content, mimeType, options);
     }
 }
+if (false) {
+    /**
+     * @abstract
+     * @param {?} worksheet
+     * @param {?=} options
+     * @return {?}
+     */
+    WorksheetExporter.prototype.createContent = function (worksheet, options) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    WorksheetExporter.prototype.getMimeType = function () { };
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TxtExporterService extends WorksheetExporter {
     constructor() {
@@ -528,11 +688,11 @@ TxtExporterService.decorators = [
 ];
 /** @nocollapse */
 TxtExporterService.ctorParameters = () => [];
-/** @nocollapse */ TxtExporterService.ngInjectableDef = defineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+/** @nocollapse */ TxtExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class XlsExporterService extends WorksheetExporter {
     constructor() {
@@ -577,11 +737,11 @@ XlsExporterService.decorators = [
 ];
 /** @nocollapse */
 XlsExporterService.ctorParameters = () => [];
-/** @nocollapse */ XlsExporterService.ngInjectableDef = defineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+/** @nocollapse */ XlsExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class XlsxExporterService extends XlsExporterService {
     constructor() {
@@ -602,11 +762,11 @@ XlsxExporterService.decorators = [
 ];
 /** @nocollapse */
 XlsxExporterService.ctorParameters = () => [];
-/** @nocollapse */ XlsxExporterService.ngInjectableDef = defineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+/** @nocollapse */ XlsxExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CsvExporterService extends WorksheetExporter {
     constructor() {
@@ -634,11 +794,11 @@ CsvExporterService.decorators = [
 ];
 /** @nocollapse */
 CsvExporterService.ctorParameters = () => [];
-/** @nocollapse */ CsvExporterService.ngInjectableDef = defineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+/** @nocollapse */ CsvExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ServiceLocatorService {
     /**
@@ -677,11 +837,18 @@ ServiceLocatorService.decorators = [
 ServiceLocatorService.ctorParameters = () => [
     { type: Injector }
 ];
-/** @nocollapse */ ServiceLocatorService.ngInjectableDef = defineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(inject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+/** @nocollapse */ ServiceLocatorService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(ɵɵinject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceLocatorService.prototype.injector;
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class DataExtractorService {
     constructor() { }
@@ -790,18 +957,17 @@ DataExtractorService.decorators = [
 ];
 /** @nocollapse */
 DataExtractorService.ctorParameters = () => [];
-/** @nocollapse */ DataExtractorService.ngInjectableDef = defineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
+/** @nocollapse */ DataExtractorService.ngInjectableDef = ɵɵdefineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CdkTableExporter, JsonExporterService, TxtExporterService, XlsExporterService, WorksheetExporter, XlsxExporterService, CsvExporterService, ExportType, ServiceLocatorService, DataExtractorService, Mime, FileUtil, CdkTableExporterModule, MAT_TABLE_EXPORTER, TYPE_ARRAY, CHAR_SET_UTF, CHAR_SET_UTF_8, CHAR_SET_UTF_16, CONTENT_TYPE_TEXT, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, P, EXTENSION_XLS, EXTENSION_XLSX, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, MIME_CSV, REF, XLS_REGEX };
-
+export { CHAR_SET_UTF, CHAR_SET_UTF_16, CHAR_SET_UTF_8, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, P, REF, ServiceLocatorService, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLS_REGEX, XlsExporterService, XlsxExporterService };
 //# sourceMappingURL=cdk-table-exporter.js.map

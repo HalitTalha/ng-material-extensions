@@ -12,6 +12,7 @@ import { ServiceLocatorService } from './services/service-locator.service';
 /**
  * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  */
+// @Directive()
 export abstract class CdkTableExporter {
 
 
@@ -156,7 +157,8 @@ export abstract class CdkTableExporter {
   /**
    * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
    */
-  exportTable(exportType?: ExportType, options?: Options) {
+  exportTable(exportTypeParam?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options) {
+    const exportType: ExportType = this.correctExportType(exportTypeParam);
     this.initExporterService(exportType);
     this._options = options;
     this.exportStarted.emit();
@@ -169,6 +171,26 @@ export abstract class CdkTableExporter {
       this.exportWithPagination();
     } catch (notPaginated) {
       this.exportSinglePage();
+    }
+  }
+  private correctExportType(exportTypeParam?: any): ExportType {
+    if (exportTypeParam && typeof exportTypeParam === 'string') {
+      switch (exportTypeParam) {
+        case ExportType.CSV:
+            return ExportType.CSV;
+        case ExportType.JSON:
+            return ExportType.JSON;
+        case ExportType.OTHER:
+            return ExportType.OTHER;
+        case ExportType.TXT:
+            return ExportType.TXT;
+        case ExportType.XLS:
+            return ExportType.XLS;
+        case ExportType.XLSX:
+            return ExportType.XLSX;
+      }
+    } else {
+      return exportTypeParam as ExportType;
     }
   }
 

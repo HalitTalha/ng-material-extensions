@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { MIME_JSON } from './../../constants';
 import { Injectable } from '@angular/core';
@@ -31,7 +31,7 @@ var JsonExporterService = /** @class */ (function () {
     ];
     /** @nocollapse */
     JsonExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ JsonExporterService.ngInjectableDef = i0.defineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
+    /** @nocollapse */ JsonExporterService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
     return JsonExporterService;
 }());
 export { JsonExporterService };

@@ -71,7 +71,8 @@ export declare abstract class CdkTableExporter {
     /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
      */
-    exportTable(exportType?: ExportType, options?: Options): void;
+    exportTable(exportTypeParam?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options): void;
+    private correctExportType;
     private exportWithPagination;
     private exportSinglePage;
     private extractDataOnCurrentPage;

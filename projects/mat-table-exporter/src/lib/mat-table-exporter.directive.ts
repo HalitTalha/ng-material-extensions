@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, Host, Renderer2, Self, Optional, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, Host, Renderer2, Self, Optional, ViewContainerRef, Input } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
 import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   exportAs: 'matTableExporter'
 })
 export class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
-
   /**
    * Overriding ngAfterViewInit of TableExporter
    */

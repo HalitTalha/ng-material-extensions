@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { CsvExporterService } from './exporters/csv-exporter.service';
 import { TxtExporterService } from './exporters/txt-exporter.service';
@@ -47,7 +47,7 @@ ServiceLocatorService.decorators = [
 ServiceLocatorService.ctorParameters = () => [
     { type: Injector }
 ];
-/** @nocollapse */ ServiceLocatorService.ngInjectableDef = i0.defineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(i0.inject(i0.INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+/** @nocollapse */ ServiceLocatorService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(i0.ɵɵinject(i0.INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
 if (false) {
     /**
      * @type {?}

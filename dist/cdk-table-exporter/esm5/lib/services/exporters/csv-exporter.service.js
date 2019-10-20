@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import * as tslib_1 from "tslib";
 import { MIME_CSV } from './../../constants';
@@ -42,7 +42,7 @@ var CsvExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     CsvExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ CsvExporterService.ngInjectableDef = i0.defineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+    /** @nocollapse */ CsvExporterService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
     return CsvExporterService;
 }(WorksheetExporter));
 export { CsvExporterService };

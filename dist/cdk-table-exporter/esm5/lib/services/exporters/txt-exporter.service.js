@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
@@ -42,7 +42,7 @@ var TxtExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     TxtExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ TxtExporterService.ngInjectableDef = i0.defineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+    /** @nocollapse */ TxtExporterService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
     return TxtExporterService;
 }(WorksheetExporter));
 export { TxtExporterService };

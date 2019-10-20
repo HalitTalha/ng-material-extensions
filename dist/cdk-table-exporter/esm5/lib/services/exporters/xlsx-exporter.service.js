@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
@@ -32,7 +32,7 @@ var XlsxExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     XlsxExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ XlsxExporterService.ngInjectableDef = i0.defineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+    /** @nocollapse */ XlsxExporterService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
     return XlsxExporterService;
 }(XlsExporterService));
 export { XlsxExporterService };

@@ -1,5 +1,3 @@
-
-
 /*
  * Public API Surface of cdk-table-exporter
  */

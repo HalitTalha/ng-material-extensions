@@ -5,12 +5,12 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -19,36 +19,28 @@
       "dom"
     ],
     "paths": {
-      "cdktable-exporter": [
-        "node_modules/cdktable-exporter"
-      ],
-      "cdktable-exporter/*": [
-        "node_modules/cdktable-exporter/*"
-      ],
-      "mattable-exporter": [
-        "node_modules/mattable-exporter"
-      ],
-      "mattable-exporter/*": [
-        "node_modules/mattable-exporter/*"
-      ],
-      "mat-table-exporter": [
-        "node_modules/mat-table-exporter"
-      ],
-      "mat-table-exporter/*": [
-        "node_modules/mat-table-exporter/*"
-      ],
       "cdk-table-exporter": [
-        "node_modules/cdk-table-exporter"
+        "dist/cdk-table-exporter"
       ],
       "cdk-table-exporter/*": [
-        "node_modules/cdk-table-exporter/*"
+        "dist/cdk-table-exporter/*"
+      ],
+      "mat-table-exporter": [
+        "dist/mat-table-exporter"
+      ],
+      "mat-table-exporter/*": [
+        "dist/mat-table-exporter/*"
       ],
       "mat-table-filter": [
-        "node_modules/mat-table-filter"
+        "dist/mat-table-filter"
       ],
       "mat-table-filter/*": [
-        "node_modules/mat-table-filter/*"
+        "dist/mat-table-filter/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }

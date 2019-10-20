@@ -1,12 +1,12 @@
 import { CdkTableModule } from '@angular/cdk/table';
+import { NgModule, EventEmitter, Input, Output, Injectable, ɵɵdefineInjectable, Injector, ɵɵinject, INJECTOR } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { __extends } from 'tslib';
 import { utils, write } from 'xlsx';
-import { NgModule, EventEmitter, Input, Output, Injectable, Injector, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CdkTableExporterModule = /** @class */ (function () {
     function CdkTableExporterModule() {
@@ -25,7 +25,7 @@ var CdkTableExporterModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 var ExportType = {
@@ -39,7 +39,7 @@ var ExportType = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var Mime = /** @class */ (function () {
     function Mime(extension, contentTypeHeader) {
@@ -48,10 +48,16 @@ var Mime = /** @class */ (function () {
     }
     return Mime;
 }());
+if (false) {
+    /** @type {?} */
+    Mime.prototype.extension;
+    /** @type {?} */
+    Mime.prototype.contentTypeHeader;
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MAT_TABLE_EXPORTER = 'mat-table-exporter';
@@ -98,7 +104,7 @@ var XLS_REGEX = P + '*\.' + ExportType.XLS + '$';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var FileUtil = /** @class */ (function () {
     function FileUtil() {
@@ -168,12 +174,13 @@ var FileUtil = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  * @abstract
  */
+// @Directive()
 var CdkTableExporter = /** @class */ (function () {
     function CdkTableExporter(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
         this.renderer = renderer;
@@ -338,17 +345,19 @@ var CdkTableExporter = /** @class */ (function () {
      */
     /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
-     * @param {?=} exportType
+     * @param {?=} exportTypeParam
      * @param {?=} options
      * @return {?}
      */
     CdkTableExporter.prototype.exportTable = /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
-     * @param {?=} exportType
+     * @param {?=} exportTypeParam
      * @param {?=} options
      * @return {?}
      */
-    function (exportType, options) {
+    function (exportTypeParam, options) {
+        /** @type {?} */
+        var exportType = this.correctExportType(exportTypeParam);
         this.initExporterService(exportType);
         this._options = options;
         this.exportStarted.emit();
@@ -362,6 +371,37 @@ var CdkTableExporter = /** @class */ (function () {
         }
         catch (notPaginated) {
             this.exportSinglePage();
+        }
+    };
+    /**
+     * @private
+     * @param {?=} exportTypeParam
+     * @return {?}
+     */
+    CdkTableExporter.prototype.correctExportType = /**
+     * @private
+     * @param {?=} exportTypeParam
+     * @return {?}
+     */
+    function (exportTypeParam) {
+        if (exportTypeParam && typeof exportTypeParam === 'string') {
+            switch (exportTypeParam) {
+                case ExportType.CSV:
+                    return ExportType.CSV;
+                case ExportType.JSON:
+                    return ExportType.JSON;
+                case ExportType.OTHER:
+                    return ExportType.OTHER;
+                case ExportType.TXT:
+                    return ExportType.TXT;
+                case ExportType.XLS:
+                    return ExportType.XLS;
+                case ExportType.XLSX:
+                    return ExportType.XLSX;
+            }
+        }
+        else {
+            return (/** @type {?} */ (exportTypeParam));
         }
     };
     /**
@@ -542,10 +582,121 @@ var CdkTableExporter = /** @class */ (function () {
     };
     return CdkTableExporter;
 }());
+if (false) {
+    /** @type {?} */
+    CdkTableExporter.prototype.hiddenColumns;
+    /** @type {?} */
+    CdkTableExporter.prototype.exporter;
+    /** @type {?} */
+    CdkTableExporter.prototype.exportCompleted;
+    /** @type {?} */
+    CdkTableExporter.prototype.exportStarted;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._cdkTable;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._exporterButton;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._fileName;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._sheetName;
+    /**
+     * Data array which is extracted from nativeTable
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._data;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._isIterating;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._initialPageIndex;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._isExporting;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._subscription;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype._options;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CdkTableExporter.prototype.renderer;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype.serviceLocator;
+    /**
+     * @type {?}
+     * @private
+     */
+    CdkTableExporter.prototype.dataExtractor;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CdkTableExporter.prototype.table;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CdkTableExporter.prototype.viewContainerRef;
+    /**
+     * Must return the number of pages of the table
+     * @abstract
+     * @return {?}
+     */
+    CdkTableExporter.prototype.getPageCount = function () { };
+    /**
+     * Must return the index of the current page that's displayed
+     * @abstract
+     * @return {?}
+     */
+    CdkTableExporter.prototype.getCurrentPageIndex = function () { };
+    /**
+     * When called, the CdkTable should render the rows inside the page whose index given as parameter
+     * @abstract
+     * @param {?} index page index
+     * @return {?}
+     */
+    CdkTableExporter.prototype.goToPage = function (index) { };
+    /**
+     * Must return an observable that notifies the subscribers about page changes
+     * @abstract
+     * @return {?}
+     */
+    CdkTableExporter.prototype.getPageChangeObservable = function () { };
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var JsonExporterService = /** @class */ (function () {
     function JsonExporterService() {
@@ -572,13 +723,13 @@ var JsonExporterService = /** @class */ (function () {
     ];
     /** @nocollapse */
     JsonExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ JsonExporterService.ngInjectableDef = defineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
+    /** @nocollapse */ JsonExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
     return JsonExporterService;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An angular service class that is used to create files out of json object arrays.
@@ -632,10 +783,24 @@ WorksheetExporter = /** @class */ (function () {
     };
     return WorksheetExporter;
 }());
+if (false) {
+    /**
+     * @abstract
+     * @param {?} worksheet
+     * @param {?=} options
+     * @return {?}
+     */
+    WorksheetExporter.prototype.createContent = function (worksheet, options) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    WorksheetExporter.prototype.getMimeType = function () { };
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var TxtExporterService = /** @class */ (function (_super) {
     __extends(TxtExporterService, _super);
@@ -671,13 +836,13 @@ var TxtExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     TxtExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ TxtExporterService.ngInjectableDef = defineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+    /** @nocollapse */ TxtExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
     return TxtExporterService;
 }(WorksheetExporter));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var XlsExporterService = /** @class */ (function (_super) {
     __extends(XlsExporterService, _super);
@@ -735,13 +900,13 @@ var XlsExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     XlsExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ XlsExporterService.ngInjectableDef = defineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+    /** @nocollapse */ XlsExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
     return XlsExporterService;
 }(WorksheetExporter));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var XlsxExporterService = /** @class */ (function (_super) {
     __extends(XlsxExporterService, _super);
@@ -768,13 +933,13 @@ var XlsxExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     XlsxExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ XlsxExporterService.ngInjectableDef = defineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+    /** @nocollapse */ XlsxExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
     return XlsxExporterService;
 }(XlsExporterService));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CsvExporterService = /** @class */ (function (_super) {
     __extends(CsvExporterService, _super);
@@ -810,13 +975,13 @@ var CsvExporterService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     CsvExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ CsvExporterService.ngInjectableDef = defineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+    /** @nocollapse */ CsvExporterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
     return CsvExporterService;
 }(WorksheetExporter));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ServiceLocatorService = /** @class */ (function () {
     function ServiceLocatorService(injector) {
@@ -855,13 +1020,20 @@ var ServiceLocatorService = /** @class */ (function () {
     ServiceLocatorService.ctorParameters = function () { return [
         { type: Injector }
     ]; };
-    /** @nocollapse */ ServiceLocatorService.ngInjectableDef = defineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(inject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+    /** @nocollapse */ ServiceLocatorService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(ɵɵinject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
     return ServiceLocatorService;
 }());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ServiceLocatorService.prototype.injector;
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var DataExtractorService = /** @class */ (function () {
     function DataExtractorService() {
@@ -1017,20 +1189,19 @@ var DataExtractorService = /** @class */ (function () {
     ];
     /** @nocollapse */
     DataExtractorService.ctorParameters = function () { return []; };
-    /** @nocollapse */ DataExtractorService.ngInjectableDef = defineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
+    /** @nocollapse */ DataExtractorService.ngInjectableDef = ɵɵdefineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
     return DataExtractorService;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CdkTableExporter, JsonExporterService, TxtExporterService, XlsExporterService, WorksheetExporter, XlsxExporterService, CsvExporterService, ExportType, ServiceLocatorService, DataExtractorService, Mime, FileUtil, CdkTableExporterModule, MAT_TABLE_EXPORTER, TYPE_ARRAY, CHAR_SET_UTF, CHAR_SET_UTF_8, CHAR_SET_UTF_16, CONTENT_TYPE_TEXT, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, P, EXTENSION_XLS, EXTENSION_XLSX, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, MIME_CSV, REF, XLS_REGEX };
-
+export { CHAR_SET_UTF, CHAR_SET_UTF_16, CHAR_SET_UTF_8, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, P, REF, ServiceLocatorService, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLS_REGEX, XlsExporterService, XlsxExporterService };
 //# sourceMappingURL=cdk-table-exporter.js.map
