@@ -88,7 +88,7 @@ We rename our "exampleObject" as filterEntity in this example.
 **table-test.component.ts**
 ```typescript
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatTableFilter } from 'mat-table-filter';
 
 export class Captain {

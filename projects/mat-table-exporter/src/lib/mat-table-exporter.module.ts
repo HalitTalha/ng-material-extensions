@@ -1,5 +1,5 @@
 import { CdkTableExporterModule } from 'cdk-table-exporter';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 import { NgModule } from '@angular/core';
 import { MatTableExporterDirective } from './mat-table-exporter.directive';
 

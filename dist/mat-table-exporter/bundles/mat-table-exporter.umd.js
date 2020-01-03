@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('cdk-table-exporter'), require('@angular/material'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('mat-table-exporter', ['exports', 'cdk-table-exporter', '@angular/material', '@angular/core'], factory) :
-    (global = global || self, factory(global['mat-table-exporter'] = {}, global['cdk-table-exporter'], global.ng.material, global.ng.core));
-}(this, function (exports, cdkTableExporter, material, core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('cdk-table-exporter'), require('@angular/material/table'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('mat-table-exporter', ['exports', 'cdk-table-exporter', '@angular/material/table', '@angular/core'], factory) :
+    (global = global || self, factory(global['mat-table-exporter'] = {}, global['cdk-table-exporter'], global.ng.material.table, global.ng.core));
+}(this, function (exports, cdkTableExporter, table, core) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -348,7 +348,7 @@
             { type: core.Renderer2 },
             { type: cdkTableExporter.ServiceLocatorService },
             { type: cdkTableExporter.DataExtractorService },
-            { type: material.MatTable, decorators: [{ type: core.Host }, { type: core.Self }, { type: core.Optional }] },
+            { type: table.MatTable, decorators: [{ type: core.Host }, { type: core.Self }, { type: core.Optional }] },
             { type: core.ViewContainerRef }
         ]; };
         return MatTableExporterDirective;
@@ -365,7 +365,7 @@
             { type: core.NgModule, args: [{
                         declarations: [MatTableExporterDirective],
                         imports: [
-                            material.MatTableModule,
+                            table.MatTableModule,
                             cdkTableExporter.CdkTableExporterModule
                         ],
                         exports: [MatTableExporterDirective]

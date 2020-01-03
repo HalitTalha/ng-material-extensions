@@ -1,6 +1,6 @@
 import { CdkTableExporter, ServiceLocatorService, DataExtractorService, CdkTableExporterModule } from 'cdk-table-exporter';
 export { CHAR_SET_UTF, CHAR_SET_UTF_16, CHAR_SET_UTF_8, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, P, REF, ServiceLocatorService, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLS_REGEX, XlsExporterService, XlsxExporterService } from 'cdk-table-exporter';
-import { MatTable, MatTableModule } from '@angular/material';
+import { MatTable, MatTableModule } from '@angular/material/table';
 import { Directive, Renderer2, Host, Self, Optional, ViewContainerRef, NgModule } from '@angular/core';
 
 /**

@@ -1,5 +1,5 @@
 import { AfterViewInit, Renderer2, ViewContainerRef } from '@angular/core';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
 export declare class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {

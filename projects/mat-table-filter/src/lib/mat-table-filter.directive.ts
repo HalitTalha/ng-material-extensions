@@ -1,5 +1,5 @@
 import { Directive, DoCheck, Input, ViewContainerRef, Host, Self, Optional } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MatTableFilter } from './mat-table-filter.enum';
