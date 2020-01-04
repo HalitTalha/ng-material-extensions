@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "emitDecoratorMetadata": true, // if you have decorators
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -10,8 +11,9 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es5",
     "typeRoots": [
+      "./typings",
       "node_modules/@types"
     ],
     "lib": [
@@ -36,6 +38,12 @@
       ],
       "mat-table-filter/*": [
         "dist/mat-table-filter/*"
+      ],
+      "example-components": [
+        "dist/example-components"
+      ],
+      "example-components/*": [
+        "dist/example-components/*"
       ]
     }
   },

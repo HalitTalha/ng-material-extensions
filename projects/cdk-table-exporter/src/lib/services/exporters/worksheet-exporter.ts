@@ -1,32 +1,22 @@
 import * as XLSX from 'xlsx';
-import { Options } from '../../options';
-import { Exporter } from './exporter';
-import { FileUtil } from '../../file-util';
 import { Mime } from '../../mime';
-
+import { FileExporter } from './file-exporter';
 /**
  * An angular service class that is used to create files out of json object arrays.
  */
-export abstract class WorksheetExporter<T extends Options> implements Exporter<T> {
-  constructor() {}
+export abstract class WorksheetExporter<T> extends FileExporter<T> {
 
-  public export(rows: Array<any>, options?: T) {
-    if (!rows) {
-      throw new Error('Empty json array is provided, rows parameter is mandatory!');
-    }
-    const worksheet: XLSX.WorkSheet =  XLSX.utils.json_to_sheet(rows, {
+  constructor() {
+    super();
+  }
+
+  public createContent(rows: Array<any>, options?: T): any {
+    const workSheet: XLSX.WorkSheet =  XLSX.utils.json_to_sheet(rows, {
       skipHeader: true // we don't want to see object properties as our headers
     });
-    this.writeToFile(worksheet, options);
+    return this.workSheetToContent(workSheet, options);
   }
-
-  public writeToFile(worksheet: XLSX.WorkSheet, options?: T) {
-    const content = this.createContent(worksheet, options);
-    const mimeType = this.getMimeType();
-    FileUtil.save(content, mimeType, options);
-  }
-
-  public abstract createContent(worksheet: XLSX.WorkSheet, options?: T): any;
+  public abstract workSheetToContent(workSheet: XLSX.WorkSheet, options?: T): any;
   public abstract getMimeType(): Mime;
 
 }

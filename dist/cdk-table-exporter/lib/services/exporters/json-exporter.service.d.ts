@@ -1,6 +1,8 @@
-import { Exporter } from './exporter';
 import { Options } from '../../options';
-export declare class JsonExporterService implements Exporter<Options> {
+import { FileExporter } from './file-exporter';
+import { Mime } from '../../mime';
+export declare class JsonExporterService extends FileExporter<Options> {
     constructor();
-    export(rows: any[], options?: Options): void;
+    createContent(rows: any[], options?: Options): string;
+    getMimeType(): Mime;
 }

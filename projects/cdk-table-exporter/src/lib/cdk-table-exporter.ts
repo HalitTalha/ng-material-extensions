@@ -15,6 +15,7 @@ import { ServiceLocatorService } from './services/service-locator.service';
 // @Directive()
 export abstract class CdkTableExporter {
 
+  private _exporterService: Exporter<Options>;
 
   @Input() hiddenColumns?: Array<number>;
   @Input() exporter?: Exporter<Options>;
@@ -139,12 +140,6 @@ export abstract class CdkTableExporter {
     }
   }
 
-  private initExporterService(exportType?: ExportType) {
-    if (exportType !== ExportType.OTHER) {
-      this.exporter = this.serviceLocator.getService(exportType);
-    }
-  }
-
   private setButtonListener() {
     if (this._exporterButton) {
       this.renderer.listen(this._exporterButton._elementRef.nativeElement, 'click', (evt) => {
@@ -157,9 +152,8 @@ export abstract class CdkTableExporter {
   /**
    * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
    */
-  exportTable(exportTypeParam?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options) {
-    const exportType: ExportType = this.correctExportType(exportTypeParam);
-    this.initExporterService(exportType);
+  exportTable(exportType?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options) {
+    this.loadExporter(exportType);
     this._options = options;
     this.exportStarted.emit();
     this._isIterating = true;
@@ -173,24 +167,12 @@ export abstract class CdkTableExporter {
       this.exportSinglePage();
     }
   }
-  private correctExportType(exportTypeParam?: any): ExportType {
-    if (exportTypeParam && typeof exportTypeParam === 'string') {
-      switch (exportTypeParam) {
-        case ExportType.CSV:
-            return ExportType.CSV;
-        case ExportType.JSON:
-            return ExportType.JSON;
-        case ExportType.OTHER:
-            return ExportType.OTHER;
-        case ExportType.TXT:
-            return ExportType.TXT;
-        case ExportType.XLS:
-            return ExportType.XLS;
-        case ExportType.XLSX:
-            return ExportType.XLSX;
-      }
+
+  private loadExporter(exportType: any) {
+    if (exportType === ExportType.OTHER.valueOf()) {
+      this._exporterService = this.exporter;
     } else {
-      return exportTypeParam as ExportType;
+      this._exporterService = this.serviceLocator.getService(exportType);
     }
   }
 
@@ -233,7 +215,7 @@ export abstract class CdkTableExporter {
   }
 
   private exportExtractedData() {
-    this.exporter.export(this._data, this._options);
+    this._exporterService.export(this._data, this._options);
     this._data = new Array<any>();
     this.enableExportButton(true);
     this.exportCompleted.emit();

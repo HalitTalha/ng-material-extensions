@@ -1,9 +1,9 @@
-import * as XLSX from 'xlsx';
-import { Options } from '../../options';
-import { WorksheetExporter } from './worksheet-exporter';
 import { Mime } from '../../mime';
-export declare class TxtExporterService extends WorksheetExporter<Options> {
+import { TxtOptions } from '../../options';
+import { FileExporter } from './file-exporter';
+export declare class TxtExporterService extends FileExporter<TxtOptions> {
     constructor();
-    createContent(worksheet: XLSX.WorkSheet, options?: Options): any;
+    createContent(rows: any[], options?: TxtOptions): string;
     getMimeType(): Mime;
+    private getDelimiter;
 }

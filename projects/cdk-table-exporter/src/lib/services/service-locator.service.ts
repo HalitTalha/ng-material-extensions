@@ -14,18 +14,20 @@ export class ServiceLocatorService {
 
   constructor(private injector: Injector) { }
 
-  public getService(exportType: ExportType): Exporter<Options> {
+  public getService(exportType: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other'): Exporter<Options> {
     switch (exportType) {
-      case ExportType.XLS:
+      case ExportType.XLS.valueOf():
         return this.injector.get<XlsExporterService>(XlsExporterService);
-      case ExportType.XLSX:
+      case ExportType.XLSX.valueOf():
           return this.injector.get<XlsxExporterService>(XlsxExporterService);
-      case ExportType.JSON:
+      case ExportType.JSON.valueOf():
         return this.injector.get<JsonExporterService>(JsonExporterService);
-      case ExportType.TXT:
+      case ExportType.TXT.valueOf():
         return this.injector.get<TxtExporterService>(TxtExporterService);
-      case ExportType.CSV:
+      case ExportType.CSV.valueOf():
         return this.injector.get<CsvExporterService>(CsvExporterService);
+      case ExportType.OTHER.valueOf():
+        return null;
       default:
         return this.injector.get<XlsxExporterService>(XlsxExporterService);
     }

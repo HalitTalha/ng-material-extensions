@@ -1,12 +1,95 @@
-.example-container {
-  display: flex;
-  flex-direction: column;
-  max-height: 500px;
-  min-width: 300px;
-  margin-bottom: 10px;
+
+.docs-header-background {
+  background: #3f51b5;
 }
 
-.mat-table {
-  overflow: auto;
-  max-height: 500px;
+.docs-header-logo {
+  width: 45px;
+  height: 45px;
+}
+
+.docs-header-headline {
+  color: #fff;
+}
+
+.docs-header-start {
+  color: #3f51b5;
+}
+
+.docs-header-background {
+  overflow: hidden;
+}
+
+.docs-header-section {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.docs-footer {
+  padding: 12px;
+  font-size: 12px;
+  margin-top: 40px;
+  background: #3f51b5;
+  color: #fff;
+  display: block;
+}
+
+.docs-footer-list {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 8px;
+}
+
+.docs-footer-logo {
+  flex: 1;
+}
+
+.footer-logo {
+  padding: 12px;
+  font-size: 12px;
+  margin-top: 40px;
+}
+
+
+h1 {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 56px;
+  margin: 15px 5px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  margin: 15px 0 25px 0;
+}
+
+
+/**
+  * Rules for when the device is detected to be a small screen.
+  */
+@media (max-width: 720px) {
+  .docs-header-section {
+    padding-top: 15px;
+  }
+}
+
+
+::ng-deep .docs-tabs > .mat-tab-header {
+  background-color: #3f51b5 !important;
+}
+
+::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-ink-bar {
+  background-color: #fff !important;
+  height: 4px;
+}
+
+::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label > .mat-tab-label-content {
+  color: #fff !important;
+}
+
+::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label-active {
+  opacity: 1;
 }

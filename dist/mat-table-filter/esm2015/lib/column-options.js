@@ -1,9 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- */
-export function ColumnOptions() { }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sdW1uLW9wdGlvbnMuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9tYXQtdGFibGUtZmlsdGVyLyIsInNvdXJjZXMiOlsibGliL2NvbHVtbi1vcHRpb25zLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFJQSxtQ0FFQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE9wdGlvbnMgfSBmcm9tICcuL29wdGlvbnMnO1xyXG5cclxuZXhwb3J0IHR5cGUgUHJlZGljYXRlRnVuYyA9IChkYXRhOiBhbnkpID0+IGJvb2xlYW47XHJcblxyXG5leHBvcnQgaW50ZXJmYWNlIENvbHVtbk9wdGlvbnMge1xyXG4gIFtwcm9wZXJ0eTogc3RyaW5nXTogT3B0aW9ucyB8IFByZWRpY2F0ZUZ1bmM7XHJcbn1cclxuIl19

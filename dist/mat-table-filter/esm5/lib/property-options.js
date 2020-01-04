@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+export function PropertyOptions() { }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvcGVydHktb3B0aW9ucy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL21hdC10YWJsZS1maWx0ZXIvIiwic291cmNlcyI6WyJsaWIvcHJvcGVydHktb3B0aW9ucy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBSUEscUNBRUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBPcHRpb25zIH0gZnJvbSAnLi9vcHRpb25zJztcclxuXHJcbmV4cG9ydCB0eXBlIFByZWRpY2F0ZUZ1bmMgPSAoZGF0YTogYW55KSA9PiBib29sZWFuO1xyXG5cclxuZXhwb3J0IGludGVyZmFjZSBQcm9wZXJ0eU9wdGlvbnMge1xyXG4gIFtwcm9wZXJ0eTogc3RyaW5nXTogT3B0aW9ucyB8IFByZWRpY2F0ZUZ1bmM7XHJcbn1cclxuIl19

@@ -1,19 +1,23 @@
-import { MIME_JSON } from './../../constants';
-import { Exporter } from './exporter';
 import { Injectable } from '@angular/core';
 import { Options } from '../../options';
-import { FileUtil } from '../../file-util';
+import { FileExporter } from './file-exporter';
+import { Mime } from '../../mime';
+import { MIME_JSON } from '../../constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JsonExporterService implements Exporter<Options> {
+export class JsonExporterService extends FileExporter<Options> {
 
   constructor() {
+    super();
   }
 
-  public export(rows: any[], options?: Options) {
-    const jsonContent = JSON.stringify(rows);
-    FileUtil.save(jsonContent, MIME_JSON, options);
+  public createContent(rows: any[], options?: Options) {
+    return JSON.stringify(rows);
   }
+   public getMimeType(): Mime {
+    return MIME_JSON;
+  }
+
 }

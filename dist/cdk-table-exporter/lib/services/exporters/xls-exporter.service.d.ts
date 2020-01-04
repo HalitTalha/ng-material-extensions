@@ -4,7 +4,8 @@ import { ExcelOptions } from '../../options';
 import { WorksheetExporter } from './worksheet-exporter';
 export declare class XlsExporterService extends WorksheetExporter<ExcelOptions> {
     constructor();
-    createContent(worksheet: XLSX.WorkSheet, options?: ExcelOptions): any;
+    workSheetToContent(worksheet: XLSX.WorkSheet, options?: ExcelOptions): any;
     getMimeType(): Mime;
-    private correctType;
+    private correctTypes;
+    private convertToWch;
 }

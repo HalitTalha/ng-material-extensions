@@ -4,6 +4,6 @@ import { WorksheetExporter } from './worksheet-exporter';
 import { Mime } from '../../mime';
 export declare class CsvExporterService extends WorksheetExporter<Options> {
     constructor();
-    createContent(worksheet: XLSX.WorkSheet, options?: Options): any;
+    workSheetToContent(worksheet: XLSX.WorkSheet, options?: Options): any;
     getMimeType(): Mime;
 }

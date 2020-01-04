@@ -1,6 +1,6 @@
 import { ExportType } from './export-type';
 import * as FileSaver from 'file-saver';
-import { MAT_TABLE_EXPORTER, P, XLS_REGEX } from './constants';
+import { MAT_TABLE_EXPORTER, DOT, XLS_REGEX } from './constants';
 import { Mime } from './mime';
 import { Options } from './options';
 
@@ -27,6 +27,6 @@ export class FileUtil {
   }
 
   public static removeExtension(options?: Options) {
-    options.fileName = options.fileName.split(P)[0];
+    options.fileName = options.fileName.split(DOT)[0];
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "mat-table-exporter",
-  "version": "1.2.2",
+  "version": "1.2.3-ng67",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
@@ -9,17 +9,17 @@
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
   },
   "peerDependencies": {
-    "@angular/common": "^7.0.0 || ^8.0.0",
-    "@angular/core": "^7.0.0 || ^8.0.0",
-    "@angular/material": "^7.0.0 || ^8.0.0",
-    "@angular/cdk": "^7.0.0 || ^8.0.0"
+    "@angular/common": "^7.0.0 || ^6.3.0",
+    "@angular/core": "^7.0.0 || ^6.3.0",
+    "@angular/material": "^7.0.0 || ^6.3.0",
+    "@angular/cdk": "^7.0.0 || ^6.3.0"
   },
   "dependencies": {
-    "cdk-table-exporter": "^1.2.2"
+    "cdk-table-exporter": "^1.2.3-ng67"
   },
   "devDependencies": {
-    "@angular/cdk": "^7.0.0 || ^8.0.0",
-    "@angular/material": "^7.0.0 || ^8.0.0",
+    "@angular/cdk": "^7.0.0 || ^6.3.0",
+    "@angular/material": "^7.0.0 || ^6.3.0",
     "goodparts": "^1.2.1"
   },
   "scripts": {

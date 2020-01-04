@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { Injectable } from '@angular/core';
 import * as i0 from "@angular/core";
@@ -158,7 +158,7 @@ var DataExtractorService = /** @class */ (function () {
     ];
     /** @nocollapse */
     DataExtractorService.ctorParameters = function () { return []; };
-    /** @nocollapse */ DataExtractorService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
+    /** @nocollapse */ DataExtractorService.ngInjectableDef = i0.defineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
     return DataExtractorService;
 }());
 export { DataExtractorService };

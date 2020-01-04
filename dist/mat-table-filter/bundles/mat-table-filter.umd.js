@@ -1,8 +1,20 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/material'), require('rxjs'), require('rxjs/operators'), require('lodash'), require('util')) :
-    typeof define === 'function' && define.amd ? define('mat-table-filter', ['exports', '@angular/core', '@angular/material', 'rxjs', 'rxjs/operators', 'lodash', 'util'], factory) :
-    (global = global || self, factory(global['mat-table-filter'] = {}, global.ng.core, global.ng.material, global.rxjs, global.rxjs.operators, global.lodash, global.util));
-}(this, function (exports, core, material, rxjs, operators, lodash, util) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/material'), require('rxjs'), require('rxjs/operators'), require('@angular/core'), require('lodash'), require('util')) :
+    typeof define === 'function' && define.amd ? define('mat-table-filter', ['exports', '@angular/material', 'rxjs', 'rxjs/operators', '@angular/core', 'lodash', 'util'], factory) :
+    (factory((global['mat-table-filter'] = {}),global.ng.material,global.rxjs,global.rxjs.operators,global.ng.core,global.LODASH,global.util));
+}(this, (function (exports,material,rxjs,operators,i0,LODASH,util) { 'use strict';
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var MatTableFilter = {
+        EQUALS: 'EQUALS',
+        ANYWHERE: 'ANYWHERE',
+        STARTS_WITH: 'STARTS_WITH',
+        ENDS_WITH: 'ENDS_WITH',
+    };
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -19,277 +31,135 @@
     and limitations under the License.
     ***************************************************************************** */
     /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
+    var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b)
+                if (b.hasOwnProperty(p))
+                    d[p] = b[p]; };
         return extendStatics(d, b);
     };
-
     function __extends(d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
-    function __rest(s, e) {
-        var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
-        if (s != null && typeof Object.getOwnPropertySymbols === "function")
-            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                    t[p[i]] = s[p[i]];
-            }
-        return t;
-    }
-
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-
-    function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
-    }
-
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-    }
-
-    function __awaiter(thisArg, _arguments, P, generator) {
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
-                }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-
-    function __exportStar(m, exports) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-
     function __values(o) {
         var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m) return m.call(o);
+        if (m)
+            return m.call(o);
         return {
             next: function () {
-                if (o && i >= o.length) o = void 0;
+                if (o && i >= o.length)
+                    o = void 0;
                 return { value: o && o[i++], done: !o };
             }
         };
     }
 
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-        }
-        catch (error) { e = { error: error }; }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
-            }
-            finally { if (e) throw e.error; }
-        }
-        return ar;
-    }
-
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-
-    function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
-    };
-
-    function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-    }
-
-    function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []), i, q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-        function fulfill(value) { resume("next", value); }
-        function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-    }
-
-    function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-    }
-
-    function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator], i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-    }
-
-    function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-        return cooked;
-    };
-
-    function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
-        return result;
-    }
-
-    function __importDefault(mod) {
-        return (mod && mod.__esModule) ? mod : { default: mod };
-    }
-
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @enum {string} */
-    var MatTableFilter = {
-        EQUALS: 'EQUALS',
-        ANYWHERE: 'ANYWHERE',
-        STARTS_WITH: 'STARTS_WITH',
-        ENDS_WITH: 'ENDS_WITH',
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @abstract
      * @template T
      */
-    var   /**
+    var /**
      * @abstract
      * @template T
-     */
-    FilterPredicate = /** @class */ (function () {
+     */ FilterPredicate = /** @class */ (function () {
         function FilterPredicate() {
         }
         /**
          * @param {?} itemPair
-         * @param {?} filterType
+         * @param {?} options
          * @return {?}
          */
         FilterPredicate.prototype.executeCondition = /**
          * @param {?} itemPair
-         * @param {?} filterType
+         * @param {?} options
          * @return {?}
          */
-        function (itemPair, filterType) {
-            switch (filterType) {
-                case MatTableFilter.EQUALS:
-                    return this.equals(itemPair);
-                case MatTableFilter.ANYWHERE:
-                    return this.anywhere(itemPair);
-                case MatTableFilter.STARTS_WITH:
-                    return this.startsWith(itemPair);
-                case MatTableFilter.ENDS_WITH:
-                    return this.endsWith(itemPair);
-                default:
-                    return true;
-            }
-        };
+            function (itemPair, options) {
+                this.handleLetterCasing(itemPair, options.caseSensitive);
+                switch (options.filterType) {
+                    case MatTableFilter.EQUALS:
+                        return this.equals(itemPair);
+                    case MatTableFilter.ANYWHERE:
+                        return this.anywhere(itemPair);
+                    case MatTableFilter.STARTS_WITH:
+                        return this.startsWith(itemPair);
+                    case MatTableFilter.ENDS_WITH:
+                        return this.endsWith(itemPair);
+                    default:
+                        return true;
+                }
+            };
+        /**
+         * @private
+         * @param {?} itemPair
+         * @param {?} caseSensitive
+         * @return {?}
+         */
+        FilterPredicate.prototype.handleLetterCasing = /**
+         * @private
+         * @param {?} itemPair
+         * @param {?} caseSensitive
+         * @return {?}
+         */
+            function (itemPair, caseSensitive) {
+                if (!caseSensitive) {
+                    this.transformAllLowerCase(itemPair);
+                }
+            };
+        /**
+         * @private
+         * @param {?} object
+         * @return {?}
+         */
+        FilterPredicate.prototype.transformAllLowerCase = /**
+         * @private
+         * @param {?} object
+         * @return {?}
+         */
+            function (object) {
+                // tslint:disable-next-line:forin
+                for (var key in object) {
+                    /** @type {?} */
+                    var value = object[key];
+                    if (LODASH.isString(value)) {
+                        object[key] = value.toLowerCase();
+                    }
+                    else {
+                        this.transformAllLowerCase(value);
+                    }
+                }
+            };
         return FilterPredicate;
     }());
-    if (false) {
-        /**
-         * @abstract
-         * @param {?} itemPair
-         * @return {?}
-         */
-        FilterPredicate.prototype.equals = function (itemPair) { };
-        /**
-         * @abstract
-         * @param {?} itemPair
-         * @return {?}
-         */
-        FilterPredicate.prototype.anywhere = function (itemPair) { };
-        /**
-         * @abstract
-         * @param {?} itemPair
-         * @return {?}
-         */
-        FilterPredicate.prototype.startsWith = function (itemPair) { };
-        /**
-         * @abstract
-         * @param {?} itemPair
-         * @return {?}
-         */
-        FilterPredicate.prototype.endsWith = function (itemPair) { };
-    }
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ArrayPredicateService = /** @class */ (function (_super) {
         __extends(ArrayPredicateService, _super);
         function ArrayPredicateService() {
             return _super.call(this) || this;
         }
+        /**
+         * @private
+         * @return {?}
+         */
+        ArrayPredicateService.warn = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                console.warn(ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING);
+                console.warn(ArrayPredicateService.SUGGESTION_WARNING);
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -298,9 +168,9 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            return lodash.isEqual(itemPair.example.sort(), itemPair.item.sort());
-        };
+            function (itemPair) {
+                return LODASH.isEqual(itemPair.example.sort(), itemPair.item.sort());
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -309,9 +179,9 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            return this.isSubset(itemPair.example, itemPair.item);
-        };
+            function (itemPair) {
+                return this.isSubset(itemPair.example, itemPair.item);
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -320,9 +190,10 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            throw new Error('Unsupported Operation');
-        };
+            function (itemPair) {
+                ArrayPredicateService.warn();
+                return this.anywhere(itemPair);
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -331,9 +202,10 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            throw new Error('Unsupported Operation');
-        };
+            function (itemPair) {
+                ArrayPredicateService.warn();
+                return this.anywhere(itemPair);
+            };
         /**
          * @private
          * @param {?} example
@@ -346,23 +218,26 @@
          * @param {?} item
          * @return {?}
          */
-        function (example, item) {
-            return !lodash.difference(lodash.flatten(example), lodash.flatten(item)).length;
-        };
+            function (example, item) {
+                return !LODASH.difference(LODASH.flatten(example), LODASH.flatten(item)).length;
+            };
+        // tslint:disable-next-line:max-line-length
+        ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING = 'This filterType is unsupported for array filtering. FilterType.ANYWHERE is executed instead!';
+        ArrayPredicateService.SUGGESTION_WARNING = 'You can set a custom predicate for the array property through PropertyOptions!';
         ArrayPredicateService.decorators = [
-            { type: core.Injectable, args: [{
+            { type: i0.Injectable, args: [{
                         providedIn: 'root'
                     },] }
         ];
         /** @nocollapse */
         ArrayPredicateService.ctorParameters = function () { return []; };
-        /** @nocollapse */ ArrayPredicateService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ArrayPredicateService_Factory() { return new ArrayPredicateService(); }, token: ArrayPredicateService, providedIn: "root" });
+        /** @nocollapse */ ArrayPredicateService.ngInjectableDef = i0.defineInjectable({ factory: function ArrayPredicateService_Factory() { return new ArrayPredicateService(); }, token: ArrayPredicateService, providedIn: "root" });
         return ArrayPredicateService;
     }(FilterPredicate));
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AlphaNumericPredicateService = /** @class */ (function (_super) {
         __extends(AlphaNumericPredicateService, _super);
@@ -377,9 +252,9 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            return itemPair.example === itemPair.item;
-        };
+            function (itemPair) {
+                return itemPair.example === itemPair.item;
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -388,9 +263,9 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            return itemPair.item.includes(itemPair.example);
-        };
+            function (itemPair) {
+                return itemPair.item.includes(itemPair.example);
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -399,9 +274,9 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            return itemPair.item.startsWith(itemPair.example);
-        };
+            function (itemPair) {
+                return itemPair.item.startsWith(itemPair.example);
+            };
         /**
          * @param {?} itemPair
          * @return {?}
@@ -410,23 +285,23 @@
          * @param {?} itemPair
          * @return {?}
          */
-        function (itemPair) {
-            return itemPair.item.endsWith(itemPair.example);
-        };
+            function (itemPair) {
+                return itemPair.item.endsWith(itemPair.example);
+            };
         AlphaNumericPredicateService.decorators = [
-            { type: core.Injectable, args: [{
+            { type: i0.Injectable, args: [{
                         providedIn: 'root'
                     },] }
         ];
         /** @nocollapse */
         AlphaNumericPredicateService.ctorParameters = function () { return []; };
-        /** @nocollapse */ AlphaNumericPredicateService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
+        /** @nocollapse */ AlphaNumericPredicateService.ngInjectableDef = i0.defineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
         return AlphaNumericPredicateService;
     }(FilterPredicate));
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MatTableFilterService = /** @class */ (function () {
         function MatTableFilterService(_alphaNumericService, _arrayService) {
@@ -435,132 +310,123 @@
         }
         /**
          * @param {?} itemPair
-         * @param {?} allOptions
+         * @param {?} propertyOptions
          * @param {?} commonOptions
          * @param {?=} propertyName
          * @return {?}
          */
         MatTableFilterService.prototype.filterPredicate = /**
          * @param {?} itemPair
-         * @param {?} allOptions
+         * @param {?} propertyOptions
          * @param {?} commonOptions
          * @param {?=} propertyName
          * @return {?}
          */
-        function (itemPair, allOptions, commonOptions, propertyName) {
-            var e_1, _a;
-            // tslint:disable-next-line:forin
-            /** @type {?} */
-            var exampleKeys = Object.keys(itemPair.example);
-            try {
-                for (var exampleKeys_1 = __values(exampleKeys), exampleKeys_1_1 = exampleKeys_1.next(); !exampleKeys_1_1.done; exampleKeys_1_1 = exampleKeys_1.next()) {
-                    var key = exampleKeys_1_1.value;
-                    /** @type {?} */
-                    var exampleColumnValue = itemPair.example[key];
-                    if (lodash.isNil(exampleColumnValue) || lodash.every(exampleColumnValue, lodash.isEmpty) && typeof exampleColumnValue !== 'boolean') {
-                        // if example entity's property is undefined/null/empty then it means the caller wants all the data
-                        continue;
-                    }
-                    if (itemPair.item.hasOwnProperty(key)) {
-                        // if example entity has additional columns then search fails
+            function (itemPair, propertyOptions, commonOptions, propertyName) {
+                var e_1, _a;
+                // tslint:disable-next-line:forin
+                /** @type {?} */
+                var exampleKeys = Object.keys(itemPair.example);
+                try {
+                    for (var exampleKeys_1 = __values(exampleKeys), exampleKeys_1_1 = exampleKeys_1.next(); !exampleKeys_1_1.done; exampleKeys_1_1 = exampleKeys_1.next()) {
+                        var key = exampleKeys_1_1.value;
                         /** @type {?} */
-                        var itemColumnValue = itemPair.item[key];
-                        /** @type {?} */
-                        var nextPropertyName = this.getNextPropertyName(propertyName, key);
-                        /** @type {?} */
-                        var options = this.getOptionsForColumn(commonOptions, allOptions, nextPropertyName);
-                        if (util.isFunction(options)) { // if user defined predicate is present for property
-                            // if user defined predicate is present for property
-                            /** @type {?} */
-                            var customPredicate = (/** @type {?} */ (options));
-                            if (!customPredicate(itemColumnValue)) {
-                                return false;
-                            }
+                        var exampleValue = LODASH.cloneDeep(itemPair.example[key]);
+                        if (LODASH.isNil(exampleValue) || LODASH.every(exampleValue, LODASH.isEmpty) && typeof exampleValue !== 'boolean') {
+                            // if example entity's property is undefined/null/empty then it means the caller wants all the data
+                            continue;
                         }
-                        else {
+                        if (itemPair.item.hasOwnProperty(key)) {
+                            // if example entity has additional columns then search fails
                             /** @type {?} */
-                            var valuePair = { item: itemColumnValue, example: exampleColumnValue };
+                            var itemValue = LODASH.cloneDeep(itemPair.item[key]);
                             /** @type {?} */
-                            var columnOptions = (/** @type {?} */ (options));
-                            if (this.isAlphaNumeric(itemColumnValue)) {
-                                this.handleLetterCasing(valuePair, columnOptions.caseSensitive);
-                                if (!this._alphaNumericService.executeCondition(valuePair, columnOptions.filterType)) {
-                                    return false;
-                                }
-                            }
-                            else if (lodash.isArray(itemColumnValue)) {
-                                if (!this._arrayService.executeCondition(valuePair, columnOptions.filterType)) {
-                                    return false;
-                                }
-                            }
-                            else if (lodash.isBoolean(itemColumnValue)) {
-                                if (itemColumnValue !== exampleColumnValue) {
+                            var nextPropertyName = this.getNextPropertyName(propertyName, key);
+                            /** @type {?} */
+                            var options = this.finalizeOptionsForProperty(commonOptions, propertyOptions, nextPropertyName);
+                            if (util.isFunction(options)) { // if user defined predicate is present for property
+                                // if user defined predicate is present for property
+                                /** @type {?} */
+                                var customPredicate = ( /** @type {?} */(options));
+                                if (!customPredicate(itemValue)) {
                                     return false;
                                 }
                             }
                             else {
-                                if (!this.filterPredicate(valuePair, allOptions, options, nextPropertyName)) {
-                                    // if one of the inner properties returns true, this shouldnt affect the whole item's filtering
-                                    // however if it returns false then the item must not be in the list
-                                    return false;
+                                /** @type {?} */
+                                var columnOptions = ( /** @type {?} */(options));
+                                if (this.isAlphaNumeric(itemValue)) {
+                                    /** @type {?} */
+                                    var valuePair = { item: itemValue.toString(), example: exampleValue };
+                                    if (!this._alphaNumericService.executeCondition(valuePair, columnOptions)) {
+                                        return false;
+                                    }
+                                }
+                                else if (LODASH.isArray(itemValue)) {
+                                    /** @type {?} */
+                                    var valuePair = { item: itemValue, example: exampleValue };
+                                    if (!this._arrayService.executeCondition(valuePair, columnOptions)) {
+                                        return false;
+                                    }
+                                }
+                                else if (LODASH.isBoolean(itemValue)) {
+                                    if (itemValue !== exampleValue) {
+                                        return false;
+                                    }
+                                }
+                                else {
+                                    /** @type {?} */
+                                    var valuePair = { item: itemValue, example: exampleValue };
+                                    if (!this.filterPredicate(valuePair, propertyOptions, options, nextPropertyName)) {
+                                        // if one of the inner properties returns true, this shouldnt affect the whole item's filtering
+                                        // however if it returns false then the item must not be in the list
+                                        return false;
+                                    }
                                 }
                             }
                         }
-                    }
-                    else {
-                        return false;
+                        else {
+                            return false;
+                        }
                     }
                 }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (exampleKeys_1_1 && !exampleKeys_1_1.done && (_a = exampleKeys_1.return)) _a.call(exampleKeys_1);
+                catch (e_1_1) {
+                    e_1 = { error: e_1_1 };
                 }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return true;
-        };
-        /**
-         * @private
-         * @param {?} itemPair
-         * @param {?} caseSensitive
-         * @return {?}
-         */
-        MatTableFilterService.prototype.handleLetterCasing = /**
-         * @private
-         * @param {?} itemPair
-         * @param {?} caseSensitive
-         * @return {?}
-         */
-        function (itemPair, caseSensitive) {
-            if (!caseSensitive) {
-                itemPair.example = itemPair.example.toUpperCase();
-                itemPair.item = itemPair.item.toUpperCase();
-            }
-        };
+                finally {
+                    try {
+                        if (exampleKeys_1_1 && !exampleKeys_1_1.done && (_a = exampleKeys_1.return))
+                            _a.call(exampleKeys_1);
+                    }
+                    finally {
+                        if (e_1)
+                            throw e_1.error;
+                    }
+                }
+                return true;
+            };
         /**
          * @private
          * @param {?} commonOptions
-         * @param {?} columnOptions
-         * @param {?=} propertyName
+         * @param {?} propertyOptions
+         * @param {?} propertyName
          * @return {?}
          */
-        MatTableFilterService.prototype.getOptionsForColumn = /**
+        MatTableFilterService.prototype.finalizeOptionsForProperty = /**
          * @private
          * @param {?} commonOptions
-         * @param {?} columnOptions
-         * @param {?=} propertyName
+         * @param {?} propertyOptions
+         * @param {?} propertyName
          * @return {?}
          */
-        function (commonOptions, columnOptions, propertyName) {
-            if (columnOptions && columnOptions.hasOwnProperty(propertyName)) {
-                return columnOptions[propertyName];
-            }
-            else {
-                return commonOptions;
-            }
-        };
+            function (commonOptions, propertyOptions, propertyName) {
+                if (propertyOptions && propertyOptions.hasOwnProperty(propertyName)) {
+                    return propertyOptions[propertyName];
+                }
+                else {
+                    return commonOptions;
+                }
+            };
         /**
          * @private
          * @param {?} propertyName
@@ -573,9 +439,9 @@
          * @param {?} key
          * @return {?}
          */
-        function (propertyName, key) {
-            return propertyName ? (propertyName + '.' + key) : key;
-        };
+            function (propertyName, key) {
+                return propertyName ? (propertyName + '.' + key) : key;
+            };
         /**
          * @param {?} oldEntity
          * @param {?} newEntity
@@ -586,9 +452,9 @@
          * @param {?} newEntity
          * @return {?}
          */
-        function (oldEntity, newEntity) {
-            return !lodash.isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
-        };
+            function (oldEntity, newEntity) {
+                return !LODASH.isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
+            };
         /**
          * @param {?} object
          * @return {?}
@@ -597,14 +463,14 @@
          * @param {?} object
          * @return {?}
          */
-        function (object) {
-            if (object) {
-                return JSON.parse(JSON.stringify(object));
-            }
-            else {
-                return undefined;
-            }
-        };
+            function (object) {
+                if (object) {
+                    return JSON.parse(JSON.stringify(object));
+                }
+                else {
+                    return undefined;
+                }
+            };
         /**
          * @private
          * @param {?} value
@@ -615,38 +481,28 @@
          * @param {?} value
          * @return {?}
          */
-        function (value) {
-            return lodash.isString(value) || lodash.isNumber(value);
-        };
+            function (value) {
+                return LODASH.isString(value) || LODASH.isNumber(value);
+            };
         MatTableFilterService.decorators = [
-            { type: core.Injectable, args: [{
+            { type: i0.Injectable, args: [{
                         providedIn: 'root'
                     },] }
         ];
         /** @nocollapse */
-        MatTableFilterService.ctorParameters = function () { return [
-            { type: AlphaNumericPredicateService },
-            { type: ArrayPredicateService }
-        ]; };
-        /** @nocollapse */ MatTableFilterService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(core.ɵɵinject(AlphaNumericPredicateService), core.ɵɵinject(ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
+        MatTableFilterService.ctorParameters = function () {
+            return [
+                { type: AlphaNumericPredicateService },
+                { type: ArrayPredicateService }
+            ];
+        };
+        /** @nocollapse */ MatTableFilterService.ngInjectableDef = i0.defineInjectable({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(i0.inject(AlphaNumericPredicateService), i0.inject(ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
         return MatTableFilterService;
     }());
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterService.prototype._alphaNumericService;
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterService.prototype._arrayService;
-    }
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MatTableFilterDirective = /** @class */ (function () {
         function MatTableFilterDirective(_filterService, _injectedTable, _viewContainerRef) {
@@ -665,12 +521,12 @@
         MatTableFilterDirective.prototype.ngDoCheck = /**
          * @return {?}
          */
-        function () {
-            if (this._filterService.isChanged(this._oldExampleEntity, this.exampleEntity)) {
-                this._oldExampleEntity = this._filterService.toPlainJson(this.exampleEntity);
-                this._exampleEntitySubject.next();
-            }
-        };
+            function () {
+                if (this._filterService.isChanged(this._oldExampleEntity, this.exampleEntity)) {
+                    this._oldExampleEntity = this._filterService.toPlainJson(this.exampleEntity);
+                    this._exampleEntitySubject.next(undefined);
+                }
+            };
         /**
          * @private
          * @return {?}
@@ -679,20 +535,20 @@
          * @private
          * @return {?}
          */
-        function () {
-            // tslint:disable-next-line:no-string-literal
-            /** @type {?} */
-            var table = this._viewContainerRef['_data'].componentView.component;
-            if (table) {
-                this._table = table;
-            }
-            else if (this._injectedTable) {
-                this._table = this._injectedTable;
-            }
-            else {
-                throw new Error('Unsupported Angular version!');
-            }
-        };
+            function () {
+                // tslint:disable-next-line:no-string-literal
+                /** @type {?} */
+                var table = this._viewContainerRef['_data'].componentView.component;
+                if (table) {
+                    this._table = table;
+                }
+                else if (this._injectedTable) {
+                    this._table = this._injectedTable;
+                }
+                else {
+                    throw new Error('Unsupported Angular version!');
+                }
+            };
         /**
          * @private
          * @return {?}
@@ -701,18 +557,17 @@
          * @private
          * @return {?}
          */
-        function () {
-            var _this = this;
-            this._exampleEntitySubject = new rxjs.BehaviorSubject(null);
-            this._exampleEntitySubject.pipe(operators.debounceTime(this.debounceTime))
-                .subscribe((/**
+            function () {
+                var _this = this;
+                this._exampleEntitySubject = new rxjs.BehaviorSubject(null);
+                this._exampleEntitySubject.pipe(operators.debounceTime(this.debounceTime))
+                    .subscribe(( /**
              * @param {?} _
              * @return {?}
-             */
-            function (_) {
-                _this.updateFilterPredicate();
-            }));
-        };
+             */function (_) {
+                    _this.updateFilterPredicate();
+                }));
+            };
         /**
          * @private
          * @return {?}
@@ -721,14 +576,14 @@
          * @private
          * @return {?}
          */
-        function () {
-            /** @type {?} */
-            var matDataSource = this.getMatDataSource();
-            if (matDataSource) {
-                matDataSource.filterPredicate = this.getFilterPredicate();
-                matDataSource.filter = (/** @type {?} */ (this.exampleEntity));
-            }
-        };
+            function () {
+                /** @type {?} */
+                var matDataSource = this.getMatDataSource();
+                if (matDataSource) {
+                    matDataSource.filterPredicate = this.getFilterPredicate();
+                    matDataSource.filter = ( /** @type {?} */(this.exampleEntity));
+                }
+            };
         /**
          * @private
          * @return {?}
@@ -737,21 +592,20 @@
          * @private
          * @return {?}
          */
-        function () {
-            var _this = this;
-            if (this.customPredicate) {
-                return this.customPredicate;
-            }
-            else {
-                return (/**
-                 * @param {?} item
-                 * @return {?}
-                 */
-                function (item) {
-                    return _this._filterService.filterPredicate({ example: _this.exampleEntity, item: item }, _this.columnOptions, { filterType: _this.filterType, caseSensitive: _this.caseSensitive });
-                });
-            }
-        };
+            function () {
+                var _this = this;
+                if (this.customPredicate) {
+                    return this.customPredicate;
+                }
+                else {
+                    return ( /**
+                     * @param {?} item
+                     * @return {?}
+                     */function (item) {
+                        return _this._filterService.filterPredicate({ example: _this.exampleEntity, item: item }, _this.propertyOptions, { filterType: _this.filterType, caseSensitive: _this.caseSensitive });
+                    });
+                }
+            };
         /**
          * @private
          * @return {?}
@@ -760,88 +614,45 @@
          * @private
          * @return {?}
          */
-        function () {
-            /** @type {?} */
-            var matTable = (/** @type {?} */ (this._table));
-            return ((/** @type {?} */ (matTable.dataSource)));
-        };
+            function () {
+                /** @type {?} */
+                var matTable = ( /** @type {?} */(this._table));
+                return (( /** @type {?} */(matTable.dataSource)));
+            };
         MatTableFilterDirective.decorators = [
-            { type: core.Directive, args: [{
+            { type: i0.Directive, args: [{
                         selector: '[matTableFilter]',
                         exportAs: 'matTableFilter'
                     },] }
         ];
         /** @nocollapse */
-        MatTableFilterDirective.ctorParameters = function () { return [
-            { type: MatTableFilterService },
-            { type: material.MatTable, decorators: [{ type: core.Host }, { type: core.Self }, { type: core.Optional }] },
-            { type: core.ViewContainerRef }
-        ]; };
+        MatTableFilterDirective.ctorParameters = function () {
+            return [
+                { type: MatTableFilterService },
+                { type: material.MatTable, decorators: [{ type: i0.Host }, { type: i0.Self }, { type: i0.Optional }] },
+                { type: i0.ViewContainerRef }
+            ];
+        };
         MatTableFilterDirective.propDecorators = {
-            exampleEntity: [{ type: core.Input }],
-            debounceTime: [{ type: core.Input }],
-            filterType: [{ type: core.Input }],
-            caseSensitive: [{ type: core.Input }],
-            customPredicate: [{ type: core.Input }],
-            columnOptions: [{ type: core.Input }]
+            exampleEntity: [{ type: i0.Input }],
+            debounceTime: [{ type: i0.Input }],
+            filterType: [{ type: i0.Input }],
+            caseSensitive: [{ type: i0.Input }],
+            customPredicate: [{ type: i0.Input }],
+            propertyOptions: [{ type: i0.Input }]
         };
         return MatTableFilterDirective;
     }());
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterDirective.prototype._oldExampleEntity;
-        /** @type {?} */
-        MatTableFilterDirective.prototype.exampleEntity;
-        /**
-         * in millis
-         * @type {?}
-         * @private
-         */
-        MatTableFilterDirective.prototype._table;
-        /** @type {?} */
-        MatTableFilterDirective.prototype.debounceTime;
-        /** @type {?} */
-        MatTableFilterDirective.prototype.filterType;
-        /** @type {?} */
-        MatTableFilterDirective.prototype.caseSensitive;
-        /** @type {?} */
-        MatTableFilterDirective.prototype.customPredicate;
-        /** @type {?} */
-        MatTableFilterDirective.prototype.columnOptions;
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterDirective.prototype._exampleEntitySubject;
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterDirective.prototype._filterService;
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterDirective.prototype._injectedTable;
-        /**
-         * @type {?}
-         * @private
-         */
-        MatTableFilterDirective.prototype._viewContainerRef;
-    }
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var MatTableFilterModule = /** @class */ (function () {
         function MatTableFilterModule() {
         }
         MatTableFilterModule.decorators = [
-            { type: core.NgModule, args: [{
+            { type: i0.NgModule, args: [{
                         declarations: [MatTableFilterDirective],
                         imports: [
                             material.MatTableModule
@@ -852,15 +663,26 @@
         return MatTableFilterModule;
     }());
 
-    exports.MatTableFilter = MatTableFilter;
-    exports.MatTableFilterModule = MatTableFilterModule;
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
     exports.MatTableFilterService = MatTableFilterService;
-    exports.ɵa = MatTableFilterDirective;
-    exports.ɵb = AlphaNumericPredicateService;
-    exports.ɵc = FilterPredicate;
-    exports.ɵd = ArrayPredicateService;
+    exports.MatTableFilter = MatTableFilter;
+    exports.MatTableFilterDirective = MatTableFilterDirective;
+    exports.MatTableFilterModule = MatTableFilterModule;
+    exports.ɵa = AlphaNumericPredicateService;
+    exports.ɵc = ArrayPredicateService;
+    exports.ɵb = FilterPredicate;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
+
 //# sourceMappingURL=mat-table-filter.umd.js.map

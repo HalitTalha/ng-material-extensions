@@ -1,4 +1,4 @@
-import { ColumnOptions, PredicateFunc } from './../column-options';
+import { PropertyOptions, PredicateFunc } from '../property-options';
 import { ItemPair } from './../item-pair';
 import { ArrayPredicateService } from './array-predicate.service';
 import { AlphaNumericPredicateService } from './alpha-numeric-predicate.service';
@@ -7,9 +7,8 @@ export declare class MatTableFilterService {
     private _alphaNumericService;
     private _arrayService;
     constructor(_alphaNumericService: AlphaNumericPredicateService, _arrayService: ArrayPredicateService);
-    filterPredicate(itemPair: ItemPair<any>, allOptions: ColumnOptions, commonOptions: Options | PredicateFunc, propertyName?: string): boolean;
-    private handleLetterCasing;
-    private getOptionsForColumn;
+    filterPredicate(itemPair: ItemPair<any>, propertyOptions: PropertyOptions, commonOptions: Options | PredicateFunc, propertyName?: string): boolean;
+    private finalizeOptionsForProperty;
     private getNextPropertyName;
     isChanged(oldEntity: any, newEntity: any): boolean;
     toPlainJson(object: any): JSON;

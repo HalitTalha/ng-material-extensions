@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
@@ -62,7 +62,7 @@ var AlphaNumericPredicateService = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     AlphaNumericPredicateService.ctorParameters = function () { return []; };
-    /** @nocollapse */ AlphaNumericPredicateService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
+    /** @nocollapse */ AlphaNumericPredicateService.ngInjectableDef = i0.defineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
     return AlphaNumericPredicateService;
 }(FilterPredicate));
 export { AlphaNumericPredicateService };

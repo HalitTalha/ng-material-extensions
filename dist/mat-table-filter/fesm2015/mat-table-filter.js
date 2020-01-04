@@ -1,13 +1,13 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Directive, Host, Self, Optional, ViewContainerRef, Input, NgModule } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { isEqual, difference, flatten, isNil, every, isEmpty, isArray, isBoolean, isString, isNumber } from 'lodash';
+import { Injectable, NgModule, Directive, Input, ViewContainerRef, Host, Self, Optional, defineInjectable, inject } from '@angular/core';
+import { isEqual, difference, flatten, isString, cloneDeep, isNil, every, isEmpty, isArray, isBoolean, isNumber } from 'lodash';
 import { isFunction } from 'util';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const MatTableFilter = {
@@ -19,7 +19,7 @@ const MatTableFilter = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -28,11 +28,12 @@ const MatTableFilter = {
 class FilterPredicate {
     /**
      * @param {?} itemPair
-     * @param {?} filterType
+     * @param {?} options
      * @return {?}
      */
-    executeCondition(itemPair, filterType) {
-        switch (filterType) {
+    executeCondition(itemPair, options) {
+        this.handleLetterCasing(itemPair, options.caseSensitive);
+        switch (options.filterType) {
             case MatTableFilter.EQUALS:
                 return this.equals(itemPair);
             case MatTableFilter.ANYWHERE:
@@ -45,41 +46,52 @@ class FilterPredicate {
                 return true;
         }
     }
-}
-if (false) {
     /**
-     * @abstract
+     * @private
      * @param {?} itemPair
+     * @param {?} caseSensitive
      * @return {?}
      */
-    FilterPredicate.prototype.equals = function (itemPair) { };
+    handleLetterCasing(itemPair, caseSensitive) {
+        if (!caseSensitive) {
+            this.transformAllLowerCase(itemPair);
+        }
+    }
     /**
-     * @abstract
-     * @param {?} itemPair
+     * @private
+     * @param {?} object
      * @return {?}
      */
-    FilterPredicate.prototype.anywhere = function (itemPair) { };
-    /**
-     * @abstract
-     * @param {?} itemPair
-     * @return {?}
-     */
-    FilterPredicate.prototype.startsWith = function (itemPair) { };
-    /**
-     * @abstract
-     * @param {?} itemPair
-     * @return {?}
-     */
-    FilterPredicate.prototype.endsWith = function (itemPair) { };
+    transformAllLowerCase(object) {
+        // tslint:disable-next-line:forin
+        for (const key in object) {
+            /** @type {?} */
+            const value = object[key];
+            if (isString(value)) {
+                object[key] = value.toLowerCase();
+            }
+            else {
+                this.transformAllLowerCase(value);
+            }
+        }
+    }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ArrayPredicateService extends FilterPredicate {
     constructor() {
         super();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    static warn() {
+        console.warn(ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING);
+        console.warn(ArrayPredicateService.SUGGESTION_WARNING);
     }
     /**
      * @param {?} itemPair
@@ -100,14 +112,16 @@ class ArrayPredicateService extends FilterPredicate {
      * @return {?}
      */
     startsWith(itemPair) {
-        throw new Error('Unsupported Operation');
+        ArrayPredicateService.warn();
+        return this.anywhere(itemPair);
     }
     /**
      * @param {?} itemPair
      * @return {?}
      */
     endsWith(itemPair) {
-        throw new Error('Unsupported Operation');
+        ArrayPredicateService.warn();
+        return this.anywhere(itemPair);
     }
     /**
      * @private
@@ -119,6 +133,9 @@ class ArrayPredicateService extends FilterPredicate {
         return !difference(flatten(example), flatten(item)).length;
     }
 }
+// tslint:disable-next-line:max-line-length
+ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING = 'This filterType is unsupported for array filtering. FilterType.ANYWHERE is executed instead!';
+ArrayPredicateService.SUGGESTION_WARNING = 'You can set a custom predicate for the array property through PropertyOptions!';
 ArrayPredicateService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
@@ -126,11 +143,11 @@ ArrayPredicateService.decorators = [
 ];
 /** @nocollapse */
 ArrayPredicateService.ctorParameters = () => [];
-/** @nocollapse */ ArrayPredicateService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ArrayPredicateService_Factory() { return new ArrayPredicateService(); }, token: ArrayPredicateService, providedIn: "root" });
+/** @nocollapse */ ArrayPredicateService.ngInjectableDef = defineInjectable({ factory: function ArrayPredicateService_Factory() { return new ArrayPredicateService(); }, token: ArrayPredicateService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AlphaNumericPredicateService extends FilterPredicate {
     constructor() {
@@ -172,11 +189,11 @@ AlphaNumericPredicateService.decorators = [
 ];
 /** @nocollapse */
 AlphaNumericPredicateService.ctorParameters = () => [];
-/** @nocollapse */ AlphaNumericPredicateService.ngInjectableDef = ɵɵdefineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
+/** @nocollapse */ AlphaNumericPredicateService.ngInjectableDef = defineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MatTableFilterService {
     /**
@@ -189,61 +206,64 @@ class MatTableFilterService {
     }
     /**
      * @param {?} itemPair
-     * @param {?} allOptions
+     * @param {?} propertyOptions
      * @param {?} commonOptions
      * @param {?=} propertyName
      * @return {?}
      */
-    filterPredicate(itemPair, allOptions, commonOptions, propertyName) {
+    filterPredicate(itemPair, propertyOptions, commonOptions, propertyName) {
         // tslint:disable-next-line:forin
         /** @type {?} */
         const exampleKeys = Object.keys(itemPair.example);
         for (const key of exampleKeys) {
             /** @type {?} */
-            const exampleColumnValue = itemPair.example[key];
-            if (isNil(exampleColumnValue) || every(exampleColumnValue, isEmpty) && typeof exampleColumnValue !== 'boolean') {
+            const exampleValue = cloneDeep(itemPair.example[key]);
+            if (isNil(exampleValue) || every(exampleValue, isEmpty) && typeof exampleValue !== 'boolean') {
                 // if example entity's property is undefined/null/empty then it means the caller wants all the data
                 continue;
             }
             if (itemPair.item.hasOwnProperty(key)) {
                 // if example entity has additional columns then search fails
                 /** @type {?} */
-                const itemColumnValue = itemPair.item[key];
+                const itemValue = cloneDeep(itemPair.item[key]);
                 /** @type {?} */
                 const nextPropertyName = this.getNextPropertyName(propertyName, key);
                 /** @type {?} */
-                const options = this.getOptionsForColumn(commonOptions, allOptions, nextPropertyName);
+                const options = this.finalizeOptionsForProperty(commonOptions, propertyOptions, nextPropertyName);
                 if (isFunction(options)) { // if user defined predicate is present for property
                     // if user defined predicate is present for property
                     /** @type {?} */
                     const customPredicate = (/** @type {?} */ (options));
-                    if (!customPredicate(itemColumnValue)) {
+                    if (!customPredicate(itemValue)) {
                         return false;
                     }
                 }
                 else {
                     /** @type {?} */
-                    const valuePair = { item: itemColumnValue, example: exampleColumnValue };
-                    /** @type {?} */
                     const columnOptions = (/** @type {?} */ (options));
-                    if (this.isAlphaNumeric(itemColumnValue)) {
-                        this.handleLetterCasing(valuePair, columnOptions.caseSensitive);
-                        if (!this._alphaNumericService.executeCondition(valuePair, columnOptions.filterType)) {
+                    if (this.isAlphaNumeric(itemValue)) {
+                        /** @type {?} */
+                        const valuePair = { item: itemValue.toString(), example: exampleValue };
+                        if (!this._alphaNumericService.executeCondition(valuePair, columnOptions)) {
                             return false;
                         }
                     }
-                    else if (isArray(itemColumnValue)) {
-                        if (!this._arrayService.executeCondition(valuePair, columnOptions.filterType)) {
+                    else if (isArray(itemValue)) {
+                        /** @type {?} */
+                        const valuePair = { item: itemValue, example: exampleValue };
+                        if (!this._arrayService.executeCondition(valuePair, columnOptions)) {
                             return false;
                         }
                     }
-                    else if (isBoolean(itemColumnValue)) {
-                        if (itemColumnValue !== exampleColumnValue) {
+                    else if (isBoolean(itemValue)) {
+                        if (itemValue !== exampleValue) {
                             return false;
                         }
                     }
                     else {
-                        if (!this.filterPredicate(valuePair, allOptions, options, nextPropertyName)) {
+                        /** @type {?} */
+                        const valuePair = { item: itemValue, example: exampleValue };
+                        if (!this.filterPredicate(valuePair, propertyOptions, options, nextPropertyName)) {
                             // if one of the inner properties returns true, this shouldnt affect the whole item's filtering
                             // however if it returns false then the item must not be in the list
                             return false;
@@ -259,26 +279,14 @@ class MatTableFilterService {
     }
     /**
      * @private
-     * @param {?} itemPair
-     * @param {?} caseSensitive
-     * @return {?}
-     */
-    handleLetterCasing(itemPair, caseSensitive) {
-        if (!caseSensitive) {
-            itemPair.example = itemPair.example.toUpperCase();
-            itemPair.item = itemPair.item.toUpperCase();
-        }
-    }
-    /**
-     * @private
      * @param {?} commonOptions
-     * @param {?} columnOptions
-     * @param {?=} propertyName
+     * @param {?} propertyOptions
+     * @param {?} propertyName
      * @return {?}
      */
-    getOptionsForColumn(commonOptions, columnOptions, propertyName) {
-        if (columnOptions && columnOptions.hasOwnProperty(propertyName)) {
-            return columnOptions[propertyName];
+    finalizeOptionsForProperty(commonOptions, propertyOptions, propertyName) {
+        if (propertyOptions && propertyOptions.hasOwnProperty(propertyName)) {
+            return propertyOptions[propertyName];
         }
         else {
             return commonOptions;
@@ -332,23 +340,11 @@ MatTableFilterService.ctorParameters = () => [
     { type: AlphaNumericPredicateService },
     { type: ArrayPredicateService }
 ];
-/** @nocollapse */ MatTableFilterService.ngInjectableDef = ɵɵdefineInjectable({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(ɵɵinject(AlphaNumericPredicateService), ɵɵinject(ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterService.prototype._alphaNumericService;
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterService.prototype._arrayService;
-}
+/** @nocollapse */ MatTableFilterService.ngInjectableDef = defineInjectable({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(inject(AlphaNumericPredicateService), inject(ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MatTableFilterDirective {
     /**
@@ -372,7 +368,7 @@ class MatTableFilterDirective {
     ngDoCheck() {
         if (this._filterService.isChanged(this._oldExampleEntity, this.exampleEntity)) {
             this._oldExampleEntity = this._filterService.toPlainJson(this.exampleEntity);
-            this._exampleEntitySubject.next();
+            this._exampleEntitySubject.next(undefined);
         }
     }
     /**
@@ -434,7 +430,7 @@ class MatTableFilterDirective {
              * @return {?}
              */
             (item) => {
-                return this._filterService.filterPredicate({ example: this.exampleEntity, item }, this.columnOptions, { filterType: this.filterType, caseSensitive: this.caseSensitive });
+                return this._filterService.filterPredicate({ example: this.exampleEntity, item }, this.propertyOptions, { filterType: this.filterType, caseSensitive: this.caseSensitive });
             });
         }
     }
@@ -466,57 +462,12 @@ MatTableFilterDirective.propDecorators = {
     filterType: [{ type: Input }],
     caseSensitive: [{ type: Input }],
     customPredicate: [{ type: Input }],
-    columnOptions: [{ type: Input }]
+    propertyOptions: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterDirective.prototype._oldExampleEntity;
-    /** @type {?} */
-    MatTableFilterDirective.prototype.exampleEntity;
-    /**
-     * in millis
-     * @type {?}
-     * @private
-     */
-    MatTableFilterDirective.prototype._table;
-    /** @type {?} */
-    MatTableFilterDirective.prototype.debounceTime;
-    /** @type {?} */
-    MatTableFilterDirective.prototype.filterType;
-    /** @type {?} */
-    MatTableFilterDirective.prototype.caseSensitive;
-    /** @type {?} */
-    MatTableFilterDirective.prototype.customPredicate;
-    /** @type {?} */
-    MatTableFilterDirective.prototype.columnOptions;
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterDirective.prototype._exampleEntitySubject;
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterDirective.prototype._filterService;
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterDirective.prototype._injectedTable;
-    /**
-     * @type {?}
-     * @private
-     */
-    MatTableFilterDirective.prototype._viewContainerRef;
-}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MatTableFilterModule {
 }
@@ -532,13 +483,19 @@ MatTableFilterModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MatTableFilter, MatTableFilterModule, MatTableFilterService, MatTableFilterDirective as ɵa, AlphaNumericPredicateService as ɵb, FilterPredicate as ɵc, ArrayPredicateService as ɵd };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { MatTableFilterService, MatTableFilter, MatTableFilterDirective, MatTableFilterModule, AlphaNumericPredicateService as ɵa, ArrayPredicateService as ɵc, FilterPredicate as ɵb };
+
 //# sourceMappingURL=mat-table-filter.js.map

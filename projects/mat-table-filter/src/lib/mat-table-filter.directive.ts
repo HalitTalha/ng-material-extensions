@@ -1,10 +1,11 @@
+import { PropertyOptions } from './property-options';
 import { Directive, DoCheck, Input, ViewContainerRef, Host, Self, Optional } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MatTableFilter } from './mat-table-filter.enum';
-import { MatTableFilterService } from './mat-table-filter.service';
-import * as LODASH from 'lodash';
+import { MatTableFilterService } from './services/mat-table-filter.service';
+
 @Directive({
   selector: '[matTableFilter]',
   exportAs: 'matTableFilter'
@@ -22,7 +23,8 @@ export class MatTableFilterDirective implements DoCheck {
   @Input() debounceTime = 400;
   @Input() filterType: MatTableFilter = MatTableFilter.ANYWHERE;
   @Input() caseSensitive = false;
-
+  @Input() customPredicate: (data: any) => boolean;
+  @Input() propertyOptions: PropertyOptions;
   private _exampleEntitySubject: BehaviorSubject<void>;
 
 
@@ -34,23 +36,12 @@ export class MatTableFilterDirective implements DoCheck {
   }
 
   ngDoCheck(): void {
-    if (this.isExampleEntityChanged()) {
-      this._oldExampleEntity = this.toPlainJson(this.exampleEntity);
-      this._exampleEntitySubject.next();
+    if (this._filterService.isChanged(this._oldExampleEntity, this.exampleEntity)) {
+      this._oldExampleEntity = this._filterService.toPlainJson(this.exampleEntity);
+      this._exampleEntitySubject.next(undefined);
     }
   }
 
-  private isExampleEntityChanged(): boolean {
-    return !LODASH.isEqual(this._oldExampleEntity, this.toPlainJson(this.exampleEntity));
-  }
-
-  private toPlainJson(object: any): JSON {
-    if (object) {
-      return JSON.parse(JSON.stringify(object));
-    } else {
-      return undefined;
-    }
-  }
 
   private initCdkTable() {
     // tslint:disable-next-line:no-string-literal
@@ -60,7 +51,7 @@ export class MatTableFilterDirective implements DoCheck {
     } else if (this._injectedTable) {
       this._table = this._injectedTable;
     } else {
-      throw new Error('Unsupported Angular version');
+      throw new Error('Unsupported Angular version!');
     }
   }
 
@@ -76,13 +67,20 @@ export class MatTableFilterDirective implements DoCheck {
   private updateFilterPredicate() {
     const matDataSource = this.getMatDataSource();
     if (matDataSource) {
-      const _this = this;
-      matDataSource.filterPredicate = (data): boolean => {
-        return _this._filterService.filterPredicate(_this.exampleEntity, data, _this.filterType, _this.caseSensitive);
-      }
+      matDataSource.filterPredicate = this.getFilterPredicate();
       matDataSource.filter = this.exampleEntity as any;
     }
+  }
 
+  private getFilterPredicate() {
+    if (this.customPredicate) {
+      return this.customPredicate;
+    } else {
+      return (item: any): boolean => {
+        return this._filterService.filterPredicate({example: this.exampleEntity, item}, this.propertyOptions,
+         {filterType: this.filterType, caseSensitive: this.caseSensitive});
+      };
+    }
   }
 
   private getMatDataSource(): MatTableDataSource<any> {

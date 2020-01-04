@@ -31,7 +31,6 @@ npm install --save cdk-table-exporter
 ```
 After installing cdk-table-exporter import CdkTableExporterModule in your ngModules
 
-You can find more detail under the corresponding title of Usage section
 
 &nbsp;
 
@@ -49,17 +48,7 @@ You can find more detail under the corresponding title of Usage section
 
 &nbsp;
 
-##### * Stackblitz demo: <a href="https://stackblitz.com/edit/mte-demo" target="_blank">mte-demo</a>.
-
-##### * Stackblitz demo of custom exporter <a href="https://stackblitz.com/edit/mte-cex-demo" target="_blank">mte-cex-demo</a>.
-
-&nbsp;
-
-## API
-
-mat-table-exporter project is only about MatTableExporterDirective that extends CdkTableExporter from cdk-table-exporter.
-
-Hence the below public API description for mat-table-export is inherited from CdkTableExporter.ts
+##API
 
 ### MatTableExporterDirective
 
@@ -114,7 +103,7 @@ ExcelOptions wraps the WritingOptions of sheetjs library. All other export types
 | compression | `boolean` |(Optional) Use ZIP compression for ZIP-based formats @default false|
 | ignoreEC | `boolean` |(Optional) Suppress "number stored as text" errors in generated files @default true|
 | Props | `Properties` |(Optional) Workbook properties like *Author, Title, Subject* etc.|
-
+| columnWidths | `Array<number>` | (Optional) Column widths in maximum char  |
 &nbsp;
 
 ## Licence

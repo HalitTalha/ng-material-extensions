@@ -14,6 +14,7 @@ export declare abstract class CdkTableExporter {
     private dataExtractor;
     protected table: any;
     protected viewContainerRef: ViewContainerRef;
+    private _exporterService;
     hiddenColumns?: Array<number>;
     exporter?: Exporter<Options>;
     exportCompleted?: EventEmitter<void>;
@@ -66,13 +67,12 @@ export declare abstract class CdkTableExporter {
      */
     abstract getPageChangeObservable(): Observable<any>;
     private initCdkTable;
-    private initExporterService;
     private setButtonListener;
     /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
      */
-    exportTable(exportTypeParam?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options): void;
-    private correctExportType;
+    exportTable(exportType?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options): void;
+    private loadExporter;
     private exportWithPagination;
     private exportSinglePage;
     private extractDataOnCurrentPage;

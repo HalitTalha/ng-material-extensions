@@ -1,4 +1,4 @@
-import { ColumnOptions } from './column-options';
+import { PropertyOptions } from './property-options';
 import { DoCheck, ViewContainerRef } from '@angular/core';
 import { MatTable } from '@angular/material';
 import { MatTableFilter } from './mat-table-filter.enum';
@@ -17,7 +17,7 @@ export declare class MatTableFilterDirective implements DoCheck {
     filterType: MatTableFilter;
     caseSensitive: boolean;
     customPredicate: (data: any) => boolean;
-    columnOptions: ColumnOptions;
+    propertyOptions: PropertyOptions;
     private _exampleEntitySubject;
     constructor(_filterService: MatTableFilterService, _injectedTable: MatTable<any>, _viewContainerRef: ViewContainerRef);
     ngDoCheck(): void;

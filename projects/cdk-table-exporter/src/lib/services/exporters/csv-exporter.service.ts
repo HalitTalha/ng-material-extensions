@@ -14,7 +14,7 @@ export class CsvExporterService extends WorksheetExporter<Options> {
     super();
   }
 
-  public createContent(worksheet: XLSX.WorkSheet, options?: Options): any {
+  public workSheetToContent(worksheet: XLSX.WorkSheet, options?: Options): any {
     return XLSX.utils.sheet_to_csv(worksheet);
   }
 

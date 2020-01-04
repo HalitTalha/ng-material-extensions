@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
-import { MIME_EXCEL_XLS, TYPE_ARRAY } from '../../constants';
+import { MIME_EXCEL_XLS, TYPE_ARRAY, XLSX_COLS } from '../../constants';
 import { Mime } from '../../mime';
 import { ExcelOptions } from '../../options';
 import { WorksheetExporter } from './worksheet-exporter';
@@ -14,12 +14,12 @@ export class XlsExporterService extends WorksheetExporter<ExcelOptions> {
     super();
   }
 
-  public createContent(worksheet: XLSX.WorkSheet, options?: ExcelOptions): any {
+  public workSheetToContent(worksheet: XLSX.WorkSheet, options: ExcelOptions = {} as ExcelOptions): any {
     const workBook = XLSX.utils.book_new();
-    if (!options) {
-      options = {} as ExcelOptions;
+    if (options.columnWidths) {
+      worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
     }
-    this.correctType(options);
+    this.correctTypes(options);
     XLSX.utils.book_append_sheet(workBook, worksheet, options.sheet);
     return XLSX.write(workBook, options);
   }
@@ -28,9 +28,14 @@ export class XlsExporterService extends WorksheetExporter<ExcelOptions> {
     return MIME_EXCEL_XLS;
   }
 
-  private correctType(options: ExcelOptions) {
+  private correctTypes(options: ExcelOptions) {
     if (!options.type) {
       options.type = TYPE_ARRAY;
     }
+    (options as any).bookType = this.getMimeType().extension.replace('.', ''); // sheetjs requires bookingType for excel format
+  }
+
+  private convertToWch(columnWidths: Array<number>): Array<{wch: number}> {
+    return columnWidths.map(width => ({wch: width}));
   }
 }
