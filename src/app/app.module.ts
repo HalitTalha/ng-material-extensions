@@ -2,10 +2,21 @@
 import { MatTableFilterModule } from 'mat-table-filter';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
-import { MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableExporterModule } from 'mat-table-exporter';
@@ -23,11 +34,12 @@ import { PropertyOptionsComponent } from './components/examples/property-options
 import { BriefExporterComponent } from './components/examples/brief-exporter/brief-exporter.component';
 import { CustomExporterComponent } from './components/examples/custom-exporter/custom-exporter.component';
 import { NotifierModule } from 'angular-notifier';
+import { MatChipsModule } from '@angular/material/chips';
 
 export function markedOptions(): MarkedOptions {
 
   return {
-    gfm: false,
+    gfm: true,
     tables: true,
     breaks: false,
     pedantic: false,
@@ -71,49 +83,25 @@ export function markedOptions(): MarkedOptions {
         showDismissButton: false
       },
       position: {
-       horizontal: {
-         position: 'right'
-       }
+        horizontal: {
+          position: 'right'
+        }
       }
     }),
-    FlexLayoutModule,
     MatTableFilterModule,
-   MatTableExporterModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
+    MatTableExporterModule,
     MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatTooltipModule,
     MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSelectModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

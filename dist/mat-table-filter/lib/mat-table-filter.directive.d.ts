@@ -1,8 +1,9 @@
 import { PropertyOptions } from './property-options';
 import { DoCheck, ViewContainerRef } from '@angular/core';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 import { MatTableFilter } from './mat-table-filter.enum';
 import { MatTableFilterService } from './services/mat-table-filter.service';
+import * as i0 from "@angular/core";
 export declare class MatTableFilterDirective implements DoCheck {
     private _filterService;
     private _injectedTable;
@@ -26,4 +27,6 @@ export declare class MatTableFilterDirective implements DoCheck {
     private updateFilterPredicate;
     private getFilterPredicate;
     private getMatDataSource;
+    static ɵfac: i0.ɵɵFactoryDef<MatTableFilterDirective>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<MatTableFilterDirective, "[matTableFilter]", ["matTableFilter"], { "exampleEntity": "exampleEntity"; "debounceTime": "debounceTime"; "filterType": "filterType"; "caseSensitive": "caseSensitive"; "customPredicate": "customPredicate"; "propertyOptions": "propertyOptions"; }, {}, never>;
 }

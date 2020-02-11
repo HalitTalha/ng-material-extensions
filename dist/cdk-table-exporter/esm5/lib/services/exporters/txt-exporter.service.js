@@ -1,60 +1,25 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-import * as tslib_1 from "tslib";
+import { __extends } from "tslib";
 import { Injectable } from '@angular/core';
 import { MIME_TXT, RETURN, TAB } from './../../constants';
 import { FileExporter } from './file-exporter';
 import * as i0 from "@angular/core";
 var TxtExporterService = /** @class */ (function (_super) {
-    tslib_1.__extends(TxtExporterService, _super);
+    __extends(TxtExporterService, _super);
     function TxtExporterService() {
         return _super.call(this) || this;
     }
-    /**
-     * @param {?} rows
-     * @param {?=} options
-     * @return {?}
-     */
-    TxtExporterService.prototype.createContent = /**
-     * @param {?} rows
-     * @param {?=} options
-     * @return {?}
-     */
-    function (rows, options) {
+    TxtExporterService.prototype.createContent = function (rows, options) {
         var _this = this;
-        /** @type {?} */
         var content = '';
-        rows.forEach((/**
-         * @param {?} element
-         * @return {?}
-         */
-        function (element) {
+        rows.forEach(function (element) {
             content += Object.values(element).join(_this.getDelimiter(options)) + RETURN;
-        }));
+        });
         return content;
     };
-    /**
-     * @return {?}
-     */
-    TxtExporterService.prototype.getMimeType = /**
-     * @return {?}
-     */
-    function () {
+    TxtExporterService.prototype.getMimeType = function () {
         return MIME_TXT;
     };
-    /**
-     * @private
-     * @param {?=} options
-     * @return {?}
-     */
-    TxtExporterService.prototype.getDelimiter = /**
-     * @private
-     * @param {?=} options
-     * @return {?}
-     */
-    function (options) {
+    TxtExporterService.prototype.getDelimiter = function (options) {
         if (options && options.delimiter) {
             return options.delimiter;
         }
@@ -62,15 +27,15 @@ var TxtExporterService = /** @class */ (function (_super) {
             return TAB;
         }
     };
-    TxtExporterService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    /** @nocollapse */
-    TxtExporterService.ctorParameters = function () { return []; };
-    /** @nocollapse */ TxtExporterService.ngInjectableDef = i0.defineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+    TxtExporterService.ɵfac = function TxtExporterService_Factory(t) { return new (t || TxtExporterService)(); };
+    TxtExporterService.ɵprov = i0.ɵɵdefineInjectable({ token: TxtExporterService, factory: TxtExporterService.ɵfac, providedIn: 'root' });
     return TxtExporterService;
 }(FileExporter));
 export { TxtExporterService };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHh0LWV4cG9ydGVyLnNlcnZpY2UuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9jZGstdGFibGUtZXhwb3J0ZXIvIiwic291cmNlcyI6WyJsaWIvc2VydmljZXMvZXhwb3J0ZXJzL3R4dC1leHBvcnRlci5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUczQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sRUFBRSxHQUFHLEVBQUUsTUFBTSxtQkFBbUIsQ0FBQztBQUMxRCxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7O0FBRS9DO0lBR3dDLDhDQUF3QjtJQUU5RDtlQUNFLGlCQUFPO0lBQ1QsQ0FBQzs7Ozs7O0lBRU0sMENBQWE7Ozs7O0lBQXBCLFVBQXFCLElBQVcsRUFBRSxPQUFvQjtRQUF0RCxpQkFNQzs7WUFMSyxPQUFPLEdBQUcsRUFBRTtRQUNoQixJQUFJLENBQUMsT0FBTzs7OztRQUFDLFVBQUEsT0FBTztZQUNsQixPQUFPLElBQUksTUFBTSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLENBQUMsS0FBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQyxHQUFHLE1BQU0sQ0FBQztRQUM5RSxDQUFDLEVBQUMsQ0FBQztRQUNILE9BQU8sT0FBTyxDQUFDO0lBQ2pCLENBQUM7Ozs7SUFFTSx3Q0FBVzs7O0lBQWxCO1FBQ0UsT0FBTyxRQUFRLENBQUM7SUFDbEIsQ0FBQzs7Ozs7O0lBRU8seUNBQVk7Ozs7O0lBQXBCLFVBQXFCLE9BQW9CO1FBQ3ZDLElBQUksT0FBTyxJQUFJLE9BQU8sQ0FBQyxTQUFTLEVBQUU7WUFDaEMsT0FBTyxPQUFPLENBQUMsU0FBUyxDQUFDO1NBQzFCO2FBQU07WUFDTCxPQUFPLEdBQUcsQ0FBQztTQUNaO0lBQ0gsQ0FBQzs7Z0JBM0JGLFVBQVUsU0FBQztvQkFDVixVQUFVLEVBQUUsTUFBTTtpQkFDbkI7Ozs7OzZCQVJEO0NBbUNDLEFBN0JELENBR3dDLFlBQVksR0EwQm5EO1NBMUJZLGtCQUFrQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEluamVjdGFibGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IE1pbWUgfSBmcm9tICcuLi8uLi9taW1lJztcbmltcG9ydCB7IFR4dE9wdGlvbnMgfSBmcm9tICcuLi8uLi9vcHRpb25zJztcbmltcG9ydCB7IE1JTUVfVFhULCBSRVRVUk4sIFRBQiB9IGZyb20gJy4vLi4vLi4vY29uc3RhbnRzJztcbmltcG9ydCB7IEZpbGVFeHBvcnRlciB9IGZyb20gJy4vZmlsZS1leHBvcnRlcic7XG5cbkBJbmplY3RhYmxlKHtcbiAgcHJvdmlkZWRJbjogJ3Jvb3QnXG59KVxuZXhwb3J0IGNsYXNzIFR4dEV4cG9ydGVyU2VydmljZSBleHRlbmRzIEZpbGVFeHBvcnRlcjxUeHRPcHRpb25zPiB7XG5cbiAgY29uc3RydWN0b3IoKSB7XG4gICAgc3VwZXIoKTtcbiAgfVxuXG4gIHB1YmxpYyBjcmVhdGVDb250ZW50KHJvd3M6IGFueVtdLCBvcHRpb25zPzogVHh0T3B0aW9ucykge1xuICAgIGxldCBjb250ZW50ID0gJyc7XG4gICAgcm93cy5mb3JFYWNoKGVsZW1lbnQgPT4ge1xuICAgICAgY29udGVudCArPSBPYmplY3QudmFsdWVzKGVsZW1lbnQpLmpvaW4odGhpcy5nZXREZWxpbWl0ZXIob3B0aW9ucykpICsgUkVUVVJOO1xuICAgIH0pO1xuICAgIHJldHVybiBjb250ZW50O1xuICB9XG5cbiAgcHVibGljIGdldE1pbWVUeXBlKCk6IE1pbWUge1xuICAgIHJldHVybiBNSU1FX1RYVDtcbiAgfVxuXG4gIHByaXZhdGUgZ2V0RGVsaW1pdGVyKG9wdGlvbnM/OiBUeHRPcHRpb25zKSB7XG4gICAgaWYgKG9wdGlvbnMgJiYgb3B0aW9ucy5kZWxpbWl0ZXIpIHtcbiAgICAgIHJldHVybiBvcHRpb25zLmRlbGltaXRlcjtcbiAgICB9IGVsc2Uge1xuICAgICAgcmV0dXJuIFRBQjtcbiAgICB9XG4gIH1cblxufVxuIl19
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(TxtExporterService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHh0LWV4cG9ydGVyLnNlcnZpY2UuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9jZGstdGFibGUtZXhwb3J0ZXIvIiwic291cmNlcyI6WyJsaWIvc2VydmljZXMvZXhwb3J0ZXJzL3R4dC1leHBvcnRlci5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRzNDLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxFQUFFLEdBQUcsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQzFELE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQzs7QUFFL0M7SUFHd0Msc0NBQXdCO0lBRTlEO2VBQ0UsaUJBQU87SUFDVCxDQUFDO0lBRU0sMENBQWEsR0FBcEIsVUFBcUIsSUFBVyxFQUFFLE9BQW9CO1FBQXRELGlCQU1DO1FBTEMsSUFBSSxPQUFPLEdBQUcsRUFBRSxDQUFDO1FBQ2pCLElBQUksQ0FBQyxPQUFPLENBQUMsVUFBQSxPQUFPO1lBQ2xCLE9BQU8sSUFBSSxNQUFNLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFJLENBQUMsWUFBWSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsTUFBTSxDQUFDO1FBQzlFLENBQUMsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxPQUFPLENBQUM7SUFDakIsQ0FBQztJQUVNLHdDQUFXLEdBQWxCO1FBQ0UsT0FBTyxRQUFRLENBQUM7SUFDbEIsQ0FBQztJQUVPLHlDQUFZLEdBQXBCLFVBQXFCLE9BQW9CO1FBQ3ZDLElBQUksT0FBTyxJQUFJLE9BQU8sQ0FBQyxTQUFTLEVBQUU7WUFDaEMsT0FBTyxPQUFPLENBQUMsU0FBUyxDQUFDO1NBQzFCO2FBQU07WUFDTCxPQUFPLEdBQUcsQ0FBQztTQUNaO0lBQ0gsQ0FBQzt3RkF4QlUsa0JBQWtCOzhEQUFsQixrQkFBa0IsV0FBbEIsa0JBQWtCLG1CQUZqQixNQUFNOzZCQVBwQjtDQW1DQyxBQTdCRCxDQUd3QyxZQUFZLEdBMEJuRDtTQTFCWSxrQkFBa0I7a0RBQWxCLGtCQUFrQjtjQUg5QixVQUFVO2VBQUM7Z0JBQ1YsVUFBVSxFQUFFLE1BQU07YUFDbkIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBNaW1lIH0gZnJvbSAnLi4vLi4vbWltZSc7XG5pbXBvcnQgeyBUeHRPcHRpb25zIH0gZnJvbSAnLi4vLi4vb3B0aW9ucyc7XG5pbXBvcnQgeyBNSU1FX1RYVCwgUkVUVVJOLCBUQUIgfSBmcm9tICcuLy4uLy4uL2NvbnN0YW50cyc7XG5pbXBvcnQgeyBGaWxlRXhwb3J0ZXIgfSBmcm9tICcuL2ZpbGUtZXhwb3J0ZXInO1xuXG5ASW5qZWN0YWJsZSh7XG4gIHByb3ZpZGVkSW46ICdyb290J1xufSlcbmV4cG9ydCBjbGFzcyBUeHRFeHBvcnRlclNlcnZpY2UgZXh0ZW5kcyBGaWxlRXhwb3J0ZXI8VHh0T3B0aW9ucz4ge1xuXG4gIGNvbnN0cnVjdG9yKCkge1xuICAgIHN1cGVyKCk7XG4gIH1cblxuICBwdWJsaWMgY3JlYXRlQ29udGVudChyb3dzOiBhbnlbXSwgb3B0aW9ucz86IFR4dE9wdGlvbnMpIHtcbiAgICBsZXQgY29udGVudCA9ICcnO1xuICAgIHJvd3MuZm9yRWFjaChlbGVtZW50ID0+IHtcbiAgICAgIGNvbnRlbnQgKz0gT2JqZWN0LnZhbHVlcyhlbGVtZW50KS5qb2luKHRoaXMuZ2V0RGVsaW1pdGVyKG9wdGlvbnMpKSArIFJFVFVSTjtcbiAgICB9KTtcbiAgICByZXR1cm4gY29udGVudDtcbiAgfVxuXG4gIHB1YmxpYyBnZXRNaW1lVHlwZSgpOiBNaW1lIHtcbiAgICByZXR1cm4gTUlNRV9UWFQ7XG4gIH1cblxuICBwcml2YXRlIGdldERlbGltaXRlcihvcHRpb25zPzogVHh0T3B0aW9ucykge1xuICAgIGlmIChvcHRpb25zICYmIG9wdGlvbnMuZGVsaW1pdGVyKSB7XG4gICAgICByZXR1cm4gb3B0aW9ucy5kZWxpbWl0ZXI7XG4gICAgfSBlbHNlIHtcbiAgICAgIHJldHVybiBUQUI7XG4gICAgfVxuICB9XG5cbn1cbiJdfQ==

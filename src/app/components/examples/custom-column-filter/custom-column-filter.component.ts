@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddToShowCase } from '../../add-to-showcase';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatTableFilter } from 'mat-table-filter';
 
 export class Route {
