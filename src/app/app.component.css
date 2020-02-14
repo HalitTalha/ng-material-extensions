@@ -12,6 +12,10 @@
   color: #fff;
 }
 
+a {
+   text-decoration:none;
+}
+
 .docs-header-start {
   color: #3f51b5;
 }

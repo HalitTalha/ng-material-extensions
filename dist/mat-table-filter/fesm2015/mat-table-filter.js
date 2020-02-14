@@ -2,7 +2,7 @@ import { MatTable, MatTableModule } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Injectable, NgModule, Directive, Input, ViewContainerRef, Host, Self, Optional, defineInjectable, inject } from '@angular/core';
-import { isEqual, difference, flatten, isString, cloneDeep, isNil, every, isEmpty, isArray, isBoolean, isNumber } from 'lodash';
+import { isString, isEqual, difference, flatten, cloneDeep, isNil, every, isEmpty, isArray, isBoolean, isNumber } from 'lodash';
 import { isFunction } from 'util';
 
 /**

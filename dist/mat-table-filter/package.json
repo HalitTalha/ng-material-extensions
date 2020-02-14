@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-filter"
   },
-  "version": "1.2.3-ng67",
+  "version": "1.2.5",
   "description": "Provides filtering support for @angular/material tables",
   "peerDependencies": {
     "@angular/common": "^7.0.0 || ^6.3.0",
