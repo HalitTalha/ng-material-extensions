@@ -2168,7 +2168,7 @@ module.exports = "\r\n.docs-header-background {\r\n  background: #3f51b5;\r\n}\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"docs-header-background\">\n  <div class=\"docs-header-section\">\n      <a fxLayout=\"column\" fxLayoutAlign=\"center center\" href=\"https://github.com/HalitTalha/mat-table-extensions\" target=\"_blank\">\n        <img class=\"docs-header-logo\" src=\"assets/images/github.png\">\n        <a class=\"docs-header-headline\">/HalitTalha</a>\n      </a>\n    <div class=\"docs-header-headline\">\n      <h1 class=\"mat-h1\">mat-table-extensions</h1>\n      <h2> Extended features for Angular Material Tables</h2>\n    </div>\n  </div>\n</header>\n  <mat-tab-group class=\"docs-tabs\" mat-align-tabs=\"center\">\n      <mat-tab label=\"Exporter\">\n        <app-exporter></app-exporter>\n      </mat-tab>\n      <mat-tab label=\"Filter\">\n        <app-filter></app-filter>\n      </mat-tab>\n  </mat-tab-group>\n<footer class=\"docs-footer\">\n  <div class=\"docs-footer-list\">\n    <div class=\"docs-footer-logo\">\n      <div class=\"footer-logo\">\n\n      </div>\n    </div>\n  </div>\n  <notifier-container></notifier-container>\n</footer>\n"
+module.exports = "<header class=\"docs-header-background\">\n  <div class=\"docs-header-section\">\n      <a fxLayout=\"column\" fxLayoutAlign=\"center center\" href=\"https://github.com/HalitTalha/mat-table-extensions\" target=\"_blank\">\n        <img class=\"docs-header-logo\" src=\"assets/logos/github.png\">\n        <a class=\"docs-header-headline\">/HalitTalha</a>\n      </a>\n    <div class=\"docs-header-headline\">\n      <h1 class=\"mat-h1\">mat-table-extensions</h1>\n      <h2> Extended features for Angular Material Tables</h2>\n    </div>\n  </div>\n</header>\n  <mat-tab-group class=\"docs-tabs\" mat-align-tabs=\"center\">\n      <mat-tab label=\"Exporter\">\n        <app-exporter></app-exporter>\n      </mat-tab>\n      <mat-tab label=\"Filter\">\n        <app-filter></app-filter>\n      </mat-tab>\n  </mat-tab-group>\n<footer class=\"docs-footer\">\n  <div class=\"docs-footer-list\">\n    <div class=\"docs-footer-logo\">\n      <div class=\"footer-logo\">\n\n      </div>\n    </div>\n  </div>\n  <notifier-container></notifier-container>\n</footer>\n"
 
 /***/ }),
 
@@ -3102,7 +3102,7 @@ module.exports = ":host\r\ntable {\r\n  border-collapse: collapse;\r\n  border-r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"docs-page\">\n<mat-tab-group mat-align-tabs=\"start\">\n  <mat-tab label=\"Overview\">\n    <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/docs/exporter/README.md'\"></markdown>\n  </mat-tab>\n  <mat-tab label=\"API\">\n    <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/docs/exporter/API.md'\"></markdown>\n  </mat-tab>\n  <mat-tab label=\"Examples\">\n    <app-example-viewer *ngFor=\"let example of examples\" [exampleType]=\"example\"></app-example-viewer>\n  </mat-tab>\n</mat-tab-group>\n</div>\n"
+module.exports = "<div class=\"docs-page\">\n<mat-tab-group mat-align-tabs=\"start\">\n  <mat-tab label=\"Overview\">\n    <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/md-files/exporter/README.md'\"></markdown>\n  </mat-tab>\n  <mat-tab label=\"API\">\n    <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/md-files/exporter/API.md'\"></markdown>\n  </mat-tab>\n  <mat-tab label=\"Examples\">\n    <app-example-viewer *ngFor=\"let example of examples\" [exampleType]=\"example\"></app-example-viewer>\n  </mat-tab>\n</mat-tab-group>\n</div>\n"
 
 /***/ }),
 
@@ -3167,7 +3167,7 @@ module.exports = ":host\r\ntable {\r\n  border-collapse: collapse;\r\n  border-r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"docs-page\">\n  <mat-tab-group mat-align-tabs=\"start\">\n    <mat-tab label=\"Overview\">\n      <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/docs/filter/README.md'\"></markdown>\n    </mat-tab>\n    <mat-tab label=\"API\">\n      <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/docs/filter/API.md'\"></markdown>\n    </mat-tab>\n    <mat-tab label=\"Examples\">\n      <app-example-viewer *ngFor=\"let example of examples\" [exampleType]=\"example\"></app-example-viewer>\n    </mat-tab>\n  </mat-tab-group>\n  </div>\n"
+module.exports = "<div class=\"docs-page\">\n  <mat-tab-group mat-align-tabs=\"start\">\n    <mat-tab label=\"Overview\">\n      <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/md-files/filter/README.md'\"></markdown>\n    </mat-tab>\n    <mat-tab label=\"API\">\n      <markdown (buttonClick)=\"onCopyClipboard()\" ngPreserveWhitespaces [src]=\"'assets/md-files/filter/API.md'\"></markdown>\n    </mat-tab>\n    <mat-tab label=\"Examples\">\n      <app-example-viewer *ngFor=\"let example of examples\" [exampleType]=\"example\"></app-example-viewer>\n    </mat-tab>\n  </mat-tab-group>\n  </div>\n"
 
 /***/ }),
 

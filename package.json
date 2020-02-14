@@ -32,6 +32,8 @@
     "angular-notifier": "5.0.0",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.2",
+    "gulp": "^4.0.2",
+    "gulp-gh-pages": "^0.5.4",
     "marked": "^0.8.0",
     "ngx-markdown": "../ngx-markdown/dist/lib",
     "prismjs": "^1.17.1",
