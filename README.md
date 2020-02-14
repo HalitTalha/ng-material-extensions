@@ -1,3 +1,5 @@
+:star::star: https://halittalha.github.io/mat-table-extensions/ :star::star:
+
 # Mat Table Extensions
 
 This is an angular workspace that currently includes 3 library projects.
@@ -119,13 +121,14 @@ ExcelOptions wraps the WritingOptions of sheetjs library. All other export types
 
 | Property | Type   | Description |
 |----------|--------|-------------|
-| fileName | string |(Optional) Name of the exported file|
-| type | 'base64', 'binary', 'buffer', 'file', 'array', 'string' |(Optional) Output data encoding|
-| bookSST | boolean |(Optional) Generate Shared String Table @default false|
-| sheet | string |(Optional) Name of the exported sheet|
-| compression | boolean |(Optional) Use ZIP compression for ZIP-based formats @default false|
-| ignoreEC | boolean |(Optional) Suppress "number stored as text" errors in generated files @default true|
-| Props | Properties |(Optional) Workbook properties like *Author, Title, Subject* etc.|
+| fileName | `string` |(Optional) Name of the exported file|
+| type | `'base64', 'binary', 'buffer', 'file', 'array', 'string'` |(Optional) Output data encoding|
+| bookSST | `boolean` |(Optional) Generate Shared String Table @default false|
+| sheet | `string` |(Optional) Name of the exported sheet|
+| compression | `boolean` |(Optional) Use ZIP compression for ZIP-based formats @default false|
+| ignoreEC | `boolean` |(Optional) Suppress "number stored as text" errors in generated files @default true|
+| Props | `Properties` |(Optional) Workbook properties like *Author, Title, Subject* etc.|
+| columnWidths | `Array<number>` | (Optional) Column widths in maximum char  |
 
 
 &nbsp;
@@ -184,14 +187,30 @@ You can change the debounce time also.
 
 ### API
 
-matTableFilter is the directive selector
-
 | Input | Property | Type | Description |
 | --- | --- | --- | --- |
 | `@Input` | exampleEntity | `any` | The example entity that is used to filter the table |
-| `@Input` | filterType | `FilterType` |(Optional) Defines the filtering strategy. Default value is `FilterType.ANYWHERE` |
+| `@Input` | filterType | `MatTableFilter` |(Optional) Defines the filtering strategy. Default value is `FilterType.ANYWHERE` |
 | `@Input` | debounceTime | `number` | (Optional) Defines debounce time in milliseconds. Default value is `400` |
 | `@Input` | caseSensitive | `boolean` | (Optional) Default value is `false` |
+| `@Input` | customPredicate | `(data: any) => boolean` | (Optional) You can set your own filtering implementation by providing your predicate function with this input |
+| `@Input` | propertyOptions | `PropertyOptions` | (Optional) With this input you can set seperate filterTypes and some more options for different keys of table item |
+
+
+&nbsp;
+
+### PropertyOptions
+| Property | Type | Description    |
+|----------|-------------|-------------|
+| `[property: string]` | `Options \| (data: any) => boolean`   | Key-Value pair where you set Options or PredicateFunc for a property. See examples.|
+
+&nbsp;
+
+### Options
+| Property | Type | Description    |
+|----------|-------------|-------------|
+| filterType | `MatTableFilter`   | (Optional) Defines the filtering strategy. Default value is `FilterType.ANYWHERE`|
+| caseSensitive | `boolean`   | (Optional) Default value is `false`|
 
 &nbsp;
 
