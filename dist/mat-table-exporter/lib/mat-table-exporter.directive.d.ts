@@ -1,8 +1,9 @@
 import { AfterViewInit, Renderer2, ViewContainerRef } from '@angular/core';
-import { MatTable } from '@angular/material';
-import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
+import { CdkTableExporterDirective, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
-export declare class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
+import { MatTable } from '@angular/material/table';
+import * as i0 from "@angular/core";
+export declare class MatTableExporterDirective extends CdkTableExporterDirective implements AfterViewInit {
     /**
      * Overriding ngAfterViewInit of TableExporter
      */
@@ -10,24 +11,22 @@ export declare class MatTableExporterDirective extends CdkTableExporter implemen
     constructor(renderer: Renderer2, serviceLocator: ServiceLocatorService, dataExtractor: DataExtractorService, table: MatTable<any>, viewContainerRef: ViewContainerRef);
     /**
      * MatTable implementation of getPageCount
-     * @override
      */
     getPageCount(): number;
     /**
      * MatTable implementation of getCurrentPageIndex
-     * @override
      */
     getCurrentPageIndex(): number;
     /**
      * MatTable implementation of goToPage
-     * @override
      */
     goToPage(index: number): void;
     /**
      * MatTable implementation of getPageChangeObservable
-     * @override
      */
     getPageChangeObservable(): Observable<any>;
     private getPaginator;
     private enablePaginator;
+    static ɵfac: i0.ɵɵFactoryDef<MatTableExporterDirective>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<MatTableExporterDirective, "[matTableExporter]", ["matTableExporter"], {}, {}, never>;
 }

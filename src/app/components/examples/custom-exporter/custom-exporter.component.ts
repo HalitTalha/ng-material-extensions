@@ -20,7 +20,7 @@ export class CustomExporterComponent implements OnInit {
   title = 'mte-test';
   displayedColumns = ['position', 'name', 'surname', 'birth'];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   dataSource: MatTableDataSource<Element>;
   customExporter: CustomExporter;
   ngOnInit(): void {

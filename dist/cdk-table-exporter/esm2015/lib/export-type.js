@@ -1,15 +1,10 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-const ExportType = {
-    XLS: 'xls',
-    XLSX: 'xlsx',
-    CSV: 'csv',
-    TXT: 'txt',
-    JSON: 'json',
-    OTHER: 'other',
-};
-export { ExportType };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0LXR5cGUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9jZGstdGFibGUtZXhwb3J0ZXIvIiwic291cmNlcyI6WyJsaWIvZXhwb3J0LXR5cGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0lBQ0UsS0FBTSxLQUFLO0lBQ1gsTUFBTyxNQUFNO0lBQ2IsS0FBTSxLQUFLO0lBQ1gsS0FBTSxLQUFLO0lBQ1gsTUFBTyxNQUFNO0lBQ2IsT0FBUSxPQUFPIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gRXhwb3J0VHlwZSB7XHJcbiAgWExTID0gJ3hscycsXHJcbiAgWExTWCA9ICd4bHN4JyxcclxuICBDU1YgPSAnY3N2JyxcclxuICBUWFQgPSAndHh0JyxcclxuICBKU09OID0gJ2pzb24nLFxyXG4gIE9USEVSID0gJ290aGVyJ1xyXG59XHJcbiJdfQ==
+export var ExportType;
+(function (ExportType) {
+    ExportType["XLS"] = "xls";
+    ExportType["XLSX"] = "xlsx";
+    ExportType["CSV"] = "csv";
+    ExportType["TXT"] = "txt";
+    ExportType["JSON"] = "json";
+    ExportType["OTHER"] = "other";
+})(ExportType || (ExportType = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0LXR5cGUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9jZGstdGFibGUtZXhwb3J0ZXIvIiwic291cmNlcyI6WyJsaWIvZXhwb3J0LXR5cGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFOLElBQVksVUFPWDtBQVBELFdBQVksVUFBVTtJQUNwQix5QkFBVyxDQUFBO0lBQ1gsMkJBQWEsQ0FBQTtJQUNiLHlCQUFXLENBQUE7SUFDWCx5QkFBVyxDQUFBO0lBQ1gsMkJBQWEsQ0FBQTtJQUNiLDZCQUFlLENBQUE7QUFDakIsQ0FBQyxFQVBXLFVBQVUsS0FBVixVQUFVLFFBT3JCIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gRXhwb3J0VHlwZSB7XG4gIFhMUyA9ICd4bHMnLFxuICBYTFNYID0gJ3hsc3gnLFxuICBDU1YgPSAnY3N2JyxcbiAgVFhUID0gJ3R4dCcsXG4gIEpTT04gPSAnanNvbicsXG4gIE9USEVSID0gJ290aGVyJ1xufVxuIl19

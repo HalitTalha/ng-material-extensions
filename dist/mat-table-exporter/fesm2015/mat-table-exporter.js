@@ -1,64 +1,37 @@
-import { Directive, Host, Renderer2, Self, Optional, ViewContainerRef, NgModule } from '@angular/core';
-import { MatTable, MatTableModule } from '@angular/material';
-import { CdkTableExporter, DataExtractorService, ServiceLocatorService, CdkTableExporterModule } from 'cdk-table-exporter';
-export { CdkTableExporter, FileExporter, JsonExporterService, TxtExporterService, XlsExporterService, WorksheetExporter, XlsxExporterService, CsvExporterService, ExportType, ServiceLocatorService, DataExtractorService, Mime, FileUtil, CdkTableExporterModule, MAT_TABLE_EXPORTER, TYPE_ARRAY, CHAR_SET_UTF, CHAR_SET_UTF_8, CONTENT_TYPE_TEXT, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, DOT, EXTENSION_XLS, EXTENSION_XLSX, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, MIME_CSV, REF, XLS_REGEX, RETURN, TAB, XLSX_COLS } from 'cdk-table-exporter';
+import { CdkTableExporterDirective, ServiceLocatorService, DataExtractorService, CdkTableExporterModule } from 'cdk-table-exporter';
+export * from 'cdk-table-exporter';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { ɵɵdirectiveInject, Renderer2, ViewContainerRef, ɵɵdefineDirective, ɵɵInheritDefinitionFeature, ɵsetClassMetadata, Directive, Host, Self, Optional, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class MatTableExporterDirective extends CdkTableExporter {
-    /**
-     * @param {?} renderer
-     * @param {?} serviceLocator
-     * @param {?} dataExtractor
-     * @param {?} table
-     * @param {?} viewContainerRef
-     */
+class MatTableExporterDirective extends CdkTableExporterDirective {
     constructor(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
         super(renderer, serviceLocator, dataExtractor, table, viewContainerRef);
     }
     /**
      * Overriding ngAfterViewInit of TableExporter
-     * @return {?}
      */
     ngAfterViewInit() {
-        this.exportStarted.subscribe((/**
-         * @param {?} _
-         * @return {?}
-         */
-        _ => {
+        this.exportStarted.subscribe(_ => {
             this.enablePaginator(false);
-        }));
-        this.exportCompleted.subscribe((/**
-         * @param {?} _
-         * @return {?}
-         */
-        _ => {
+        });
+        this.exportCompleted.subscribe(_ => {
             this.enablePaginator(true);
-        }));
+        });
     }
     /**
      * MatTable implementation of getPageCount
-     * @override
-     * @return {?}
      */
     getPageCount() {
         return this.getPaginator().getNumberOfPages();
     }
     /**
      * MatTable implementation of getCurrentPageIndex
-     * @override
-     * @return {?}
      */
     getCurrentPageIndex() {
         return this.getPaginator().pageIndex;
     }
     /**
      * MatTable implementation of goToPage
-     * @override
-     * @param {?} index
-     * @return {?}
      */
     goToPage(index) {
         this.getPaginator().pageIndex = index;
@@ -66,24 +39,13 @@ class MatTableExporterDirective extends CdkTableExporter {
     }
     /**
      * MatTable implementation of getPageChangeObservable
-     * @override
-     * @return {?}
      */
     getPageChangeObservable() {
         return this.getPaginator().page;
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getPaginator() {
-        return ((/** @type {?} */ (this.cdkTable.dataSource))).paginator;
+        return this.cdkTable.dataSource.paginator;
     }
-    /**
-     * @private
-     * @param {?} value
-     * @return {?}
-     */
     enablePaginator(value) {
         if (this.getPaginator()) {
             this.getPaginator().disabled = !value;
@@ -91,49 +53,50 @@ class MatTableExporterDirective extends CdkTableExporter {
         }
     }
 }
-MatTableExporterDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[ngxMatTableExporter], [matTableExporter]',
-                // renamed selector but kept old version for backwards compat.
+MatTableExporterDirective.ɵfac = function MatTableExporterDirective_Factory(t) { return new (t || MatTableExporterDirective)(ɵɵdirectiveInject(Renderer2), ɵɵdirectiveInject(ServiceLocatorService), ɵɵdirectiveInject(DataExtractorService), ɵɵdirectiveInject(MatTable, 11), ɵɵdirectiveInject(ViewContainerRef)); };
+MatTableExporterDirective.ɵdir = ɵɵdefineDirective({ type: MatTableExporterDirective, selectors: [["", "matTableExporter", ""]], exportAs: ["matTableExporter"], features: [ɵɵInheritDefinitionFeature] });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(MatTableExporterDirective, [{
+        type: Directive,
+        args: [{
+                selector: '[matTableExporter]',
                 exportAs: 'matTableExporter'
-            },] }
-];
-/** @nocollapse */
-MatTableExporterDirective.ctorParameters = () => [
-    { type: Renderer2 },
-    { type: ServiceLocatorService },
-    { type: DataExtractorService },
-    { type: MatTable, decorators: [{ type: Host }, { type: Self }, { type: Optional }] },
-    { type: ViewContainerRef }
-];
+            }]
+    }], function () { return [{ type: Renderer2 }, { type: ServiceLocatorService }, { type: DataExtractorService }, { type: MatTable, decorators: [{
+                type: Host
+            }, {
+                type: Self
+            }, {
+                type: Optional
+            }] }, { type: ViewContainerRef }]; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class MatTableExporterModule {
 }
-MatTableExporterModule.decorators = [
-    { type: NgModule, args: [{
+MatTableExporterModule.ɵmod = ɵɵdefineNgModule({ type: MatTableExporterModule });
+MatTableExporterModule.ɵinj = ɵɵdefineInjector({ factory: function MatTableExporterModule_Factory(t) { return new (t || MatTableExporterModule)(); }, imports: [[
+            MatTableModule,
+            CdkTableExporterModule
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(MatTableExporterModule, { declarations: [MatTableExporterDirective], imports: [MatTableModule,
+        CdkTableExporterModule], exports: [MatTableExporterDirective] }); })();
+/*@__PURE__*/ (function () { ɵsetClassMetadata(MatTableExporterModule, [{
+        type: NgModule,
+        args: [{
                 declarations: [MatTableExporterDirective],
                 imports: [
                     MatTableModule,
                     CdkTableExporterModule
                 ],
                 exports: [MatTableExporterDirective]
-            },] }
-];
+            }]
+    }], null, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+/*
+ * Public API Surface of mat-table-exporter
  */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { MatTableExporterDirective, MatTableExporterModule };
-
 //# sourceMappingURL=mat-table-exporter.js.map

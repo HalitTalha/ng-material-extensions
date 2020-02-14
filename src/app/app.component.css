@@ -3,6 +3,13 @@
   background: #3f51b5;
 }
 
+.docs-header-container {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  align-items: center;
+}
+
 .docs-header-logo {
   width: 45px;
   height: 45px;
@@ -79,7 +86,6 @@ h2 {
     padding-top: 15px;
   }
 }
-
 
 ::ng-deep .docs-tabs > .mat-tab-header {
   background-color: #3f51b5 !important;

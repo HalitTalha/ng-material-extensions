@@ -19,7 +19,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -54,7 +54,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -63,6 +62,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -140,6 +143,11 @@
           "options": {
             "tsConfig": "projects/cdk-table-exporter/tsconfig.lib.json",
             "project": "projects/cdk-table-exporter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/cdk-table-exporter/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -175,6 +183,11 @@
           "options": {
             "tsConfig": "projects/mat-table-exporter/tsconfig.lib.json",
             "project": "projects/mat-table-exporter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mat-table-exporter/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -210,6 +223,11 @@
           "options": {
             "tsConfig": "projects/mat-table-filter/tsconfig.lib.json",
             "project": "projects/mat-table-filter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mat-table-filter/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {

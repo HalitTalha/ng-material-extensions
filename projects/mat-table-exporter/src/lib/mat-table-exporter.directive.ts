@@ -1,9 +1,11 @@
 import { AfterViewInit, Directive, Host, Renderer2, Self, Optional, ViewContainerRef } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
 import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+
 @Directive({
-  selector: '[ngxMatTableExporter], [matTableExporter]', // renamed selector but kept old version for backwards compat.
+  selector: '[matTableExporter]', // renamed selector but kept old version for backwards compat.
   exportAs: 'matTableExporter'
 })
 export class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
@@ -19,17 +21,18 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
     });
   }
 
-  constructor(renderer: Renderer2,
-              serviceLocator: ServiceLocatorService,
-              dataExtractor: DataExtractorService,
-              @Host() @Self() @Optional() table: MatTable<any>,
-              viewContainerRef: ViewContainerRef) {
-              super(renderer, serviceLocator, dataExtractor, table, viewContainerRef);
+  constructor(
+    renderer: Renderer2,
+    serviceLocator: ServiceLocatorService,
+    dataExtractor: DataExtractorService,
+    @Host() @Self() @Optional() table: MatTable<any>,
+    viewContainerRef: ViewContainerRef
+  ) {
+    super(renderer, serviceLocator, dataExtractor, table, viewContainerRef);
   }
 
   /**
    * MatTable implementation of getPageCount
-   * @override
    */
   public getPageCount(): number {
     return this.getPaginator().getNumberOfPages();
@@ -37,7 +40,6 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
 
   /**
    * MatTable implementation of getCurrentPageIndex
-   * @override
    */
   public getCurrentPageIndex(): number {
     return this.getPaginator().pageIndex;
@@ -45,7 +47,6 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
 
   /**
    * MatTable implementation of goToPage
-   * @override
    */
   public goToPage(index: number): void {
     this.getPaginator().pageIndex = index;
@@ -54,7 +55,6 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
 
   /**
    * MatTable implementation of getPageChangeObservable
-   * @override
    */
   public getPageChangeObservable(): Observable<any> {
     return this.getPaginator().page;

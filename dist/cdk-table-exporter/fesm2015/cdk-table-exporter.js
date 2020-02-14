@@ -1,136 +1,79 @@
 import { CdkTableModule } from '@angular/cdk/table';
+import { ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, ɵsetClassMetadata, NgModule, ɵɵdefineInjectable, Injectable, ɵɵinject, Injector, EventEmitter, ɵɵinvalidFactory, ɵɵdefineDirective, Directive, Renderer2, ViewContainerRef, Input, Output } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { utils, write } from 'xlsx';
-import { NgModule, EventEmitter, Input, Output, Injectable, Injector, defineInjectable, inject, INJECTOR } from '@angular/core';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class CdkTableExporterModule {
 }
-CdkTableExporterModule.decorators = [
-    { type: NgModule, args: [{
+CdkTableExporterModule.ɵmod = ɵɵdefineNgModule({ type: CdkTableExporterModule });
+CdkTableExporterModule.ɵinj = ɵɵdefineInjector({ factory: function CdkTableExporterModule_Factory(t) { return new (t || CdkTableExporterModule)(); }, imports: [[
+            CdkTableModule
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CdkTableExporterModule, { imports: [CdkTableModule] }); })();
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CdkTableExporterModule, [{
+        type: NgModule,
+        args: [{
                 declarations: [],
                 imports: [
                     CdkTableModule
                 ],
                 exports: []
-            },] }
-];
+            }]
+    }], null, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-const ExportType = {
-    XLS: 'xls',
-    XLSX: 'xlsx',
-    CSV: 'csv',
-    TXT: 'txt',
-    JSON: 'json',
-    OTHER: 'other',
-};
+var ExportType;
+(function (ExportType) {
+    ExportType["XLS"] = "xls";
+    ExportType["XLSX"] = "xlsx";
+    ExportType["CSV"] = "csv";
+    ExportType["TXT"] = "txt";
+    ExportType["JSON"] = "json";
+    ExportType["OTHER"] = "other";
+})(ExportType || (ExportType = {}));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class Mime {
-    /**
-     * @param {?} extension
-     * @param {?} contentTypeHeader
-     */
     constructor(extension, contentTypeHeader) {
         this.extension = extension;
         this.contentTypeHeader = contentTypeHeader;
     }
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
 const MAT_TABLE_EXPORTER = 'mat-table-exporter';
-/** @type {?} */
 const TYPE_ARRAY = 'array';
-/** @type {?} */
 const CHAR_SET_UTF = ';charset=utf-';
-/** @type {?} */
 const CHAR_SET_UTF_8 = CHAR_SET_UTF + '8';
-/** @type {?} */
 const CONTENT_TYPE_TEXT = ExportType.TXT + '/';
-/** @type {?} */
 const CONTENT_TYPE_APPLICATION = 'application/';
-/** @type {?} */
 const CONTENT_TYPE_EXCEL = CONTENT_TYPE_APPLICATION + 'octet-stream';
-/** @type {?} */
 const DOT = '.';
-/** @type {?} */
 const EXTENSION_XLS = DOT + ExportType.XLS;
-/** @type {?} */
 const EXTENSION_XLSX = DOT + ExportType.XLSX;
-/** @type {?} */
 const EXTENSION_CSV = DOT + ExportType.CSV;
-/** @type {?} */
 const EXTENSION_JSON = DOT + ExportType.JSON;
-/** @type {?} */
 const EXTENSION_TEXT = DOT + ExportType.TXT;
-/** @type {?} */
 const MIME_EXCEL_XLS = new Mime(EXTENSION_XLS, CONTENT_TYPE_EXCEL + CHAR_SET_UTF_8);
-/** @type {?} */
 const MIME_EXCEL_XLSX = new Mime(EXTENSION_XLSX, CONTENT_TYPE_EXCEL + CHAR_SET_UTF_8);
-/** @type {?} */
 const MIME_JSON = new Mime(EXTENSION_JSON, CONTENT_TYPE_TEXT + JSON + CHAR_SET_UTF_8);
-/** @type {?} */
 const MIME_TXT = new Mime(EXTENSION_TEXT, CONTENT_TYPE_TEXT + ExportType.TXT + CHAR_SET_UTF_8);
-/** @type {?} */
 const MIME_CSV = new Mime(EXTENSION_CSV, CONTENT_TYPE_TEXT + ExportType.CSV + CHAR_SET_UTF_8);
-/** @type {?} */
 const REF = '!ref';
-/** @type {?} */
 const XLS_REGEX = DOT + '*\.' + ExportType.XLS + '$';
-/** @type {?} */
 const RETURN = '\n';
-/** @type {?} */
 const TAB = '\t';
-/** @type {?} */
 const XLSX_COLS = '!cols';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class FileUtil {
-    /**
-     * @param {?} content
-     * @param {?} mime
-     * @param {?=} options
-     * @return {?}
-     */
     static save(content, mime, options) {
-        /** @type {?} */
         const blob = new Blob([content], { type: mime.contentTypeHeader });
-        /** @type {?} */
         let fileName = MAT_TABLE_EXPORTER;
         if (options && options.fileName) {
             fileName = options.fileName;
         }
         saveAs(blob, fileName + mime.extension);
     }
-    /**
-     * @param {?} fileName
-     * @return {?}
-     */
     static isXls(fileName) {
         return fileName.toLowerCase().match(XLS_REGEX) != null;
     }
-    /**
-     * @param {?=} fileName
-     * @return {?}
-     */
     static identifyExportType(fileName) {
         if (fileName && FileUtil.isXls(fileName)) {
             return ExportType.XLS;
@@ -139,401 +82,129 @@ class FileUtil {
             return ExportType.XLSX;
         }
     }
-    /**
-     * @param {?=} options
-     * @return {?}
-     */
     static removeExtension(options) {
         options.fileName = options.fileName.split(DOT)[0];
     }
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
- * @abstract
- */
-// @Directive()
-class CdkTableExporter {
-    /**
-     * @param {?} renderer
-     * @param {?} serviceLocator
-     * @param {?} dataExtractor
-     * @param {?} table
-     * @param {?} viewContainerRef
-     */
-    constructor(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
-        this.renderer = renderer;
-        this.serviceLocator = serviceLocator;
-        this.dataExtractor = dataExtractor;
-        this.table = table;
-        this.viewContainerRef = viewContainerRef;
-        this.exportCompleted = new EventEmitter();
-        this.exportStarted = new EventEmitter();
-        this.initCdkTable();
+class DataExtractorService {
+    constructor() {
     }
-    /**
-     * @return {?}
-     */
-    get cdkTable() {
-        return this._cdkTable;
+    extractRows(cdkTable, hiddenColumns) {
+        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
     }
-    /**
-     * @deprecated
-     * @param {?} value
-     * @return {?}
-     */
-    set cdkTable(value) {
-        console.warn('cdkTable input is deprecated!');
-        this._cdkTable = value;
+    extractRow(cdkTable, hiddenColumns, outlet) {
+        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
     }
-    /**
-     * @return {?}
-     */
-    get exporterButton() {
-        return this._exporterButton;
+    getRowsAsJsonArray(cdkTable, hiddenColumns, outlet) {
+        const renderedRows = this.getRenderedRows(cdkTable, outlet);
+        return this.convertToJsonArray(hiddenColumns, renderedRows);
     }
-    /**
-     * @deprecated
-     * @param {?} value
-     * @return {?}
-     */
-    set exporterButton(value) {
-        console.warn('exporterButton input is deprecated!');
-        this._exporterButton = value;
-        this.setButtonListener();
+    getRenderedRows(cdkTable, outlet) {
+        return cdkTable._getRenderedRows(outlet);
     }
-    /**
-     * @return {?}
-     */
-    get fileName() {
-        return this._fileName;
-    }
-    /**
-     * @deprecated
-     * @param {?} value
-     * @return {?}
-     */
-    set fileName(value) {
-        console.warn('fileName input is deprecated!');
-        this._fileName = value;
-    }
-    /**
-     * @return {?}
-     */
-    get sheetName() {
-        return this._sheetName;
-    }
-    /**
-     * @deprecated
-     * @param {?} value
-     * @return {?}
-     */
-    set sheetName(value) {
-        console.warn('sheetName input is deprecated!');
-        this._sheetName = value;
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    initCdkTable() {
-        // tslint:disable-next-line:no-string-literal
-        /** @type {?} */
-        const table = this.viewContainerRef['_data'].componentView.component;
-        if (table) {
-            this._cdkTable = table;
+    convertToJsonArray(hiddenColumns, rows) {
+        const result = new Array();
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < rows.length; i++) {
+            const row = this.convertRow(hiddenColumns, rows[i]);
+            result.push(this.createExcelItem(row));
         }
-        else if (this.table) {
-            this._cdkTable = this.table;
+        return result;
+    }
+    convertRow(hiddenColumns, row) {
+        const result = new Array();
+        const cells = row.children;
+        for (let i = 0; i < cells.length; i++) {
+            if (!this.shouldHide(hiddenColumns, i)) {
+                const element = cells.item(i).innerText;
+                result.push(element);
+            }
         }
-        else {
-            throw new Error('Unsupported Angular version');
-        }
+        return result;
     }
-    /**
-     * @private
-     * @return {?}
-     */
-    setButtonListener() {
-        if (this._exporterButton) {
-            this.renderer.listen(this._exporterButton._elementRef.nativeElement, 'click', (/**
-             * @param {?} evt
-             * @return {?}
-             */
-            (evt) => {
-                /** @type {?} */
-                const options = (/** @type {?} */ ({ fileName: this._fileName, sheet: this._sheetName }));
-                this.exportTable(FileUtil.identifyExportType(this._fileName), options); // this is to support deprecated way of exporting
-            }));
-        }
-    }
-    /**
-     * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
-     * @param {?=} exportType
-     * @param {?=} options
-     * @return {?}
-     */
-    exportTable(exportType, options) {
-        this.loadExporter(exportType);
-        this._options = options;
-        this.exportStarted.emit();
-        this._isIterating = true;
-        this._isExporting = true;
-        this._data = new Array();
-        this.enableExportButton(false);
-        this.extractTableHeader();
-        try {
-            this.exportWithPagination();
-        }
-        catch (notPaginated) {
-            this.exportSinglePage();
-        }
-    }
-    /**
-     * @private
-     * @param {?} exportType
-     * @return {?}
-     */
-    loadExporter(exportType) {
-        if (exportType === ExportType.OTHER.valueOf()) {
-            this._exporterService = this.exporter;
-        }
-        else {
-            this._exporterService = this.serviceLocator.getService(exportType);
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    exportWithPagination() {
-        this._initialPageIndex = this.getCurrentPageIndex();
-        this.initPageHandler();
-        this.goToPage(0);
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    exportSinglePage() {
-        this.extractDataOnCurrentPage();
-        this.extractTableFooter();
-        this.exportExtractedData();
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    extractDataOnCurrentPage() {
-        this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    initPageHandler() {
-        if (!this._subscription) {
-            this._subscription = this.getPageChangeObservable().subscribe((/**
-             * @return {?}
-             */
-            () => {
-                setTimeout((/**
-                 * @return {?}
-                 */
-                () => {
-                    if (this._isIterating) {
-                        this.extractDataOnCurrentPage();
-                        if (this.hasNextPage()) {
-                            this.nextPage();
-                        }
-                        else {
-                            this._isIterating = false;
-                            this.goToPage(this._initialPageIndex);
-                        }
-                    }
-                    else if (this._isExporting) {
-                        this._isExporting = false;
-                        this.extractTableFooter();
-                        this.exportExtractedData();
-                    }
-                }));
-            }));
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    exportExtractedData() {
-        this._exporterService.export(this._data, this._options);
-        this._data = new Array();
-        this.enableExportButton(true);
-        this.exportCompleted.emit();
-    }
-    /**
-     * @private
-     * @param {?} outlet
-     * @return {?}
-     */
-    extractSpecialRow(outlet) {
-        /** @type {?} */
-        const row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
-        if (row) {
-            this._data.push(row);
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    extractTableHeader() {
-        this.extractSpecialRow(this._cdkTable._headerRowOutlet);
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    extractTableFooter() {
-        this.extractSpecialRow(this._cdkTable._footerRowOutlet);
-    }
-    /**
-     * @return {?}
-     */
-    hasNextPage() {
-        if (this.getCurrentPageIndex() < this.getPageCount() - 1) {
+    shouldHide(hiddenColumns, columnIndex) {
+        if (hiddenColumns && hiddenColumns.includes(columnIndex)) {
             return true;
         }
         else {
             return false;
         }
     }
-    /**
-     * @return {?}
-     */
-    nextPage() {
-        this.goToPage(this.getCurrentPageIndex() + 1);
-    }
-    /**
-     * @private
-     * @param {?} value
-     * @return {?}
-     */
-    enableExportButton(value) {
-        if (this._exporterButton) {
-            this.renderer.setProperty(this._exporterButton._elementRef.nativeElement, 'disabled', value ? null : 'true');
-        }
+    createExcelItem(row) {
+        return Object.assign({}, row);
     }
 }
-CdkTableExporter.propDecorators = {
-    hiddenColumns: [{ type: Input }],
-    exporter: [{ type: Input }],
-    exportCompleted: [{ type: Output }],
-    exportStarted: [{ type: Output }],
-    cdkTable: [{ type: Input }],
-    exporterButton: [{ type: Input }],
-    fileName: [{ type: Input }],
-    sheetName: [{ type: Input }]
-};
+DataExtractorService.ɵfac = function DataExtractorService_Factory(t) { return new (t || DataExtractorService)(); };
+DataExtractorService.ɵprov = ɵɵdefineInjectable({ token: DataExtractorService, factory: DataExtractorService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(DataExtractorService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- * @template T
- */
 class FileExporter {
     constructor() { }
-    /**
-     * @param {?} rows
-     * @param {?=} options
-     * @return {?}
-     */
     export(rows, options) {
         if (!rows) {
             throw new Error('Empty json array is provided, rows parameter is mandatory!');
         }
-        /** @type {?} */
         const content = this.createContent(rows, options);
-        /** @type {?} */
         const mimeType = this.getMimeType();
         FileUtil.save(content, mimeType, options);
     }
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * An angular service class that is used to create files out of json object arrays.
  */
-class JsonExporterService extends FileExporter {
+class WorksheetExporter extends FileExporter {
     constructor() {
         super();
     }
-    /**
-     * @param {?} rows
-     * @param {?=} options
-     * @return {?}
-     */
     createContent(rows, options) {
-        return JSON.stringify(rows);
-    }
-    /**
-     * @return {?}
-     */
-    getMimeType() {
-        return MIME_JSON;
+        const workSheet = utils.json_to_sheet(rows, {
+            skipHeader: true // we don't want to see object properties as our headers
+        });
+        return this.workSheetToContent(workSheet, options);
     }
 }
-JsonExporterService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-JsonExporterService.ctorParameters = () => [];
-/** @nocollapse */ JsonExporterService.ngInjectableDef = defineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+class CsvExporterService extends WorksheetExporter {
+    constructor() {
+        super();
+    }
+    workSheetToContent(worksheet, options) {
+        return utils.sheet_to_csv(worksheet);
+    }
+    getMimeType() {
+        return MIME_CSV;
+    }
+}
+CsvExporterService.ɵfac = function CsvExporterService_Factory(t) { return new (t || CsvExporterService)(); };
+CsvExporterService.ɵprov = ɵɵdefineInjectable({ token: CsvExporterService, factory: CsvExporterService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CsvExporterService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
+
 class TxtExporterService extends FileExporter {
     constructor() {
         super();
     }
-    /**
-     * @param {?} rows
-     * @param {?=} options
-     * @return {?}
-     */
     createContent(rows, options) {
-        /** @type {?} */
         let content = '';
-        rows.forEach((/**
-         * @param {?} element
-         * @return {?}
-         */
-        element => {
+        rows.forEach(element => {
             content += Object.values(element).join(this.getDelimiter(options)) + RETURN;
-        }));
+        });
         return content;
     }
-    /**
-     * @return {?}
-     */
     getMimeType() {
         return MIME_TXT;
     }
-    /**
-     * @private
-     * @param {?=} options
-     * @return {?}
-     */
     getDelimiter(options) {
         if (options && options.delimiter) {
             return options.delimiter;
@@ -543,57 +214,20 @@ class TxtExporterService extends FileExporter {
         }
     }
 }
-TxtExporterService.decorators = [
-    { type: Injectable, args: [{
+TxtExporterService.ɵfac = function TxtExporterService_Factory(t) { return new (t || TxtExporterService)(); };
+TxtExporterService.ɵprov = ɵɵdefineInjectable({ token: TxtExporterService, factory: TxtExporterService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(TxtExporterService, [{
+        type: Injectable,
+        args: [{
                 providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-TxtExporterService.ctorParameters = () => [];
-/** @nocollapse */ TxtExporterService.ngInjectableDef = defineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+            }]
+    }], function () { return []; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * An angular service class that is used to create files out of json object arrays.
- * @abstract
- * @template T
- */
-class WorksheetExporter extends FileExporter {
-    constructor() {
-        super();
-    }
-    /**
-     * @param {?} rows
-     * @param {?=} options
-     * @return {?}
-     */
-    createContent(rows, options) {
-        /** @type {?} */
-        const workSheet = utils.json_to_sheet(rows, {
-            skipHeader: true // we don't want to see object properties as our headers
-        });
-        return this.workSheetToContent(workSheet, options);
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class XlsExporterService extends WorksheetExporter {
     constructor() {
         super();
     }
-    /**
-     * @param {?} worksheet
-     * @param {?=} options
-     * @return {?}
-     */
-    workSheetToContent(worksheet, options = (/** @type {?} */ ({}))) {
-        /** @type {?} */
+    workSheetToContent(worksheet, options = {}) {
         const workBook = utils.book_new();
         if (options.columnWidths) {
             worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
@@ -602,117 +236,70 @@ class XlsExporterService extends WorksheetExporter {
         utils.book_append_sheet(workBook, worksheet, options.sheet);
         return write(workBook, options);
     }
-    /**
-     * @return {?}
-     */
     getMimeType() {
         return MIME_EXCEL_XLS;
     }
-    /**
-     * @private
-     * @param {?} options
-     * @return {?}
-     */
     correctTypes(options) {
         if (!options.type) {
             options.type = TYPE_ARRAY;
         }
-        ((/** @type {?} */ (options))).bookType = this.getMimeType().extension.replace('.', ''); // sheetjs requires bookingType for excel format
+        options.bookType = this.getMimeType().extension.replace('.', ''); // sheetjs requires bookingType for excel format
     }
-    /**
-     * @private
-     * @param {?} columnWidths
-     * @return {?}
-     */
     convertToWch(columnWidths) {
-        return columnWidths.map((/**
-         * @param {?} width
-         * @return {?}
-         */
-        width => ({ wch: width })));
+        return columnWidths.map(width => ({ wch: width }));
     }
 }
-XlsExporterService.decorators = [
-    { type: Injectable, args: [{
+XlsExporterService.ɵfac = function XlsExporterService_Factory(t) { return new (t || XlsExporterService)(); };
+XlsExporterService.ɵprov = ɵɵdefineInjectable({ token: XlsExporterService, factory: XlsExporterService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(XlsExporterService, [{
+        type: Injectable,
+        args: [{
                 providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-XlsExporterService.ctorParameters = () => [];
-/** @nocollapse */ XlsExporterService.ngInjectableDef = defineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+            }]
+    }], function () { return []; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+class JsonExporterService extends FileExporter {
+    constructor() {
+        super();
+    }
+    createContent(rows, options) {
+        return JSON.stringify(rows);
+    }
+    getMimeType() {
+        return MIME_JSON;
+    }
+}
+JsonExporterService.ɵfac = function JsonExporterService_Factory(t) { return new (t || JsonExporterService)(); };
+JsonExporterService.ɵprov = ɵɵdefineInjectable({ token: JsonExporterService, factory: JsonExporterService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonExporterService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
+
 class XlsxExporterService extends XlsExporterService {
     constructor() {
         super();
     }
     // override
-    /**
-     * @return {?}
-     */
     getMimeType() {
         return MIME_EXCEL_XLSX;
     }
 }
-XlsxExporterService.decorators = [
-    { type: Injectable, args: [{
+XlsxExporterService.ɵfac = function XlsxExporterService_Factory(t) { return new (t || XlsxExporterService)(); };
+XlsxExporterService.ɵprov = ɵɵdefineInjectable({ token: XlsxExporterService, factory: XlsxExporterService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(XlsxExporterService, [{
+        type: Injectable,
+        args: [{
                 providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-XlsxExporterService.ctorParameters = () => [];
-/** @nocollapse */ XlsxExporterService.ngInjectableDef = defineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+            }]
+    }], function () { return []; }, null); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CsvExporterService extends WorksheetExporter {
-    constructor() {
-        super();
-    }
-    /**
-     * @param {?} worksheet
-     * @param {?=} options
-     * @return {?}
-     */
-    workSheetToContent(worksheet, options) {
-        return utils.sheet_to_csv(worksheet);
-    }
-    /**
-     * @return {?}
-     */
-    getMimeType() {
-        return MIME_CSV;
-    }
-}
-CsvExporterService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-CsvExporterService.ctorParameters = () => [];
-/** @nocollapse */ CsvExporterService.ngInjectableDef = defineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class ServiceLocatorService {
-    /**
-     * @param {?} injector
-     */
     constructor(injector) {
         this.injector = injector;
     }
-    /**
-     * @param {?} exportType
-     * @return {?}
-     */
     getService(exportType) {
         switch (exportType) {
             case ExportType.XLS.valueOf():
@@ -732,140 +319,219 @@ class ServiceLocatorService {
         }
     }
 }
-ServiceLocatorService.decorators = [
-    { type: Injectable, args: [{
+ServiceLocatorService.ɵfac = function ServiceLocatorService_Factory(t) { return new (t || ServiceLocatorService)(ɵɵinject(Injector)); };
+ServiceLocatorService.ɵprov = ɵɵdefineInjectable({ token: ServiceLocatorService, factory: ServiceLocatorService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(ServiceLocatorService, [{
+        type: Injectable,
+        args: [{
                 providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-ServiceLocatorService.ctorParameters = () => [
-    { type: Injector }
-];
-/** @nocollapse */ ServiceLocatorService.ngInjectableDef = defineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(inject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+            }]
+    }], function () { return [{ type: Injector }]; }, null); })();
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  */
-class DataExtractorService {
-    constructor() { }
-    /**
-     * @param {?} cdkTable
-     * @param {?} hiddenColumns
-     * @return {?}
-     */
-    extractRows(cdkTable, hiddenColumns) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
+class CdkTableExporter {
+    constructor(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
+        this.renderer = renderer;
+        this.serviceLocator = serviceLocator;
+        this.dataExtractor = dataExtractor;
+        this.table = table;
+        this.viewContainerRef = viewContainerRef;
+        this.exportCompleted = new EventEmitter();
+        this.exportStarted = new EventEmitter();
+        this.initCdkTable();
+    }
+    get cdkTable() {
+        return this._cdkTable;
     }
     /**
-     * @param {?} cdkTable
-     * @param {?} hiddenColumns
-     * @param {?} outlet
-     * @return {?}
+     * @deprecated
      */
-    extractRow(cdkTable, hiddenColumns, outlet) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
+    set cdkTable(value) {
+        console.warn('cdkTable input is deprecated!');
+        this._cdkTable = value;
+    }
+    get exporterButton() {
+        return this._exporterButton;
     }
     /**
-     * @private
-     * @param {?} cdkTable
-     * @param {?} hiddenColumns
-     * @param {?} outlet
-     * @return {?}
+     * @deprecated
      */
-    getRowsAsJsonArray(cdkTable, hiddenColumns, outlet) {
-        /** @type {?} */
-        const renderedRows = this.getRenderedRows(cdkTable, outlet);
-        return this.convertToJsonArray(hiddenColumns, renderedRows);
+    set exporterButton(value) {
+        console.warn('exporterButton input is deprecated!');
+        this._exporterButton = value;
+        this.setButtonListener();
+    }
+    get fileName() {
+        return this._fileName;
     }
     /**
-     * @private
-     * @param {?} cdkTable
-     * @param {?} outlet
-     * @return {?}
+     * @deprecated
      */
-    getRenderedRows(cdkTable, outlet) {
-        return (/** @type {?} */ (cdkTable._getRenderedRows(outlet)));
+    set fileName(value) {
+        console.warn('fileName input is deprecated!');
+        this._fileName = value;
+    }
+    get sheetName() {
+        return this._sheetName;
     }
     /**
-     * @private
-     * @param {?} hiddenColumns
-     * @param {?} rows
-     * @return {?}
+     * @deprecated
      */
-    convertToJsonArray(hiddenColumns, rows) {
-        /** @type {?} */
-        const result = new Array();
-        // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < rows.length; i++) {
-            /** @type {?} */
-            const row = this.convertRow(hiddenColumns, rows[i]);
-            result.push(this.createExcelItem(row));
+    set sheetName(value) {
+        console.warn('sheetName input is deprecated!');
+        this._sheetName = value;
+    }
+    initCdkTable() {
+        var _a, _b;
+        // tslint:disable-next-line:no-string-literal
+        const table = (_b = (_a = this.viewContainerRef['_data']) === null || _a === void 0 ? void 0 : _a.componentView) === null || _b === void 0 ? void 0 : _b.component;
+        if (table) {
+            this._cdkTable = table;
         }
-        return result;
-    }
-    /**
-     * @private
-     * @param {?} hiddenColumns
-     * @param {?} row
-     * @return {?}
-     */
-    convertRow(hiddenColumns, row) {
-        /** @type {?} */
-        const result = new Array();
-        /** @type {?} */
-        const cells = row.children;
-        for (let i = 0; i < cells.length; i++) {
-            if (!this.shouldHide(hiddenColumns, i)) {
-                /** @type {?} */
-                const element = cells.item(i).innerText;
-                result.push(element);
-            }
+        else if (this.table) {
+            this._cdkTable = this.table;
         }
-        return result;
+        else {
+            throw new Error('Unsupported Angular version');
+        }
+    }
+    setButtonListener() {
+        if (this._exporterButton) {
+            this.renderer.listen(this._exporterButton._elementRef.nativeElement, 'click', (evt) => {
+                const options = { fileName: this._fileName, sheet: this._sheetName };
+                this.exportTable(FileUtil.identifyExportType(this._fileName), options); // this is to support deprecated way of exporting
+            });
+        }
     }
     /**
-     * @private
-     * @param {?} hiddenColumns
-     * @param {?} columnIndex
-     * @return {?}
+     * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
      */
-    shouldHide(hiddenColumns, columnIndex) {
-        if (hiddenColumns && hiddenColumns.includes(columnIndex)) {
+    exportTable(exportType, options) {
+        this.loadExporter(exportType);
+        this._options = options;
+        this.exportStarted.emit();
+        this._isIterating = true;
+        this._isExporting = true;
+        this._data = new Array();
+        this.enableExportButton(false);
+        this.extractTableHeader();
+        try {
+            this.exportWithPagination();
+        }
+        catch (notPaginated) {
+            this.exportSinglePage();
+        }
+    }
+    loadExporter(exportType) {
+        if (exportType === ExportType.OTHER.valueOf()) {
+            this._exporterService = this.exporter;
+        }
+        else {
+            this._exporterService = this.serviceLocator.getService(exportType);
+        }
+    }
+    exportWithPagination() {
+        this._initialPageIndex = this.getCurrentPageIndex();
+        this.initPageHandler();
+        this.goToPage(0);
+    }
+    exportSinglePage() {
+        this.extractDataOnCurrentPage();
+        this.extractTableFooter();
+        this.exportExtractedData();
+    }
+    extractDataOnCurrentPage() {
+        this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
+    }
+    initPageHandler() {
+        if (!this._subscription) {
+            this._subscription = this.getPageChangeObservable().subscribe(() => {
+                setTimeout(() => {
+                    if (this._isIterating) {
+                        this.extractDataOnCurrentPage();
+                        if (this.hasNextPage()) {
+                            this.nextPage();
+                        }
+                        else {
+                            this._isIterating = false;
+                            this.goToPage(this._initialPageIndex);
+                        }
+                    }
+                    else if (this._isExporting) {
+                        this._isExporting = false;
+                        this.extractTableFooter();
+                        this.exportExtractedData();
+                    }
+                });
+            });
+        }
+    }
+    exportExtractedData() {
+        this._exporterService.export(this._data, this._options);
+        this._data = new Array();
+        this.enableExportButton(true);
+        this.exportCompleted.emit();
+    }
+    extractSpecialRow(outlet) {
+        const row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
+        if (row) {
+            this._data.push(row);
+        }
+    }
+    extractTableHeader() {
+        this.extractSpecialRow(this._cdkTable._headerRowOutlet);
+    }
+    extractTableFooter() {
+        this.extractSpecialRow(this._cdkTable._footerRowOutlet);
+    }
+    hasNextPage() {
+        if (this.getCurrentPageIndex() < this.getPageCount() - 1) {
             return true;
         }
         else {
             return false;
         }
     }
-    /**
-     * @private
-     * @param {?} row
-     * @return {?}
-     */
-    createExcelItem(row) {
-        return Object.assign({}, row);
+    nextPage() {
+        this.goToPage(this.getCurrentPageIndex() + 1);
+    }
+    enableExportButton(value) {
+        if (this._exporterButton) {
+            this.renderer.setProperty(this._exporterButton._elementRef.nativeElement, 'disabled', value ? null : 'true');
+        }
     }
 }
-DataExtractorService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-DataExtractorService.ctorParameters = () => [];
-/** @nocollapse */ DataExtractorService.ngInjectableDef = defineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
+CdkTableExporter.ɵfac = function CdkTableExporter_Factory(t) { ɵɵinvalidFactory(); };
+CdkTableExporter.ɵdir = ɵɵdefineDirective({ type: CdkTableExporter, inputs: { hiddenColumns: "hiddenColumns", exporter: "exporter", cdkTable: "cdkTable", exporterButton: "exporterButton", fileName: "fileName", sheetName: "sheetName" }, outputs: { exportCompleted: "exportCompleted", exportStarted: "exportStarted" } });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CdkTableExporter, [{
+        type: Directive
+    }], function () { return [{ type: Renderer2 }, { type: ServiceLocatorService }, { type: DataExtractorService }, { type: undefined }, { type: ViewContainerRef }]; }, { hiddenColumns: [{
+            type: Input
+        }], exporter: [{
+            type: Input
+        }], exportCompleted: [{
+            type: Output
+        }], exportStarted: [{
+            type: Output
+        }], cdkTable: [{
+            type: Input
+        }], exporterButton: [{
+            type: Input
+        }], fileName: [{
+            type: Input
+        }], sheetName: [{
+            type: Input
+        }] }); })();
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+/*
+ * Public API Surface of cdk-table-exporter
  */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
-export { CdkTableExporter, FileExporter, JsonExporterService, TxtExporterService, XlsExporterService, WorksheetExporter, XlsxExporterService, CsvExporterService, ExportType, ServiceLocatorService, DataExtractorService, Mime, FileUtil, CdkTableExporterModule, MAT_TABLE_EXPORTER, TYPE_ARRAY, CHAR_SET_UTF, CHAR_SET_UTF_8, CONTENT_TYPE_TEXT, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, DOT, EXTENSION_XLS, EXTENSION_XLSX, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, MIME_CSV, REF, XLS_REGEX, RETURN, TAB, XLSX_COLS };
-
+export { CHAR_SET_UTF, CHAR_SET_UTF_8, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService };
 //# sourceMappingURL=cdk-table-exporter.js.map

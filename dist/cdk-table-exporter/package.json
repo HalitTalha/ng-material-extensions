@@ -9,19 +9,14 @@
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/cdk-table-exporter"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@angular/core": "^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@angular/cdk": "^8.0.0 || ^7.0.0 || ^6.3.0"
+    "@angular/common": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
+    "@angular/core": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
+    "@angular/cdk": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
+    "tslib": "^1.10.0"
   },
   "dependencies": {
     "file-saver": "^2.0.2",
-    "xlsx": "^0.14.1",
-    "tslib": "^1.9.0"
-  },
-  "devDependencies": {
-    "@angular/cdk": "^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@types/file-saver": "^2.0.1",
-    "goodparts": "^1.2.1"
+    "xlsx": "^0.14.1"
   },
   "keywords": [
     "cdktable",
@@ -42,6 +37,8 @@
   "fesm5": "fesm5/cdk-table-exporter.js",
   "fesm2015": "fesm2015/cdk-table-exporter.js",
   "typings": "cdk-table-exporter.d.ts",
-  "metadata": "cdk-table-exporter.metadata.json",
-  "sideEffects": false
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
+  }
 }

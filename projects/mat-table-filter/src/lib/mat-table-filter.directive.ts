@@ -1,6 +1,6 @@
 import { PropertyOptions } from './property-options';
 import { Directive, DoCheck, Input, ViewContainerRef, Host, Self, Optional } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MatTableFilter } from './mat-table-filter.enum';
@@ -11,7 +11,6 @@ import { MatTableFilterService } from './services/mat-table-filter.service';
   exportAs: 'matTableFilter'
 })
 export class MatTableFilterDirective implements DoCheck {
-
   private _oldExampleEntity: any;
 
   @Input() exampleEntity: any;
@@ -28,11 +27,13 @@ export class MatTableFilterDirective implements DoCheck {
   private _exampleEntitySubject: BehaviorSubject<void>;
 
 
-  constructor(private _filterService: MatTableFilterService,
-              @Host() @Self() @Optional() private _injectedTable: MatTable<any>,
-              private _viewContainerRef: ViewContainerRef) {
-              this.initCdkTable();
-              this.initDebounceSubject();
+  constructor(
+    private _filterService: MatTableFilterService,
+    @Host() @Self() @Optional() private _injectedTable: MatTable<any>,
+    private _viewContainerRef: ViewContainerRef
+  ) {
+    this.initCdkTable();
+    this.initDebounceSubject();
   }
 
   ngDoCheck(): void {
@@ -45,7 +46,8 @@ export class MatTableFilterDirective implements DoCheck {
 
   private initCdkTable() {
     // tslint:disable-next-line:no-string-literal
-    const table = this._viewContainerRef['_data'].componentView.component;
+    const table = this._viewContainerRef['_data']?.componentView?.component;
+
     if (table) {
       this._table = table;
     } else if (this._injectedTable) {
@@ -58,10 +60,10 @@ export class MatTableFilterDirective implements DoCheck {
   private initDebounceSubject() {
     this._exampleEntitySubject = new BehaviorSubject<void>(null);
     this._exampleEntitySubject.pipe(
-     debounceTime(this.debounceTime))
-     .subscribe(_ => {
-       this.updateFilterPredicate();
-     });
+      debounceTime(this.debounceTime))
+      .subscribe(_ => {
+        this.updateFilterPredicate();
+      });
   }
 
   private updateFilterPredicate() {
@@ -77,8 +79,8 @@ export class MatTableFilterDirective implements DoCheck {
       return this.customPredicate;
     } else {
       return (item: any): boolean => {
-        return this._filterService.filterPredicate({example: this.exampleEntity, item}, this.propertyOptions,
-         {filterType: this.filterType, caseSensitive: this.caseSensitive});
+        return this._filterService.filterPredicate({ example: this.exampleEntity, item }, this.propertyOptions,
+          { filterType: this.filterType, caseSensitive: this.caseSensitive });
       };
     }
   }
