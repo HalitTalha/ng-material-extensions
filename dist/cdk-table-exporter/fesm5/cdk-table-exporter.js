@@ -1,29 +1,23 @@
+import { __decorate, __metadata, __extends } from 'tslib';
 import { CdkTableModule } from '@angular/cdk/table';
-import { ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, ɵsetClassMetadata, NgModule, ɵɵdefineInjectable, Injectable, ɵɵinject, Injector, EventEmitter, ɵɵinvalidFactory, ɵɵdefineDirective, Directive, Renderer2, ViewContainerRef, Input, Output } from '@angular/core';
-import { saveAs } from 'file-saver';
-import { __extends } from 'tslib';
+import { NgModule, ɵɵdefineInjectable, Injectable, Injector, ɵɵinject, INJECTOR, EventEmitter, Renderer2, Input, Output, Directive } from '@angular/core';
 import { utils, write } from 'xlsx';
+import { saveAs } from 'file-saver';
 
 var CdkTableExporterModule = /** @class */ (function () {
     function CdkTableExporterModule() {
     }
-    CdkTableExporterModule.ɵmod = ɵɵdefineNgModule({ type: CdkTableExporterModule });
-    CdkTableExporterModule.ɵinj = ɵɵdefineInjector({ factory: function CdkTableExporterModule_Factory(t) { return new (t || CdkTableExporterModule)(); }, imports: [[
+    CdkTableExporterModule = __decorate([
+        NgModule({
+            declarations: [],
+            imports: [
                 CdkTableModule
-            ]] });
+            ],
+            exports: []
+        })
+    ], CdkTableExporterModule);
     return CdkTableExporterModule;
 }());
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CdkTableExporterModule, { imports: [CdkTableModule] }); })();
-/*@__PURE__*/ (function () { ɵsetClassMetadata(CdkTableExporterModule, [{
-        type: NgModule,
-        args: [{
-                declarations: [],
-                imports: [
-                    CdkTableModule
-                ],
-                exports: []
-            }]
-    }], null, null); })();
 
 var ExportType;
 (function (ExportType) {
@@ -34,6 +28,63 @@ var ExportType;
     ExportType["JSON"] = "json";
     ExportType["OTHER"] = "other";
 })(ExportType || (ExportType = {}));
+
+var DataExtractorService = /** @class */ (function () {
+    function DataExtractorService() {
+    }
+    DataExtractorService.prototype.extractRows = function (cdkTable, hiddenColumns) {
+        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
+    };
+    DataExtractorService.prototype.extractRow = function (cdkTable, hiddenColumns, outlet) {
+        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
+    };
+    DataExtractorService.prototype.getRowsAsJsonArray = function (cdkTable, hiddenColumns, outlet) {
+        var renderedRows = this.getRenderedRows(cdkTable, outlet);
+        return this.convertToJsonArray(hiddenColumns, renderedRows);
+    };
+    DataExtractorService.prototype.getRenderedRows = function (cdkTable, outlet) {
+        return cdkTable._getRenderedRows(outlet);
+    };
+    DataExtractorService.prototype.convertToJsonArray = function (hiddenColumns, rows) {
+        var result = new Array();
+        // tslint:disable-next-line:prefer-for-of
+        for (var i = 0; i < rows.length; i++) {
+            var row = this.convertRow(hiddenColumns, rows[i]);
+            result.push(this.createExcelItem(row));
+        }
+        return result;
+    };
+    DataExtractorService.prototype.convertRow = function (hiddenColumns, row) {
+        var result = new Array();
+        var cells = row.children;
+        for (var i = 0; i < cells.length; i++) {
+            if (!this.shouldHide(hiddenColumns, i)) {
+                var element = cells.item(i).innerText;
+                result.push(element);
+            }
+        }
+        return result;
+    };
+    DataExtractorService.prototype.shouldHide = function (hiddenColumns, columnIndex) {
+        if (hiddenColumns && hiddenColumns.includes(columnIndex)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    DataExtractorService.prototype.createExcelItem = function (row) {
+        return Object.assign({}, row);
+    };
+    DataExtractorService.ɵprov = ɵɵdefineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
+    DataExtractorService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], DataExtractorService);
+    return DataExtractorService;
+}());
 
 var Mime = /** @class */ (function () {
     function Mime(extension, contentTypeHeader) {
@@ -95,64 +146,6 @@ var FileUtil = /** @class */ (function () {
     return FileUtil;
 }());
 
-var DataExtractorService = /** @class */ (function () {
-    function DataExtractorService() {
-    }
-    DataExtractorService.prototype.extractRows = function (cdkTable, hiddenColumns) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
-    };
-    DataExtractorService.prototype.extractRow = function (cdkTable, hiddenColumns, outlet) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
-    };
-    DataExtractorService.prototype.getRowsAsJsonArray = function (cdkTable, hiddenColumns, outlet) {
-        var renderedRows = this.getRenderedRows(cdkTable, outlet);
-        return this.convertToJsonArray(hiddenColumns, renderedRows);
-    };
-    DataExtractorService.prototype.getRenderedRows = function (cdkTable, outlet) {
-        return cdkTable._getRenderedRows(outlet);
-    };
-    DataExtractorService.prototype.convertToJsonArray = function (hiddenColumns, rows) {
-        var result = new Array();
-        // tslint:disable-next-line:prefer-for-of
-        for (var i = 0; i < rows.length; i++) {
-            var row = this.convertRow(hiddenColumns, rows[i]);
-            result.push(this.createExcelItem(row));
-        }
-        return result;
-    };
-    DataExtractorService.prototype.convertRow = function (hiddenColumns, row) {
-        var result = new Array();
-        var cells = row.children;
-        for (var i = 0; i < cells.length; i++) {
-            if (!this.shouldHide(hiddenColumns, i)) {
-                var element = cells.item(i).innerText;
-                result.push(element);
-            }
-        }
-        return result;
-    };
-    DataExtractorService.prototype.shouldHide = function (hiddenColumns, columnIndex) {
-        if (hiddenColumns && hiddenColumns.includes(columnIndex)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-    DataExtractorService.prototype.createExcelItem = function (row) {
-        return Object.assign({}, row);
-    };
-    DataExtractorService.ɵfac = function DataExtractorService_Factory(t) { return new (t || DataExtractorService)(); };
-    DataExtractorService.ɵprov = ɵɵdefineInjectable({ token: DataExtractorService, factory: DataExtractorService.ɵfac, providedIn: 'root' });
-    return DataExtractorService;
-}());
-/*@__PURE__*/ (function () { ɵsetClassMetadata(DataExtractorService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
-
 var FileExporter = /** @class */ (function () {
     function FileExporter() {
     }
@@ -195,16 +188,15 @@ var CsvExporterService = /** @class */ (function (_super) {
     CsvExporterService.prototype.getMimeType = function () {
         return MIME_CSV;
     };
-    CsvExporterService.ɵfac = function CsvExporterService_Factory(t) { return new (t || CsvExporterService)(); };
-    CsvExporterService.ɵprov = ɵɵdefineInjectable({ token: CsvExporterService, factory: CsvExporterService.ɵfac, providedIn: 'root' });
+    CsvExporterService.ɵprov = ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+    CsvExporterService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], CsvExporterService);
     return CsvExporterService;
 }(WorksheetExporter));
-/*@__PURE__*/ (function () { ɵsetClassMetadata(CsvExporterService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
 
 var TxtExporterService = /** @class */ (function (_super) {
     __extends(TxtExporterService, _super);
@@ -230,16 +222,15 @@ var TxtExporterService = /** @class */ (function (_super) {
             return TAB;
         }
     };
-    TxtExporterService.ɵfac = function TxtExporterService_Factory(t) { return new (t || TxtExporterService)(); };
-    TxtExporterService.ɵprov = ɵɵdefineInjectable({ token: TxtExporterService, factory: TxtExporterService.ɵfac, providedIn: 'root' });
+    TxtExporterService.ɵprov = ɵɵdefineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+    TxtExporterService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], TxtExporterService);
     return TxtExporterService;
 }(FileExporter));
-/*@__PURE__*/ (function () { ɵsetClassMetadata(TxtExporterService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
 
 var XlsExporterService = /** @class */ (function (_super) {
     __extends(XlsExporterService, _super);
@@ -268,16 +259,15 @@ var XlsExporterService = /** @class */ (function (_super) {
     XlsExporterService.prototype.convertToWch = function (columnWidths) {
         return columnWidths.map(function (width) { return ({ wch: width }); });
     };
-    XlsExporterService.ɵfac = function XlsExporterService_Factory(t) { return new (t || XlsExporterService)(); };
-    XlsExporterService.ɵprov = ɵɵdefineInjectable({ token: XlsExporterService, factory: XlsExporterService.ɵfac, providedIn: 'root' });
+    XlsExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+    XlsExporterService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], XlsExporterService);
     return XlsExporterService;
 }(WorksheetExporter));
-/*@__PURE__*/ (function () { ɵsetClassMetadata(XlsExporterService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
 
 var JsonExporterService = /** @class */ (function (_super) {
     __extends(JsonExporterService, _super);
@@ -290,16 +280,15 @@ var JsonExporterService = /** @class */ (function (_super) {
     JsonExporterService.prototype.getMimeType = function () {
         return MIME_JSON;
     };
-    JsonExporterService.ɵfac = function JsonExporterService_Factory(t) { return new (t || JsonExporterService)(); };
-    JsonExporterService.ɵprov = ɵɵdefineInjectable({ token: JsonExporterService, factory: JsonExporterService.ɵfac, providedIn: 'root' });
+    JsonExporterService.ɵprov = ɵɵdefineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
+    JsonExporterService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], JsonExporterService);
     return JsonExporterService;
 }(FileExporter));
-/*@__PURE__*/ (function () { ɵsetClassMetadata(JsonExporterService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
 
 var XlsxExporterService = /** @class */ (function (_super) {
     __extends(XlsxExporterService, _super);
@@ -310,16 +299,15 @@ var XlsxExporterService = /** @class */ (function (_super) {
     XlsxExporterService.prototype.getMimeType = function () {
         return MIME_EXCEL_XLSX;
     };
-    XlsxExporterService.ɵfac = function XlsxExporterService_Factory(t) { return new (t || XlsxExporterService)(); };
-    XlsxExporterService.ɵprov = ɵɵdefineInjectable({ token: XlsxExporterService, factory: XlsxExporterService.ɵfac, providedIn: 'root' });
+    XlsxExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+    XlsxExporterService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], XlsxExporterService);
     return XlsxExporterService;
 }(XlsExporterService));
-/*@__PURE__*/ (function () { ɵsetClassMetadata(XlsxExporterService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
 
 var ServiceLocatorService = /** @class */ (function () {
     function ServiceLocatorService(injector) {
@@ -343,111 +331,31 @@ var ServiceLocatorService = /** @class */ (function () {
                 return this.injector.get(XlsxExporterService);
         }
     };
-    ServiceLocatorService.ɵfac = function ServiceLocatorService_Factory(t) { return new (t || ServiceLocatorService)(ɵɵinject(Injector)); };
-    ServiceLocatorService.ɵprov = ɵɵdefineInjectable({ token: ServiceLocatorService, factory: ServiceLocatorService.ɵfac, providedIn: 'root' });
+    ServiceLocatorService.ctorParameters = function () { return [
+        { type: Injector }
+    ]; };
+    ServiceLocatorService.ɵprov = ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(ɵɵinject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+    ServiceLocatorService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [Injector])
+    ], ServiceLocatorService);
     return ServiceLocatorService;
 }());
-/*@__PURE__*/ (function () { ɵsetClassMetadata(ServiceLocatorService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: Injector }]; }, null); })();
 
 /**
  * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  */
 var CdkTableExporter = /** @class */ (function () {
-    function CdkTableExporter(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
+    function CdkTableExporter(renderer, serviceLocator, dataExtractor, _cdkTable) {
         this.renderer = renderer;
         this.serviceLocator = serviceLocator;
         this.dataExtractor = dataExtractor;
-        this.table = table;
-        this.viewContainerRef = viewContainerRef;
+        this._cdkTable = _cdkTable;
         this.exportCompleted = new EventEmitter();
         this.exportStarted = new EventEmitter();
-        this.initCdkTable();
     }
-    Object.defineProperty(CdkTableExporter.prototype, "cdkTable", {
-        get: function () {
-            return this._cdkTable;
-        },
-        /**
-         * @deprecated
-         */
-        set: function (value) {
-            console.warn('cdkTable input is deprecated!');
-            this._cdkTable = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CdkTableExporter.prototype, "exporterButton", {
-        get: function () {
-            return this._exporterButton;
-        },
-        /**
-         * @deprecated
-         */
-        set: function (value) {
-            console.warn('exporterButton input is deprecated!');
-            this._exporterButton = value;
-            this.setButtonListener();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CdkTableExporter.prototype, "fileName", {
-        get: function () {
-            return this._fileName;
-        },
-        /**
-         * @deprecated
-         */
-        set: function (value) {
-            console.warn('fileName input is deprecated!');
-            this._fileName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CdkTableExporter.prototype, "sheetName", {
-        get: function () {
-            return this._sheetName;
-        },
-        /**
-         * @deprecated
-         */
-        set: function (value) {
-            console.warn('sheetName input is deprecated!');
-            this._sheetName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    CdkTableExporter.prototype.initCdkTable = function () {
-        var _a, _b;
-        // tslint:disable-next-line:no-string-literal
-        var table = (_b = (_a = this.viewContainerRef['_data']) === null || _a === void 0 ? void 0 : _a.componentView) === null || _b === void 0 ? void 0 : _b.component;
-        if (table) {
-            this._cdkTable = table;
-        }
-        else if (this.table) {
-            this._cdkTable = this.table;
-        }
-        else {
-            throw new Error('Unsupported Angular version');
-        }
-    };
-    CdkTableExporter.prototype.setButtonListener = function () {
-        var _this = this;
-        if (this._exporterButton) {
-            this.renderer.listen(this._exporterButton._elementRef.nativeElement, 'click', function (evt) {
-                var options = { fileName: _this._fileName, sheet: _this._sheetName };
-                _this.exportTable(FileUtil.identifyExportType(_this._fileName), options); // this is to support deprecated way of exporting
-            });
-        }
-    };
     /**
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
      */
@@ -458,7 +366,6 @@ var CdkTableExporter = /** @class */ (function () {
         this._isIterating = true;
         this._isExporting = true;
         this._data = new Array();
-        this.enableExportButton(false);
         this.extractTableHeader();
         try {
             this.exportWithPagination();
@@ -515,7 +422,6 @@ var CdkTableExporter = /** @class */ (function () {
     CdkTableExporter.prototype.exportExtractedData = function () {
         this._exporterService.export(this._data, this._options);
         this._data = new Array();
-        this.enableExportButton(true);
         this.exportCompleted.emit();
     };
     CdkTableExporter.prototype.extractSpecialRow = function (outlet) {
@@ -541,34 +447,36 @@ var CdkTableExporter = /** @class */ (function () {
     CdkTableExporter.prototype.nextPage = function () {
         this.goToPage(this.getCurrentPageIndex() + 1);
     };
-    CdkTableExporter.prototype.enableExportButton = function (value) {
-        if (this._exporterButton) {
-            this.renderer.setProperty(this._exporterButton._elementRef.nativeElement, 'disabled', value ? null : 'true');
-        }
-    };
-    CdkTableExporter.ɵfac = function CdkTableExporter_Factory(t) { ɵɵinvalidFactory(); };
-    CdkTableExporter.ɵdir = ɵɵdefineDirective({ type: CdkTableExporter, inputs: { hiddenColumns: "hiddenColumns", exporter: "exporter", cdkTable: "cdkTable", exporterButton: "exporterButton", fileName: "fileName", sheetName: "sheetName" }, outputs: { exportCompleted: "exportCompleted", exportStarted: "exportStarted" } });
+    CdkTableExporter.ctorParameters = function () { return [
+        { type: Renderer2 },
+        { type: ServiceLocatorService },
+        { type: DataExtractorService },
+        { type: undefined }
+    ]; };
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], CdkTableExporter.prototype, "hiddenColumns", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], CdkTableExporter.prototype, "exporter", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], CdkTableExporter.prototype, "exportCompleted", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], CdkTableExporter.prototype, "exportStarted", void 0);
+    CdkTableExporter = __decorate([
+        Directive(),
+        __metadata("design:paramtypes", [Renderer2,
+            ServiceLocatorService,
+            DataExtractorService, Object])
+    ], CdkTableExporter);
     return CdkTableExporter;
 }());
-/*@__PURE__*/ (function () { ɵsetClassMetadata(CdkTableExporter, [{
-        type: Directive
-    }], function () { return [{ type: Renderer2 }, { type: ServiceLocatorService }, { type: DataExtractorService }, { type: undefined }, { type: ViewContainerRef }]; }, { hiddenColumns: [{
-            type: Input
-        }], exporter: [{
-            type: Input
-        }], exportCompleted: [{
-            type: Output
-        }], exportStarted: [{
-            type: Output
-        }], cdkTable: [{
-            type: Input
-        }], exporterButton: [{
-            type: Input
-        }], fileName: [{
-            type: Input
-        }], sheetName: [{
-            type: Input
-        }] }); })();
 
 /*
  * Public API Surface of cdk-table-exporter

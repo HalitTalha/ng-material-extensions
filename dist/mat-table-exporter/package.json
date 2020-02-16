@@ -1,9 +1,10 @@
 {
   "name": "mat-table-exporter",
-  "version": "1.2.5",
+  "version": "9.0.0",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
+  "homepage": "https://halittalha.github.io/mat-table-extensions/",
   "repository": {
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
@@ -15,9 +16,6 @@
     "@angular/cdk": "^9.0.0",
     "tslib": "^1.10.0"
   },
-  "dependencies": {
-    "cdk-table-exporter": "^1.2.5"
-  },
   "keywords": [
     "angular",
     "material",
@@ -28,6 +26,9 @@
     "table",
     "excel"
   ],
+  "dependencies": {
+    "cdk-table-exporter": "^9.0.0"
+  },
   "main": "bundles/mat-table-exporter.umd.js",
   "module": "fesm5/mat-table-exporter.js",
   "es2015": "fesm2015/mat-table-exporter.js",
@@ -36,8 +37,6 @@
   "fesm5": "fesm5/mat-table-exporter.js",
   "fesm2015": "fesm2015/mat-table-exporter.js",
   "typings": "mat-table-exporter.d.ts",
-  "sideEffects": false,
-  "scripts": {
-    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
-  }
+  "metadata": "mat-table-exporter.metadata.json",
+  "sideEffects": false
 }

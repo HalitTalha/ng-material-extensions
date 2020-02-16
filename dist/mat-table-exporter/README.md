@@ -19,8 +19,15 @@ If you are employing angular material in your project. Install mat-table-exporte
 ```
 npm install --save mat-table-exporter
 ```
+NOTE: For the previous major versions of Angular install version 1.2.5 
+```
+npm install --save mat-table-exporter@1.2.5
+```
 
 After installing mat-table-exporter import MatTableExporterModule in your ngModule
+```
+import { MatTableExporterModule } from 'mat-table-exporter';
+```
 
 ### Other than Angular Material
 
@@ -29,8 +36,15 @@ Install cdk-table-exporter if you are not using angular material in your project
 ```
 npm install --save cdk-table-exporter
 ```
-After installing cdk-table-exporter import CdkTableExporterModule in your ngModules
+NOTE: For the previous major versions of Angular install version 1.2.5
+```
+npm install --save cdk-table-exporter@1.2.5
+```
 
+After installing cdk-table-exporter import CdkTableExporterModule in your ngModules
+```
+import { CdkTableExporterModule } from 'cdk-table-exporter';
+```
 
 &nbsp;
 
@@ -45,6 +59,12 @@ After installing cdk-table-exporter import CdkTableExporterModule in your ngModu
 ```html
 <button mat-button (click)="exporter.exportTable('csv')"></button>
 ```
+
+&nbsp;
+
+##### * Stackblitz demo: <a href="https://stackblitz.com/edit/mte-demo" target="_blank">mte-demo</a>.
+
+##### * Stackblitz demo of custom exporter <a href="https://stackblitz.com/edit/mte-cex-demo" target="_blank">mte-cex-demo</a>.
 
 &nbsp;
 

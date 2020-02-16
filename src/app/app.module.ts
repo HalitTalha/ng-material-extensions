@@ -20,7 +20,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableExporterModule } from 'mat-table-exporter';
-
 import { ExporterComponent } from './components/exporter/exporter.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
@@ -33,7 +32,6 @@ import { ArrayFilterComponent } from './components/examples/array-filter/array-f
 import { PropertyOptionsComponent } from './components/examples/property-options/property-options.component';
 import { BriefExporterComponent } from './components/examples/brief-exporter/brief-exporter.component';
 import { CustomExporterComponent } from './components/examples/custom-exporter/custom-exporter.component';
-import { NotifierModule } from 'angular-notifier';
 import { MatChipsModule } from '@angular/material/chips';
 
 export function markedOptions(): MarkedOptions {
@@ -76,18 +74,6 @@ export function markedOptions(): MarkedOptions {
       },
     }),
     BrowserAnimationsModule,
-    NotifierModule.withConfig({
-      theme: 'material',
-      behaviour: {
-        autoHide: 2000,
-        showDismissButton: false
-      },
-      position: {
-        horizontal: {
-          position: 'right'
-        }
-      }
-    }),
     MatTableFilterModule,
     MatTableExporterModule,
     MatIconModule,

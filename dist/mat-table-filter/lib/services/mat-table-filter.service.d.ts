@@ -3,7 +3,6 @@ import { ItemPair } from './../item-pair';
 import { ArrayPredicateService } from './array-predicate.service';
 import { AlphaNumericPredicateService } from './alpha-numeric-predicate.service';
 import { Options } from '../options';
-import * as i0 from "@angular/core";
 export declare class MatTableFilterService {
     private _alphaNumericService;
     private _arrayService;
@@ -14,6 +13,4 @@ export declare class MatTableFilterService {
     isChanged(oldEntity: any, newEntity: any): boolean;
     toPlainJson(object: any): JSON;
     private isAlphaNumeric;
-    static ɵfac: i0.ɵɵFactoryDef<MatTableFilterService>;
-    static ɵprov: i0.ɵɵInjectableDef<MatTableFilterService>;
 }

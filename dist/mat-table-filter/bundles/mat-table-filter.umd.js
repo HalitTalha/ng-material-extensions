@@ -251,9 +251,10 @@
         function ArrayPredicateService() {
             return _super.call(this) || this;
         }
+        ArrayPredicateService_1 = ArrayPredicateService;
         ArrayPredicateService.warn = function () {
-            console.warn(ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING);
-            console.warn(ArrayPredicateService.SUGGESTION_WARNING);
+            console.warn(ArrayPredicateService_1.UNSUPPORTED_OPERATION_WARNING);
+            console.warn(ArrayPredicateService_1.SUGGESTION_WARNING);
         };
         ArrayPredicateService.prototype.equals = function (itemPair) {
             return lodash.isEqual(itemPair.example.sort(), itemPair.item.sort());
@@ -262,29 +263,29 @@
             return this.isSubset(itemPair.example, itemPair.item);
         };
         ArrayPredicateService.prototype.startsWith = function (itemPair) {
-            ArrayPredicateService.warn();
+            ArrayPredicateService_1.warn();
             return this.anywhere(itemPair);
         };
         ArrayPredicateService.prototype.endsWith = function (itemPair) {
-            ArrayPredicateService.warn();
+            ArrayPredicateService_1.warn();
             return this.anywhere(itemPair);
         };
         ArrayPredicateService.prototype.isSubset = function (example, item) {
             return !lodash.difference(lodash.flatten(example), lodash.flatten(item)).length;
         };
+        var ArrayPredicateService_1;
         // tslint:disable-next-line:max-line-length
         ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING = 'This filterType is unsupported for array filtering. FilterType.ANYWHERE is executed instead!';
         ArrayPredicateService.SUGGESTION_WARNING = 'You can set a custom predicate for the array property through PropertyOptions!';
-        ArrayPredicateService.ɵfac = function ArrayPredicateService_Factory(t) { return new (t || ArrayPredicateService)(); };
-        ArrayPredicateService.ɵprov = core["ɵɵdefineInjectable"]({ token: ArrayPredicateService, factory: ArrayPredicateService.ɵfac, providedIn: 'root' });
+        ArrayPredicateService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ArrayPredicateService_Factory() { return new ArrayPredicateService(); }, token: ArrayPredicateService, providedIn: "root" });
+        ArrayPredicateService = ArrayPredicateService_1 = __decorate([
+            core.Injectable({
+                providedIn: 'root'
+            }),
+            __metadata("design:paramtypes", [])
+        ], ArrayPredicateService);
         return ArrayPredicateService;
     }(FilterPredicate));
-    /*@__PURE__*/ (function () { core["ɵsetClassMetadata"](ArrayPredicateService, [{
-            type: core.Injectable,
-            args: [{
-                    providedIn: 'root'
-                }]
-        }], function () { return []; }, null); })();
 
     var AlphaNumericPredicateService = /** @class */ (function (_super) {
         __extends(AlphaNumericPredicateService, _super);
@@ -303,16 +304,15 @@
         AlphaNumericPredicateService.prototype.endsWith = function (itemPair) {
             return itemPair.item.endsWith(itemPair.example);
         };
-        AlphaNumericPredicateService.ɵfac = function AlphaNumericPredicateService_Factory(t) { return new (t || AlphaNumericPredicateService)(); };
-        AlphaNumericPredicateService.ɵprov = core["ɵɵdefineInjectable"]({ token: AlphaNumericPredicateService, factory: AlphaNumericPredicateService.ɵfac, providedIn: 'root' });
+        AlphaNumericPredicateService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
+        AlphaNumericPredicateService = __decorate([
+            core.Injectable({
+                providedIn: 'root'
+            }),
+            __metadata("design:paramtypes", [])
+        ], AlphaNumericPredicateService);
         return AlphaNumericPredicateService;
     }(FilterPredicate));
-    /*@__PURE__*/ (function () { core["ɵsetClassMetadata"](AlphaNumericPredicateService, [{
-            type: core.Injectable,
-            args: [{
-                    providedIn: 'root'
-                }]
-        }], function () { return []; }, null); })();
 
     var MatTableFilterService = /** @class */ (function () {
         function MatTableFilterService(_alphaNumericService, _arrayService) {
@@ -410,46 +410,36 @@
         MatTableFilterService.prototype.isAlphaNumeric = function (value) {
             return lodash.isString(value) || lodash.isNumber(value);
         };
-        MatTableFilterService.ɵfac = function MatTableFilterService_Factory(t) { return new (t || MatTableFilterService)(core["ɵɵinject"](AlphaNumericPredicateService), core["ɵɵinject"](ArrayPredicateService)); };
-        MatTableFilterService.ɵprov = core["ɵɵdefineInjectable"]({ token: MatTableFilterService, factory: MatTableFilterService.ɵfac, providedIn: 'root' });
+        MatTableFilterService.ctorParameters = function () { return [
+            { type: AlphaNumericPredicateService },
+            { type: ArrayPredicateService }
+        ]; };
+        MatTableFilterService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(core["ɵɵinject"](AlphaNumericPredicateService), core["ɵɵinject"](ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
+        MatTableFilterService = __decorate([
+            core.Injectable({
+                providedIn: 'root'
+            }),
+            __metadata("design:paramtypes", [AlphaNumericPredicateService, ArrayPredicateService])
+        ], MatTableFilterService);
         return MatTableFilterService;
     }());
-    /*@__PURE__*/ (function () { core["ɵsetClassMetadata"](MatTableFilterService, [{
-            type: core.Injectable,
-            args: [{
-                    providedIn: 'root'
-                }]
-        }], function () { return [{ type: AlphaNumericPredicateService }, { type: ArrayPredicateService }]; }, null); })();
 
     var MatTableFilterDirective = /** @class */ (function () {
-        function MatTableFilterDirective(_filterService, _injectedTable, _viewContainerRef) {
+        function MatTableFilterDirective(_filterService, _table) {
             this._filterService = _filterService;
-            this._injectedTable = _injectedTable;
-            this._viewContainerRef = _viewContainerRef;
+            this._table = _table;
+            /**
+             * in millis
+             */
             this.debounceTime = 400;
             this.filterType = exports.MatTableFilter.ANYWHERE;
             this.caseSensitive = false;
-            this.initCdkTable();
             this.initDebounceSubject();
         }
         MatTableFilterDirective.prototype.ngDoCheck = function () {
             if (this._filterService.isChanged(this._oldExampleEntity, this.exampleEntity)) {
                 this._oldExampleEntity = this._filterService.toPlainJson(this.exampleEntity);
                 this._exampleEntitySubject.next(undefined);
-            }
-        };
-        MatTableFilterDirective.prototype.initCdkTable = function () {
-            var _a, _b;
-            // tslint:disable-next-line:no-string-literal
-            var table = (_b = (_a = this._viewContainerRef['_data']) === null || _a === void 0 ? void 0 : _a.componentView) === null || _b === void 0 ? void 0 : _b.component;
-            if (table) {
-                this._table = table;
-            }
-            else if (this._injectedTable) {
-                this._table = this._injectedTable;
-            }
-            else {
-                throw new Error('Unsupported Angular version!');
             }
         };
         MatTableFilterDirective.prototype.initDebounceSubject = function () {
@@ -482,60 +472,67 @@
             var matTable = this._table;
             return matTable.dataSource;
         };
-        MatTableFilterDirective.ɵfac = function MatTableFilterDirective_Factory(t) { return new (t || MatTableFilterDirective)(core["ɵɵdirectiveInject"](MatTableFilterService), core["ɵɵdirectiveInject"](table.MatTable, 11), core["ɵɵdirectiveInject"](core.ViewContainerRef)); };
-        MatTableFilterDirective.ɵdir = core["ɵɵdefineDirective"]({ type: MatTableFilterDirective, selectors: [["", "matTableFilter", ""]], inputs: { exampleEntity: "exampleEntity", debounceTime: "debounceTime", filterType: "filterType", caseSensitive: "caseSensitive", customPredicate: "customPredicate", propertyOptions: "propertyOptions" }, exportAs: ["matTableFilter"] });
+        MatTableFilterDirective.ctorParameters = function () { return [
+            { type: MatTableFilterService },
+            { type: table.MatTable, decorators: [{ type: core.Host }, { type: core.Self }, { type: core.Optional }] }
+        ]; };
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MatTableFilterDirective.prototype, "exampleEntity", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MatTableFilterDirective.prototype, "debounceTime", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", String)
+        ], MatTableFilterDirective.prototype, "filterType", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MatTableFilterDirective.prototype, "caseSensitive", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Function)
+        ], MatTableFilterDirective.prototype, "customPredicate", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Object)
+        ], MatTableFilterDirective.prototype, "propertyOptions", void 0);
+        MatTableFilterDirective = __decorate([
+            core.Directive({
+                selector: '[matTableFilter]',
+                exportAs: 'matTableFilter'
+            }),
+            __param(1, core.Host()), __param(1, core.Self()), __param(1, core.Optional()),
+            __metadata("design:paramtypes", [MatTableFilterService,
+                table.MatTable])
+        ], MatTableFilterDirective);
         return MatTableFilterDirective;
     }());
-    /*@__PURE__*/ (function () { core["ɵsetClassMetadata"](MatTableFilterDirective, [{
-            type: core.Directive,
-            args: [{
-                    selector: '[matTableFilter]',
-                    exportAs: 'matTableFilter'
-                }]
-        }], function () { return [{ type: MatTableFilterService }, { type: table.MatTable, decorators: [{
-                    type: core.Host
-                }, {
-                    type: core.Self
-                }, {
-                    type: core.Optional
-                }] }, { type: core.ViewContainerRef }]; }, { exampleEntity: [{
-                type: core.Input
-            }], debounceTime: [{
-                type: core.Input
-            }], filterType: [{
-                type: core.Input
-            }], caseSensitive: [{
-                type: core.Input
-            }], customPredicate: [{
-                type: core.Input
-            }], propertyOptions: [{
-                type: core.Input
-            }] }); })();
 
     var MatTableFilterModule = /** @class */ (function () {
         function MatTableFilterModule() {
         }
-        MatTableFilterModule.ɵmod = core["ɵɵdefineNgModule"]({ type: MatTableFilterModule });
-        MatTableFilterModule.ɵinj = core["ɵɵdefineInjector"]({ factory: function MatTableFilterModule_Factory(t) { return new (t || MatTableFilterModule)(); }, imports: [[
+        MatTableFilterModule = __decorate([
+            core.NgModule({
+                declarations: [MatTableFilterDirective],
+                imports: [
                     table.MatTableModule
-                ]] });
+                ],
+                exports: [MatTableFilterDirective]
+            })
+        ], MatTableFilterModule);
         return MatTableFilterModule;
     }());
-    (function () { (typeof ngJitMode === "undefined" || ngJitMode) && core["ɵɵsetNgModuleScope"](MatTableFilterModule, { declarations: [MatTableFilterDirective], imports: [table.MatTableModule], exports: [MatTableFilterDirective] }); })();
-    /*@__PURE__*/ (function () { core["ɵsetClassMetadata"](MatTableFilterModule, [{
-            type: core.NgModule,
-            args: [{
-                    declarations: [MatTableFilterDirective],
-                    imports: [
-                        table.MatTableModule
-                    ],
-                    exports: [MatTableFilterDirective]
-                }]
-        }], null, null); })();
 
     exports.MatTableFilterDirective = MatTableFilterDirective;
     exports.MatTableFilterModule = MatTableFilterModule;
     exports.MatTableFilterService = MatTableFilterService;
+    exports.ɵa = AlphaNumericPredicateService;
+    exports.ɵb = FilterPredicate;
+    exports.ɵc = ArrayPredicateService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

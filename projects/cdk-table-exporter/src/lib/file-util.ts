@@ -18,7 +18,7 @@ export class FileUtil {
     return fileName.toLowerCase().match(XLS_REGEX) != null;
   }
 
-  public static identifyExportType(fileName?: string) {
+  public static identifyExportType(fileName?: string): ExportType {
     if (fileName && FileUtil.isXls(fileName)) {
       return ExportType.XLS;
     } else {

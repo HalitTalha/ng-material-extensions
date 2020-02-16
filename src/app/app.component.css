@@ -3,10 +3,9 @@
   background: #3f51b5;
 }
 
-.docs-header-container {
+::ng-deep .docs-header-container {
   display: flex;
   flex-direction: column;
-  place-content: center;
   align-items: center;
 }
 

@@ -19,6 +19,10 @@ If you are employing angular material in your project. Install mat-table-exporte
 ```
 npm install --save mat-table-exporter
 ```
+NOTE: For the previous major versions of Angular install version 1.2.5 
+```
+npm install --save mat-table-exporter@1.2.5
+```
 
 After installing mat-table-exporter import MatTableExporterModule in your ngModule
 
@@ -28,6 +32,10 @@ Install cdk-table-exporter if you are not using angular material in your project
 
 ```
 npm install --save cdk-table-exporter
+```
+NOTE: For the previous major versions of Angular install version 1.2.5
+```
+npm install --save cdk-table-exporter@1.2.5
 ```
 After installing cdk-table-exporter import CdkTableExporterModule in your ngModules
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Exporter, Options } from 'mat-table-exporter';
@@ -16,7 +16,7 @@ export class CustomExporter implements Exporter<Options> {
   styleUrls: ['./custom-exporter.component.css']
 })
 @AddToShowCase('exporter', 'custom-exporter.component', 'Custom Exporting Implementation')
-export class CustomExporterComponent implements OnInit {
+export class CustomExporterComponent implements OnInit, AfterViewInit {
   title = 'mte-test';
   displayedColumns = ['position', 'name', 'surname', 'birth'];
 
@@ -25,8 +25,11 @@ export class CustomExporterComponent implements OnInit {
   customExporter: CustomExporter;
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
     this.customExporter = new CustomExporter(); // YOU CAN BENEFIT FROM DI TOO.
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 }
 

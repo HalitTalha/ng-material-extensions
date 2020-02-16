@@ -15,8 +15,14 @@ Install cdk-table-exporter if you are not using angular material in your project
 ```
 npm install --save cdk-table-exporter
 ```
+NOTE: For the previous major versions of Angular install version 1.2.5
+```
+npm install --save cdk-table-exporter@1.2.5
+```
 After installing cdk-table-exporter import CdkTableExporterModule in your ngModule
-
+```
+import { CdkTableExporterModule } from 'cdk-table-exporter';
+```
 
 
 ## Usage

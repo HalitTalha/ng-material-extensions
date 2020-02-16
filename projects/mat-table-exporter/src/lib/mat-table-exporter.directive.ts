@@ -1,8 +1,8 @@
-import { AfterViewInit, Directive, Host, Renderer2, Self, Optional, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, Host, Optional, Renderer2, Self } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
 import { Observable } from 'rxjs';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 
 @Directive({
   selector: '[matTableExporter]', // renamed selector but kept old version for backwards compat.
@@ -25,10 +25,9 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
     renderer: Renderer2,
     serviceLocator: ServiceLocatorService,
     dataExtractor: DataExtractorService,
-    @Host() @Self() @Optional() table: MatTable<any>,
-    viewContainerRef: ViewContainerRef
+    @Host() @Self() @Optional() table: MatTable<any>
   ) {
-    super(renderer, serviceLocator, dataExtractor, table, viewContainerRef);
+    super(renderer, serviceLocator, dataExtractor, table);
   }
 
   /**
@@ -62,7 +61,7 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
 
 
   private getPaginator(): MatPaginator {
-    return (this.cdkTable.dataSource as MatTableDataSource<any>).paginator;
+    return (this._cdkTable.dataSource as MatTableDataSource<any>).paginator;
   }
 
   private enablePaginator(value: boolean) {

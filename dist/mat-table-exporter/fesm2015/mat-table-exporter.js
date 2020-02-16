@@ -1,11 +1,12 @@
-import { CdkTableExporterDirective, ServiceLocatorService, DataExtractorService, CdkTableExporterModule } from 'cdk-table-exporter';
+import { __decorate, __param, __metadata } from 'tslib';
+import { CdkTableExporter, ServiceLocatorService, DataExtractorService, CdkTableExporterModule } from 'cdk-table-exporter';
 export * from 'cdk-table-exporter';
 import { MatTable, MatTableModule } from '@angular/material/table';
-import { ɵɵdirectiveInject, Renderer2, ViewContainerRef, ɵɵdefineDirective, ɵɵInheritDefinitionFeature, ɵsetClassMetadata, Directive, Host, Self, Optional, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
+import { Renderer2, Host, Self, Optional, Directive, NgModule } from '@angular/core';
 
-class MatTableExporterDirective extends CdkTableExporterDirective {
-    constructor(renderer, serviceLocator, dataExtractor, table, viewContainerRef) {
-        super(renderer, serviceLocator, dataExtractor, table, viewContainerRef);
+let MatTableExporterDirective = class MatTableExporterDirective extends CdkTableExporter {
+    constructor(renderer, serviceLocator, dataExtractor, table) {
+        super(renderer, serviceLocator, dataExtractor, table);
     }
     /**
      * Overriding ngAfterViewInit of TableExporter
@@ -44,7 +45,7 @@ class MatTableExporterDirective extends CdkTableExporterDirective {
         return this.getPaginator().page;
     }
     getPaginator() {
-        return this.cdkTable.dataSource.paginator;
+        return this._cdkTable.dataSource.paginator;
     }
     enablePaginator(value) {
         if (this.getPaginator()) {
@@ -52,43 +53,37 @@ class MatTableExporterDirective extends CdkTableExporterDirective {
             this.getPaginator()._changePageSize(this.getPaginator().pageSize);
         }
     }
-}
-MatTableExporterDirective.ɵfac = function MatTableExporterDirective_Factory(t) { return new (t || MatTableExporterDirective)(ɵɵdirectiveInject(Renderer2), ɵɵdirectiveInject(ServiceLocatorService), ɵɵdirectiveInject(DataExtractorService), ɵɵdirectiveInject(MatTable, 11), ɵɵdirectiveInject(ViewContainerRef)); };
-MatTableExporterDirective.ɵdir = ɵɵdefineDirective({ type: MatTableExporterDirective, selectors: [["", "matTableExporter", ""]], exportAs: ["matTableExporter"], features: [ɵɵInheritDefinitionFeature] });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(MatTableExporterDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[matTableExporter]',
-                exportAs: 'matTableExporter'
-            }]
-    }], function () { return [{ type: Renderer2 }, { type: ServiceLocatorService }, { type: DataExtractorService }, { type: MatTable, decorators: [{
-                type: Host
-            }, {
-                type: Self
-            }, {
-                type: Optional
-            }] }, { type: ViewContainerRef }]; }, null); })();
+};
+MatTableExporterDirective.ctorParameters = () => [
+    { type: Renderer2 },
+    { type: ServiceLocatorService },
+    { type: DataExtractorService },
+    { type: MatTable, decorators: [{ type: Host }, { type: Self }, { type: Optional }] }
+];
+MatTableExporterDirective = __decorate([
+    Directive({
+        selector: '[matTableExporter]',
+        exportAs: 'matTableExporter'
+    }),
+    __param(3, Host()), __param(3, Self()), __param(3, Optional()),
+    __metadata("design:paramtypes", [Renderer2,
+        ServiceLocatorService,
+        DataExtractorService,
+        MatTable])
+], MatTableExporterDirective);
 
-class MatTableExporterModule {
-}
-MatTableExporterModule.ɵmod = ɵɵdefineNgModule({ type: MatTableExporterModule });
-MatTableExporterModule.ɵinj = ɵɵdefineInjector({ factory: function MatTableExporterModule_Factory(t) { return new (t || MatTableExporterModule)(); }, imports: [[
+let MatTableExporterModule = class MatTableExporterModule {
+};
+MatTableExporterModule = __decorate([
+    NgModule({
+        declarations: [MatTableExporterDirective],
+        imports: [
             MatTableModule,
             CdkTableExporterModule
-        ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(MatTableExporterModule, { declarations: [MatTableExporterDirective], imports: [MatTableModule,
-        CdkTableExporterModule], exports: [MatTableExporterDirective] }); })();
-/*@__PURE__*/ (function () { ɵsetClassMetadata(MatTableExporterModule, [{
-        type: NgModule,
-        args: [{
-                declarations: [MatTableExporterDirective],
-                imports: [
-                    MatTableModule,
-                    CdkTableExporterModule
-                ],
-                exports: [MatTableExporterDirective]
-            }]
-    }], null, null); })();
+        ],
+        exports: [MatTableExporterDirective]
+    })
+], MatTableExporterModule);
 
 /*
  * Public API Surface of mat-table-exporter

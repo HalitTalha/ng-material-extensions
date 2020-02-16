@@ -29,15 +29,13 @@
               "src/styles.css",
               "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
-              "node_modules/prismjs/themes/prism.css",
-              "node_modules/angular-notifier/styles.css"
+              "node_modules/prismjs/themes/prism.css"
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-css.min.js",
-              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
-              "node_modules/clipboard/dist/clipboard.min.js"
+              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js"
             ]
           },
           "configurations": {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddToShowCase } from '../../add-to-showcase';
@@ -9,14 +9,17 @@ import { AddToShowCase } from '../../add-to-showcase';
   styleUrls: ['./brief-exporter.component.css']
 })
 @AddToShowCase('exporter', 'brief-exporter.component', 'Overall Exporting Example')
-export class BriefExporterComponent implements OnInit {
+export class BriefExporterComponent implements AfterViewInit, OnInit {
   title = 'mte-test';
   displayedColumns = ['position', 'name', 'surname', 'birth'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   dataSource: MatTableDataSource<Element>;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
+  }
+
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 }

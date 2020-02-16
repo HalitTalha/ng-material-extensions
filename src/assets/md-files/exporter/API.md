@@ -1,3 +1,7 @@
+`import { MatTableExporterModule } from 'mat-table-exporter';`
+
+&nbsp;
+
 ### MatTableExporterDirective
 
 | Input/Output | Property | Type | Description |

@@ -19,7 +19,8 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "enableIvy": false
   },
   "exclude": [
     "src/test.ts",

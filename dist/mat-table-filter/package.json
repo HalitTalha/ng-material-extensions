@@ -6,13 +6,14 @@
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-filter"
   },
-  "version": "1.2.5",
+  "version": "9.0.0",
   "description": "Provides filtering support for @angular/material tables",
+  "homepage": "https://halittalha.github.io/mat-table-extensions/",
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",
     "@angular/cdk": "^9.0.0",
-    "@angular/material": "^9.0.00",
+    "@angular/material": "^9.0.0",
     "tslib": "^1.10.0"
   },
   "dependencies": {
@@ -39,8 +40,6 @@
   "fesm5": "fesm5/mat-table-filter.js",
   "fesm2015": "fesm2015/mat-table-filter.js",
   "typings": "mat-table-filter.d.ts",
-  "sideEffects": false,
-  "scripts": {
-    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
-  }
+  "metadata": "mat-table-filter.metadata.json",
+  "sideEffects": false
 }

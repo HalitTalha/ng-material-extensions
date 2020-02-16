@@ -13,7 +13,10 @@ By employing this directive you will end up with having
 ```
 npm install --save mat-table-filter
 ```
-
+NOTE: For the previous major versions of Angular install version 1.2.5 
+```
+npm install --save mat-table-filter@1.2.5
+```
 After installing mat-table-filter import MatTableFilterModule in your ngModule
 
 ## Usage

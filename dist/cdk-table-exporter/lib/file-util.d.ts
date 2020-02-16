@@ -4,6 +4,6 @@ import { Options } from './options';
 export declare class FileUtil {
     static save(content: string, mime: Mime, options?: Options): void;
     static isXls(fileName: string): boolean;
-    static identifyExportType(fileName?: string): ExportType.XLS | ExportType.XLSX;
+    static identifyExportType(fileName?: string): ExportType;
     static removeExtension(options?: Options): void;
 }

@@ -1,10 +1,10 @@
 <div class="docs-page">
 <mat-tab-group mat-align-tabs="start">
   <mat-tab label="Overview">
-    <markdown (buttonClick)="onCopyClipboard()" ngPreserveWhitespaces [src]="'assets/md-files/exporter/README.md'"></markdown>
+    <markdown ngPreserveWhitespaces [src]="'assets/md-files/exporter/README.md'"></markdown>
   </mat-tab>
   <mat-tab label="API">
-    <markdown (buttonClick)="onCopyClipboard()" ngPreserveWhitespaces [src]="'assets/md-files/exporter/API.md'"></markdown>
+    <markdown ngPreserveWhitespaces [src]="'assets/md-files/exporter/API.md'"></markdown>
   </mat-tab>
   <mat-tab label="Examples">
     <app-example-viewer *ngFor="let example of examples" [exampleType]="example"></app-example-viewer>

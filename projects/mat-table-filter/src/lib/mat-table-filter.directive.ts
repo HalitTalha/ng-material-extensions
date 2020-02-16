@@ -18,7 +18,6 @@ export class MatTableFilterDirective implements DoCheck {
   /**
    * in millis
    */
-  private _table: any;
   @Input() debounceTime = 400;
   @Input() filterType: MatTableFilter = MatTableFilter.ANYWHERE;
   @Input() caseSensitive = false;
@@ -29,10 +28,8 @@ export class MatTableFilterDirective implements DoCheck {
 
   constructor(
     private _filterService: MatTableFilterService,
-    @Host() @Self() @Optional() private _injectedTable: MatTable<any>,
-    private _viewContainerRef: ViewContainerRef
+    @Host() @Self() @Optional() private _table: MatTable<any>
   ) {
-    this.initCdkTable();
     this.initDebounceSubject();
   }
 
@@ -43,19 +40,6 @@ export class MatTableFilterDirective implements DoCheck {
     }
   }
 
-
-  private initCdkTable() {
-    // tslint:disable-next-line:no-string-literal
-    const table = this._viewContainerRef['_data']?.componentView?.component;
-
-    if (table) {
-      this._table = table;
-    } else if (this._injectedTable) {
-      this._table = this._injectedTable;
-    } else {
-      throw new Error('Unsupported Angular version!');
-    }
-  }
 
   private initDebounceSubject() {
     this._exampleEntitySubject = new BehaviorSubject<void>(null);

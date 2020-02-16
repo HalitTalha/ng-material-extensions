@@ -1,25 +1,23 @@
 {
   "name": "mat-table-exporter",
-  "version": "1.2.5",
+  "version": "9.0.0",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
+  "homepage": "https://halittalha.github.io/mat-table-extensions/",
   "repository": {
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
   },
   "peerDependencies": {
-    "@angular/common": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@angular/core": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@angular/material": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@angular/cdk": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0"
-  },
-  "dependencies": {
-    "cdk-table-exporter": "^1.2.5"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/material": "^9.0.0",
+    "@angular/cdk": "^9.0.0"
   },
   "devDependencies": {
-    "@angular/cdk": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
-    "@angular/material": "^9.0.0 || ^8.0.0 || ^7.0.0 || ^6.3.0",
+    "@angular/cdk": "^9.0.0",
+    "@angular/material": "^9.0.0",
     "goodparts": "^1.2.1"
   },
   "scripts": {
@@ -34,5 +32,8 @@
     "paginated",
     "table",
     "excel"
-  ]
+  ],
+  "dependencies": {
+    "cdk-table-exporter": "^9.0.0"
+  }
 }

@@ -1,8 +1,7 @@
 import { DataRowOutlet } from '@angular/cdk/table';
-import { EventEmitter, Input, Output, Renderer2, ViewContainerRef, Directive } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ExportType } from './export-type';
-import { FileUtil } from './file-util';
 import { ExcelOptions, Options, TxtOptions } from './options';
 import { DataExtractorService } from './services/data-extractor.service';
 import { Exporter } from './services/exporters/exporter';
@@ -20,68 +19,6 @@ export abstract class CdkTableExporter {
   @Input() exporter?: Exporter<Options>;
   @Output() exportCompleted = new EventEmitter<void>();
   @Output() exportStarted = new EventEmitter<void>();
-
-  private _cdkTable: any;
-
-  get cdkTable(): any {
-    return this._cdkTable;
-  }
-
-  /**
-   * @deprecated
-   */
-  @Input()
-  set cdkTable(value: any) {
-    console.warn('cdkTable input is deprecated!');
-    this._cdkTable = value;
-  }
-
-  private _exporterButton: any;
-
-  get exporterButton(): any {
-    return this._exporterButton;
-  }
-
-  /**
-   * @deprecated
-   */
-  @Input()
-  set exporterButton(value: any) {
-    console.warn('exporterButton input is deprecated!');
-    this._exporterButton = value;
-    this.setButtonListener();
-  }
-
-  private _fileName: string;
-
-  get fileName(): string {
-    return this._fileName;
-  }
-
-  /**
-   * @deprecated
-   */
-  @Input()
-  set fileName(value: string) {
-    console.warn('fileName input is deprecated!');
-    this._fileName = value;
-  }
-
-  private _sheetName: string;
-
-  get sheetName(): string {
-    return this._sheetName;
-  }
-
-  /**
-   * @deprecated
-   */
-  @Input()
-  set sheetName(value: string) {
-    console.warn('sheetName input is deprecated!');
-    this._sheetName = value;
-  }
-
 
   /**
    * Data array which is extracted from nativeTable
@@ -102,11 +39,8 @@ export abstract class CdkTableExporter {
     protected renderer: Renderer2,
     private serviceLocator: ServiceLocatorService,
     private dataExtractor: DataExtractorService,
-    protected table: any,
-    protected viewContainerRef: ViewContainerRef,
-  ) {
-    this.initCdkTable();
-  }
+    protected _cdkTable: any,
+  ) {}
 
   /**
    * Must return the number of pages of the table
@@ -129,38 +63,17 @@ export abstract class CdkTableExporter {
    */
   public abstract getPageChangeObservable(): Observable<any>;
 
-  private initCdkTable() {
-    // tslint:disable-next-line:no-string-literal
-    const table = this.viewContainerRef['_data']?.componentView?.component;
-    if (table) {
-      this._cdkTable = table;
-    } else if (this.table) {
-      this._cdkTable = this.table;
-    } else {
-      throw new Error('Unsupported Angular version');
-    }
-  }
-
-  private setButtonListener() {
-    if (this._exporterButton) {
-      this.renderer.listen(this._exporterButton._elementRef.nativeElement, 'click', (evt) => {
-        const options = { fileName: this._fileName, sheet: this._sheetName } as ExcelOptions;
-        this.exportTable(FileUtil.identifyExportType(this._fileName), options); // this is to support deprecated way of exporting
-      });
-    }
-  }
 
   /**
    * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
    */
-  exportTable(exportType?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: ExcelOptions | TxtOptions | Options) {
+  exportTable(exportType?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options | ExcelOptions | TxtOptions) {
     this.loadExporter(exportType);
     this._options = options;
     this.exportStarted.emit();
     this._isIterating = true;
     this._isExporting = true;
     this._data = new Array<any>();
-    this.enableExportButton(false);
     this.extractTableHeader();
     try {
       this.exportWithPagination();
@@ -218,7 +131,6 @@ export abstract class CdkTableExporter {
   private exportExtractedData() {
     this._exporterService.export(this._data, this._options);
     this._data = new Array<any>();
-    this.enableExportButton(true);
     this.exportCompleted.emit();
   }
 
@@ -249,10 +161,5 @@ export abstract class CdkTableExporter {
     this.goToPage(this.getCurrentPageIndex() + 1);
   }
 
-  private enableExportButton(value: boolean) {
-    if (this._exporterButton) {
-      this.renderer.setProperty(this._exporterButton._elementRef.nativeElement, 'disabled', value ? null : 'true');
-    }
-  }
 }
 

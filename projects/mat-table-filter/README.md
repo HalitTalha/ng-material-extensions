@@ -13,8 +13,15 @@ By employing this directive you will end up with having
 ```
 npm install --save mat-table-filter
 ```
+NOTE: For the previous major versions of Angular install version 1.2.5
+```
+npm install --save mat-table-filter@1.2.5
+```
 
 After installing mat-table-filter import MatTableFilterModule in your ngModule
+```
+import { MatTableFilterModule } from 'mat-table-filter';
+```
 
 ## Usage
 
@@ -37,7 +44,8 @@ That's all. When you populate the exampleObject's properties, the filter will au
 You can change the debounce time also.
 
 &nbsp;
-
+### Stackblitz demo [mat-table-filter-example](https://stackblitz.com/github/HalitTalha/mat-table-filter-example)
+&nbsp;
 ##API
 
 ### MatTableFilterDirective
