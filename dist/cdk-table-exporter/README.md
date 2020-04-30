@@ -23,7 +23,13 @@ After installing cdk-table-exporter import CdkTableExporterModule in your ngModu
 ```
 import { CdkTableExporterModule } from 'cdk-table-exporter';
 ```
-
+```
+@NgModule({
+  imports: [
+    ...
+    CdkTableExporterModule
+  ],
+ ]})
 
 ## Usage
 CdkTableExporter class defines the common functionality that an exporter directive should have.
@@ -34,16 +40,16 @@ Thus the usage is simply as follows:
 
 
 ## Contributing
-This project is a library project inside mat-table-extensions angular workspace. If you are interested in the source code of this particular library you can get ready and build the project by applying the steps below:
+This project is a library project inside ng-material-extensions angular workspace. If you are interested in the source code of this particular library you can get ready and build the project by applying the steps below:
 
-1. Do ```npm install``` in ```mat-table-extensions``` directory
-2. Do ```npm install``` in ```mat-table-extensions\projects\cdk-table-exporter``` directory
-3. Go to ```mat-table-extensions``` directory
+1. Do ```npm install``` in ```ng-material-extensions``` directory
+2. Do ```npm install``` in ```ng-material-extensions\projects\cdk-table-exporter``` directory
+3. Go to ```ng-material-extensions``` directory
 4. Build it:
 ```
 ng build cdk-table-exporter
 ```
-
+5. You can run the showcase application and see your changes in action. In ```ng-material-extensions``` run ```ng s -o```
 
 ## Licence
 
