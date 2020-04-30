@@ -1,4 +1,4 @@
-:star::star: https://halittalha.github.io/mat-table-extensions/ :star::star:
+:star::star: https://halittalha.github.io/ng-material-extensions/ :star::star:
 
 # Mat Table Extensions
 

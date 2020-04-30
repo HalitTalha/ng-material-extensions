@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mat-table-extensions": {
+    "ng-material-extensions": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -40,7 +40,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/mat-table-extensions/",
+              "baseHref": "/ng-material-extensions/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mat-table-extensions:build"
+            "browserTarget": "ng-material-extensions:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mat-table-extensions:build:production"
+              "browserTarget": "ng-material-extensions:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mat-table-extensions:build"
+            "browserTarget": "ng-material-extensions:build"
           }
         },
         "test": {
@@ -120,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mat-table-extensions:serve"
+            "devServerTarget": "ng-material-extensions:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "mat-table-extensions:serve:production"
+              "devServerTarget": "ng-material-extensions:serve:production"
             }
           }
         }
@@ -286,5 +286,5 @@
       }
     }
   },
-  "defaultProject": "mat-table-extensions"
+  "defaultProject": "ng-material-extensions"
 }
