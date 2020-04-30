@@ -57,3 +57,19 @@ ExcelOptions wraps the WritingOptions of sheetjs library. All other export types
 | Props | `Properties` |(Optional) Workbook properties like *Author, Title, Subject* etc.|
 | columnWidths | `Array<number>` | (Optional) Column widths in maximum char  |
 &nbsp;
+
+## Contributing
+This project is a library project inside ng-material-extensions angular workspace. If you are interested in the source code of this particular library you can get ready and build the project by applying the steps below:
+
+1. Do ```npm install``` in ```ng-material-extensions``` directory
+2. Do ```npm install``` in ```ng-material-extensions\projects\cdk-table-exporter``` directory
+3. Do ```npm install``` in ```ng-material-extensions\projects\mat-table-exporter``` directory
+4. Go to ```ng-material-extensions``` directory
+5. Build both of the exporter packages:
+```
+ng build cdk-table-exporter
+```
+```
+ng build mat-table-exporter
+```
+6. You can run the showcase application and see your changes in action. In ```ng-material-extensions``` run ```ng s -o```

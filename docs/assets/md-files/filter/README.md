@@ -13,12 +13,23 @@ By employing this directive you will end up with having
 ```
 npm install --save mat-table-filter
 ```
-NOTE: For the previous major versions of Angular install version 1.2.5 
+NOTE: For the previous major versions of Angular install version 1.2.5
 ```
 npm install --save mat-table-filter@1.2.5
 ```
-After installing mat-table-filter import MatTableFilterModule in your ngModule
 
+After installing mat-table-filter import MatTableFilterModule in your ngModule
+```
+import { MatTableFilterModule } from 'mat-table-filter';
+```
+```
+@NgModule({
+  imports: [
+    ...
+    MatTableFilterModule
+  ],
+ ]})
+```
 ## Usage
 
 A datasource of a simple array won't work. In order to use matTableFilter, your table's datasource must be created as MatTableDataSource, see the example below.
@@ -38,6 +49,10 @@ dataSource = new MatTableDataSource(ELEMENT_DATA);
 
 That's all. When you populate the exampleObject's properties, the filter will automatically work just fine with the default debounce support.
 You can change the debounce time also.
+
+&nbsp;
+### Stackblitz demo [mat-table-filter-example](https://stackblitz.com/github/HalitTalha/mat-table-filter-example)
+&nbsp;
 
 ## Licence
 
