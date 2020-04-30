@@ -1,10 +1,10 @@
 {
   "name": "mat-table-exporter",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
-  "homepage": "https://halittalha.github.io/mat-table-extensions/",
+  "homepage": "https://halittalha.github.io/ng-material-extensions/",
   "repository": {
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
@@ -27,7 +27,7 @@
     "excel"
   ],
   "dependencies": {
-    "cdk-table-exporter": "^9.0.0"
+    "cdk-table-exporter": "^9.0.1"
   },
   "main": "bundles/mat-table-exporter.umd.js",
   "module": "fesm5/mat-table-exporter.js",

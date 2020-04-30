@@ -2,7 +2,7 @@
   "name": "ng-material-extensions",
   "version": "1.2.5",
   "license": "Apache-2.0",
-  "description": "Extended features for cdkTable @angular/material table components",
+  "description": "Extended features for @angular/material components",
   "author": "Halit Talha Türe",
   "repository": {
     "type": "git",

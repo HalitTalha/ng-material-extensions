@@ -19,7 +19,7 @@ If you are employing angular material in your project. Install mat-table-exporte
 ```
 npm install --save mat-table-exporter
 ```
-NOTE: For the previous major versions of Angular install version 1.2.5 
+NOTE: For the previous major versions of Angular (Angular 8 and older versions) install version 1.2.5 
 ```
 npm install --save mat-table-exporter@1.2.5
 ```
@@ -28,24 +28,14 @@ After installing mat-table-exporter import MatTableExporterModule in your ngModu
 ```
 import { MatTableExporterModule } from 'mat-table-exporter';
 ```
-
-### Other than Angular Material
-
-Install cdk-table-exporter if you are not using angular material in your project. In this case you have to implement your version of CdkTableExporter abstract class to use as your directive.
-
 ```
-npm install --save cdk-table-exporter
+@NgModule({
+  imports: [
+    ...
+    MatTableExporterModule
+  ],
+ ]})
 ```
-NOTE: For the previous major versions of Angular install version 1.2.5
-```
-npm install --save cdk-table-exporter@1.2.5
-```
-
-After installing cdk-table-exporter import CdkTableExporterModule in your ngModules
-```
-import { CdkTableExporterModule } from 'cdk-table-exporter';
-```
-
 &nbsp;
 
 ## Usage
@@ -125,6 +115,22 @@ ExcelOptions wraps the WritingOptions of sheetjs library. All other export types
 | Props | `Properties` |(Optional) Workbook properties like *Author, Title, Subject* etc.|
 | columnWidths | `Array<number>` | (Optional) Column widths in maximum char  |
 &nbsp;
+
+## Contributing
+This project is a library project inside ng-material-extensions angular workspace. If you are interested in the source code of this particular library you can get ready and build the project by applying the steps below:
+
+1. Do ```npm install``` in ```ng-material-extensions``` directory
+2. Do ```npm install``` in ```ng-material-extensions\projects\cdk-table-exporter``` directory
+3. Do ```npm install``` in ```ng-material-extensions\projects\mat-table-exporter``` directory
+4. Go to ```ng-material-extensions``` directory
+5. Build both of the exporter packages:
+```
+ng build cdk-table-exporter
+```
+```
+ng build mat-table-exporter
+```
+6. You can run the showcase application and see your changes in action. In ```ng-material-extensions``` run ```ng s -o```
 
 ## Licence
 
