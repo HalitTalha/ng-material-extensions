@@ -134,19 +134,16 @@ export abstract class CdkTableExporter {
     this.exportCompleted.emit();
   }
 
-  private extractSpecialRow(outlet: DataRowOutlet) {
-    const row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
-    if (row) {
-      this._data.push(row);
-    }
+  private extractSpecialRows(outlet: DataRowOutlet) {
+    this._data.push(...this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns, outlet));
   }
 
   private extractTableHeader() {
-    this.extractSpecialRow(this._cdkTable._headerRowOutlet);
+    this.extractSpecialRows(this._cdkTable._headerRowOutlet);
   }
 
   private extractTableFooter() {
-    this.extractSpecialRow(this._cdkTable._footerRowOutlet);
+    this.extractSpecialRows(this._cdkTable._footerRowOutlet);
   }
 
   public hasNextPage(): boolean {

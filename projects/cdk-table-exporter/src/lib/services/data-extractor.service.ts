@@ -8,12 +8,8 @@ export class DataExtractorService {
 
   constructor() { }
 
-  public extractRows(cdkTable: any, hiddenColumns: Array<any>): Array<any> {
-    return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
-  }
-
-  public extractRow(cdkTable: any, hiddenColumns: Array<any>, outlet: DataRowOutlet): Array<any> {
-    return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
+  public extractRows(cdkTable: any, hiddenColumns: Array<any>, outlet?: DataRowOutlet): Array<any> {
+    return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet ?? cdkTable._rowOutlet);
   }
 
   private getRowsAsJsonArray(cdkTable: any, hiddenColumns: Array<any>, outlet: DataRowOutlet): Array<any> {
