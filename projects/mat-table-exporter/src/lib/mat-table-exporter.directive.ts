@@ -38,6 +38,13 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   }
 
   /**
+   * MatTable implementation of getPageSize
+   */
+  public getPageSize(): number {
+    return this.getPaginator().pageSize;
+  }
+
+  /**
    * MatTable implementation of getCurrentPageIndex
    */
   public getCurrentPageIndex(): number {

@@ -15,6 +15,7 @@ export abstract class CdkTableExporter {
 
   private _exporterService: Exporter<Options>;
 
+  @Input() selectedRows?: Array<number>;
   @Input() hiddenColumns?: Array<number>;
   @Input() exporter?: Exporter<Options>;
   @Output() exportCompleted = new EventEmitter<void>();
@@ -46,6 +47,11 @@ export abstract class CdkTableExporter {
    * Must return the number of pages of the table
    */
   public abstract getPageCount(): number;
+  
+  /**
+   * Must return the number of items to display on a page
+   */
+  public abstract getPageSize(): number;
 
   /**
    * Must return the index of the current page that's displayed
@@ -103,7 +109,9 @@ export abstract class CdkTableExporter {
   }
 
   private extractDataOnCurrentPage() {
-    this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
+    let rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
+    if (this.selectedRows) rows = rows.filter((_, i) => this.selectedRows.includes(i + (this.getPageSize() * this.getCurrentPageIndex())));
+    this._data = this._data.concat(rows);
   }
 
   private initPageHandler(): void {

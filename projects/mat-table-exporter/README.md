@@ -64,6 +64,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 
 | Input/Output | Property | Type | Description |
 | --- | --- | --- | --- |
+| `@Input` | selectedRows | `Array<number>` | (Optional) The indexes of the rows that are wanted in the output file |
 | `@Input` | hiddenColumns | `Array<number>` | (Optional) The indexes of the columns that are not wanted in the output file |
 | `@Input` | exporter | `Exporter<Options>` | (Optional) The actual exporting implementation that defines the strategy to be applied to the rows extracted from MatTable. |
 | `@Output` | exportStarted | `EventEmitter<void>` | (Optional) Event that's fired when the export started |
