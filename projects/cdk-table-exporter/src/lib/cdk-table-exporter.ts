@@ -97,25 +97,19 @@ export abstract class CdkTableExporter {
 
   toggleRow(index: number): void {
     const paginatedRowIndex: number = this.getPaginatedRowIndex(index);
-    if (this._selectAllRows) {
-      this._selectedRows = [...Array(this.getTotalItemsCount()).keys()].filter(x => x !== paginatedRowIndex);
-      this._selectAllRows = false;
-      return;
-    }
-
     if (!!this._selectedRows?.find(x => x === paginatedRowIndex)) {
-       this._selectedRows =  this._selectedRows.filter(x => x !== paginatedRowIndex);
+      this._selectedRows =  this._selectedRows.filter(x => x !== paginatedRowIndex);
     } else {
       this._selectedRows = [...(this._selectedRows || []), paginatedRowIndex];
-      if (this._selectedRows.length === this.getTotalItemsCount()) {
-        this._selectAllRows = true;
-      }
     }
   }
 
   masterToggle(): void {
-    this._selectAllRows = !this._selectAllRows;
-    if (!this._selectAllRows) this._selectedRows = [];
+    if (this._selectedRows?.length === this.getTotalItemsCount()) {
+      this._selectedRows = [];
+    } else {
+      this._selectedRows = [...Array(this.getTotalItemsCount()).keys()];
+    }
   }
 
   private loadExporter(exportType: any) {
@@ -140,7 +134,7 @@ export abstract class CdkTableExporter {
 
   private extractDataOnCurrentPage() {
     let rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
-    if (!this._selectAllRows && this._selectedRows) rows = rows.filter((_, i) => this._selectedRows.includes(this.getPaginatedRowIndex(i)));
+    if (this._selectedRows && this._selectedRows.length !== this.getTotalItemsCount()) rows = rows.filter((_, i) => this._selectedRows.includes(this.getPaginatedRowIndex(i)));
     this._data = this._data.concat(rows);
   }
 
