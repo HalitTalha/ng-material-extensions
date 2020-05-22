@@ -1,3 +1,7 @@
+`import { MatTableFilterModule } from 'mat-table-filter';`
+
+&nbsp;
+
 ### MatTableFilterDirective
 
 matTableFilter is the directive selector
