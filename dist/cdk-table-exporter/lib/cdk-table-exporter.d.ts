@@ -27,15 +27,24 @@ export declare abstract class CdkTableExporter {
     private _isExporting;
     private _subscription;
     private _options?;
+    private _selectedRows?;
     constructor(renderer: Renderer2, serviceLocator: ServiceLocatorService, dataExtractor: DataExtractorService, _cdkTable: any);
     /**
      * Must return the number of pages of the table
      */
     abstract getPageCount(): number;
     /**
+     * Must return the number of items to display on a page
+     */
+    abstract getPageSize(): number;
+    /**
      * Must return the index of the current page that's displayed
      */
     abstract getCurrentPageIndex(): number;
+    /**
+     * Must return the total number of items in the table
+     */
+    abstract getTotalItemsCount(): number;
     /**
      * When called, the CdkTable should render the rows inside the page whose index given as parameter
      * @param index page index
@@ -49,15 +58,25 @@ export declare abstract class CdkTableExporter {
      * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
      */
     exportTable(exportType?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options | ExcelOptions | TxtOptions): void;
+    toggleRow(index: number): void;
+    private toggleOn;
+    private toggleOff;
+    private isToggleOn;
     private loadExporter;
     private exportWithPagination;
     private exportSinglePage;
     private extractDataOnCurrentPage;
+    private getSelectedRows;
+    private isSelectiveExport;
+    private isMasterToggleOn;
+    private isMasterToggleOff;
+    private compareSelectedRowCount;
     private initPageHandler;
     private exportExtractedData;
-    private extractSpecialRow;
+    private extractSpecialRows;
     private extractTableHeader;
     private extractTableFooter;
-    hasNextPage(): boolean;
-    nextPage(): void;
+    private hasNextPage;
+    private nextPage;
+    private getPaginatedRowIndex;
 }

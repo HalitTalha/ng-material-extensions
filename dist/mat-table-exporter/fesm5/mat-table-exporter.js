@@ -28,10 +28,25 @@ var MatTableExporterDirective = /** @class */ (function (_super) {
         return this.getPaginator().getNumberOfPages();
     };
     /**
+     * MatTable implementation of getPageSize
+     */
+    MatTableExporterDirective.prototype.getPageSize = function () {
+        var _a, _b;
+        return _b = (_a = this.getPaginator()) === null || _a === void 0 ? void 0 : _a.pageSize, (_b !== null && _b !== void 0 ? _b : 0);
+    };
+    /**
      * MatTable implementation of getCurrentPageIndex
      */
     MatTableExporterDirective.prototype.getCurrentPageIndex = function () {
-        return this.getPaginator().pageIndex;
+        var _a, _b;
+        return _b = (_a = this.getPaginator()) === null || _a === void 0 ? void 0 : _a.pageIndex, (_b !== null && _b !== void 0 ? _b : 0);
+    };
+    /**
+     * MatTable implementation of getTotalItemsCount
+     */
+    MatTableExporterDirective.prototype.getTotalItemsCount = function () {
+        var _a, _b, _c, _d, _e;
+        return _e = (_b = (_a = this.getPaginator()) === null || _a === void 0 ? void 0 : _a.length, (_b !== null && _b !== void 0 ? _b : (_d = (_c = this.getDataSource()) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.length)), (_e !== null && _e !== void 0 ? _e : 0);
     };
     /**
      * MatTable implementation of goToPage
@@ -46,8 +61,11 @@ var MatTableExporterDirective = /** @class */ (function (_super) {
     MatTableExporterDirective.prototype.getPageChangeObservable = function () {
         return this.getPaginator().page;
     };
+    MatTableExporterDirective.prototype.getDataSource = function () {
+        return this._cdkTable.dataSource;
+    };
     MatTableExporterDirective.prototype.getPaginator = function () {
-        return this._cdkTable.dataSource.paginator;
+        return this.getDataSource().paginator;
     };
     MatTableExporterDirective.prototype.enablePaginator = function (value) {
         if (this.getPaginator()) {
