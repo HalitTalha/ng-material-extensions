@@ -33,6 +33,7 @@ import { PropertyOptionsComponent } from './components/examples/property-options
 import { BriefExporterComponent } from './components/examples/brief-exporter/brief-exporter.component';
 import { CustomExporterComponent } from './components/examples/custom-exporter/custom-exporter.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { SelectionExporterComponent } from './components/examples/selection-exporter/selection-exporter.component';
 
 export function markedOptions(): MarkedOptions {
 
@@ -59,7 +60,8 @@ export function markedOptions(): MarkedOptions {
     SimpleFilterComponent,
     PropertyOptionsComponent,
     BriefExporterComponent,
-    CustomExporterComponent
+    CustomExporterComponent,
+    SelectionExporterComponent
   ],
   imports: [
     HttpClientModule,
@@ -98,6 +100,7 @@ export function markedOptions(): MarkedOptions {
     CustomExporterComponent,
     SimpleFilterComponent,
     PropertyOptionsComponent,
+    SelectionExporterComponent
 
   ]
 })

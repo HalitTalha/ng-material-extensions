@@ -37,8 +37,6 @@ export abstract class CdkTableExporter {
 
   private _selectedRows?: Array<number>;
 
-  private _selectAllRows: boolean;
-
   constructor(
     protected renderer: Renderer2,
     private serviceLocator: ServiceLocatorService,
@@ -97,20 +95,25 @@ export abstract class CdkTableExporter {
 
   toggleRow(index: number): void {
     const paginatedRowIndex: number = this.getPaginatedRowIndex(index);
-    if (!!this._selectedRows?.find(x => x === paginatedRowIndex)) {
-      this._selectedRows =  this._selectedRows.filter(x => x !== paginatedRowIndex);
+    if (this.isToggleOn(paginatedRowIndex)) {
+      this.toggleOff(paginatedRowIndex);
     } else {
-      this._selectedRows = [...(this._selectedRows || []), paginatedRowIndex];
+      this.toggleOn(paginatedRowIndex);
     }
   }
 
-  masterToggle(): void {
-    if (this._selectedRows?.length === this.getTotalItemsCount()) {
-      this._selectedRows = [];
-    } else {
-      this._selectedRows = [...Array(this.getTotalItemsCount()).keys()];
-    }
+  private toggleOn(index: number) {
+    this._selectedRows = [...(this._selectedRows || []), index];
   }
+
+  private toggleOff(index: number) {
+    this._selectedRows =  this._selectedRows.filter(x => x !== index);
+  }
+
+  private isToggleOn(index: number): boolean {
+    return this._selectedRows?.includes(index);
+  }
+
 
   private loadExporter(exportType: any) {
     if (exportType === ExportType.OTHER.valueOf()) {
@@ -133,9 +136,32 @@ export abstract class CdkTableExporter {
   }
 
   private extractDataOnCurrentPage() {
-    let rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
-    if (this._selectedRows && this._selectedRows.length !== this.getTotalItemsCount()) rows = rows.filter((_, i) => this._selectedRows.includes(this.getPaginatedRowIndex(i)));
-    this._data = this._data.concat(rows);
+    const rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
+    this._data = this._data.concat(this.getSelectedRows(rows));
+  }
+
+  private getSelectedRows(rows: Array<any>) {
+    if (this.isSelectiveExport()) {
+      return rows.filter((_, i) => this._selectedRows.includes(this.getPaginatedRowIndex(i)));
+    } else {
+      return rows;
+    }
+  }
+
+  private isSelectiveExport(): boolean {
+    return this._selectedRows && !this.isMasterToggleOff() &&  !this.isMasterToggleOn();
+  }
+
+  private isMasterToggleOn(): boolean {
+    return this.compareSelectedRowCount(this.getTotalItemsCount());
+  }
+
+  private isMasterToggleOff(): boolean {
+    return this.compareSelectedRowCount(0);
+  }
+
+  private compareSelectedRowCount(rowCount: number): boolean {
+    return !!(this._selectedRows?.length === rowCount);
   }
 
   private initPageHandler(): void {

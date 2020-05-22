@@ -5,7 +5,7 @@ import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'c
 import { Observable } from 'rxjs';
 
 @Directive({
-  selector: '[matTableExporter]', // renamed selector but kept old version for backwards compat.
+  selector: '[matTableExporter]',
   exportAs: 'matTableExporter'
 })
 export class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
