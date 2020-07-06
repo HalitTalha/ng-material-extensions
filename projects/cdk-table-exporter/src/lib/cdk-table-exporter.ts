@@ -102,7 +102,11 @@ export abstract class CdkTableExporter {
     }
   }
 
-  resetRows() {
+  /**
+   * This event will clear rows selection done using toggleRow functionality
+   * 
+   */
+  resetToggleRows() {
     this._selectedRows = [];
   }
 
