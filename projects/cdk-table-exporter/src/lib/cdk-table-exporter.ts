@@ -102,6 +102,10 @@ export abstract class CdkTableExporter {
     }
   }
 
+  resetRows() {
+    this._selectedRows = [];
+  }
+
   private toggleOn(index: number) {
     this._selectedRows = [...(this._selectedRows || []), index];
   }
