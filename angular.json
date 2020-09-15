@@ -13,6 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "util",
+              "xlsx",
+              "file-saver"
+            ],
             "preserveSymlinks": true,
             "outputPath": "docs",
             "index": "src/index.html",
@@ -22,7 +28,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/logos",
+              "src/assets/md-files"
             ],
             "styles": [
               "src/custom-theme.scss",

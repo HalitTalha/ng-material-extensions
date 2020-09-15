@@ -39,10 +39,8 @@ export function markedOptions(): MarkedOptions {
 
   return {
     gfm: true,
-    tables: true,
     breaks: false,
     pedantic: false,
-    sanitize: false,
     smartLists: true,
     smartypants: false,
   };
@@ -104,4 +102,17 @@ export function markedOptions(): MarkedOptions {
 
   ]
 })
-export class AppModule { }
+export class AppModule {
+  // work around for ivy tree shaking these out in the production build
+  // https://github.com/angular/angular/issues/35314#issuecomment-584821399
+  static  entryComponents = [
+    ArrayFilterComponent,
+    BriefExporterComponent,
+    CustomColumnFilterComponent,
+    CustomExporterComponent,
+    SimpleFilterComponent,
+    PropertyOptionsComponent,
+    SelectionExporterComponent
+
+  ]
+}

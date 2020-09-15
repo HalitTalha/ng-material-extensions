@@ -20,7 +20,7 @@
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
     "preserveSymlinks": true,
-    "enableIvy": false
+    "enableIvy": true
   },
   "exclude": [
     "src/test.ts",
