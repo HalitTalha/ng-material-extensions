@@ -229,11 +229,8 @@
     var DataExtractorService = /** @class */ (function () {
         function DataExtractorService() {
         }
-        DataExtractorService.prototype.extractRows = function (cdkTable, hiddenColumns) {
-            return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
-        };
-        DataExtractorService.prototype.extractRow = function (cdkTable, hiddenColumns, outlet) {
-            return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
+        DataExtractorService.prototype.extractRows = function (cdkTable, hiddenColumns, outlet) {
+            return this.getRowsAsJsonArray(cdkTable, hiddenColumns, (outlet !== null && outlet !== void 0 ? outlet : cdkTable._rowOutlet));
         };
         DataExtractorService.prototype.getRowsAsJsonArray = function (cdkTable, hiddenColumns, outlet) {
             var renderedRows = this.getRenderedRows(cdkTable, outlet);
@@ -571,6 +568,25 @@
                 this.exportSinglePage();
             }
         };
+        CdkTableExporter.prototype.toggleRow = function (index) {
+            var paginatedRowIndex = this.getPaginatedRowIndex(index);
+            if (this.isToggleOn(paginatedRowIndex)) {
+                this.toggleOff(paginatedRowIndex);
+            }
+            else {
+                this.toggleOn(paginatedRowIndex);
+            }
+        };
+        CdkTableExporter.prototype.toggleOn = function (index) {
+            this._selectedRows = __spread((this._selectedRows || []), [index]);
+        };
+        CdkTableExporter.prototype.toggleOff = function (index) {
+            this._selectedRows = this._selectedRows.filter(function (x) { return x !== index; });
+        };
+        CdkTableExporter.prototype.isToggleOn = function (index) {
+            var _a;
+            return (_a = this._selectedRows) === null || _a === void 0 ? void 0 : _a.includes(index);
+        };
         CdkTableExporter.prototype.loadExporter = function (exportType) {
             if (exportType === exports.ExportType.OTHER.valueOf()) {
                 this._exporterService = this.exporter;
@@ -590,7 +606,30 @@
             this.exportExtractedData();
         };
         CdkTableExporter.prototype.extractDataOnCurrentPage = function () {
-            this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
+            var rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
+            this._data = this._data.concat(this.getSelectedRows(rows));
+        };
+        CdkTableExporter.prototype.getSelectedRows = function (rows) {
+            var _this = this;
+            if (this.isSelectiveExport()) {
+                return rows.filter(function (_, i) { return _this._selectedRows.includes(_this.getPaginatedRowIndex(i)); });
+            }
+            else {
+                return rows;
+            }
+        };
+        CdkTableExporter.prototype.isSelectiveExport = function () {
+            return this._selectedRows && !this.isMasterToggleOff() && !this.isMasterToggleOn();
+        };
+        CdkTableExporter.prototype.isMasterToggleOn = function () {
+            return this.compareSelectedRowCount(this.getTotalItemsCount());
+        };
+        CdkTableExporter.prototype.isMasterToggleOff = function () {
+            return this.compareSelectedRowCount(0);
+        };
+        CdkTableExporter.prototype.compareSelectedRowCount = function (rowCount) {
+            var _a;
+            return !!(((_a = this._selectedRows) === null || _a === void 0 ? void 0 : _a.length) === rowCount);
         };
         CdkTableExporter.prototype.initPageHandler = function () {
             var _this = this;
@@ -621,17 +660,15 @@
             this._data = new Array();
             this.exportCompleted.emit();
         };
-        CdkTableExporter.prototype.extractSpecialRow = function (outlet) {
-            var row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
-            if (row) {
-                this._data.push(row);
-            }
+        CdkTableExporter.prototype.extractSpecialRows = function (outlet) {
+            var _a;
+            (_a = this._data).push.apply(_a, __spread(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns, outlet)));
         };
         CdkTableExporter.prototype.extractTableHeader = function () {
-            this.extractSpecialRow(this._cdkTable._headerRowOutlet);
+            this.extractSpecialRows(this._cdkTable._headerRowOutlet);
         };
         CdkTableExporter.prototype.extractTableFooter = function () {
-            this.extractSpecialRow(this._cdkTable._footerRowOutlet);
+            this.extractSpecialRows(this._cdkTable._footerRowOutlet);
         };
         CdkTableExporter.prototype.hasNextPage = function () {
             if (this.getCurrentPageIndex() < this.getPageCount() - 1) {
@@ -643,6 +680,9 @@
         };
         CdkTableExporter.prototype.nextPage = function () {
             this.goToPage(this.getCurrentPageIndex() + 1);
+        };
+        CdkTableExporter.prototype.getPaginatedRowIndex = function (index) {
+            return index + (this.getPageSize() * this.getCurrentPageIndex());
         };
         CdkTableExporter.ctorParameters = function () { return [
             { type: core.Renderer2 },

@@ -13,9 +13,17 @@ export declare class MatTableExporterDirective extends CdkTableExporter implemen
      */
     getPageCount(): number;
     /**
+     * MatTable implementation of getPageSize
+     */
+    getPageSize(): number;
+    /**
      * MatTable implementation of getCurrentPageIndex
      */
     getCurrentPageIndex(): number;
+    /**
+     * MatTable implementation of getTotalItemsCount
+     */
+    getTotalItemsCount(): number;
     /**
      * MatTable implementation of goToPage
      */
@@ -24,6 +32,7 @@ export declare class MatTableExporterDirective extends CdkTableExporter implemen
      * MatTable implementation of getPageChangeObservable
      */
     getPageChangeObservable(): Observable<any>;
+    private getDataSource;
     private getPaginator;
     private enablePaginator;
 }

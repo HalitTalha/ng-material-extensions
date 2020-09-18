@@ -29,11 +29,8 @@ var ExportType;
 let DataExtractorService = class DataExtractorService {
     constructor() {
     }
-    extractRows(cdkTable, hiddenColumns) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, cdkTable._rowOutlet);
-    }
-    extractRow(cdkTable, hiddenColumns, outlet) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet)[0];
+    extractRows(cdkTable, hiddenColumns, outlet) {
+        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, (outlet !== null && outlet !== void 0 ? outlet : cdkTable._rowOutlet));
     }
     getRowsAsJsonArray(cdkTable, hiddenColumns, outlet) {
         const renderedRows = this.getRenderedRows(cdkTable, outlet);
@@ -349,6 +346,25 @@ let CdkTableExporter = class CdkTableExporter {
             this.exportSinglePage();
         }
     }
+    toggleRow(index) {
+        const paginatedRowIndex = this.getPaginatedRowIndex(index);
+        if (this.isToggleOn(paginatedRowIndex)) {
+            this.toggleOff(paginatedRowIndex);
+        }
+        else {
+            this.toggleOn(paginatedRowIndex);
+        }
+    }
+    toggleOn(index) {
+        this._selectedRows = [...(this._selectedRows || []), index];
+    }
+    toggleOff(index) {
+        this._selectedRows = this._selectedRows.filter(x => x !== index);
+    }
+    isToggleOn(index) {
+        var _a;
+        return (_a = this._selectedRows) === null || _a === void 0 ? void 0 : _a.includes(index);
+    }
     loadExporter(exportType) {
         if (exportType === ExportType.OTHER.valueOf()) {
             this._exporterService = this.exporter;
@@ -368,7 +384,29 @@ let CdkTableExporter = class CdkTableExporter {
         this.exportExtractedData();
     }
     extractDataOnCurrentPage() {
-        this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
+        const rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
+        this._data = this._data.concat(this.getSelectedRows(rows));
+    }
+    getSelectedRows(rows) {
+        if (this.isSelectiveExport()) {
+            return rows.filter((_, i) => this._selectedRows.includes(this.getPaginatedRowIndex(i)));
+        }
+        else {
+            return rows;
+        }
+    }
+    isSelectiveExport() {
+        return this._selectedRows && !this.isMasterToggleOff() && !this.isMasterToggleOn();
+    }
+    isMasterToggleOn() {
+        return this.compareSelectedRowCount(this.getTotalItemsCount());
+    }
+    isMasterToggleOff() {
+        return this.compareSelectedRowCount(0);
+    }
+    compareSelectedRowCount(rowCount) {
+        var _a;
+        return !!(((_a = this._selectedRows) === null || _a === void 0 ? void 0 : _a.length) === rowCount);
     }
     initPageHandler() {
         if (!this._subscription) {
@@ -398,17 +436,14 @@ let CdkTableExporter = class CdkTableExporter {
         this._data = new Array();
         this.exportCompleted.emit();
     }
-    extractSpecialRow(outlet) {
-        const row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
-        if (row) {
-            this._data.push(row);
-        }
+    extractSpecialRows(outlet) {
+        this._data.push(...this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns, outlet));
     }
     extractTableHeader() {
-        this.extractSpecialRow(this._cdkTable._headerRowOutlet);
+        this.extractSpecialRows(this._cdkTable._headerRowOutlet);
     }
     extractTableFooter() {
-        this.extractSpecialRow(this._cdkTable._footerRowOutlet);
+        this.extractSpecialRows(this._cdkTable._footerRowOutlet);
     }
     hasNextPage() {
         if (this.getCurrentPageIndex() < this.getPageCount() - 1) {
@@ -420,6 +455,9 @@ let CdkTableExporter = class CdkTableExporter {
     }
     nextPage() {
         this.goToPage(this.getCurrentPageIndex() + 1);
+    }
+    getPaginatedRowIndex(index) {
+        return index + (this.getPageSize() * this.getCurrentPageIndex());
     }
 };
 CdkTableExporter.ctorParameters = () => [
