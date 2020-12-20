@@ -107,7 +107,7 @@ Extends the common Options interface.
 
 | Property | Type   | Description |
 |----------|--------|-------------|
-| delimiter | `string` |(Optional) Field separator @default `,`|
+| delimiter | `string` | (Optional) Field separator @default `,`|
 
 &nbsp;
 
