@@ -2,7 +2,7 @@
 
 [![Node version](https://img.shields.io/npm/v/cdk-table-exporter.svg?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/cdk-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/cdk-table-exporter.svg?style=for-the-badge)
 
-**!! If you are using angular material please use** [mat-table-exporter](https://www.npmjs.com/package/cdk-table-exporter)
+**!! If you are using angular material please use** [mat-table-exporter](https://www.npmjs.com/package/mat-table-exporter)
 
 This project facilitates the common functionalities for CdkTable implementations abstracting the behavior that can change among different CdkTable implementations, see [mat-table-exporter](https://www.npmjs.com/package/mat-table-exporter) for angular material table export.
 
