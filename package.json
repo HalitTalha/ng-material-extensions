@@ -15,7 +15,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-docs": "ng build --prod --base-href '/ng-material-extensions/' --deploy-url '/ng-material-extensions/'"
+    "build-docs": "ng build --prod --base-href /ng-material-extensions/ --deploy-url /ng-material-extensions/"
   },
   "private": true,
   "dependencies": {
