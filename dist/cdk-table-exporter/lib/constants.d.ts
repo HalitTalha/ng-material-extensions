@@ -7,6 +7,7 @@ export declare const CONTENT_TYPE_TEXT: string;
 export declare const CONTENT_TYPE_APPLICATION = "application/";
 export declare const CONTENT_TYPE_EXCEL: string;
 export declare const DOT = ".";
+export declare const COMMA = ",";
 export declare const EXTENSION_XLS: string;
 export declare const EXTENSION_XLSX: string;
 export declare const EXTENSION_CSV: string;

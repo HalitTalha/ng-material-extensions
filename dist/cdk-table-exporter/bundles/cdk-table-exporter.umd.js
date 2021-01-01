@@ -296,6 +296,7 @@
     var CONTENT_TYPE_APPLICATION = 'application/';
     var CONTENT_TYPE_EXCEL = CONTENT_TYPE_APPLICATION + 'octet-stream';
     var DOT = '.';
+    var COMMA = ',';
     var EXTENSION_XLS = DOT + exports.ExportType.XLS;
     var EXTENSION_XLSX = DOT + exports.ExportType.XLSX;
     var EXTENSION_CSV = DOT + exports.ExportType.CSV;
@@ -377,7 +378,8 @@
             return _super.call(this) || this;
         }
         CsvExporterService.prototype.workSheetToContent = function (worksheet, options) {
-            return xlsx.utils.sheet_to_csv(worksheet);
+            var _a, _b;
+            return xlsx.utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
         };
         CsvExporterService.prototype.getMimeType = function () {
             return MIME_CSV;
@@ -577,6 +579,13 @@
                 this.toggleOn(paginatedRowIndex);
             }
         };
+        /**
+         * This event will clear rows selection done using toggleRow functionality
+         *
+         */
+        CdkTableExporter.prototype.resetToggleRows = function () {
+            this._selectedRows = [];
+        };
         CdkTableExporter.prototype.toggleOn = function (index) {
             this._selectedRows = __spread((this._selectedRows || []), [index]);
         };
@@ -717,6 +726,7 @@
 
     exports.CHAR_SET_UTF = CHAR_SET_UTF;
     exports.CHAR_SET_UTF_8 = CHAR_SET_UTF_8;
+    exports.COMMA = COMMA;
     exports.CONTENT_TYPE_APPLICATION = CONTENT_TYPE_APPLICATION;
     exports.CONTENT_TYPE_EXCEL = CONTENT_TYPE_EXCEL;
     exports.CONTENT_TYPE_TEXT = CONTENT_TYPE_TEXT;

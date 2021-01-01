@@ -94,6 +94,7 @@ const CONTENT_TYPE_TEXT = ExportType.TXT + '/';
 const CONTENT_TYPE_APPLICATION = 'application/';
 const CONTENT_TYPE_EXCEL = CONTENT_TYPE_APPLICATION + 'octet-stream';
 const DOT = '.';
+const COMMA = ',';
 const EXTENSION_XLS = DOT + ExportType.XLS;
 const EXTENSION_XLSX = DOT + ExportType.XLSX;
 const EXTENSION_CSV = DOT + ExportType.CSV;
@@ -167,7 +168,8 @@ let CsvExporterService = class CsvExporterService extends WorksheetExporter {
         super();
     }
     workSheetToContent(worksheet, options) {
-        return utils.sheet_to_csv(worksheet);
+        var _a, _b;
+        return utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
     }
     getMimeType() {
         return MIME_CSV;
@@ -355,6 +357,13 @@ let CdkTableExporter = class CdkTableExporter {
             this.toggleOn(paginatedRowIndex);
         }
     }
+    /**
+     * This event will clear rows selection done using toggleRow functionality
+     *
+     */
+    resetToggleRows() {
+        this._selectedRows = [];
+    }
     toggleOn(index) {
         this._selectedRows = [...(this._selectedRows || []), index];
     }
@@ -497,5 +506,5 @@ CdkTableExporter = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { CHAR_SET_UTF, CHAR_SET_UTF_8, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService };
+export { CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService };
 //# sourceMappingURL=cdk-table-exporter.js.map

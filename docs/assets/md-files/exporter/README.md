@@ -1,6 +1,7 @@
 # Angular Material Table Exporter
 
-[![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")  [![Node version](https://img.shields.io/npm/v/mat-table-exporter.svg?style=flat)](https://www.npmjs.com/package/mat-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-exporter.svg)
+[![Node version](https://img.shields.io/npm/v/mat-table-exporter.svg?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/mat-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-exporter.svg?style=for-the-badge)
+
 
 This package is to make MatTable components exportable in ***excel, csv, txt*** and ***json*** formats. ***Pagination is also supported***. Applying MatTableExporter directive to your MatTable is enough to make it exportable. The directive uses different exporter services for different exporting types. You can also implement your own exporter and use it for your custom exporting requirements.
 
@@ -12,8 +13,6 @@ cdk-table-exporter facilitates the common exporting related functionalities for 
 &nbsp;
 
 ## Getting Started
-
-### Angular Material Users
 
 If you are employing angular material in your project. Install mat-table-exporter
 ```
@@ -39,7 +38,6 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 &nbsp;
 
 ## Usage
-### Angular Material Users
 
 `matTableExporter` is the directive selector.
 ```html
@@ -55,6 +53,20 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 ##### * Stackblitz demo: <a href="https://stackblitz.com/edit/mte-demo" target="_blank">mte-demo</a>.
 
 ##### * Stackblitz demo of custom exporter <a href="https://stackblitz.com/edit/mte-cex-demo" target="_blank">mte-cex-demo</a>.
+
+&nbsp;
+
+## Support & Donations
+
+Feel free to show your support. Donating supporters will be added into *Supporters* section inside the **README.md** of the repository.
+
+[![GitHub Org's stars](https://img.shields.io/github/stars/HalitTalha/ng-material-extensions?logo=Github&style=for-the-badge)](https://github.com/HalitTalha/ng-material-extensions/stargazers) -> **Become a star-gazer, giving a star at Github** 
+
+[![Patreon Badge](https://img.shields.io/badge/Patreon-talhature-e05d44?logo=Patreon&style=for-the-badge)](https://www.patreon.com/talhature) -> **Become a Patreon**
+
+
+[![Crypto Donation](https://img.shields.io/badge/_-DONATE-4d4d4e?logo=bitcoin&style=for-the-badge)](https://commerce.coinbase.com/checkout/3643d820-81aa-46ca-9973-877c1184e082) -> **Donate in crypto currencies**
+
 
 &nbsp;
 

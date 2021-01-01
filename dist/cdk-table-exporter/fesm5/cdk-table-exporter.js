@@ -99,6 +99,7 @@ var CONTENT_TYPE_TEXT = ExportType.TXT + '/';
 var CONTENT_TYPE_APPLICATION = 'application/';
 var CONTENT_TYPE_EXCEL = CONTENT_TYPE_APPLICATION + 'octet-stream';
 var DOT = '.';
+var COMMA = ',';
 var EXTENSION_XLS = DOT + ExportType.XLS;
 var EXTENSION_XLSX = DOT + ExportType.XLSX;
 var EXTENSION_CSV = DOT + ExportType.CSV;
@@ -180,7 +181,8 @@ var CsvExporterService = /** @class */ (function (_super) {
         return _super.call(this) || this;
     }
     CsvExporterService.prototype.workSheetToContent = function (worksheet, options) {
-        return utils.sheet_to_csv(worksheet);
+        var _a, _b;
+        return utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
     };
     CsvExporterService.prototype.getMimeType = function () {
         return MIME_CSV;
@@ -380,6 +382,13 @@ var CdkTableExporter = /** @class */ (function () {
             this.toggleOn(paginatedRowIndex);
         }
     };
+    /**
+     * This event will clear rows selection done using toggleRow functionality
+     *
+     */
+    CdkTableExporter.prototype.resetToggleRows = function () {
+        this._selectedRows = [];
+    };
     CdkTableExporter.prototype.toggleOn = function (index) {
         this._selectedRows = __spread((this._selectedRows || []), [index]);
     };
@@ -526,5 +535,5 @@ var CdkTableExporter = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { CHAR_SET_UTF, CHAR_SET_UTF_8, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService };
+export { CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService };
 //# sourceMappingURL=cdk-table-exporter.js.map
