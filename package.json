@@ -1,6 +1,6 @@
 {
   "name": "ng-material-extensions",
-  "version": "1.2.5",
+  "version": "9.1.0",
   "license": "Apache-2.0",
   "description": "Extended features for @angular/material components",
   "author": "Halit Talha Türe",
@@ -14,7 +14,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-docs": "ng build --prod --base-href '/ng-material-extensions/' --deploy-url '/ng-material-extensions/'"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +30,7 @@
     "@angular/platform-browser": "~9.0.0",
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
+    "@ctrl/ngx-github-buttons": "^6.1.0",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.2",
     "gulp": "^4.0.2",
@@ -43,14 +45,14 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.1",
+    "@angular-devkit/build-angular": "^0.1100.5",
     "@angular-devkit/build-ng-packagr": "~0.900.1",
     "@angular/cli": "~9.0.1",
     "@angular/compiler-cli": "~9.0.0",
     "@angular/language-service": "~9.0.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

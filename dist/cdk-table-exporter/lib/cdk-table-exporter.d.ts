@@ -59,6 +59,11 @@ export declare abstract class CdkTableExporter {
      */
     exportTable(exportType?: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', options?: Options | ExcelOptions | TxtOptions): void;
     toggleRow(index: number): void;
+    /**
+     * This event will clear rows selection done using toggleRow functionality
+     *
+     */
+    resetToggleRows(): void;
     private toggleOn;
     private toggleOff;
     private isToggleOn;

@@ -17,7 +17,8 @@
 | Method | Description    |
 |----------|-------------|
 | `exportTable(exportType?: ExportType, options?: Options)`   | Called to trigger the export of MatTable|
-| `toggleRow(index: number)`   | Called to mark the row for selection export, if the requirement is to export only selected rows. Having no rows selected means export everything|
+| `toggleRow(index: number)`   | Called to mark the row for selection export, if the requirement is to export only selected rows. Having no rows selected means export everything |
+| `resetToggleRow()` | Resets all the rows toggled for exporting |
 
 &nbsp;
 
