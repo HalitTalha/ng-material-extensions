@@ -10,10 +10,10 @@
   "description": "Provides filtering support for @angular/material tables",
   "homepage": "https://halittalha.github.io/ng-material-extensions/",
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/cdk": "^9.0.0",
-    "@angular/material": "^9.0.0"
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
+    "@angular/cdk": ">=9.0.0",
+    "@angular/material": ">=9.0.0"
   },
   "dependencies": {
     "@types/lodash": "^4.14.138",

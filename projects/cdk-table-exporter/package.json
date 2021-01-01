@@ -10,9 +10,9 @@
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/cdk-table-exporter"
   },
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/cdk": "^9.0.0"
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
+    "@angular/cdk": ">=9.0.0"
   },
   "dependencies": {
     "file-saver": "^2.0.2",
