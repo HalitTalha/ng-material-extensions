@@ -44,6 +44,15 @@ export enum ExportType {
 
 &nbsp;
 
+### TxtOptions
+Extends the common Options interface.
+
+| Property | Type   | Description |
+|----------|--------|-------------|
+| delimiter | `string` |(Optional) Field separator @default `,`|
+
+&nbsp;
+
 ### ExcelOptions
 ExcelOptions wraps the WritingOptions of sheetjs library. All other export types share the common Options interface. In the next releases, options will be enriched for the other export types.
 
