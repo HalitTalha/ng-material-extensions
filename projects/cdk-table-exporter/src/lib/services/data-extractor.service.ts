@@ -36,7 +36,7 @@ export class DataExtractorService {
     const cells: any = row.children;
     for (let i = 0; i < cells.length; i++) {
       if (!this.shouldHide(hiddenColumns, i)) {
-        const element = cells.item(i).innerText;
+        const element = (cells.item(i).innerText).trim();
         result.push(element);
       }
     }
