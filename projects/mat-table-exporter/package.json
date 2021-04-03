@@ -17,11 +17,7 @@
   },
   "devDependencies": {
     "@angular/cdk": "^9.0.0",
-    "@angular/material": "^9.0.0",
-    "goodparts": "^1.2.1"
-  },
-  "scripts": {
-    "lint": "node_modules/.bin/goodparts lib"
+    "@angular/material": "^9.0.0"
   },
   "keywords": [
     "angular",

@@ -1,5 +1,5 @@
 import { ExportType } from './export-type';
-import * as FileSaver from 'file-saver';
+import * as FileSaver from 'file-saver-es';
 import { MAT_TABLE_EXPORTER, DOT, XLS_REGEX } from './constants';
 import { Mime } from './mime';
 import { Options } from './options';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FilterPredicate } from './filter-predicate';
-import * as LODASH from 'lodash';
+import * as LODASH from 'lodash-es';
 import { ItemPair } from '../item-pair';
 
 @Injectable({
