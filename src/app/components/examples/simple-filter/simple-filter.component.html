@@ -16,7 +16,7 @@
         <input matInput placeholder="Captain Name" [(ngModel)]="filterEntity.captain.name">
       </mat-form-field>
     </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.captain.name}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.captain?.name}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="captainSurname">
@@ -25,7 +25,7 @@
         <input matInput placeholder="Captain Surname" [(ngModel)]="filterEntity.captain.surname">
       </mat-form-field>
     </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.captain.surname}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.captain?.surname}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="isConstitutionClass">

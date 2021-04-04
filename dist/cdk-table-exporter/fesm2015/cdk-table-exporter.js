@@ -2,7 +2,7 @@ import { __decorate, __metadata } from 'tslib';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule, ɵɵdefineInjectable, Injectable, Injector, ɵɵinject, INJECTOR, EventEmitter, Renderer2, Input, Output, Directive } from '@angular/core';
 import { utils, write } from 'xlsx';
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 
 let CdkTableExporterModule = class CdkTableExporterModule {
 };
@@ -359,7 +359,6 @@ let CdkTableExporter = class CdkTableExporter {
     }
     /**
      * This event will clear rows selection done using toggleRow functionality
-     *
      */
     resetToggleRows() {
         this._selectedRows = [];

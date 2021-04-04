@@ -140,7 +140,7 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/cdk-table-exporter/tsconfig.lib.json",
-            "project": "projects/cdk-table-exporter/ng-package.json",
+            "project": "projects/cdk-table-exporter/ng-package.json"
           },
           "configurations": {
             "production": {

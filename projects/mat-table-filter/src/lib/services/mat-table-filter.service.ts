@@ -22,7 +22,7 @@ export class MatTableFilterService {
         // if example entity's property is undefined/null/empty then it means the caller wants all the data
         continue;
       }
-      if (itemPair.item.hasOwnProperty(key)) {
+      if (itemPair.item?.hasOwnProperty(key)) {
         // if example entity has additional columns then search fails
         const itemValue = LODASH.cloneDeep(itemPair.item[key]);
         const nextPropertyName = this.getNextPropertyName(propertyName, key);
