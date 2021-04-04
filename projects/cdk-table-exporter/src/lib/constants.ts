@@ -25,3 +25,4 @@ export const XLS_REGEX = DOT + '*\.' + ExportType.XLS + '$';
 export const RETURN = '\n';
 export const TAB = '\t';
 export const XLSX_COLS = '!cols';
+export const BOM = '\uFEFF';

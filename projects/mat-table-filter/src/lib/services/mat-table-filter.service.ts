@@ -3,9 +3,8 @@ import { ItemPair } from './../item-pair';
 import { ArrayPredicateService } from './array-predicate.service';
 import { AlphaNumericPredicateService } from './alpha-numeric-predicate.service';
 import { Injectable } from '@angular/core';
-import * as LODASH from 'lodash';
+import * as LODASH from 'lodash-es';
 import { Options } from '../options';
-import { isFunction } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +22,12 @@ export class MatTableFilterService {
         // if example entity's property is undefined/null/empty then it means the caller wants all the data
         continue;
       }
-      if (itemPair.item.hasOwnProperty(key)) {
+      if (itemPair.item?.hasOwnProperty(key)) {
         // if example entity has additional columns then search fails
         const itemValue = LODASH.cloneDeep(itemPair.item[key]);
         const nextPropertyName = this.getNextPropertyName(propertyName, key);
         const options = this.finalizeOptionsForProperty(commonOptions, propertyOptions, nextPropertyName);
-        if (isFunction(options)) { // if user defined predicate is present for property
+        if (LODASH.isFunction(options)) { // if user defined predicate is present for property
           const customPredicate = options as PredicateFunc;
           if (!customPredicate(itemValue)) {
             return false;

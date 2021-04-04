@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/material/table'), require('rxjs'), require('rxjs/operators'), require('lodash'), require('util')) :
-    typeof define === 'function' && define.amd ? define('mat-table-filter', ['exports', '@angular/core', '@angular/material/table', 'rxjs', 'rxjs/operators', 'lodash', 'util'], factory) :
-    (global = global || self, factory(global['mat-table-filter'] = {}, global.ng.core, global.ng.material.table, global.rxjs, global.rxjs.operators, global.lodash, global.util));
-}(this, (function (exports, core, table, rxjs, operators, lodash, util) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/material/table'), require('rxjs'), require('rxjs/operators'), require('lodash-es')) :
+    typeof define === 'function' && define.amd ? define('mat-table-filter', ['exports', '@angular/core', '@angular/material/table', 'rxjs', 'rxjs/operators', 'lodash-es'], factory) :
+    (global = global || self, factory(global['mat-table-filter'] = {}, global.ng.core, global.ng.material.table, global.rxjs, global.rxjs.operators, global.lodashEs));
+}(this, (function (exports, core, table, rxjs, operators, lodashEs) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -235,7 +235,7 @@
             // tslint:disable-next-line:forin
             for (var key in object) {
                 var value = object[key];
-                if (lodash.isString(value)) {
+                if (lodashEs.isString(value)) {
                     object[key] = value.toLowerCase();
                 }
                 else {
@@ -257,7 +257,7 @@
             console.warn(ArrayPredicateService_1.SUGGESTION_WARNING);
         };
         ArrayPredicateService.prototype.equals = function (itemPair) {
-            return lodash.isEqual(itemPair.example.sort(), itemPair.item.sort());
+            return lodashEs.isEqual(itemPair.example.sort(), itemPair.item.sort());
         };
         ArrayPredicateService.prototype.anywhere = function (itemPair) {
             return this.isSubset(itemPair.example, itemPair.item);
@@ -271,7 +271,7 @@
             return this.anywhere(itemPair);
         };
         ArrayPredicateService.prototype.isSubset = function (example, item) {
-            return !lodash.difference(lodash.flatten(example), lodash.flatten(item)).length;
+            return !lodashEs.difference(lodashEs.flatten(example), lodashEs.flatten(item)).length;
         };
         var ArrayPredicateService_1;
         // tslint:disable-next-line:max-line-length
@@ -321,22 +321,23 @@
         }
         MatTableFilterService.prototype.filterPredicate = function (itemPair, propertyOptions, commonOptions, propertyName) {
             var e_1, _a;
+            var _b;
             // tslint:disable-next-line:forin
             var exampleKeys = Object.keys(itemPair.example);
             try {
                 for (var exampleKeys_1 = __values(exampleKeys), exampleKeys_1_1 = exampleKeys_1.next(); !exampleKeys_1_1.done; exampleKeys_1_1 = exampleKeys_1.next()) {
                     var key = exampleKeys_1_1.value;
-                    var exampleValue = lodash.cloneDeep(itemPair.example[key]);
-                    if (lodash.isNil(exampleValue) || lodash.every(exampleValue, lodash.isEmpty) && typeof exampleValue !== 'boolean') {
+                    var exampleValue = lodashEs.cloneDeep(itemPair.example[key]);
+                    if (lodashEs.isNil(exampleValue) || lodashEs.every(exampleValue, lodashEs.isEmpty) && typeof exampleValue !== 'boolean') {
                         // if example entity's property is undefined/null/empty then it means the caller wants all the data
                         continue;
                     }
-                    if (itemPair.item.hasOwnProperty(key)) {
+                    if ((_b = itemPair.item) === null || _b === void 0 ? void 0 : _b.hasOwnProperty(key)) {
                         // if example entity has additional columns then search fails
-                        var itemValue = lodash.cloneDeep(itemPair.item[key]);
+                        var itemValue = lodashEs.cloneDeep(itemPair.item[key]);
                         var nextPropertyName = this.getNextPropertyName(propertyName, key);
                         var options = this.finalizeOptionsForProperty(commonOptions, propertyOptions, nextPropertyName);
-                        if (util.isFunction(options)) { // if user defined predicate is present for property
+                        if (lodashEs.isFunction(options)) { // if user defined predicate is present for property
                             var customPredicate = options;
                             if (!customPredicate(itemValue)) {
                                 return false;
@@ -350,13 +351,13 @@
                                     return false;
                                 }
                             }
-                            else if (lodash.isArray(itemValue)) {
+                            else if (lodashEs.isArray(itemValue)) {
                                 var valuePair = { item: itemValue, example: exampleValue };
                                 if (!this._arrayService.executeCondition(valuePair, columnOptions)) {
                                     return false;
                                 }
                             }
-                            else if (lodash.isBoolean(itemValue)) {
+                            else if (lodashEs.isBoolean(itemValue)) {
                                 if (itemValue !== exampleValue) {
                                     return false;
                                 }
@@ -397,7 +398,7 @@
             return propertyName ? (propertyName + '.' + key) : key;
         };
         MatTableFilterService.prototype.isChanged = function (oldEntity, newEntity) {
-            return !lodash.isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
+            return !lodashEs.isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
         };
         MatTableFilterService.prototype.toPlainJson = function (object) {
             if (object) {
@@ -408,7 +409,7 @@
             }
         };
         MatTableFilterService.prototype.isAlphaNumeric = function (value) {
-            return lodash.isString(value) || lodash.isNumber(value);
+            return lodashEs.isString(value) || lodashEs.isNumber(value);
         };
         MatTableFilterService.ctorParameters = function () { return [
             { type: AlphaNumericPredicateService },

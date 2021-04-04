@@ -1,6 +1,6 @@
 {
   "name": "cdk-table-exporter",
-  "version": "9.1.0",
+  "version": "9.1.1",
   "description": "Abstract CdkTable Exporter",
   "author": "Halit Talha Türe",
   "license": "Apache-2.0",
@@ -16,8 +16,8 @@
     "tslib": "^1.10.0"
   },
   "dependencies": {
-    "file-saver": "^2.0.2",
-    "xlsx": "^0.14.1"
+    "file-saver-es": "^2.0.5",
+    "xlsx": "^0.16.9"
   },
   "keywords": [
     "cdktable",

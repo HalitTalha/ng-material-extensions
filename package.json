@@ -1,6 +1,6 @@
 {
   "name": "ng-material-extensions",
-  "version": "9.1.0",
+  "version": "9.1.2",
   "license": "Apache-2.0",
   "description": "Extended features for @angular/material components",
   "author": "Halit Talha Türe",
@@ -32,16 +32,17 @@
     "@angular/router": "~9.0.0",
     "@ctrl/ngx-github-buttons": "^6.1.0",
     "core-js": "^2.5.4",
-    "file-saver": "^2.0.2",
+    "file-saver-es": "^2.0.5",
     "gulp": "^4.0.2",
     "gulp-gh-pages": "^0.5.4",
+    "lodash-es": "^4.17.20",
     "marked": "^0.8.0",
     "ngx-markdown": "^9.0.0-beta.0",
     "node-sass": "^4.13.1",
     "prismjs": "^1.17.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "xlsx": "^0.14.1",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

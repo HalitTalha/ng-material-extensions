@@ -11,6 +11,11 @@
       "es2018"
     ]
   },
+  "paths": {
+    "file-saver-es": [
+      "@types/file-saver"
+    ]
+  },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,

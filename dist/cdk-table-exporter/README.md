@@ -2,7 +2,7 @@
 
 [![Node version](https://img.shields.io/npm/v/cdk-table-exporter.svg?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/cdk-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/cdk-table-exporter.svg?style=for-the-badge)
 
-**!! If you are using angular material please use** [mat-table-exporter](https://www.npmjs.com/package/cdk-table-exporter)
+**!! If you are using angular material please use** [mat-table-exporter](https://www.npmjs.com/package/mat-table-exporter)
 
 This project facilitates the common functionalities for CdkTable implementations abstracting the behavior that can change among different CdkTable implementations, see [mat-table-exporter](https://www.npmjs.com/package/mat-table-exporter) for angular material table export.
 
@@ -30,6 +30,7 @@ import { CdkTableExporterModule } from 'cdk-table-exporter';
     CdkTableExporterModule
   ],
  ]})
+```
 
 ## Usage
 CdkTableExporter class defines the common functionality that an exporter directive should have.
@@ -50,6 +51,7 @@ This project is a library project inside ng-material-extensions angular workspac
 ng build cdk-table-exporter
 ```
 5. You can run the showcase application and see your changes in action. In ```ng-material-extensions``` run ```ng s -o```
+
 &nbsp;
 
 ## Support & Donations

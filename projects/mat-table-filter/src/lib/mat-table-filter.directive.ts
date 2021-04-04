@@ -1,5 +1,5 @@
 import { PropertyOptions } from './property-options';
-import { Directive, DoCheck, Input, ViewContainerRef, Host, Self, Optional } from '@angular/core';
+import { Directive, DoCheck, Input, Host, Self, Optional } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';

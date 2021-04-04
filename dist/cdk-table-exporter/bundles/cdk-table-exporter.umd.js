@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/table'), require('@angular/core'), require('xlsx'), require('file-saver')) :
-    typeof define === 'function' && define.amd ? define('cdk-table-exporter', ['exports', '@angular/cdk/table', '@angular/core', 'xlsx', 'file-saver'], factory) :
-    (global = global || self, factory(global['cdk-table-exporter'] = {}, global.ng.cdk.table, global.ng.core, global.xlsx, global.fileSaver));
-}(this, (function (exports, table, core, xlsx, fileSaver) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/table'), require('@angular/core'), require('xlsx'), require('file-saver-es')) :
+    typeof define === 'function' && define.amd ? define('cdk-table-exporter', ['exports', '@angular/cdk/table', '@angular/core', 'xlsx', 'file-saver-es'], factory) :
+    (global = global || self, factory(global['cdk-table-exporter'] = {}, global.ng.cdk.table, global.ng.core, global.xlsx, global.fileSaverEs));
+}(this, (function (exports, table, core, xlsx, fileSaverEs) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -322,7 +322,7 @@
             if (options && options.fileName) {
                 fileName = options.fileName;
             }
-            fileSaver.saveAs(blob, fileName + mime.extension);
+            fileSaverEs.saveAs(blob, fileName + mime.extension);
         };
         FileUtil.isXls = function (fileName) {
             return fileName.toLowerCase().match(XLS_REGEX) != null;
@@ -581,7 +581,6 @@
         };
         /**
          * This event will clear rows selection done using toggleRow functionality
-         *
          */
         CdkTableExporter.prototype.resetToggleRows = function () {
             this._selectedRows = [];

@@ -61,7 +61,6 @@ export declare abstract class CdkTableExporter {
     toggleRow(index: number): void;
     /**
      * This event will clear rows selection done using toggleRow functionality
-     *
      */
     resetToggleRows(): void;
     private toggleOn;

@@ -3,8 +3,7 @@ import { ɵɵdefineInjectable, Injectable, ɵɵinject, Host, Self, Optional, Inp
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { isString, isEqual, difference, flatten, cloneDeep, isNil, every, isEmpty, isArray, isBoolean, isNumber } from 'lodash';
-import { isFunction } from 'util';
+import { isString, isEqual, difference, flatten, cloneDeep, isNil, every, isEmpty, isFunction, isArray, isBoolean, isNumber } from 'lodash-es';
 
 var MatTableFilter;
 (function (MatTableFilter) {
@@ -118,6 +117,7 @@ let MatTableFilterService = class MatTableFilterService {
         this._arrayService = _arrayService;
     }
     filterPredicate(itemPair, propertyOptions, commonOptions, propertyName) {
+        var _a;
         // tslint:disable-next-line:forin
         const exampleKeys = Object.keys(itemPair.example);
         for (const key of exampleKeys) {
@@ -126,7 +126,7 @@ let MatTableFilterService = class MatTableFilterService {
                 // if example entity's property is undefined/null/empty then it means the caller wants all the data
                 continue;
             }
-            if (itemPair.item.hasOwnProperty(key)) {
+            if ((_a = itemPair.item) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(key)) {
                 // if example entity has additional columns then search fails
                 const itemValue = cloneDeep(itemPair.item[key]);
                 const nextPropertyName = this.getNextPropertyName(propertyName, key);

@@ -1,6 +1,6 @@
 import { MatTableFilter } from '../mat-table-filter.enum';
 import { ItemPair } from '../item-pair';
-import * as LODASH from 'lodash';
+import * as LODASH from 'lodash-es';
 import { Options } from '../options';
 
 export abstract class FilterPredicate<T> {
