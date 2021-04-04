@@ -23,3 +23,4 @@ export declare const XLS_REGEX: string;
 export declare const RETURN = "\n";
 export declare const TAB = "\t";
 export declare const XLSX_COLS = "!cols";
+export declare const BOM = "\uFEFF";
