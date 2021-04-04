@@ -312,6 +312,7 @@
     var RETURN = '\n';
     var TAB = '\t';
     var XLSX_COLS = '!cols';
+    var BOM = '\uFEFF';
 
     var FileUtil = /** @class */ (function () {
         function FileUtil() {
@@ -379,7 +380,7 @@
         }
         CsvExporterService.prototype.workSheetToContent = function (worksheet, options) {
             var _a, _b;
-            return xlsx.utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
+            return BOM + xlsx.utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
         };
         CsvExporterService.prototype.getMimeType = function () {
             return MIME_CSV;
@@ -723,6 +724,7 @@
         return CdkTableExporter;
     }());
 
+    exports.BOM = BOM;
     exports.CHAR_SET_UTF = CHAR_SET_UTF;
     exports.CHAR_SET_UTF_8 = CHAR_SET_UTF_8;
     exports.COMMA = COMMA;
