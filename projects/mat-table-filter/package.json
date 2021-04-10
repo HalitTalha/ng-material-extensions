@@ -16,7 +16,8 @@
     "@angular/material": ">=9.0.0"
   },
   "dependencies": {
-    "lodash-es": "^4.17.20"
+    "lodash-es": "^4.17.20",
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@angular/cdk": "^9.0.0",

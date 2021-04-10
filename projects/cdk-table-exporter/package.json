@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "file-saver-es": "^2.0.5",
+    "tslib": "^2.0.0",
     "xlsx": "^0.16.9"
   },
   "devDependencies": {
