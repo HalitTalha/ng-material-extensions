@@ -37,7 +37,7 @@
     "gulp-gh-pages": "^0.5.4",
     "lodash-es": "^4.17.20",
     "marked": "^0.8.0",
-    "ngx-markdown": "^9.0.0-beta.0",
+    "ngx-markdown": "^11.1.2",
     "node-sass": "^4.13.1",
     "prismjs": "^1.17.1",
     "rxjs": "~6.5.4",
