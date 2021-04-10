@@ -92,16 +92,6 @@ export function markedOptions(): MarkedOptions {
     MatTabsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    ArrayFilterComponent,
-    BriefExporterComponent,
-    CustomColumnFilterComponent,
-    CustomExporterComponent,
-    SimpleFilterComponent,
-    PropertyOptionsComponent,
-    SelectionExporterComponent
-
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
