@@ -1,5 +1,5 @@
 import { TxtOptions } from '../../options';
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx/dist/xlsx.mini.min';
 import { WorksheetExporter } from './worksheet-exporter';
 import { Mime } from '../../mime';
 export declare class CsvExporterService extends WorksheetExporter<TxtOptions> {
