@@ -1,6 +1,11 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "import-blacklist": [
+      true,
+      "rxjs/Rx",
+      "lodash-es"
+    ],
     "align": {
       "options": [
         "parameters",
@@ -30,10 +35,6 @@
       "kebab-case"
     ],
     "eofline": true,
-    "import-blacklist": [
-      true,
-      "rxjs/Rx"
-    ],
     "import-spacing": true,
     "indent": {
       "options": [

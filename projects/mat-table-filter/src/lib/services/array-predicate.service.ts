@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FilterPredicate } from './filter-predicate';
-import * as LODASH from 'lodash-es';
+import isEqual from 'lodash-es/isEqual';
+import difference from 'lodash-es/difference';
+import flatten from 'lodash-es/flatten';
 import { ItemPair } from '../item-pair';
 
 @Injectable({
@@ -21,7 +23,7 @@ export class ArrayPredicateService extends FilterPredicate<Array<any>> {
   }
 
   public equals(itemPair: ItemPair<Array<any>>): boolean {
-    return LODASH.isEqual(itemPair.example.sort(), itemPair.item.sort());
+    return isEqual(itemPair.example.sort(), itemPair.item.sort());
   }
   public anywhere(itemPair: ItemPair<Array<any>>): boolean {
     return this.isSubset(itemPair.example, itemPair.item);
@@ -36,7 +38,7 @@ export class ArrayPredicateService extends FilterPredicate<Array<any>> {
   }
 
   private isSubset(example: Array<any>, item: Array<any>): boolean {
-    return !LODASH.difference(LODASH.flatten(example), LODASH.flatten(item)).length;
+    return !difference(flatten(example), flatten(item)).length;
   }
 
 }
