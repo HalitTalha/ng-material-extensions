@@ -1,6 +1,6 @@
 {
   "name": "mat-table-exporter",
-  "version": "9.1.2",
+  "version": "10.2.0",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
@@ -10,11 +10,10 @@
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
   },
   "peerDependencies": {
-    "@angular/common": ">=9.0.0",
-    "@angular/core": ">=9.0.0",
-    "@angular/material": ">=9.0.0",
-    "@angular/cdk": ">=9.0.0",
-    "tslib": "^1.10.0"
+    "@angular/cdk": ">=10.2.7",
+    "@angular/common": ">=10.2.4",
+    "@angular/core": ">=10.2.4",
+    "@angular/material": ">=10.2.7"
   },
   "keywords": [
     "angular",
@@ -27,14 +26,13 @@
     "excel"
   ],
   "dependencies": {
-    "cdk-table-exporter": "^9.1.2"
+    "cdk-table-exporter": "^9.1.2",
+    "tslib": "^2.0.0"
   },
   "main": "bundles/mat-table-exporter.umd.js",
-  "module": "fesm5/mat-table-exporter.js",
+  "module": "fesm2015/mat-table-exporter.js",
   "es2015": "fesm2015/mat-table-exporter.js",
-  "esm5": "esm5/mat-table-exporter.js",
   "esm2015": "esm2015/mat-table-exporter.js",
-  "fesm5": "fesm5/mat-table-exporter.js",
   "fesm2015": "fesm2015/mat-table-exporter.js",
   "typings": "mat-table-exporter.d.ts",
   "metadata": "mat-table-exporter.metadata.json",
