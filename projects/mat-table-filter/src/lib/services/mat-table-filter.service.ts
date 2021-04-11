@@ -3,7 +3,16 @@ import { ItemPair } from './../item-pair';
 import { ArrayPredicateService } from './array-predicate.service';
 import { AlphaNumericPredicateService } from './alpha-numeric-predicate.service';
 import { Injectable } from '@angular/core';
-import * as LODASH from 'lodash-es';
+import isEqual from 'lodash-es/isEqual';
+import cloneDeep from 'lodash-es/cloneDeep';
+import isNil from 'lodash-es/isNil';
+import every from 'lodash-es/every';
+import isFunction from 'lodash-es/isFunction';
+import isArray from 'lodash-es/isArray';
+import isBoolean from 'lodash-es/isBoolean';
+import isString from 'lodash-es/isString';
+import isNumber from 'lodash-es/isNumber';
+import isEmpty from 'lodash-es/isEmpty';
 import { Options } from '../options';
 
 @Injectable({
@@ -17,17 +26,17 @@ export class MatTableFilterService {
     // tslint:disable-next-line:forin
     const exampleKeys = Object.keys(itemPair.example);
     for (const key of exampleKeys) {
-      const exampleValue = LODASH.cloneDeep(itemPair.example[key]);
-      if (LODASH.isNil(exampleValue) || LODASH.every(exampleValue, LODASH.isEmpty) && typeof exampleValue !== 'boolean') {
+      const exampleValue = cloneDeep(itemPair.example[key]);
+      if (isNil(exampleValue) || every(exampleValue, isEmpty) && typeof exampleValue !== 'boolean') {
         // if example entity's property is undefined/null/empty then it means the caller wants all the data
         continue;
       }
       if (itemPair.item?.hasOwnProperty(key)) {
         // if example entity has additional columns then search fails
-        const itemValue = LODASH.cloneDeep(itemPair.item[key]);
+        const itemValue = cloneDeep(itemPair.item[key]);
         const nextPropertyName = this.getNextPropertyName(propertyName, key);
         const options = this.finalizeOptionsForProperty(commonOptions, propertyOptions, nextPropertyName);
-        if (LODASH.isFunction(options)) { // if user defined predicate is present for property
+        if (isFunction(options)) { // if user defined predicate is present for property
           const customPredicate = options as PredicateFunc;
           if (!customPredicate(itemValue)) {
             return false;
@@ -39,12 +48,12 @@ export class MatTableFilterService {
             if (!this._alphaNumericService.executeCondition(valuePair, columnOptions)) {
               return false;
             }
-          } else if (LODASH.isArray(itemValue)) {
+          } else if (isArray(itemValue)) {
             const valuePair: ItemPair<any[]> = {item: itemValue, example: exampleValue};
             if (!this._arrayService.executeCondition(valuePair, columnOptions)) {
               return false;
             }
-          } else if (LODASH.isBoolean(itemValue)) {
+          } else if (isBoolean(itemValue)) {
             if (itemValue !== exampleValue) {
               return false;
             }
@@ -78,7 +87,7 @@ export class MatTableFilterService {
   }
 
   public isChanged(oldEntity: any, newEntity: any): boolean {
-    return !LODASH.isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
+    return !isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
   }
 
   public toPlainJson(object: any): JSON {
@@ -90,6 +99,6 @@ export class MatTableFilterService {
   }
 
   private isAlphaNumeric(value: any): boolean {
-    return LODASH.isString(value) || LODASH.isNumber(value);
+    return isString(value) || isNumber(value);
   }
 }

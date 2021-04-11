@@ -1,20 +1,19 @@
-import { __decorate, __metadata } from 'tslib';
 import { CdkTableModule } from '@angular/cdk/table';
-import { NgModule, ɵɵdefineInjectable, Injectable, Injector, ɵɵinject, INJECTOR, EventEmitter, Renderer2, Input, Output, Directive } from '@angular/core';
-import { utils, write } from 'xlsx';
+import { NgModule, ɵɵdefineInjectable, Injectable, ɵɵinject, INJECTOR, Injector, EventEmitter, Directive, Renderer2, Input, Output } from '@angular/core';
+import { utils, write } from 'xlsx/dist/xlsx.mini.min';
 import { saveAs } from 'file-saver-es';
 
-let CdkTableExporterModule = class CdkTableExporterModule {
-};
-CdkTableExporterModule = __decorate([
-    NgModule({
-        declarations: [],
-        imports: [
-            CdkTableModule
-        ],
-        exports: []
-    })
-], CdkTableExporterModule);
+class CdkTableExporterModule {
+}
+CdkTableExporterModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [],
+                imports: [
+                    CdkTableModule
+                ],
+                exports: []
+            },] }
+];
 
 var ExportType;
 (function (ExportType) {
@@ -26,11 +25,10 @@ var ExportType;
     ExportType["OTHER"] = "other";
 })(ExportType || (ExportType = {}));
 
-let DataExtractorService = class DataExtractorService {
-    constructor() {
-    }
+class DataExtractorService {
+    constructor() { }
     extractRows(cdkTable, hiddenColumns, outlet) {
-        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, (outlet !== null && outlet !== void 0 ? outlet : cdkTable._rowOutlet));
+        return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet !== null && outlet !== void 0 ? outlet : cdkTable._rowOutlet);
     }
     getRowsAsJsonArray(cdkTable, hiddenColumns, outlet) {
         const renderedRows = this.getRenderedRows(cdkTable, outlet);
@@ -53,7 +51,7 @@ let DataExtractorService = class DataExtractorService {
         const cells = row.children;
         for (let i = 0; i < cells.length; i++) {
             if (!this.shouldHide(hiddenColumns, i)) {
-                const element = cells.item(i).innerText;
+                const element = (cells.item(i).innerText).trim();
                 result.push(element);
             }
         }
@@ -70,14 +68,14 @@ let DataExtractorService = class DataExtractorService {
     createExcelItem(row) {
         return Object.assign({}, row);
     }
-};
+}
 DataExtractorService.ɵprov = ɵɵdefineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
-DataExtractorService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], DataExtractorService);
+DataExtractorService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+DataExtractorService.ctorParameters = () => [];
 
 class Mime {
     constructor(extension, contentTypeHeader) {
@@ -164,27 +162,27 @@ class WorksheetExporter extends FileExporter {
     }
 }
 
-let CsvExporterService = class CsvExporterService extends WorksheetExporter {
+class CsvExporterService extends WorksheetExporter {
     constructor() {
         super();
     }
     workSheetToContent(worksheet, options) {
-        var _a, _b;
-        return BOM + utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
+        var _a;
+        return BOM + utils.sheet_to_csv(worksheet, { FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA });
     }
     getMimeType() {
         return MIME_CSV;
     }
-};
+}
 CsvExporterService.ɵprov = ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
-CsvExporterService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], CsvExporterService);
+CsvExporterService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+CsvExporterService.ctorParameters = () => [];
 
-let TxtExporterService = class TxtExporterService extends FileExporter {
+class TxtExporterService extends FileExporter {
     constructor() {
         super();
     }
@@ -206,16 +204,16 @@ let TxtExporterService = class TxtExporterService extends FileExporter {
             return TAB;
         }
     }
-};
+}
 TxtExporterService.ɵprov = ɵɵdefineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
-TxtExporterService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], TxtExporterService);
+TxtExporterService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+TxtExporterService.ctorParameters = () => [];
 
-let XlsExporterService = class XlsExporterService extends WorksheetExporter {
+class XlsExporterService extends WorksheetExporter {
     constructor() {
         super();
     }
@@ -240,16 +238,16 @@ let XlsExporterService = class XlsExporterService extends WorksheetExporter {
     convertToWch(columnWidths) {
         return columnWidths.map(width => ({ wch: width }));
     }
-};
+}
 XlsExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
-XlsExporterService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], XlsExporterService);
+XlsExporterService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+XlsExporterService.ctorParameters = () => [];
 
-let JsonExporterService = class JsonExporterService extends FileExporter {
+class JsonExporterService extends FileExporter {
     constructor() {
         super();
     }
@@ -259,16 +257,16 @@ let JsonExporterService = class JsonExporterService extends FileExporter {
     getMimeType() {
         return MIME_JSON;
     }
-};
+}
 JsonExporterService.ɵprov = ɵɵdefineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
-JsonExporterService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], JsonExporterService);
+JsonExporterService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+JsonExporterService.ctorParameters = () => [];
 
-let XlsxExporterService = class XlsxExporterService extends XlsExporterService {
+class XlsxExporterService extends XlsExporterService {
     constructor() {
         super();
     }
@@ -276,16 +274,16 @@ let XlsxExporterService = class XlsxExporterService extends XlsExporterService {
     getMimeType() {
         return MIME_EXCEL_XLSX;
     }
-};
+}
 XlsxExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
-XlsxExporterService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], XlsxExporterService);
+XlsxExporterService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+XlsxExporterService.ctorParameters = () => [];
 
-let ServiceLocatorService = class ServiceLocatorService {
+class ServiceLocatorService {
     constructor(injector) {
         this.injector = injector;
     }
@@ -307,22 +305,21 @@ let ServiceLocatorService = class ServiceLocatorService {
                 return this.injector.get(XlsxExporterService);
         }
     }
-};
+}
+ServiceLocatorService.ɵprov = ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(ɵɵinject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+ServiceLocatorService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
 ServiceLocatorService.ctorParameters = () => [
     { type: Injector }
 ];
-ServiceLocatorService.ɵprov = ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(ɵɵinject(INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
-ServiceLocatorService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [Injector])
-], ServiceLocatorService);
 
 /**
  * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
  */
-let CdkTableExporter = class CdkTableExporter {
+class CdkTableExporter {
     constructor(renderer, serviceLocator, dataExtractor, _cdkTable) {
         this.renderer = renderer;
         this.serviceLocator = serviceLocator;
@@ -468,35 +465,22 @@ let CdkTableExporter = class CdkTableExporter {
     getPaginatedRowIndex(index) {
         return index + (this.getPageSize() * this.getCurrentPageIndex());
     }
-};
+}
+CdkTableExporter.decorators = [
+    { type: Directive }
+];
 CdkTableExporter.ctorParameters = () => [
     { type: Renderer2 },
     { type: ServiceLocatorService },
     { type: DataExtractorService },
     { type: undefined }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Array)
-], CdkTableExporter.prototype, "hiddenColumns", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], CdkTableExporter.prototype, "exporter", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], CdkTableExporter.prototype, "exportCompleted", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], CdkTableExporter.prototype, "exportStarted", void 0);
-CdkTableExporter = __decorate([
-    Directive(),
-    __metadata("design:paramtypes", [Renderer2,
-        ServiceLocatorService,
-        DataExtractorService, Object])
-], CdkTableExporter);
+CdkTableExporter.propDecorators = {
+    hiddenColumns: [{ type: Input }],
+    exporter: [{ type: Input }],
+    exportCompleted: [{ type: Output }],
+    exportStarted: [{ type: Output }]
+};
 
 /*
  * Public API Surface of cdk-table-exporter

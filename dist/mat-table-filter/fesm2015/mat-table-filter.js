@@ -1,9 +1,19 @@
-import { __decorate, __metadata, __param } from 'tslib';
-import { ɵɵdefineInjectable, Injectable, ɵɵinject, Host, Self, Optional, Input, Directive, NgModule } from '@angular/core';
+import { ɵɵdefineInjectable, Injectable, ɵɵinject, Directive, Host, Self, Optional, Input, NgModule } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { isString, isEqual, difference, flatten, cloneDeep, isNil, every, isEmpty, isFunction, isArray, isBoolean, isNumber } from 'lodash-es';
+import isString from 'lodash-es/isString';
+import isEqual from 'lodash-es/isEqual';
+import difference from 'lodash-es/difference';
+import flatten from 'lodash-es/flatten';
+import cloneDeep from 'lodash-es/cloneDeep';
+import isNil from 'lodash-es/isNil';
+import every from 'lodash-es/every';
+import isFunction from 'lodash-es/isFunction';
+import isArray from 'lodash-es/isArray';
+import isBoolean from 'lodash-es/isBoolean';
+import isNumber from 'lodash-es/isNumber';
+import isEmpty from 'lodash-es/isEmpty';
 
 var MatTableFilter;
 (function (MatTableFilter) {
@@ -48,14 +58,13 @@ class FilterPredicate {
     }
 }
 
-var ArrayPredicateService_1;
-let ArrayPredicateService = ArrayPredicateService_1 = class ArrayPredicateService extends FilterPredicate {
+class ArrayPredicateService extends FilterPredicate {
     constructor() {
         super();
     }
     static warn() {
-        console.warn(ArrayPredicateService_1.UNSUPPORTED_OPERATION_WARNING);
-        console.warn(ArrayPredicateService_1.SUGGESTION_WARNING);
+        console.warn(ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING);
+        console.warn(ArrayPredicateService.SUGGESTION_WARNING);
     }
     equals(itemPair) {
         return isEqual(itemPair.example.sort(), itemPair.item.sort());
@@ -64,29 +73,29 @@ let ArrayPredicateService = ArrayPredicateService_1 = class ArrayPredicateServic
         return this.isSubset(itemPair.example, itemPair.item);
     }
     startsWith(itemPair) {
-        ArrayPredicateService_1.warn();
+        ArrayPredicateService.warn();
         return this.anywhere(itemPair);
     }
     endsWith(itemPair) {
-        ArrayPredicateService_1.warn();
+        ArrayPredicateService.warn();
         return this.anywhere(itemPair);
     }
     isSubset(example, item) {
         return !difference(flatten(example), flatten(item)).length;
     }
-};
+}
 // tslint:disable-next-line:max-line-length
 ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING = 'This filterType is unsupported for array filtering. FilterType.ANYWHERE is executed instead!';
 ArrayPredicateService.SUGGESTION_WARNING = 'You can set a custom predicate for the array property through PropertyOptions!';
 ArrayPredicateService.ɵprov = ɵɵdefineInjectable({ factory: function ArrayPredicateService_Factory() { return new ArrayPredicateService(); }, token: ArrayPredicateService, providedIn: "root" });
-ArrayPredicateService = ArrayPredicateService_1 = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], ArrayPredicateService);
+ArrayPredicateService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ArrayPredicateService.ctorParameters = () => [];
 
-let AlphaNumericPredicateService = class AlphaNumericPredicateService extends FilterPredicate {
+class AlphaNumericPredicateService extends FilterPredicate {
     constructor() {
         super();
     }
@@ -102,16 +111,16 @@ let AlphaNumericPredicateService = class AlphaNumericPredicateService extends Fi
     endsWith(itemPair) {
         return itemPair.item.endsWith(itemPair.example);
     }
-};
+}
 AlphaNumericPredicateService.ɵprov = ɵɵdefineInjectable({ factory: function AlphaNumericPredicateService_Factory() { return new AlphaNumericPredicateService(); }, token: AlphaNumericPredicateService, providedIn: "root" });
-AlphaNumericPredicateService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [])
-], AlphaNumericPredicateService);
+AlphaNumericPredicateService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+AlphaNumericPredicateService.ctorParameters = () => [];
 
-let MatTableFilterService = class MatTableFilterService {
+class MatTableFilterService {
     constructor(_alphaNumericService, _arrayService) {
         this._alphaNumericService = _alphaNumericService;
         this._arrayService = _arrayService;
@@ -197,20 +206,19 @@ let MatTableFilterService = class MatTableFilterService {
     isAlphaNumeric(value) {
         return isString(value) || isNumber(value);
     }
-};
+}
+MatTableFilterService.ɵprov = ɵɵdefineInjectable({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(ɵɵinject(AlphaNumericPredicateService), ɵɵinject(ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
+MatTableFilterService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
 MatTableFilterService.ctorParameters = () => [
     { type: AlphaNumericPredicateService },
     { type: ArrayPredicateService }
 ];
-MatTableFilterService.ɵprov = ɵɵdefineInjectable({ factory: function MatTableFilterService_Factory() { return new MatTableFilterService(ɵɵinject(AlphaNumericPredicateService), ɵɵinject(ArrayPredicateService)); }, token: MatTableFilterService, providedIn: "root" });
-MatTableFilterService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [AlphaNumericPredicateService, ArrayPredicateService])
-], MatTableFilterService);
 
-let MatTableFilterDirective = class MatTableFilterDirective {
+class MatTableFilterDirective {
     constructor(_filterService, _table) {
         this._filterService = _filterService;
         this._table = _table;
@@ -256,56 +264,37 @@ let MatTableFilterDirective = class MatTableFilterDirective {
         const matTable = this._table;
         return matTable.dataSource;
     }
-};
+}
+MatTableFilterDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[matTableFilter]',
+                exportAs: 'matTableFilter'
+            },] }
+];
 MatTableFilterDirective.ctorParameters = () => [
     { type: MatTableFilterService },
     { type: MatTable, decorators: [{ type: Host }, { type: Self }, { type: Optional }] }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], MatTableFilterDirective.prototype, "exampleEntity", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], MatTableFilterDirective.prototype, "debounceTime", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], MatTableFilterDirective.prototype, "filterType", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], MatTableFilterDirective.prototype, "caseSensitive", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Function)
-], MatTableFilterDirective.prototype, "customPredicate", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], MatTableFilterDirective.prototype, "propertyOptions", void 0);
-MatTableFilterDirective = __decorate([
-    Directive({
-        selector: '[matTableFilter]',
-        exportAs: 'matTableFilter'
-    }),
-    __param(1, Host()), __param(1, Self()), __param(1, Optional()),
-    __metadata("design:paramtypes", [MatTableFilterService,
-        MatTable])
-], MatTableFilterDirective);
-
-let MatTableFilterModule = class MatTableFilterModule {
+MatTableFilterDirective.propDecorators = {
+    exampleEntity: [{ type: Input }],
+    debounceTime: [{ type: Input }],
+    filterType: [{ type: Input }],
+    caseSensitive: [{ type: Input }],
+    customPredicate: [{ type: Input }],
+    propertyOptions: [{ type: Input }]
 };
-MatTableFilterModule = __decorate([
-    NgModule({
-        declarations: [MatTableFilterDirective],
-        imports: [
-            MatTableModule
-        ],
-        exports: [MatTableFilterDirective]
-    })
-], MatTableFilterModule);
+
+class MatTableFilterModule {
+}
+MatTableFilterModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [MatTableFilterDirective],
+                imports: [
+                    MatTableModule
+                ],
+                exports: [MatTableFilterDirective]
+            },] }
+];
 
 /*
  * Public API Surface of mat-table-filter

@@ -1,53 +1,71 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/table'), require('@angular/core'), require('xlsx'), require('file-saver-es')) :
-    typeof define === 'function' && define.amd ? define('cdk-table-exporter', ['exports', '@angular/cdk/table', '@angular/core', 'xlsx', 'file-saver-es'], factory) :
-    (global = global || self, factory(global['cdk-table-exporter'] = {}, global.ng.cdk.table, global.ng.core, global.xlsx, global.fileSaverEs));
-}(this, (function (exports, table, core, xlsx, fileSaverEs) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/table'), require('@angular/core'), require('xlsx/dist/xlsx.mini.min'), require('file-saver-es')) :
+    typeof define === 'function' && define.amd ? define('cdk-table-exporter', ['exports', '@angular/cdk/table', '@angular/core', 'xlsx/dist/xlsx.mini.min', 'file-saver-es'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['cdk-table-exporter'] = {}, global.ng.cdk.table, global.ng.core, global.XLSX, global.FileSaver));
+}(this, (function (exports, table, i0, XLSX, FileSaver) { 'use strict';
+
+    var CdkTableExporterModule = /** @class */ (function () {
+        function CdkTableExporterModule() {
+        }
+        return CdkTableExporterModule;
+    }());
+    CdkTableExporterModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    declarations: [],
+                    imports: [
+                        table.CdkTableModule
+                    ],
+                    exports: []
+                },] }
+    ];
 
     /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
+    Copyright (c) Microsoft Corporation.
 
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
 
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
     /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
+    var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b)
+                if (Object.prototype.hasOwnProperty.call(b, p))
+                    d[p] = b[p]; };
         return extendStatics(d, b);
     };
-
     function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
-
-    var __assign = function() {
+    var __assign = function () {
         __assign = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
                 s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
             }
             return t;
         };
         return __assign.apply(this, arguments);
     };
-
     function __rest(s, e) {
         var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
+        for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+                t[p] = s[p];
         if (s != null && typeof Object.getOwnPropertySymbols === "function")
             for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
                 if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
@@ -55,167 +73,263 @@
             }
         return t;
     }
-
     function __decorate(decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if (d = decorators[i])
+                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     }
-
     function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
+        return function (target, key) { decorator(target, key, paramIndex); };
     }
-
     function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+            return Reflect.metadata(metadataKey, metadataValue);
     }
-
     function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
             step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
     }
-
     function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
         function verb(n) { return function (v) { return step([n, v]); }; }
         function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
                 }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
         }
     }
-
-    function __exportStar(m, exports) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    var __createBinding = Object.create ? (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
+    }) : (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        o[k2] = m[k];
+    });
+    function __exportStar(m, o) {
+        for (var p in m)
+            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
+                __createBinding(o, m, p);
     }
-
     function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m) return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length) o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
+        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+        if (m)
+            return m.call(o);
+        if (o && typeof o.length === "number")
+            return {
+                next: function () {
+                    if (o && i >= o.length)
+                        o = void 0;
+                    return { value: o && o[i++], done: !o };
+                }
+            };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
     }
-
     function __read(o, n) {
         var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
+        if (!m)
+            return o;
         var i = m.call(o), r, ar = [], e;
         try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
         }
-        catch (error) { e = { error: error }; }
+        catch (error) {
+            e = { error: error };
+        }
         finally {
             try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
             }
-            finally { if (e) throw e.error; }
+            finally {
+                if (e)
+                    throw e.error;
+            }
         }
         return ar;
     }
-
+    /** @deprecated */
     function __spread() {
         for (var ar = [], i = 0; i < arguments.length; i++)
             ar = ar.concat(__read(arguments[i]));
         return ar;
     }
-
+    /** @deprecated */
     function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++)
+            s += arguments[i].length;
         for (var r = Array(s), k = 0, i = 0; i < il; i++)
             for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
                 r[k] = a[j];
         return r;
-    };
-
+    }
+    function __spreadArray(to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
+    }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
     }
-
     function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
         var g = generator.apply(thisArg, _arguments || []), i, q = [];
         return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function verb(n) { if (g[n])
+            i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try {
+            step(g[n](v));
+        }
+        catch (e) {
+            settle(q[0][3], e);
+        } }
         function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
         function fulfill(value) { resume("next", value); }
         function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+        function settle(f, v) { if (f(v), q.shift(), q.length)
+            resume(q[0][0], q[0][1]); }
     }
-
     function __asyncDelegator(o) {
         var i, p;
         return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
         function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
     }
-
     function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
         var m = o[Symbol.asyncIterator], i;
         return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
         function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function (v) { resolve({ value: v, done: d }); }, reject); }
     }
-
     function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        if (Object.defineProperty) {
+            Object.defineProperty(cooked, "raw", { value: raw });
+        }
+        else {
+            cooked.raw = raw;
+        }
         return cooked;
+    }
+    ;
+    var __setModuleDefault = Object.create ? (function (o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+    }) : function (o, v) {
+        o["default"] = v;
     };
-
     function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
+        if (mod && mod.__esModule)
+            return mod;
         var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
+        if (mod != null)
+            for (var k in mod)
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                    __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
         return result;
     }
-
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
-
-    var CdkTableExporterModule = /** @class */ (function () {
-        function CdkTableExporterModule() {
-        }
-        CdkTableExporterModule = __decorate([
-            core.NgModule({
-                declarations: [],
-                imports: [
-                    table.CdkTableModule
-                ],
-                exports: []
-            })
-        ], CdkTableExporterModule);
-        return CdkTableExporterModule;
-    }());
-
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+    }
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+    }
 
     (function (ExportType) {
         ExportType["XLS"] = "xls";
@@ -230,7 +344,7 @@
         function DataExtractorService() {
         }
         DataExtractorService.prototype.extractRows = function (cdkTable, hiddenColumns, outlet) {
-            return this.getRowsAsJsonArray(cdkTable, hiddenColumns, (outlet !== null && outlet !== void 0 ? outlet : cdkTable._rowOutlet));
+            return this.getRowsAsJsonArray(cdkTable, hiddenColumns, outlet !== null && outlet !== void 0 ? outlet : cdkTable._rowOutlet);
         };
         DataExtractorService.prototype.getRowsAsJsonArray = function (cdkTable, hiddenColumns, outlet) {
             var renderedRows = this.getRenderedRows(cdkTable, outlet);
@@ -253,7 +367,7 @@
             var cells = row.children;
             for (var i = 0; i < cells.length; i++) {
                 if (!this.shouldHide(hiddenColumns, i)) {
-                    var element = cells.item(i).innerText;
+                    var element = (cells.item(i).innerText).trim();
                     result.push(element);
                 }
             }
@@ -270,15 +384,15 @@
         DataExtractorService.prototype.createExcelItem = function (row) {
             return Object.assign({}, row);
         };
-        DataExtractorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
-        DataExtractorService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [])
-        ], DataExtractorService);
         return DataExtractorService;
     }());
+    DataExtractorService.ɵprov = i0.ɵɵdefineInjectable({ factory: function DataExtractorService_Factory() { return new DataExtractorService(); }, token: DataExtractorService, providedIn: "root" });
+    DataExtractorService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    DataExtractorService.ctorParameters = function () { return []; };
 
     var Mime = /** @class */ (function () {
         function Mime(extension, contentTypeHeader) {
@@ -323,7 +437,7 @@
             if (options && options.fileName) {
                 fileName = options.fileName;
             }
-            fileSaverEs.saveAs(blob, fileName + mime.extension);
+            FileSaver.saveAs(blob, fileName + mime.extension);
         };
         FileUtil.isXls = function (fileName) {
             return fileName.toLowerCase().match(XLS_REGEX) != null;
@@ -365,7 +479,7 @@
             return _super.call(this) || this;
         }
         WorksheetExporter.prototype.createContent = function (rows, options) {
-            var workSheet = xlsx.utils.json_to_sheet(rows, {
+            var workSheet = XLSX.utils.json_to_sheet(rows, {
                 skipHeader: true // we don't want to see object properties as our headers
             });
             return this.workSheetToContent(workSheet, options);
@@ -379,21 +493,21 @@
             return _super.call(this) || this;
         }
         CsvExporterService.prototype.workSheetToContent = function (worksheet, options) {
-            var _a, _b;
-            return BOM + xlsx.utils.sheet_to_csv(worksheet, { FS: (_b = (_a = options) === null || _a === void 0 ? void 0 : _a.delimiter, (_b !== null && _b !== void 0 ? _b : COMMA)) });
+            var _a;
+            return BOM + XLSX.utils.sheet_to_csv(worksheet, { FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA });
         };
         CsvExporterService.prototype.getMimeType = function () {
             return MIME_CSV;
         };
-        CsvExporterService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
-        CsvExporterService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [])
-        ], CsvExporterService);
         return CsvExporterService;
     }(WorksheetExporter));
+    CsvExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+    CsvExporterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    CsvExporterService.ctorParameters = function () { return []; };
 
     var TxtExporterService = /** @class */ (function (_super) {
         __extends(TxtExporterService, _super);
@@ -419,15 +533,15 @@
                 return TAB;
             }
         };
-        TxtExporterService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
-        TxtExporterService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [])
-        ], TxtExporterService);
         return TxtExporterService;
     }(FileExporter));
+    TxtExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function TxtExporterService_Factory() { return new TxtExporterService(); }, token: TxtExporterService, providedIn: "root" });
+    TxtExporterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    TxtExporterService.ctorParameters = function () { return []; };
 
     var XlsExporterService = /** @class */ (function (_super) {
         __extends(XlsExporterService, _super);
@@ -436,13 +550,13 @@
         }
         XlsExporterService.prototype.workSheetToContent = function (worksheet, options) {
             if (options === void 0) { options = {}; }
-            var workBook = xlsx.utils.book_new();
+            var workBook = XLSX.utils.book_new();
             if (options.columnWidths) {
                 worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
             }
             this.correctTypes(options);
-            xlsx.utils.book_append_sheet(workBook, worksheet, options.sheet);
-            return xlsx.write(workBook, options);
+            XLSX.utils.book_append_sheet(workBook, worksheet, options.sheet);
+            return XLSX.write(workBook, options);
         };
         XlsExporterService.prototype.getMimeType = function () {
             return MIME_EXCEL_XLS;
@@ -456,15 +570,15 @@
         XlsExporterService.prototype.convertToWch = function (columnWidths) {
             return columnWidths.map(function (width) { return ({ wch: width }); });
         };
-        XlsExporterService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
-        XlsExporterService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [])
-        ], XlsExporterService);
         return XlsExporterService;
     }(WorksheetExporter));
+    XlsExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+    XlsExporterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    XlsExporterService.ctorParameters = function () { return []; };
 
     var JsonExporterService = /** @class */ (function (_super) {
         __extends(JsonExporterService, _super);
@@ -477,15 +591,15 @@
         JsonExporterService.prototype.getMimeType = function () {
             return MIME_JSON;
         };
-        JsonExporterService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
-        JsonExporterService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [])
-        ], JsonExporterService);
         return JsonExporterService;
     }(FileExporter));
+    JsonExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function JsonExporterService_Factory() { return new JsonExporterService(); }, token: JsonExporterService, providedIn: "root" });
+    JsonExporterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    JsonExporterService.ctorParameters = function () { return []; };
 
     var XlsxExporterService = /** @class */ (function (_super) {
         __extends(XlsxExporterService, _super);
@@ -496,15 +610,15 @@
         XlsxExporterService.prototype.getMimeType = function () {
             return MIME_EXCEL_XLSX;
         };
-        XlsxExporterService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
-        XlsxExporterService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [])
-        ], XlsxExporterService);
         return XlsxExporterService;
     }(XlsExporterService));
+    XlsxExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+    XlsxExporterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    XlsxExporterService.ctorParameters = function () { return []; };
 
     var ServiceLocatorService = /** @class */ (function () {
         function ServiceLocatorService(injector) {
@@ -528,18 +642,17 @@
                     return this.injector.get(XlsxExporterService);
             }
         };
-        ServiceLocatorService.ctorParameters = function () { return [
-            { type: core.Injector }
-        ]; };
-        ServiceLocatorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(core["ɵɵinject"](core.INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
-        ServiceLocatorService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            }),
-            __metadata("design:paramtypes", [core.Injector])
-        ], ServiceLocatorService);
         return ServiceLocatorService;
     }());
+    ServiceLocatorService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ServiceLocatorService_Factory() { return new ServiceLocatorService(i0.ɵɵinject(i0.INJECTOR)); }, token: ServiceLocatorService, providedIn: "root" });
+    ServiceLocatorService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    ServiceLocatorService.ctorParameters = function () { return [
+        { type: i0.Injector }
+    ]; };
 
     /**
      * Exporter class for CdkTable. Abstracts the varying behaviors among different CdkTable implementations.
@@ -550,8 +663,8 @@
             this.serviceLocator = serviceLocator;
             this.dataExtractor = dataExtractor;
             this._cdkTable = _cdkTable;
-            this.exportCompleted = new core.EventEmitter();
-            this.exportStarted = new core.EventEmitter();
+            this.exportCompleted = new i0.EventEmitter();
+            this.exportStarted = new i0.EventEmitter();
         }
         /**
          * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
@@ -670,8 +783,8 @@
             this.exportCompleted.emit();
         };
         CdkTableExporter.prototype.extractSpecialRows = function (outlet) {
-            var _a;
-            (_a = this._data).push.apply(_a, __spread(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns, outlet)));
+            var _b;
+            (_b = this._data).push.apply(_b, __spread(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns, outlet)));
         };
         CdkTableExporter.prototype.extractTableHeader = function () {
             this.extractSpecialRows(this._cdkTable._headerRowOutlet);
@@ -693,36 +806,31 @@
         CdkTableExporter.prototype.getPaginatedRowIndex = function (index) {
             return index + (this.getPageSize() * this.getCurrentPageIndex());
         };
-        CdkTableExporter.ctorParameters = function () { return [
-            { type: core.Renderer2 },
-            { type: ServiceLocatorService },
-            { type: DataExtractorService },
-            { type: undefined }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Array)
-        ], CdkTableExporter.prototype, "hiddenColumns", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], CdkTableExporter.prototype, "exporter", void 0);
-        __decorate([
-            core.Output(),
-            __metadata("design:type", Object)
-        ], CdkTableExporter.prototype, "exportCompleted", void 0);
-        __decorate([
-            core.Output(),
-            __metadata("design:type", Object)
-        ], CdkTableExporter.prototype, "exportStarted", void 0);
-        CdkTableExporter = __decorate([
-            core.Directive(),
-            __metadata("design:paramtypes", [core.Renderer2,
-                ServiceLocatorService,
-                DataExtractorService, Object])
-        ], CdkTableExporter);
         return CdkTableExporter;
     }());
+    CdkTableExporter.decorators = [
+        { type: i0.Directive }
+    ];
+    CdkTableExporter.ctorParameters = function () { return [
+        { type: i0.Renderer2 },
+        { type: ServiceLocatorService },
+        { type: DataExtractorService },
+        { type: undefined }
+    ]; };
+    CdkTableExporter.propDecorators = {
+        hiddenColumns: [{ type: i0.Input }],
+        exporter: [{ type: i0.Input }],
+        exportCompleted: [{ type: i0.Output }],
+        exportStarted: [{ type: i0.Output }]
+    };
+
+    /*
+     * Public API Surface of cdk-table-exporter
+     */
+
+    /**
+     * Generated bundle index. Do not edit.
+     */
 
     exports.BOM = BOM;
     exports.CHAR_SET_UTF = CHAR_SET_UTF;

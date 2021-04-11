@@ -1,6 +1,6 @@
 import { MatTableFilter } from '../mat-table-filter.enum';
 import { ItemPair } from '../item-pair';
-import * as LODASH from 'lodash-es';
+import isString from 'lodash-es/isString';
 import { Options } from '../options';
 
 export abstract class FilterPredicate<T> {
@@ -36,7 +36,7 @@ export abstract class FilterPredicate<T> {
     // tslint:disable-next-line:forin
     for (const key in object) {
       const value = object[key];
-      if (LODASH.isString(value)) {
+      if (isString(value)) {
         object[key] = value.toLowerCase();
       } else {
         this.transformAllLowerCase(value);
