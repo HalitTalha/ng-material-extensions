@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx/dist/xlsx.mini.min';
 import { MIME_EXCEL_XLS, TYPE_ARRAY, XLSX_COLS } from '../../constants';
 import { Mime } from '../../mime';
 import { ExcelOptions } from '../../options';
