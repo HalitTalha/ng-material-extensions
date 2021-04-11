@@ -30,7 +30,7 @@
     "excel"
   ],
   "dependencies": {
-    "cdk-table-exporter": "^9.1.2",
+    "cdk-table-exporter": "^10.2.0",
     "tslib": "^2.0.0"
   }
 }
