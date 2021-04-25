@@ -13,7 +13,7 @@ export class JsonExporterService extends FileExporter<Options> {
     super();
   }
 
-  public createContent(rows: any[], options?: Options) {
+  public async createContent(rows: any[], options?: Options): Promise<any> {
     return JSON.stringify(rows);
   }
    public getMimeType(): Mime {

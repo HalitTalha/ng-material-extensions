@@ -1,9 +1,10 @@
 import { TxtOptions } from '../../options';
-import * as XLSX from 'xlsx/dist/xlsx.mini.min';
+import { WorkSheet } from 'xlsx';
 import { WorksheetExporter } from './worksheet-exporter';
 import { Mime } from '../../mime';
+import { SheetjsHelperService } from '../sheetjs-helper.service';
 export declare class CsvExporterService extends WorksheetExporter<TxtOptions> {
-    constructor();
-    workSheetToContent(worksheet: XLSX.WorkSheet, options?: TxtOptions): any;
+    constructor(sheetJsHelper: SheetjsHelperService);
+    workSheetToContent(worksheet: WorkSheet, options?: TxtOptions): Promise<any>;
     getMimeType(): Mime;
 }

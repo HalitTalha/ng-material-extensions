@@ -1,4 +1,4 @@
-import { WritingOptions } from 'xlsx/dist/xlsx.mini.min';
+import { WritingOptions } from 'xlsx';
 export interface Options {
     fileName?: string;
 }

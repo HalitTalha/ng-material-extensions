@@ -1,8 +1,8 @@
-import { ExportType } from './export-type';
+import { ExportType } from '../export-type';
 import * as FileSaver from 'file-saver-es';
-import { MAT_TABLE_EXPORTER, DOT, XLS_REGEX } from './constants';
-import { Mime } from './mime';
-import { Options } from './options';
+import { MAT_TABLE_EXPORTER, DOT, XLS_REGEX } from '../constants';
+import { Mime } from '../mime';
+import { Options } from '../options';
 
 export class FileUtil {
   public static save(content: string, mime: Mime, options?: Options) {

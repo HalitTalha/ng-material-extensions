@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('cdk-table-exporter'), require('@angular/material/table'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('mat-table-exporter', ['exports', 'cdk-table-exporter', '@angular/material/table', '@angular/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['mat-table-exporter'] = {}, global['cdk-table-exporter'], global.ng.material.table, global.ng.core));
-}(this, (function (exports, cdkTableExporter, table, core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/material/table'), require('cdk-table-exporter')) :
+    typeof define === 'function' && define.amd ? define('mat-table-exporter', ['exports', '@angular/core', '@angular/material/table', 'cdk-table-exporter'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['mat-table-exporter'] = {}, global.ng.core, global.ng.material.table, global['cdk-table-exporter']));
+}(this, (function (exports, core, table, cdkTableExporter) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -403,6 +403,17 @@
     var MatTableExporterModule = /** @class */ (function () {
         function MatTableExporterModule() {
         }
+        MatTableExporterModule.forRoot = function (configuration) {
+            return {
+                ngModule: MatTableExporterModule,
+                providers: [
+                    {
+                        provide: cdkTableExporter.XLSX_LIGHTWEIGHT,
+                        useValue: configuration.xlsxLightWeight
+                    }
+                ]
+            };
+        };
         return MatTableExporterModule;
     }());
     MatTableExporterModule.decorators = [

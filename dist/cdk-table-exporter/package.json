@@ -1,6 +1,6 @@
 {
   "name": "cdk-table-exporter",
-  "version": "10.2.0",
+  "version": "10.2.3",
   "description": "Abstract CdkTable Exporter",
   "author": "Halit Talha Türe",
   "license": "Apache-2.0",

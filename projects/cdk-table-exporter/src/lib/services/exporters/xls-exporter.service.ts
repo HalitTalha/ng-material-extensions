@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
-import * as XLSX from 'xlsx/dist/xlsx.mini.min';
+import { WorkSheet } from 'xlsx';
 import { MIME_EXCEL_XLS, TYPE_ARRAY, XLSX_COLS } from '../../constants';
 import { Mime } from '../../mime';
 import { ExcelOptions } from '../../options';
 import { WorksheetExporter } from './worksheet-exporter';
+import { SheetjsHelperService } from '../sheetjs-helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class XlsExporterService extends WorksheetExporter<ExcelOptions> {
 
-  constructor() {
-    super();
+  constructor(sheetJsHelper: SheetjsHelperService) {
+    super(sheetJsHelper);
   }
 
-  public workSheetToContent(worksheet: XLSX.WorkSheet, options: ExcelOptions = {} as ExcelOptions): any {
-    const workBook = XLSX.utils.book_new();
+  public async workSheetToContent(worksheet: WorkSheet, options: ExcelOptions = {} as ExcelOptions): Promise<any> {
+    const { utils, write } = await this.sheetJsHelper.getXlsx();
+    const workBook = utils.book_new();
     if (options.columnWidths) {
       worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
     }
     this.correctTypes(options);
-    XLSX.utils.book_append_sheet(workBook, worksheet, options.sheet);
-    return XLSX.write(workBook, options);
+    utils.book_append_sheet(workBook, worksheet, options.sheet);
+    return write(workBook, options);
   }
 
   public getMimeType(): Mime {

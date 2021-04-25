@@ -1,7 +1,7 @@
-import { CdkTableExporter, ServiceLocatorService, DataExtractorService, CdkTableExporterModule } from 'cdk-table-exporter';
-export * from 'cdk-table-exporter';
-import { MatTable, MatTableModule } from '@angular/material/table';
 import { Directive, Renderer2, Host, Self, Optional, NgModule } from '@angular/core';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { CdkTableExporter, ServiceLocatorService, DataExtractorService, XLSX_LIGHTWEIGHT, CdkTableExporterModule } from 'cdk-table-exporter';
+export * from 'cdk-table-exporter';
 
 class MatTableExporterDirective extends CdkTableExporter {
     constructor(renderer, serviceLocator, dataExtractor, table) {
@@ -85,6 +85,17 @@ MatTableExporterDirective.ctorParameters = () => [
 ];
 
 class MatTableExporterModule {
+    static forRoot(configuration) {
+        return {
+            ngModule: MatTableExporterModule,
+            providers: [
+                {
+                    provide: XLSX_LIGHTWEIGHT,
+                    useValue: configuration.xlsxLightWeight
+                }
+            ]
+        };
+    }
 }
 MatTableExporterModule.decorators = [
     { type: NgModule, args: [{

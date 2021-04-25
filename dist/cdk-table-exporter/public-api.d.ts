@@ -14,4 +14,4 @@ export { ServiceLocatorService } from './lib/services/service-locator.service';
 export { DataExtractorService } from './lib/services/data-extractor.service';
 export { Mime } from './lib/mime';
 export * from './lib/constants';
-export { FileUtil } from './lib/file-util';
+export { FileUtil } from './lib/util/file-util';

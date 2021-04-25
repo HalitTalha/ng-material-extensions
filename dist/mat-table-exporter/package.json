@@ -1,6 +1,6 @@
 {
   "name": "mat-table-exporter",
-  "version": "10.2.0",
+  "version": "10.2.3",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
@@ -26,7 +26,7 @@
     "excel"
   ],
   "dependencies": {
-    "cdk-table-exporter": "^9.1.2",
+    "cdk-table-exporter": "^10.2.3",
     "tslib": "^2.0.0"
   },
   "main": "bundles/mat-table-exporter.umd.js",

@@ -1,21 +1,23 @@
 import { COMMA, MIME_CSV, BOM } from './../../constants';
 import { TxtOptions } from '../../options';
 import { Injectable } from '@angular/core';
-import * as XLSX from 'xlsx/dist/xlsx.mini.min';
+import { WorkSheet } from 'xlsx';
 import { WorksheetExporter } from './worksheet-exporter';
 import { Mime } from '../../mime';
+import { SheetjsHelperService } from '../sheetjs-helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CsvExporterService extends WorksheetExporter<TxtOptions> {
 
-  constructor() {
-    super();
+  constructor(sheetJsHelper: SheetjsHelperService) {
+    super(sheetJsHelper);
   }
 
-  public workSheetToContent(worksheet: XLSX.WorkSheet, options?: TxtOptions): any {
-    return BOM + XLSX.utils.sheet_to_csv(worksheet, { FS: options?.delimiter ?? COMMA });
+  public async workSheetToContent(worksheet: WorkSheet, options?: TxtOptions): Promise<any> {
+    const content = (await this.sheetJsHelper.getXlsx()).utils.sheet_to_csv(worksheet, { FS: options?.delimiter ?? COMMA });
+    return BOM + content;
   }
 
   public getMimeType(): Mime {

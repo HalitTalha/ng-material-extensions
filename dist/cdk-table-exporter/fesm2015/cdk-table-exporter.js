@@ -1,6 +1,6 @@
 import { CdkTableModule } from '@angular/cdk/table';
-import { NgModule, ɵɵdefineInjectable, Injectable, ɵɵinject, INJECTOR, Injector, EventEmitter, Directive, Renderer2, Input, Output } from '@angular/core';
-import { utils, write } from 'xlsx/dist/xlsx.mini.min';
+import { NgModule, ɵɵdefineInjectable, Injectable, InjectionToken, ɵɵinject, Optional, Inject, INJECTOR, Injector, EventEmitter, Directive, Renderer2, Input, Output } from '@angular/core';
+import { __awaiter } from 'tslib';
 import { saveAs } from 'file-saver-es';
 
 class CdkTableExporterModule {
@@ -109,6 +109,7 @@ const RETURN = '\n';
 const TAB = '\t';
 const XLSX_COLS = '!cols';
 const BOM = '\uFEFF';
+const XLSX_LIGHTWEIGHT = new InjectionToken('XLSX_LIGHTWEIGHT');
 
 class FileUtil {
     static save(content, mime, options) {
@@ -141,9 +142,10 @@ class FileExporter {
         if (!rows) {
             throw new Error('Empty json array is provided, rows parameter is mandatory!');
         }
-        const content = this.createContent(rows, options);
         const mimeType = this.getMimeType();
-        FileUtil.save(content, mimeType, options);
+        this.createContent(rows, options).then(content => {
+            FileUtil.save(content, mimeType, options);
+        });
     }
 }
 
@@ -151,47 +153,82 @@ class FileExporter {
  * An angular service class that is used to create files out of json object arrays.
  */
 class WorksheetExporter extends FileExporter {
-    constructor() {
+    constructor(sheetJsHelper) {
         super();
+        this.sheetJsHelper = sheetJsHelper;
     }
     createContent(rows, options) {
-        const workSheet = utils.json_to_sheet(rows, {
-            skipHeader: true // we don't want to see object properties as our headers
+        return __awaiter(this, void 0, void 0, function* () {
+            const workSheet = (yield this.sheetJsHelper.getXlsx()).utils.json_to_sheet(rows, {
+                skipHeader: true // we don't want to see object properties as our headers
+            });
+            return yield this.workSheetToContent(workSheet, options);
         });
-        return this.workSheetToContent(workSheet, options);
     }
 }
 
+class SheetjsHelperService {
+    constructor(xlsxLightweight) {
+        this.xlsxLightweight = xlsxLightweight;
+    }
+    getXlsx() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.xlsxLightweight) {
+                return yield import('xlsx/dist/xlsx.mini.min');
+            }
+            else {
+                return yield import('xlsx');
+            }
+        });
+    }
+}
+SheetjsHelperService.ɵprov = ɵɵdefineInjectable({ factory: function SheetjsHelperService_Factory() { return new SheetjsHelperService(ɵɵinject(XLSX_LIGHTWEIGHT, 8)); }, token: SheetjsHelperService, providedIn: "root" });
+SheetjsHelperService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+SheetjsHelperService.ctorParameters = () => [
+    { type: Boolean, decorators: [{ type: Optional }, { type: Inject, args: [XLSX_LIGHTWEIGHT,] }] }
+];
+
 class CsvExporterService extends WorksheetExporter {
-    constructor() {
-        super();
+    constructor(sheetJsHelper) {
+        super(sheetJsHelper);
     }
     workSheetToContent(worksheet, options) {
         var _a;
-        return BOM + utils.sheet_to_csv(worksheet, { FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA });
+        return __awaiter(this, void 0, void 0, function* () {
+            const content = (yield this.sheetJsHelper.getXlsx()).utils.sheet_to_csv(worksheet, { FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA });
+            return BOM + content;
+        });
     }
     getMimeType() {
         return MIME_CSV;
     }
 }
-CsvExporterService.ɵprov = ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+CsvExporterService.ɵprov = ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(ɵɵinject(SheetjsHelperService)); }, token: CsvExporterService, providedIn: "root" });
 CsvExporterService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
             },] }
 ];
-CsvExporterService.ctorParameters = () => [];
+CsvExporterService.ctorParameters = () => [
+    { type: SheetjsHelperService }
+];
 
 class TxtExporterService extends FileExporter {
     constructor() {
         super();
     }
     createContent(rows, options) {
-        let content = '';
-        rows.forEach(element => {
-            content += Object.values(element).join(this.getDelimiter(options)) + RETURN;
+        return __awaiter(this, void 0, void 0, function* () {
+            let content = '';
+            rows.forEach(element => {
+                content += Object.values(element).join(this.getDelimiter(options)) + RETURN;
+            });
+            return content;
         });
-        return content;
     }
     getMimeType() {
         return MIME_TXT;
@@ -214,17 +251,20 @@ TxtExporterService.decorators = [
 TxtExporterService.ctorParameters = () => [];
 
 class XlsExporterService extends WorksheetExporter {
-    constructor() {
-        super();
+    constructor(sheetJsHelper) {
+        super(sheetJsHelper);
     }
     workSheetToContent(worksheet, options = {}) {
-        const workBook = utils.book_new();
-        if (options.columnWidths) {
-            worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
-        }
-        this.correctTypes(options);
-        utils.book_append_sheet(workBook, worksheet, options.sheet);
-        return write(workBook, options);
+        return __awaiter(this, void 0, void 0, function* () {
+            const { utils, write } = yield this.sheetJsHelper.getXlsx();
+            const workBook = utils.book_new();
+            if (options.columnWidths) {
+                worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
+            }
+            this.correctTypes(options);
+            utils.book_append_sheet(workBook, worksheet, options.sheet);
+            return write(workBook, options);
+        });
     }
     getMimeType() {
         return MIME_EXCEL_XLS;
@@ -239,20 +279,24 @@ class XlsExporterService extends WorksheetExporter {
         return columnWidths.map(width => ({ wch: width }));
     }
 }
-XlsExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+XlsExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(ɵɵinject(SheetjsHelperService)); }, token: XlsExporterService, providedIn: "root" });
 XlsExporterService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
             },] }
 ];
-XlsExporterService.ctorParameters = () => [];
+XlsExporterService.ctorParameters = () => [
+    { type: SheetjsHelperService }
+];
 
 class JsonExporterService extends FileExporter {
     constructor() {
         super();
     }
     createContent(rows, options) {
-        return JSON.stringify(rows);
+        return __awaiter(this, void 0, void 0, function* () {
+            return JSON.stringify(rows);
+        });
     }
     getMimeType() {
         return MIME_JSON;
@@ -267,21 +311,23 @@ JsonExporterService.decorators = [
 JsonExporterService.ctorParameters = () => [];
 
 class XlsxExporterService extends XlsExporterService {
-    constructor() {
-        super();
+    constructor(sheetJsHelper) {
+        super(sheetJsHelper);
     }
     // override
     getMimeType() {
         return MIME_EXCEL_XLSX;
     }
 }
-XlsxExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+XlsxExporterService.ɵprov = ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(ɵɵinject(SheetjsHelperService)); }, token: XlsxExporterService, providedIn: "root" });
 XlsxExporterService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
             },] }
 ];
-XlsxExporterService.ctorParameters = () => [];
+XlsxExporterService.ctorParameters = () => [
+    { type: SheetjsHelperService }
+];
 
 class ServiceLocatorService {
     constructor(injector) {
@@ -490,5 +536,5 @@ CdkTableExporter.propDecorators = {
  * Generated bundle index. Do not edit.
  */
 
-export { BOM, CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService };
+export { BOM, CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLSX_LIGHTWEIGHT, XLS_REGEX, XlsExporterService, XlsxExporterService, SheetjsHelperService as ɵa };
 //# sourceMappingURL=cdk-table-exporter.js.map
