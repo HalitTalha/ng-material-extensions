@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/table'), require('@angular/core'), require('xlsx/dist/xlsx.mini.min'), require('file-saver-es')) :
-    typeof define === 'function' && define.amd ? define('cdk-table-exporter', ['exports', '@angular/cdk/table', '@angular/core', 'xlsx/dist/xlsx.mini.min', 'file-saver-es'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['cdk-table-exporter'] = {}, global.ng.cdk.table, global.ng.core, global.XLSX, global.FileSaver));
-}(this, (function (exports, table, i0, XLSX, FileSaver) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/table'), require('@angular/core'), require('file-saver-es')) :
+    typeof define === 'function' && define.amd ? define('cdk-table-exporter', ['exports', '@angular/cdk/table', '@angular/core', 'file-saver-es'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['cdk-table-exporter'] = {}, global.ng.cdk.table, global.ng.core, global.FileSaver));
+}(this, (function (exports, table, i0, FileSaver) { 'use strict';
 
     var CdkTableExporterModule = /** @class */ (function () {
         function CdkTableExporterModule() {
@@ -427,6 +427,7 @@
     var TAB = '\t';
     var XLSX_COLS = '!cols';
     var BOM = '\uFEFF';
+    var XLSX_LIGHTWEIGHT = new i0.InjectionToken('XLSX_LIGHTWEIGHT');
 
     var FileUtil = /** @class */ (function () {
         function FileUtil() {
@@ -463,9 +464,10 @@
             if (!rows) {
                 throw new Error('Empty json array is provided, rows parameter is mandatory!');
             }
-            var content = this.createContent(rows, options);
             var mimeType = this.getMimeType();
-            FileUtil.save(content, mimeType, options);
+            this.createContent(rows, options).then(function (content) {
+                FileUtil.save(content, mimeType, options);
+            });
         };
         return FileExporter;
     }());
@@ -475,39 +477,93 @@
      */
     var WorksheetExporter = /** @class */ (function (_super) {
         __extends(WorksheetExporter, _super);
-        function WorksheetExporter() {
-            return _super.call(this) || this;
+        function WorksheetExporter(sheetJsHelper) {
+            var _this = _super.call(this) || this;
+            _this.sheetJsHelper = sheetJsHelper;
+            return _this;
         }
         WorksheetExporter.prototype.createContent = function (rows, options) {
-            var workSheet = XLSX.utils.json_to_sheet(rows, {
-                skipHeader: true // we don't want to see object properties as our headers
+            return __awaiter(this, void 0, void 0, function () {
+                var workSheet;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.sheetJsHelper.getXlsx()];
+                        case 1:
+                            workSheet = (_a.sent()).utils.json_to_sheet(rows, {
+                                skipHeader: true // we don't want to see object properties as our headers
+                            });
+                            return [4 /*yield*/, this.workSheetToContent(workSheet, options)];
+                        case 2: return [2 /*return*/, _a.sent()];
+                    }
+                });
             });
-            return this.workSheetToContent(workSheet, options);
         };
         return WorksheetExporter;
     }(FileExporter));
 
+    var SheetjsHelperService = /** @class */ (function () {
+        function SheetjsHelperService(xlsxLightweight) {
+            this.xlsxLightweight = xlsxLightweight;
+        }
+        SheetjsHelperService.prototype.getXlsx = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.xlsxLightweight) return [3 /*break*/, 2];
+                            return [4 /*yield*/, import('xlsx/dist/xlsx.mini.min')];
+                        case 1: return [2 /*return*/, _a.sent()];
+                        case 2: return [4 /*yield*/, import('xlsx')];
+                        case 3: return [2 /*return*/, _a.sent()];
+                    }
+                });
+            });
+        };
+        return SheetjsHelperService;
+    }());
+    SheetjsHelperService.ɵprov = i0.ɵɵdefineInjectable({ factory: function SheetjsHelperService_Factory() { return new SheetjsHelperService(i0.ɵɵinject(XLSX_LIGHTWEIGHT, 8)); }, token: SheetjsHelperService, providedIn: "root" });
+    SheetjsHelperService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    SheetjsHelperService.ctorParameters = function () { return [
+        { type: Boolean, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [XLSX_LIGHTWEIGHT,] }] }
+    ]; };
+
     var CsvExporterService = /** @class */ (function (_super) {
         __extends(CsvExporterService, _super);
-        function CsvExporterService() {
-            return _super.call(this) || this;
+        function CsvExporterService(sheetJsHelper) {
+            return _super.call(this, sheetJsHelper) || this;
         }
         CsvExporterService.prototype.workSheetToContent = function (worksheet, options) {
             var _a;
-            return BOM + XLSX.utils.sheet_to_csv(worksheet, { FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA });
+            return __awaiter(this, void 0, void 0, function () {
+                var content;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0: return [4 /*yield*/, this.sheetJsHelper.getXlsx()];
+                        case 1:
+                            content = (_b.sent()).utils.sheet_to_csv(worksheet, { FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA });
+                            return [2 /*return*/, BOM + content];
+                    }
+                });
+            });
         };
         CsvExporterService.prototype.getMimeType = function () {
             return MIME_CSV;
         };
         return CsvExporterService;
     }(WorksheetExporter));
-    CsvExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(); }, token: CsvExporterService, providedIn: "root" });
+    CsvExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CsvExporterService_Factory() { return new CsvExporterService(i0.ɵɵinject(SheetjsHelperService)); }, token: CsvExporterService, providedIn: "root" });
     CsvExporterService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
                 },] }
     ];
-    CsvExporterService.ctorParameters = function () { return []; };
+    CsvExporterService.ctorParameters = function () { return [
+        { type: SheetjsHelperService }
+    ]; };
 
     var TxtExporterService = /** @class */ (function (_super) {
         __extends(TxtExporterService, _super);
@@ -515,12 +571,17 @@
             return _super.call(this) || this;
         }
         TxtExporterService.prototype.createContent = function (rows, options) {
-            var _this = this;
-            var content = '';
-            rows.forEach(function (element) {
-                content += Object.values(element).join(_this.getDelimiter(options)) + RETURN;
+            return __awaiter(this, void 0, void 0, function () {
+                var content;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    content = '';
+                    rows.forEach(function (element) {
+                        content += Object.values(element).join(_this.getDelimiter(options)) + RETURN;
+                    });
+                    return [2 /*return*/, content];
+                });
             });
-            return content;
         };
         TxtExporterService.prototype.getMimeType = function () {
             return MIME_TXT;
@@ -545,18 +606,28 @@
 
     var XlsExporterService = /** @class */ (function (_super) {
         __extends(XlsExporterService, _super);
-        function XlsExporterService() {
-            return _super.call(this) || this;
+        function XlsExporterService(sheetJsHelper) {
+            return _super.call(this, sheetJsHelper) || this;
         }
         XlsExporterService.prototype.workSheetToContent = function (worksheet, options) {
             if (options === void 0) { options = {}; }
-            var workBook = XLSX.utils.book_new();
-            if (options.columnWidths) {
-                worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
-            }
-            this.correctTypes(options);
-            XLSX.utils.book_append_sheet(workBook, worksheet, options.sheet);
-            return XLSX.write(workBook, options);
+            return __awaiter(this, void 0, void 0, function () {
+                var _a, utils, write, workBook;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0: return [4 /*yield*/, this.sheetJsHelper.getXlsx()];
+                        case 1:
+                            _a = _b.sent(), utils = _a.utils, write = _a.write;
+                            workBook = utils.book_new();
+                            if (options.columnWidths) {
+                                worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
+                            }
+                            this.correctTypes(options);
+                            utils.book_append_sheet(workBook, worksheet, options.sheet);
+                            return [2 /*return*/, write(workBook, options)];
+                    }
+                });
+            });
         };
         XlsExporterService.prototype.getMimeType = function () {
             return MIME_EXCEL_XLS;
@@ -572,13 +643,15 @@
         };
         return XlsExporterService;
     }(WorksheetExporter));
-    XlsExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(); }, token: XlsExporterService, providedIn: "root" });
+    XlsExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function XlsExporterService_Factory() { return new XlsExporterService(i0.ɵɵinject(SheetjsHelperService)); }, token: XlsExporterService, providedIn: "root" });
     XlsExporterService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
                 },] }
     ];
-    XlsExporterService.ctorParameters = function () { return []; };
+    XlsExporterService.ctorParameters = function () { return [
+        { type: SheetjsHelperService }
+    ]; };
 
     var JsonExporterService = /** @class */ (function (_super) {
         __extends(JsonExporterService, _super);
@@ -586,7 +659,11 @@
             return _super.call(this) || this;
         }
         JsonExporterService.prototype.createContent = function (rows, options) {
-            return JSON.stringify(rows);
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, JSON.stringify(rows)];
+                });
+            });
         };
         JsonExporterService.prototype.getMimeType = function () {
             return MIME_JSON;
@@ -603,8 +680,8 @@
 
     var XlsxExporterService = /** @class */ (function (_super) {
         __extends(XlsxExporterService, _super);
-        function XlsxExporterService() {
-            return _super.call(this) || this;
+        function XlsxExporterService(sheetJsHelper) {
+            return _super.call(this, sheetJsHelper) || this;
         }
         // override
         XlsxExporterService.prototype.getMimeType = function () {
@@ -612,13 +689,15 @@
         };
         return XlsxExporterService;
     }(XlsExporterService));
-    XlsxExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(); }, token: XlsxExporterService, providedIn: "root" });
+    XlsxExporterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function XlsxExporterService_Factory() { return new XlsxExporterService(i0.ɵɵinject(SheetjsHelperService)); }, token: XlsxExporterService, providedIn: "root" });
     XlsxExporterService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
                 },] }
     ];
-    XlsxExporterService.ctorParameters = function () { return []; };
+    XlsxExporterService.ctorParameters = function () { return [
+        { type: SheetjsHelperService }
+    ]; };
 
     var ServiceLocatorService = /** @class */ (function () {
         function ServiceLocatorService(injector) {
@@ -867,9 +946,11 @@
     exports.TxtExporterService = TxtExporterService;
     exports.WorksheetExporter = WorksheetExporter;
     exports.XLSX_COLS = XLSX_COLS;
+    exports.XLSX_LIGHTWEIGHT = XLSX_LIGHTWEIGHT;
     exports.XLS_REGEX = XLS_REGEX;
     exports.XlsExporterService = XlsExporterService;
     exports.XlsxExporterService = XlsxExporterService;
+    exports.ɵa = SheetjsHelperService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

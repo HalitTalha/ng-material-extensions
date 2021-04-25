@@ -13,7 +13,7 @@ export class TxtExporterService extends FileExporter<TxtOptions> {
     super();
   }
 
-  public createContent(rows: any[], options?: TxtOptions) {
+  public async createContent(rows: any[], options?: TxtOptions): Promise<any> {
     let content = '';
     rows.forEach(element => {
       content += Object.values(element).join(this.getDelimiter(options)) + RETURN;

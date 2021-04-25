@@ -1,4 +1,5 @@
 import { Mime } from './mime';
+import { InjectionToken } from '@angular/core';
 export declare const MAT_TABLE_EXPORTER = "mat-table-exporter";
 export declare const TYPE_ARRAY = "array";
 export declare const CHAR_SET_UTF = ";charset=utf-";
@@ -24,3 +25,4 @@ export declare const RETURN = "\n";
 export declare const TAB = "\t";
 export declare const XLSX_COLS = "!cols";
 export declare const BOM = "\uFEFF";
+export declare const XLSX_LIGHTWEIGHT: InjectionToken<boolean>;

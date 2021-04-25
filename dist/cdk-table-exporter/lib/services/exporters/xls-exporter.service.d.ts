@@ -1,10 +1,11 @@
-import * as XLSX from 'xlsx/dist/xlsx.mini.min';
+import { WorkSheet } from 'xlsx';
 import { Mime } from '../../mime';
 import { ExcelOptions } from '../../options';
 import { WorksheetExporter } from './worksheet-exporter';
+import { SheetjsHelperService } from '../sheetjs-helper.service';
 export declare class XlsExporterService extends WorksheetExporter<ExcelOptions> {
-    constructor();
-    workSheetToContent(worksheet: XLSX.WorkSheet, options?: ExcelOptions): any;
+    constructor(sheetJsHelper: SheetjsHelperService);
+    workSheetToContent(worksheet: WorkSheet, options?: ExcelOptions): Promise<any>;
     getMimeType(): Mime;
     private correctTypes;
     private convertToWch;

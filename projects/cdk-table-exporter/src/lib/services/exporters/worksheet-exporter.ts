@@ -1,22 +1,23 @@
-import * as XLSX from 'xlsx/dist/xlsx.mini.min';
+import { WorkSheet } from 'xlsx';
 import { Mime } from '../../mime';
 import { FileExporter } from './file-exporter';
+import { SheetjsHelperService } from '../sheetjs-helper.service';
 /**
  * An angular service class that is used to create files out of json object arrays.
  */
 export abstract class WorksheetExporter<T> extends FileExporter<T> {
 
-  constructor() {
+  constructor(protected sheetJsHelper: SheetjsHelperService) {
     super();
   }
 
-  public createContent(rows: Array<any>, options?: T): any {
-    const workSheet: XLSX.WorkSheet =  XLSX.utils.json_to_sheet(rows, {
+  public async createContent(rows: Array<any>, options?: T): Promise<any> {
+    const workSheet: WorkSheet =  (await this.sheetJsHelper.getXlsx()).utils.json_to_sheet(rows, {
       skipHeader: true // we don't want to see object properties as our headers
     });
-    return this.workSheetToContent(workSheet, options);
+    return await this.workSheetToContent(workSheet, options);
   }
-  public abstract workSheetToContent(workSheet: XLSX.WorkSheet, options?: T): any;
+  public abstract workSheetToContent(workSheet: WorkSheet, options?: T): Promise<any>;
   public abstract getMimeType(): Mime;
 
 }

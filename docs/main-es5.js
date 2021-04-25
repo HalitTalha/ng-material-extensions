@@ -38,7 +38,7 @@
       !*** ./dist/mat-table-exporter/fesm2015/mat-table-exporter.js ***!
       \****************************************************************/
 
-    /*! exports provided: BOM, CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService, MatTableExporterDirective, MatTableExporterModule */
+    /*! exports provided: BOM, CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLSX_LIGHTWEIGHT, XLS_REGEX, XlsExporterService, XlsxExporterService, ɵa, MatTableExporterDirective, MatTableExporterModule */
 
     /***/
     function BY(module, __webpack_exports__, __webpack_require__) {
@@ -60,243 +60,9 @@
       /* harmony import */
 
 
-      var cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! cdk-table-exporter */
-      "jLbr");
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "BOM", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["BOM"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CHAR_SET_UTF", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CHAR_SET_UTF"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CHAR_SET_UTF_8", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CHAR_SET_UTF_8"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "COMMA", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["COMMA"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CONTENT_TYPE_APPLICATION", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CONTENT_TYPE_APPLICATION"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CONTENT_TYPE_EXCEL", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CONTENT_TYPE_EXCEL"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CONTENT_TYPE_TEXT", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CONTENT_TYPE_TEXT"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CdkTableExporter", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CdkTableExporter"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CdkTableExporterModule", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CdkTableExporterModule"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "CsvExporterService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CsvExporterService"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "DOT", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["DOT"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "DataExtractorService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["DataExtractorService"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "EXTENSION_CSV", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["EXTENSION_CSV"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "EXTENSION_JSON", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["EXTENSION_JSON"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "EXTENSION_TEXT", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["EXTENSION_TEXT"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "EXTENSION_XLS", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["EXTENSION_XLS"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "EXTENSION_XLSX", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["EXTENSION_XLSX"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ExportType", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["ExportType"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "FileExporter", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["FileExporter"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "FileUtil", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["FileUtil"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "JsonExporterService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["JsonExporterService"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MAT_TABLE_EXPORTER", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["MAT_TABLE_EXPORTER"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MIME_CSV", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["MIME_CSV"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MIME_EXCEL_XLS", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["MIME_EXCEL_XLS"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MIME_EXCEL_XLSX", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["MIME_EXCEL_XLSX"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MIME_JSON", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["MIME_JSON"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "MIME_TXT", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["MIME_TXT"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "Mime", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["Mime"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "REF", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["REF"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "RETURN", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["RETURN"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ServiceLocatorService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["ServiceLocatorService"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "TAB", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["TAB"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "TYPE_ARRAY", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["TYPE_ARRAY"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "TxtExporterService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["TxtExporterService"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "WorksheetExporter", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["WorksheetExporter"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "XLSX_COLS", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["XLSX_COLS"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "XLS_REGEX", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["XLS_REGEX"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "XlsExporterService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["XlsExporterService"];
-      });
-      /* harmony reexport (safe) */
-
-
-      __webpack_require__.d(__webpack_exports__, "XlsxExporterService", function () {
-        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["XlsxExporterService"];
-      });
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
       /* harmony import */
 
 
@@ -306,9 +72,255 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! cdk-table-exporter */
+      "jLbr");
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "BOM", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["BOM"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CHAR_SET_UTF", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CHAR_SET_UTF"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CHAR_SET_UTF_8", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CHAR_SET_UTF_8"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "COMMA", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["COMMA"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CONTENT_TYPE_APPLICATION", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CONTENT_TYPE_APPLICATION"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CONTENT_TYPE_EXCEL", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CONTENT_TYPE_EXCEL"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CONTENT_TYPE_TEXT", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CONTENT_TYPE_TEXT"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CdkTableExporter", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CdkTableExporter"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CdkTableExporterModule", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CdkTableExporterModule"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "CsvExporterService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CsvExporterService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "DOT", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["DOT"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "DataExtractorService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["DataExtractorService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EXTENSION_CSV", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["EXTENSION_CSV"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EXTENSION_JSON", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["EXTENSION_JSON"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EXTENSION_TEXT", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["EXTENSION_TEXT"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EXTENSION_XLS", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["EXTENSION_XLS"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EXTENSION_XLSX", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["EXTENSION_XLSX"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ExportType", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["ExportType"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "FileExporter", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["FileExporter"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "FileUtil", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["FileUtil"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "JsonExporterService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["JsonExporterService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MAT_TABLE_EXPORTER", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["MAT_TABLE_EXPORTER"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MIME_CSV", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["MIME_CSV"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MIME_EXCEL_XLS", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["MIME_EXCEL_XLS"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MIME_EXCEL_XLSX", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["MIME_EXCEL_XLSX"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MIME_JSON", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["MIME_JSON"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MIME_TXT", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["MIME_TXT"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "Mime", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["Mime"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "REF", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["REF"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "RETURN", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["RETURN"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ServiceLocatorService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["ServiceLocatorService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "TAB", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["TAB"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "TYPE_ARRAY", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["TYPE_ARRAY"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "TxtExporterService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["TxtExporterService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "WorksheetExporter", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["WorksheetExporter"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "XLSX_COLS", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["XLSX_COLS"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "XLSX_LIGHTWEIGHT", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["XLSX_LIGHTWEIGHT"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "XLS_REGEX", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["XLS_REGEX"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "XlsExporterService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["XlsExporterService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "XlsxExporterService", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["XlsxExporterService"];
+      });
+      /* harmony reexport (safe) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ɵa", function () {
+        return cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["ɵa"];
+      });
 
       var MatTableExporterDirective = /*#__PURE__*/function (_cdk_table_exporter__) {
         _inherits(MatTableExporterDirective, _cdk_table_exporter__);
@@ -421,10 +433,10 @@
         }]);
 
         return MatTableExporterDirective;
-      }(cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CdkTableExporter"]);
+      }(cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CdkTableExporter"]);
 
       MatTableExporterDirective.decorators = [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Directive"],
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
         args: [{
           selector: '[matTableExporter]',
           exportAs: 'matTableExporter'
@@ -433,32 +445,49 @@
 
       MatTableExporterDirective.ctorParameters = function () {
         return [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Renderer2"]
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"]
         }, {
-          type: cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["ServiceLocatorService"]
+          type: cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["ServiceLocatorService"]
         }, {
-          type: cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["DataExtractorService"]
+          type: cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["DataExtractorService"]
         }, {
           type: _angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTable"],
           decorators: [{
-            type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Host"]
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Host"]
           }, {
-            type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Self"]
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Self"]
           }, {
-            type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Optional"]
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
           }]
         }];
       };
 
-      var MatTableExporterModule = function MatTableExporterModule() {
-        _classCallCheck(this, MatTableExporterModule);
-      };
+      var MatTableExporterModule = /*#__PURE__*/function () {
+        function MatTableExporterModule() {
+          _classCallCheck(this, MatTableExporterModule);
+        }
+
+        _createClass(MatTableExporterModule, null, [{
+          key: "forRoot",
+          value: function forRoot(configuration) {
+            return {
+              ngModule: MatTableExporterModule,
+              providers: [{
+                provide: cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["XLSX_LIGHTWEIGHT"],
+                useValue: configuration.xlsxLightWeight
+              }]
+            };
+          }
+        }]);
+
+        return MatTableExporterModule;
+      }();
 
       MatTableExporterModule.decorators = [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"],
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
           declarations: [MatTableExporterDirective],
-          imports: [_angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableModule"], cdk_table_exporter__WEBPACK_IMPORTED_MODULE_0__["CdkTableExporterModule"]],
+          imports: [_angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableModule"], cdk_table_exporter__WEBPACK_IMPORTED_MODULE_2__["CdkTableExporterModule"]],
           exports: [MatTableExporterDirective]
         }]
       }];
@@ -718,21 +747,6 @@
       module.exports = __webpack_require__(
       /*! D:\angular_workspace\ng-material-extensions\src\main.ts */
       "zUnb");
-      /***/
-    },
-
-    /***/
-    1:
-    /*!********************!*\
-      !*** fs (ignored) ***!
-      \********************/
-
-    /*! no static exports found */
-
-    /***/
-    function _(module, exports) {
-      /* (ignored) */
-
       /***/
     },
 
@@ -5779,7 +5793,7 @@
       !*** ./dist/cdk-table-exporter/fesm2015/cdk-table-exporter.js ***!
       \****************************************************************/
 
-    /*! exports provided: BOM, CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLS_REGEX, XlsExporterService, XlsxExporterService */
+    /*! exports provided: BOM, CHAR_SET_UTF, CHAR_SET_UTF_8, COMMA, CONTENT_TYPE_APPLICATION, CONTENT_TYPE_EXCEL, CONTENT_TYPE_TEXT, CdkTableExporter, CdkTableExporterModule, CsvExporterService, DOT, DataExtractorService, EXTENSION_CSV, EXTENSION_JSON, EXTENSION_TEXT, EXTENSION_XLS, EXTENSION_XLSX, ExportType, FileExporter, FileUtil, JsonExporterService, MAT_TABLE_EXPORTER, MIME_CSV, MIME_EXCEL_XLS, MIME_EXCEL_XLSX, MIME_JSON, MIME_TXT, Mime, REF, RETURN, ServiceLocatorService, TAB, TYPE_ARRAY, TxtExporterService, WorksheetExporter, XLSX_COLS, XLSX_LIGHTWEIGHT, XLS_REGEX, XlsExporterService, XlsxExporterService, ɵa */
 
     /***/
     function jLbr(module, __webpack_exports__, __webpack_require__) {
@@ -6005,6 +6019,12 @@
       /* harmony export (binding) */
 
 
+      __webpack_require__.d(__webpack_exports__, "XLSX_LIGHTWEIGHT", function () {
+        return XLSX_LIGHTWEIGHT;
+      });
+      /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "XLS_REGEX", function () {
         return XLS_REGEX;
       });
@@ -6019,6 +6039,12 @@
 
       __webpack_require__.d(__webpack_exports__, "XlsxExporterService", function () {
         return XlsxExporterService;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ɵa", function () {
+        return SheetjsHelperService;
       });
       /* harmony import */
 
@@ -6035,13 +6061,9 @@
       /* harmony import */
 
 
-      var xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! xlsx/dist/xlsx.mini.min */
-      "UWmM");
-      /* harmony import */
-
-
-      var xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__);
+      var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
       /* harmony import */
 
 
@@ -6189,6 +6211,7 @@
       var TAB = '\t';
       var XLSX_COLS = '!cols';
       var BOM = "\uFEFF";
+      var XLSX_LIGHTWEIGHT = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('XLSX_LIGHTWEIGHT');
 
       var FileUtil = /*#__PURE__*/function () {
         function FileUtil() {
@@ -6245,9 +6268,10 @@
               throw new Error('Empty json array is provided, rows parameter is mandatory!');
             }
 
-            var content = this.createContent(rows, options);
             var mimeType = this.getMimeType();
-            FileUtil.save(content, mimeType, options);
+            this.createContent(rows, options).then(function (content) {
+              FileUtil.save(content, mimeType, options);
+            });
           }
         }]);
 
@@ -6263,35 +6287,141 @@
 
         var _super5 = _createSuper(WorksheetExporter);
 
-        function WorksheetExporter() {
+        function WorksheetExporter(sheetJsHelper) {
+          var _this5;
+
           _classCallCheck(this, WorksheetExporter);
 
-          return _super5.call(this);
+          _this5 = _super5.call(this);
+          _this5.sheetJsHelper = sheetJsHelper;
+          return _this5;
         }
 
         _createClass(WorksheetExporter, [{
           key: "createContent",
           value: function createContent(rows, options) {
-            var workSheet = xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__["utils"].json_to_sheet(rows, {
-              skipHeader: true // we don't want to see object properties as our headers
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var workSheet;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return this.sheetJsHelper.getXlsx();
 
-            });
-            return this.workSheetToContent(workSheet, options);
+                    case 2:
+                      workSheet = _context.sent.utils.json_to_sheet(rows, {
+                        skipHeader: true // we don't want to see object properties as our headers
+
+                      });
+                      _context.next = 5;
+                      return this.workSheetToContent(workSheet, options);
+
+                    case 5:
+                      return _context.abrupt("return", _context.sent);
+
+                    case 6:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
           }
         }]);
 
         return WorksheetExporter;
       }(FileExporter);
 
+      var SheetjsHelperService = /*#__PURE__*/function () {
+        function SheetjsHelperService(xlsxLightweight) {
+          _classCallCheck(this, SheetjsHelperService);
+
+          this.xlsxLightweight = xlsxLightweight;
+        }
+
+        _createClass(SheetjsHelperService, [{
+          key: "getXlsx",
+          value: function getXlsx() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      if (!this.xlsxLightweight) {
+                        _context2.next = 6;
+                        break;
+                      }
+
+                      _context2.next = 3;
+                      return __webpack_require__.e(
+                      /*! import() | xlsx-dist-xlsx-mini-min */
+                      "xlsx-dist-xlsx-mini-min").then(__webpack_require__.t.bind(null,
+                      /*! xlsx/dist/xlsx.mini.min */
+                      "UWmM", 7));
+
+                    case 3:
+                      return _context2.abrupt("return", _context2.sent);
+
+                    case 6:
+                      _context2.next = 8;
+                      return __webpack_require__.e(
+                      /*! import() | xlsx */
+                      "xlsx").then(__webpack_require__.t.bind(null,
+                      /*! xlsx */
+                      "EUZL", 7));
+
+                    case 8:
+                      return _context2.abrupt("return", _context2.sent);
+
+                    case 9:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
+          }
+        }]);
+
+        return SheetjsHelperService;
+      }();
+
+      SheetjsHelperService.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"])({
+        factory: function SheetjsHelperService_Factory() {
+          return new SheetjsHelperService(Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"])(XLSX_LIGHTWEIGHT, 8));
+        },
+        token: SheetjsHelperService,
+        providedIn: "root"
+      });
+      SheetjsHelperService.decorators = [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
+        args: [{
+          providedIn: 'root'
+        }]
+      }];
+
+      SheetjsHelperService.ctorParameters = function () {
+        return [{
+          type: Boolean,
+          decorators: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"]
+          }, {
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"],
+            args: [XLSX_LIGHTWEIGHT]
+          }]
+        }];
+      };
+
       var CsvExporterService = /*#__PURE__*/function (_WorksheetExporter) {
         _inherits(CsvExporterService, _WorksheetExporter);
 
         var _super6 = _createSuper(CsvExporterService);
 
-        function CsvExporterService() {
+        function CsvExporterService(sheetJsHelper) {
           _classCallCheck(this, CsvExporterService);
 
-          return _super6.call(this);
+          return _super6.call(this, sheetJsHelper);
         }
 
         _createClass(CsvExporterService, [{
@@ -6299,9 +6429,28 @@
           value: function workSheetToContent(worksheet, options) {
             var _a;
 
-            return BOM + xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__["utils"].sheet_to_csv(worksheet, {
-              FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA
-            });
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var content;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return this.sheetJsHelper.getXlsx();
+
+                    case 2:
+                      content = _context3.sent.utils.sheet_to_csv(worksheet, {
+                        FS: (_a = options === null || options === void 0 ? void 0 : options.delimiter) !== null && _a !== void 0 ? _a : COMMA
+                      });
+                      return _context3.abrupt("return", BOM + content);
+
+                    case 4:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
           }
         }, {
           key: "getMimeType",
@@ -6315,7 +6464,7 @@
 
       CsvExporterService.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"])({
         factory: function CsvExporterService_Factory() {
-          return new CsvExporterService();
+          return new CsvExporterService(Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"])(SheetjsHelperService));
         },
         token: CsvExporterService,
         providedIn: "root"
@@ -6328,7 +6477,9 @@
       }];
 
       CsvExporterService.ctorParameters = function () {
-        return [];
+        return [{
+          type: SheetjsHelperService
+        }];
       };
 
       var TxtExporterService = /*#__PURE__*/function (_FileExporter2) {
@@ -6345,13 +6496,27 @@
         _createClass(TxtExporterService, [{
           key: "createContent",
           value: function createContent(rows, options) {
-            var _this5 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var _this6 = this;
 
-            var content = '';
-            rows.forEach(function (element) {
-              content += Object.values(element).join(_this5.getDelimiter(options)) + RETURN;
-            });
-            return content;
+              var content;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      content = '';
+                      rows.forEach(function (element) {
+                        content += Object.values(element).join(_this6.getDelimiter(options)) + RETURN;
+                      });
+                      return _context4.abrupt("return", content);
+
+                    case 3:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4);
+            }));
           }
         }, {
           key: "getMimeType",
@@ -6395,25 +6560,47 @@
 
         var _super8 = _createSuper(XlsExporterService);
 
-        function XlsExporterService() {
+        function XlsExporterService(sheetJsHelper) {
           _classCallCheck(this, XlsExporterService);
 
-          return _super8.call(this);
+          return _super8.call(this, sheetJsHelper);
         }
 
         _createClass(XlsExporterService, [{
           key: "workSheetToContent",
           value: function workSheetToContent(worksheet) {
             var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var workBook = xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__["utils"].book_new();
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var _yield$this$sheetJsHe, utils, write, workBook;
 
-            if (options.columnWidths) {
-              worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
-            }
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
+                      return this.sheetJsHelper.getXlsx();
 
-            this.correctTypes(options);
-            xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(workBook, worksheet, options.sheet);
-            return Object(xlsx_dist_xlsx_mini_min__WEBPACK_IMPORTED_MODULE_2__["write"])(workBook, options);
+                    case 2:
+                      _yield$this$sheetJsHe = _context5.sent;
+                      utils = _yield$this$sheetJsHe.utils;
+                      write = _yield$this$sheetJsHe.write;
+                      workBook = utils.book_new();
+
+                      if (options.columnWidths) {
+                        worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
+                      }
+
+                      this.correctTypes(options);
+                      utils.book_append_sheet(workBook, worksheet, options.sheet);
+                      return _context5.abrupt("return", write(workBook, options));
+
+                    case 10:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this);
+            }));
           }
         }, {
           key: "getMimeType",
@@ -6445,7 +6632,7 @@
 
       XlsExporterService.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"])({
         factory: function XlsExporterService_Factory() {
-          return new XlsExporterService();
+          return new XlsExporterService(Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"])(SheetjsHelperService));
         },
         token: XlsExporterService,
         providedIn: "root"
@@ -6458,7 +6645,9 @@
       }];
 
       XlsExporterService.ctorParameters = function () {
-        return [];
+        return [{
+          type: SheetjsHelperService
+        }];
       };
 
       var JsonExporterService = /*#__PURE__*/function (_FileExporter3) {
@@ -6475,7 +6664,20 @@
         _createClass(JsonExporterService, [{
           key: "createContent",
           value: function createContent(rows, options) {
-            return JSON.stringify(rows);
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      return _context6.abrupt("return", JSON.stringify(rows));
+
+                    case 1:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6);
+            }));
           }
         }, {
           key: "getMimeType",
@@ -6510,10 +6712,10 @@
 
         var _super10 = _createSuper(XlsxExporterService);
 
-        function XlsxExporterService() {
+        function XlsxExporterService(sheetJsHelper) {
           _classCallCheck(this, XlsxExporterService);
 
-          return _super10.call(this);
+          return _super10.call(this, sheetJsHelper);
         } // override
 
 
@@ -6529,7 +6731,7 @@
 
       XlsxExporterService.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"])({
         factory: function XlsxExporterService_Factory() {
-          return new XlsxExporterService();
+          return new XlsxExporterService(Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"])(SheetjsHelperService));
         },
         token: XlsxExporterService,
         providedIn: "root"
@@ -6542,7 +6744,9 @@
       }];
 
       XlsxExporterService.ctorParameters = function () {
-        return [];
+        return [{
+          type: SheetjsHelperService
+        }];
       };
 
       var ServiceLocatorService = /*#__PURE__*/function () {
@@ -6711,11 +6915,11 @@
         }, {
           key: "getSelectedRows",
           value: function getSelectedRows(rows) {
-            var _this6 = this;
+            var _this7 = this;
 
             if (this.isSelectiveExport()) {
               return rows.filter(function (_, i) {
-                return _this6._selectedRows.includes(_this6.getPaginatedRowIndex(i));
+                return _this7._selectedRows.includes(_this7.getPaginatedRowIndex(i));
               });
             } else {
               return rows;
@@ -6746,27 +6950,27 @@
         }, {
           key: "initPageHandler",
           value: function initPageHandler() {
-            var _this7 = this;
+            var _this8 = this;
 
             if (!this._subscription) {
               this._subscription = this.getPageChangeObservable().subscribe(function () {
                 setTimeout(function () {
-                  if (_this7._isIterating) {
-                    _this7.extractDataOnCurrentPage();
+                  if (_this8._isIterating) {
+                    _this8.extractDataOnCurrentPage();
 
-                    if (_this7.hasNextPage()) {
-                      _this7.nextPage();
+                    if (_this8.hasNextPage()) {
+                      _this8.nextPage();
                     } else {
-                      _this7._isIterating = false;
+                      _this8._isIterating = false;
 
-                      _this7.goToPage(_this7._initialPageIndex);
+                      _this8.goToPage(_this8._initialPageIndex);
                     }
-                  } else if (_this7._isExporting) {
-                    _this7._isExporting = false;
+                  } else if (_this8._isExporting) {
+                    _this8._isExporting = false;
 
-                    _this7.extractTableFooter();
+                    _this8.extractTableFooter();
 
-                    _this7.exportExtractedData();
+                    _this8.exportExtractedData();
                   }
                 });
               });
