@@ -17,7 +17,7 @@
   "dependencies": {
     "file-saver-es": "^2.0.5",
     "tslib": "^2.0.0",
-    "xlsx": "^0.16.9"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@angular/cdk": "~10.2.7",
