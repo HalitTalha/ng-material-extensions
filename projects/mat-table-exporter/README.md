@@ -56,6 +56,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 
 &nbsp;
 
+
 ## API
 
 ### MatTableExporterDirective

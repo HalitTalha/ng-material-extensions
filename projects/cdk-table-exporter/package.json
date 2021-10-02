@@ -1,6 +1,6 @@
 {
   "name": "cdk-table-exporter",
-  "version": "10.2.3",
+  "version": "10.2.4",
   "description": "Abstract CdkTable Exporter",
   "author": "Halit Talha Türe",
   "license": "Apache-2.0",
@@ -17,7 +17,7 @@
   "dependencies": {
     "file-saver-es": "^2.0.5",
     "tslib": "^2.0.0",
-    "xlsx": "^0.16.9"
+    "xlsx": "^0.17.2"
   },
   "devDependencies": {
     "@angular/cdk": "~10.2.7",
