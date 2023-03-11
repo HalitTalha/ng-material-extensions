@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -40,7 +40,7 @@
     "lodash-es": "^4.17.20",
     "marked": "^0.8.0",
     "ngx-markdown": "^11.1.2",
-    "node-sass": "^4.13.1",
+    "sass": "^1.59.2",
     "prismjs": "^1.25.0",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
