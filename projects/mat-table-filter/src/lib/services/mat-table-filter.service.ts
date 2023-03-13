@@ -34,7 +34,7 @@ export class MatTableFilterService {
       if (itemPair.item?.hasOwnProperty(key)) {
         // if example entity has additional columns then search fails
         const itemValue = cloneDeep(itemPair.item[key]);
-        const nextPropertyName = this.getNextPropertyName(propertyName, key);
+        const nextPropertyName = this.getNextPropertyName(key, propertyName);
         const options = this.finalizeOptionsForProperty(commonOptions, propertyOptions, nextPropertyName);
         if (isFunction(options)) { // if user defined predicate is present for property
           const customPredicate = options as PredicateFunc;
@@ -82,7 +82,7 @@ export class MatTableFilterService {
     }
   }
 
-  private getNextPropertyName(propertyName: string, key: string): string {
+  private getNextPropertyName(key: string, propertyName?: string): string {
     return propertyName ? (propertyName + '.' + key) : key;
   }
 
@@ -91,11 +91,7 @@ export class MatTableFilterService {
   }
 
   public toPlainJson(object: any): JSON {
-    if (object) {
-      return JSON.parse(JSON.stringify(object));
-    } else {
-      return undefined;
-    }
+    return JSON.parse(JSON.stringify(object));
   }
 
   private isAlphaNumeric(value: any): boolean {

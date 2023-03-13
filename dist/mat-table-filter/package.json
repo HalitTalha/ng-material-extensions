@@ -6,19 +6,18 @@
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-filter"
   },
-  "version": "10.2.0",
+  "version": "15.0.0",
   "description": "Provides filtering support for @angular/material tables",
   "homepage": "https://halittalha.github.io/ng-material-extensions/",
   "peerDependencies": {
-    "@angular/cdk": ">=10.2.7",
-    "@angular/common": ">=10.2.4",
-    "@angular/core": ">=10.2.4",
-    "@angular/material": ">=10.2.7"
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0"
   },
   "dependencies": {
-    "lodash-es": "^4.17.20",
-    "tslib": "^2.0.0"
+    "lodash-es": "^4.17.21",
+    "tslib": "^2.3.0"
   },
+  "sideEffects": false,
   "keywords": [
     "angular",
     "material",
@@ -31,12 +30,23 @@
     "directive",
     "nested"
   ],
-  "main": "bundles/mat-table-filter.umd.js",
-  "module": "fesm2015/mat-table-filter.js",
-  "es2015": "fesm2015/mat-table-filter.js",
-  "esm2015": "esm2015/mat-table-filter.js",
-  "fesm2015": "fesm2015/mat-table-filter.js",
-  "typings": "mat-table-filter.d.ts",
-  "metadata": "mat-table-filter.metadata.json",
-  "sideEffects": false
+  "module": "fesm2015/mat-table-filter.mjs",
+  "es2020": "fesm2020/mat-table-filter.mjs",
+  "esm2020": "esm2020/mat-table-filter.mjs",
+  "fesm2020": "fesm2020/mat-table-filter.mjs",
+  "fesm2015": "fesm2015/mat-table-filter.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/mat-table-filter.mjs",
+      "es2020": "./fesm2020/mat-table-filter.mjs",
+      "es2015": "./fesm2015/mat-table-filter.mjs",
+      "node": "./fesm2015/mat-table-filter.mjs",
+      "default": "./fesm2020/mat-table-filter.mjs"
+    }
+  }
 }

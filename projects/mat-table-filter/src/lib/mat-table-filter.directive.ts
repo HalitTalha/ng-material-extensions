@@ -42,7 +42,7 @@ export class MatTableFilterDirective implements DoCheck {
 
 
   private initDebounceSubject() {
-    this._exampleEntitySubject = new BehaviorSubject<void>(null);
+    this._exampleEntitySubject = new BehaviorSubject<void>(undefined);
     this._exampleEntitySubject.pipe(
       debounceTime(this.debounceTime))
       .subscribe(_ => {
