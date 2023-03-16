@@ -35,7 +35,7 @@ export class PropertyOptionsComponent implements OnInit {
   propertyOptions: PropertyOptions;
 
   displayedColumns: string[] = ['name', 'captainName', 'captainSurname', 'isConstitutionClass'];
-  dataSource;
+  dataSource: any;
   constructor() {
   }
 

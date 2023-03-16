@@ -39,7 +39,7 @@ export class ArrayFilterComponent implements OnInit {
   filterEntity: Product;
   filterType: MatTableFilter;
   displayedColumns: string[] = ['category', 'brand', 'availableSizes'];
-  dataSource;
+  dataSource: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   add(event: MatChipInputEvent): void {

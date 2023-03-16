@@ -90,7 +90,9 @@ export class MatTableFilterService {
     return !isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
   }
 
-  public toPlainJson(object: any): JSON {
+  public toPlainJson(object?: any): JSON | null {
+    if (!object)
+      return null;
     return JSON.parse(JSON.stringify(object));
   }
 

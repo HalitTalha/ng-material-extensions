@@ -28,8 +28,8 @@ export class CustomColumnFilterComponent implements OnInit {
   filterEntity: Route;
   filterType: MatTableFilter;
   displayedColumns: string[] = ['name', 'journeyTime'];
-  propertyOptions;
-  dataSource;
+  propertyOptions: any;
+  dataSource: any;
 
   constructor() {
   }

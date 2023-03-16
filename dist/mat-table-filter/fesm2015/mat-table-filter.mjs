@@ -200,6 +200,8 @@ class MatTableFilterService {
         return !isEqual(this.toPlainJson(oldEntity), this.toPlainJson(newEntity));
     }
     toPlainJson(object) {
+        if (!object)
+            return null;
         return JSON.parse(JSON.stringify(object));
     }
     isAlphaNumeric(value) {

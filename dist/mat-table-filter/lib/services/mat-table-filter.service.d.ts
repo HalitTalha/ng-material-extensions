@@ -12,7 +12,7 @@ export declare class MatTableFilterService {
     private finalizeOptionsForProperty;
     private getNextPropertyName;
     isChanged(oldEntity: any, newEntity: any): boolean;
-    toPlainJson(object: any): JSON;
+    toPlainJson(object?: any): JSON | null;
     private isAlphaNumeric;
     static ɵfac: i0.ɵɵFactoryDeclaration<MatTableFilterService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<MatTableFilterService>;

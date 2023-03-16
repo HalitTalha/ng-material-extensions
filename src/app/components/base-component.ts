@@ -1,6 +1,6 @@
 export class BaseComponent {
 
-  examples;
+  examples: any;
 
   constructor() {
   }
