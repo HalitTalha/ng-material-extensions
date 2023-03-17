@@ -29,6 +29,10 @@
         "dist/example-components/*"
       ]
     },
+    "typeRoots": [
+      "./typings",
+      "node_modules/@types"
+    ],
     "strictPropertyInitialization": false,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

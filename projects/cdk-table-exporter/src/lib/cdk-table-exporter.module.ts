@@ -1,16 +1,11 @@
+import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
-import { CdkTableExporterComponent } from './cdk-table-exporter.component';
-
-
 
 @NgModule({
-  declarations: [
-    CdkTableExporterComponent
-  ],
+  declarations: [],
   imports: [
+    CdkTableModule
   ],
-  exports: [
-    CdkTableExporterComponent
-  ]
+  exports: []
 })
 export class CdkTableExporterModule { }

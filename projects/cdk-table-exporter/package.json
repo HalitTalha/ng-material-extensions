@@ -1,12 +1,37 @@
 {
   "name": "cdk-table-exporter",
-  "version": "0.0.1",
+  "version": "15.0.0",
+  "description": "Abstract CdkTable Exporter",
+  "author": "Halit Talha Türe",
+  "license": "Apache-2.0",
+  "homepage": "https://halittalha.github.io/ng-material-extensions",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/cdk-table-exporter"
+  },
   "peerDependencies": {
+    "@angular/cdk": "^15.2.2",
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "file-saver-es": "^2.0.5",
+    "tslib": "^2.3.0",
+    "xlsx": "^0.18.5"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/file-saver-es": "^2.0.1"
+  },
+  "keywords": [
+    "cdktable",
+    "angular",
+    "material",
+    "mattable",
+    "table",
+    "export",
+    "paginated",
+    "table",
+    "excel"
+  ]
 }

@@ -3,5 +3,10 @@
   "dest": "../../dist/cdk-table-exporter",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "xlsx",
+    "angular/cdk",
+    "file-saver"
+  ]
 }

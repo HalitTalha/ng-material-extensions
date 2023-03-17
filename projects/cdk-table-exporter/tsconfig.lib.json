@@ -6,9 +6,15 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    "noImplicitAny": false
   },
   "exclude": [
     "**/*.spec.ts"
-  ]
+  ],
+  "paths": {
+    "file-saver-es": [
+      "@types/file-saver"
+    ]
+  }
 }
