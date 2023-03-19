@@ -1,5 +1,5 @@
 import { DataRowOutlet } from '@angular/cdk/table';
-import { Directive, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ExportType } from './export-type';
 import { ExcelOptions, Options, TxtOptions } from './options';
@@ -38,7 +38,6 @@ export abstract class CdkTableExporter {
   private _selectedRows: Array<number>;
 
   constructor(
-    protected renderer: Renderer2,
     private serviceLocator: ServiceLocatorService,
     private dataExtractor: DataExtractorService,
     protected _cdkTable: any
