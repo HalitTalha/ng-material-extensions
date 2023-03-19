@@ -71,8 +71,8 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   /**
    * MatTable implementation of getPageChangeObservable
    */
-  public getPageChangeObservable(): Observable<any> {
-    return this.getPaginator().page;
+  public getPageChangeObservable(): Observable<any> | undefined {
+    return this.getPaginator()?.page;
   }
 
   private getDataSource(): MatTableDataSource<any> {
@@ -80,7 +80,7 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   }
 
   private getPaginator(): MatPaginator | null {
-    return this.getDataSource().paginator;
+    return this.getDataSource()?.paginator;
   }
 
   private enablePaginator(value: boolean) {

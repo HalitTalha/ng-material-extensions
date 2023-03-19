@@ -77,9 +77,9 @@ class AlphaNumericPredicateService extends FilterPredicate {
         return itemPair.item.endsWith(itemPair.example);
     }
 }
-AlphaNumericPredicateService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: AlphaNumericPredicateService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-AlphaNumericPredicateService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: AlphaNumericPredicateService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: AlphaNumericPredicateService, decorators: [{
+AlphaNumericPredicateService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: AlphaNumericPredicateService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+AlphaNumericPredicateService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: AlphaNumericPredicateService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: AlphaNumericPredicateService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -115,9 +115,9 @@ class ArrayPredicateService extends FilterPredicate {
 // tslint:disable-next-line:max-line-length
 ArrayPredicateService.UNSUPPORTED_OPERATION_WARNING = 'This filterType is unsupported for array filtering. FilterType.ANYWHERE is executed instead!';
 ArrayPredicateService.SUGGESTION_WARNING = 'You can set a custom predicate for the array property through PropertyOptions!';
-ArrayPredicateService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: ArrayPredicateService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-ArrayPredicateService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: ArrayPredicateService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: ArrayPredicateService, decorators: [{
+ArrayPredicateService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: ArrayPredicateService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+ArrayPredicateService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: ArrayPredicateService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: ArrayPredicateService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -208,9 +208,9 @@ class MatTableFilterService {
         return isString(value) || isNumber(value);
     }
 }
-MatTableFilterService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterService, deps: [{ token: AlphaNumericPredicateService }, { token: ArrayPredicateService }], target: i0.ɵɵFactoryTarget.Injectable });
-MatTableFilterService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterService, decorators: [{
+MatTableFilterService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterService, deps: [{ token: AlphaNumericPredicateService }, { token: ArrayPredicateService }], target: i0.ɵɵFactoryTarget.Injectable });
+MatTableFilterService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -264,9 +264,9 @@ class MatTableFilterDirective {
         return matTable.dataSource;
     }
 }
-MatTableFilterDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterDirective, deps: [{ token: MatTableFilterService }, { token: i2.MatTable, host: true, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
-MatTableFilterDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.2", type: MatTableFilterDirective, selector: "[matTableFilter]", inputs: { exampleEntity: "exampleEntity", debounceTime: "debounceTime", filterType: "filterType", caseSensitive: "caseSensitive", customPredicate: "customPredicate", propertyOptions: "propertyOptions" }, exportAs: ["matTableFilter"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterDirective, decorators: [{
+MatTableFilterDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterDirective, deps: [{ token: MatTableFilterService }, { token: i2.MatTable, host: true, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
+MatTableFilterDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "14.3.0", type: MatTableFilterDirective, selector: "[matTableFilter]", inputs: { exampleEntity: "exampleEntity", debounceTime: "debounceTime", filterType: "filterType", caseSensitive: "caseSensitive", customPredicate: "customPredicate", propertyOptions: "propertyOptions" }, exportAs: ["matTableFilter"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[matTableFilter]',
@@ -296,10 +296,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImpor
 
 class MatTableFilterModule {
 }
-MatTableFilterModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-MatTableFilterModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterModule, declarations: [MatTableFilterDirective], imports: [MatTableModule], exports: [MatTableFilterDirective] });
-MatTableFilterModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterModule, imports: [MatTableModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterModule, decorators: [{
+MatTableFilterModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+MatTableFilterModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterModule, declarations: [MatTableFilterDirective], imports: [MatTableModule], exports: [MatTableFilterDirective] });
+MatTableFilterModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterModule, imports: [MatTableModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [MatTableFilterDirective],

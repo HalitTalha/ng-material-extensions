@@ -31,7 +31,7 @@ export abstract class CdkTableExporter {
 
   private _isExporting: boolean;
 
-  private _subscription: Subscription;
+  private _subscription: Subscription | undefined;
 
   private _options?: Options;
 
@@ -72,7 +72,7 @@ export abstract class CdkTableExporter {
   /**
    * Must return an observable that notifies the subscribers about page changes
    */
-  public abstract getPageChangeObservable(): Observable<any>;
+  public abstract getPageChangeObservable(): Observable<any> | undefined;
 
   /**
    * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
@@ -167,7 +167,7 @@ export abstract class CdkTableExporter {
 
   private initPageHandler(): void {
     if (!this._subscription) {
-      this._subscription = this.getPageChangeObservable().subscribe(() => {
+      this._subscription = this.getPageChangeObservable()?.subscribe(() => {
         setTimeout(() => {
           if (this._isIterating) {
             this.extractDataOnCurrentPage();

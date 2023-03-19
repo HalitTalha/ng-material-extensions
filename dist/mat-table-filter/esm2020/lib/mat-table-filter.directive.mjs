@@ -52,9 +52,9 @@ export class MatTableFilterDirective {
         return matTable.dataSource;
     }
 }
-MatTableFilterDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterDirective, deps: [{ token: i1.MatTableFilterService }, { token: i2.MatTable, host: true, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
-MatTableFilterDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.2", type: MatTableFilterDirective, selector: "[matTableFilter]", inputs: { exampleEntity: "exampleEntity", debounceTime: "debounceTime", filterType: "filterType", caseSensitive: "caseSensitive", customPredicate: "customPredicate", propertyOptions: "propertyOptions" }, exportAs: ["matTableFilter"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.2", ngImport: i0, type: MatTableFilterDirective, decorators: [{
+MatTableFilterDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterDirective, deps: [{ token: i1.MatTableFilterService }, { token: i2.MatTable, host: true, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
+MatTableFilterDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "14.3.0", type: MatTableFilterDirective, selector: "[matTableFilter]", inputs: { exampleEntity: "exampleEntity", debounceTime: "debounceTime", filterType: "filterType", caseSensitive: "caseSensitive", customPredicate: "customPredicate", propertyOptions: "propertyOptions" }, exportAs: ["matTableFilter"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: MatTableFilterDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[matTableFilter]',
