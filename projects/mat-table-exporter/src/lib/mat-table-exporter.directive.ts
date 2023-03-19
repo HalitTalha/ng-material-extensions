@@ -61,7 +61,7 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
    * MatTable implementation of goToPage
    */
   public goToPage(index: number): void {
-    const paginator = this.getPaginator();
+    const paginator: MatPaginator | null = this.getPaginator();
     if (paginator) {
       paginator.pageIndex = index;
       paginator._changePageSize(paginator.pageSize);
@@ -79,14 +79,15 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
     return this._cdkTable.dataSource as MatTableDataSource<any>;
   }
 
-  private getPaginator(): MatTableDataSourcePaginator | null {
+  private getPaginator(): MatPaginator | null {
     return this.getDataSource().paginator;
   }
 
   private enablePaginator(value: boolean) {
-    if (this.getPaginator()) {
-      this.getPaginator().disabled = !value;
-      this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+    const paginator: MatPaginator | null = this.getPaginator();
+    if (paginator) {
+      paginator.disabled = !value;
+      paginator._changePageSize(paginator.pageSize);
     }
   }
 
