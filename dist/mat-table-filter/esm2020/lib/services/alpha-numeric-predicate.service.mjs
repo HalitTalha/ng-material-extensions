@@ -18,9 +18,9 @@ export class AlphaNumericPredicateService extends FilterPredicate {
         return itemPair.item.endsWith(itemPair.example);
     }
 }
-AlphaNumericPredicateService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: AlphaNumericPredicateService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-AlphaNumericPredicateService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: AlphaNumericPredicateService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.3.0", ngImport: i0, type: AlphaNumericPredicateService, decorators: [{
+AlphaNumericPredicateService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.3", ngImport: i0, type: AlphaNumericPredicateService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+AlphaNumericPredicateService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.3", ngImport: i0, type: AlphaNumericPredicateService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.3", ngImport: i0, type: AlphaNumericPredicateService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
