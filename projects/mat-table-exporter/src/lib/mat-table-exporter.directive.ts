@@ -33,7 +33,7 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
    * MatTable implementation of getPageCount
    */
   public getPageCount(): number {
-    return this.getPaginator()?.lastPage() ?? 1;
+    return this.getPaginator()?.length ?? 1;
   }
 
   /**
