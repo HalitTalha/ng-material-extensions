@@ -2,7 +2,11 @@ import { FileUtil } from '../../util/file-util';
 import { Mime } from '../../mime';
 import { Exporter } from './exporter';
 import { Options } from '../../options';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export abstract class FileExporter<T extends Options> implements Exporter<T> {
   constructor() {}
 

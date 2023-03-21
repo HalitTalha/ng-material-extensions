@@ -3,9 +3,13 @@ import { Mime } from '../../mime';
 import { FileExporter } from './file-exporter';
 import { SheetjsHelperService } from '../sheetjs-helper.service';
 import { Options } from '../../options';
+import { Injectable } from '@angular/core';
 /**
  * An angular service class that is used to create files out of json object arrays.
  */
+@Injectable({
+  providedIn: 'root'
+})
 export abstract class WorksheetExporter<T extends Options> extends FileExporter<T> {
 
   constructor(protected sheetJsHelper: SheetjsHelperService) {
