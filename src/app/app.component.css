@@ -84,19 +84,7 @@ h2 {
   }
 }
 
-::ng-deep .docs-tabs > .mat-tab-header {
-  background-color: #3f51b5 !important;
-}
-
-::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-ink-bar {
-  background-color: #fff !important;
-  height: 4px;
-}
-
-::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label > .mat-tab-label-content {
-  color: #fff !important;
-}
-
-::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label-active {
-  opacity: 1;
+::ng-deep .mat-mdc-tab-header {
+  max-width: 50%;
+  align-self: center;
 }
