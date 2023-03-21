@@ -13,12 +13,19 @@ This project facilitates the common functionalities for CdkTable implementations
 Install cdk-table-exporter if you are not using angular material in your project. In this case you have to implement your version of CdkTableExporter abstract class to use as your directive.
 
 ```
-npm install --save cdk-table-exporter
+npm install cdk-table-exporter
 ```
-NOTE: For the previous major versions of Angular install version 1.2.5
+NOTE: Angular versions older than Angular 8 should install cdk-table-exporter@1.2.5
 ```
-npm install --save cdk-table-exporter@1.2.5
+npm install cdk-table-exporter@1.2.5
 ```
+
+For Angular versions between 8-13 (inclusive), please install cdk-table-exporter@10.2.4
+```
+npm install cdk-table-exporter@10.2.4
+```
+
+
 After installing cdk-table-exporter import CdkTableExporterModule in your ngModule
 ```
 import { CdkTableExporterModule } from 'cdk-table-exporter';
@@ -59,8 +66,6 @@ ng build cdk-table-exporter
 Feel free to show your support. Donating supporters will be added into *Supporters* section inside the **README.md** of the repository.
 
 [![GitHub Org's stars](https://img.shields.io/github/stars/HalitTalha/ng-material-extensions?logo=Github&style=for-the-badge)](https://github.com/HalitTalha/ng-material-extensions/stargazers) -> **Become a star-gazer, giving a star at Github** 
-
-[![Patreon Badge](https://img.shields.io/badge/Patreon-talhature-e05d44?logo=Patreon&style=for-the-badge)](https://www.patreon.com/talhature) -> **Become a Patreon**
 
 
 [![Crypto Donation](https://img.shields.io/badge/_-DONATE-4d4d4e?logo=bitcoin&style=for-the-badge)](https://commerce.coinbase.com/checkout/3643d820-81aa-46ca-9973-877c1184e082) -> **Donate in crypto currencies**

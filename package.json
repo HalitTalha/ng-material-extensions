@@ -1,12 +1,22 @@
 {
   "name": "ng-material-extensions",
-  "version": "0.0.0",
+  "version": "14.0.0",
+  "license": "Apache-2.0",
+  "description": "Extended features for @angular/material components",
+  "author": "Halit Talha Türe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HalitTalha/ng-material-extensions"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-docs": "ng build --configuration production --base-href /ng-material-extensions/",
+    "build-stats": "ng build --stats-json",
+    "analyze": "webpack-bundle-analyzer docs/stats.json"
   },
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -22,7 +32,7 @@
     "@ctrl/ngx-github-buttons": "^8.0.0",
     "file-saver-es": "^2.0.5",
     "lodash": "^4.17.21",
-    "marked": "^4.2.12",
+    "marked": "^4.0.0",
     "ngx-markdown": "^14.0.1",
     "prismjs": "^1.29.0",
     "rxjs": "~7.5.0",
