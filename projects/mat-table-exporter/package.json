@@ -10,13 +10,12 @@
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
   },
   "peerDependencies": {
-    "@angular/cdk": "^14.2.7",
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
-    "@angular/material": "^14.2.7"
+    "@angular/cdk": "^15.2.3",
+    "@angular/common": "^15.2.3",
+    "@angular/core": "^15.2.3",
+    "@angular/material": "^15.2.3"
   },
   "dependencies": {
-    "cdk-table-exporter": "^14.0.0",
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
