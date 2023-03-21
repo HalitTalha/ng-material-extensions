@@ -16,6 +16,7 @@
     "@angular/material": "^15.2.3"
   },
   "dependencies": {
+    "cdk-table-exporter": "^15.0.0",
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
