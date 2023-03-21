@@ -14,7 +14,7 @@ export class ServiceLocatorService {
 
   constructor(private injector: Injector) { }
 
-  public getService(exportType: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other'): Exporter<Options> {
+  public getService(exportType: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'other', customExporter?: Exporter<Options>): Exporter<Options> {
     switch (exportType) {
       case ExportType.XLS.valueOf():
         return this.injector.get<XlsExporterService>(XlsExporterService);
@@ -27,7 +27,12 @@ export class ServiceLocatorService {
       case ExportType.CSV.valueOf():
         return this.injector.get<CsvExporterService>(CsvExporterService);
       case ExportType.OTHER.valueOf():
-        return null;
+        if (!customExporter) {
+          console.error("Provide a custom exporter implementation. Using default exporter.");
+          return this.injector.get<XlsxExporterService>(XlsxExporterService);
+        } else {
+          return customExporter;
+        }
       default:
         return this.injector.get<XlsxExporterService>(XlsxExporterService);
     }

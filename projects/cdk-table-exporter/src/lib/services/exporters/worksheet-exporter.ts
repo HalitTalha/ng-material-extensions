@@ -19,6 +19,6 @@ export abstract class WorksheetExporter<T extends Options> extends FileExporter<
     return await this.workSheetToContent(workSheet, options);
   }
   public abstract workSheetToContent(workSheet: WorkSheet, options?: T): Promise<any>;
-  public abstract getMimeType(): Mime;
+  public abstract override getMimeType(): Mime;
 
 }

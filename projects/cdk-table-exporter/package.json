@@ -1,6 +1,6 @@
 {
   "name": "cdk-table-exporter",
-  "version": "10.2.4",
+  "version": "14.0.0",
   "description": "Abstract CdkTable Exporter",
   "author": "Halit Talha Türe",
   "license": "Apache-2.0",
@@ -10,18 +10,18 @@
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/cdk-table-exporter"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=10.2.7",
-    "@angular/common": ">=10.2.4",
-    "@angular/core": ">=10.2.4"
+    "@angular/cdk": "^14.2.7",
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
   },
   "dependencies": {
     "file-saver-es": "^2.0.5",
-    "tslib": "^2.0.0",
-    "xlsx": "^0.17.2"
+    "tslib": "^2.3.0",
+    "xlsx": "^0.18.5"
   },
+  "sideEffects": false,
   "devDependencies": {
-    "@angular/cdk": "~10.2.7",
-    "@types/file-saver": "^2.0.1"
+    "@types/file-saver-es": "^2.0.1"
   },
   "keywords": [
     "cdktable",

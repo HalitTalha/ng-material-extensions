@@ -13,8 +13,7 @@ export class XlsxExporterService extends XlsExporterService {
     super(sheetJsHelper);
   }
 
-  // override
-  public getMimeType(): Mime {
+  public override getMimeType(): Mime {
     return MIME_EXCEL_XLSX;
   }
 }

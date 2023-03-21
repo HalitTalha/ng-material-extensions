@@ -20,8 +20,8 @@ const SPACECRAFT_DATA: SpaceCraft[] = [
   {name: 'Enterprise', isConstitutionClass: true, captain: {name: 'Talha', surname: 'Türe'}},
   {name: 'Discovery', isConstitutionClass: true, captain: {name: 'Christopher', surname: 'Pike'}},
   {name: 'Enterprise', isConstitutionClass: false, captain: {name: 'Jean-Luc', surname: 'Pickard'}},
-  {name: null, isConstitutionClass: true, captain: {name: 'Christopher', surname: 'Pike'}},
-  {name: 'Discovery', isConstitutionClass: true, captain: null}
+  {name: '', isConstitutionClass: true, captain: {name: 'Christopher', surname: 'Pike'}},
+  {name: 'Discovery', isConstitutionClass: true, captain: {} as Captain}
 ];
 
 @Component({
@@ -34,7 +34,7 @@ export class SimpleFilterComponent implements OnInit {
   filterEntity: SpaceCraft;
   filterType: MatTableFilter;
   displayedColumns: string[] = ['name', 'captainName', 'captainSurname', 'isConstitutionClass'];
-  dataSource;
+  dataSource: any;
   constructor() {
   }
 

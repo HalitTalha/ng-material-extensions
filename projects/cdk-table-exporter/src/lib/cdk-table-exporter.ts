@@ -1,5 +1,5 @@
 import { DataRowOutlet } from '@angular/cdk/table';
-import { Directive, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ExportType } from './export-type';
 import { ExcelOptions, Options, TxtOptions } from './options';
@@ -31,14 +31,13 @@ export abstract class CdkTableExporter {
 
   private _isExporting: boolean;
 
-  private _subscription: Subscription;
+  private _subscription: Subscription | undefined;
 
   private _options?: Options;
 
-  private _selectedRows?: Array<number>;
+  private _selectedRows: Array<number>;
 
   constructor(
-    protected renderer: Renderer2,
     private serviceLocator: ServiceLocatorService,
     private dataExtractor: DataExtractorService,
     protected _cdkTable: any
@@ -73,7 +72,7 @@ export abstract class CdkTableExporter {
   /**
    * Must return an observable that notifies the subscribers about page changes
    */
-  public abstract getPageChangeObservable(): Observable<any>;
+  public abstract getPageChangeObservable(): Observable<any> | undefined;
 
   /**
    * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
@@ -121,13 +120,8 @@ export abstract class CdkTableExporter {
     return this._selectedRows?.includes(index);
   }
 
-
   private loadExporter(exportType: any) {
-    if (exportType === ExportType.OTHER.valueOf()) {
-      this._exporterService = this.exporter;
-    } else {
-      this._exporterService = this.serviceLocator.getService(exportType);
-    }
+    this._exporterService = this.serviceLocator.getService(exportType, this.exporter);
   }
 
   private exportWithPagination() {
@@ -168,12 +162,12 @@ export abstract class CdkTableExporter {
   }
 
   private compareSelectedRowCount(rowCount: number): boolean {
-    return !!(this._selectedRows?.length === rowCount);
+    return !!(this._selectedRows.length === rowCount);
   }
 
   private initPageHandler(): void {
     if (!this._subscription) {
-      this._subscription = this.getPageChangeObservable().subscribe(() => {
+      this._subscription = this.getPageChangeObservable()?.subscribe(() => {
         setTimeout(() => {
           if (this._isIterating) {
             this.extractDataOnCurrentPage();

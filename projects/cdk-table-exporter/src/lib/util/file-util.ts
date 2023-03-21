@@ -27,6 +27,7 @@ export class FileUtil {
   }
 
   public static removeExtension(options?: Options) {
-    options.fileName = options.fileName.split(DOT)[0];
+    if (options)
+      options.fileName = options.fileName?.split(DOT)[0];
   }
 }

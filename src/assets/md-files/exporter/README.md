@@ -2,7 +2,6 @@
 
 [![Node version](https://img.shields.io/npm/v/mat-table-exporter.svg?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/mat-table-exporter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-exporter.svg?style=for-the-badge)
 
-
 This package is to make MatTable components exportable in ***excel, csv, txt*** and ***json*** formats. ***Pagination is also supported***. Applying MatTableExporter directive to your MatTable is enough to make it exportable. The directive uses different exporter services for different exporting types. You can also implement your own exporter and use it for your custom exporting requirements.
 
 This project employs <a href="https://github.com/SheetJS/js-xlsx" target="_blank">xlsx sheetjs</a>, which is a great library and mature enough for the excel creation itself. In order to achieve a cross-browser file saving capability <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaverjs</a> is employed.
@@ -16,11 +15,16 @@ cdk-table-exporter facilitates the common exporting related functionalities for 
 
 If you are employing angular material in your project. Install mat-table-exporter
 ```
-npm install --save mat-table-exporter
+npm install mat-table-exporter
 ```
-NOTE: For the previous major versions of Angular (Angular 8 and older versions) install version 1.2.5 
+NOTE: Angular versions older than Angular 8 should install mat-table-exporter@1.2.5
 ```
-npm install --save mat-table-exporter@1.2.5
+npm install mat-table-exporter@1.2.5
+```
+
+For Angular versions between 8-13 (inclusive), please install mat-table-exporter@10.2.4
+```
+npm install mat-table-exporter@10.2.4
 ```
 
 After installing mat-table-exporter import MatTableExporterModule in your ngModule
@@ -35,6 +39,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
   ],
  ]})
 ```
+
 &nbsp;
 
 ## Usage
@@ -56,20 +61,18 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 
 &nbsp;
 
+
 ## Support & Donations
 
 Feel free to show your support. Donating supporters will be added into *Supporters* section inside the **README.md** of the repository.
 
 [![GitHub Org's stars](https://img.shields.io/github/stars/HalitTalha/ng-material-extensions?logo=Github&style=for-the-badge)](https://github.com/HalitTalha/ng-material-extensions/stargazers) -> **Become a star-gazer, giving a star at Github** 
 
-[![Patreon Badge](https://img.shields.io/badge/Patreon-talhature-e05d44?logo=Patreon&style=for-the-badge)](https://www.patreon.com/talhature) -> **Become a Patreon**
-
 
 [![Crypto Donation](https://img.shields.io/badge/_-DONATE-4d4d4e?logo=bitcoin&style=for-the-badge)](https://commerce.coinbase.com/checkout/3643d820-81aa-46ca-9973-877c1184e082) -> **Donate in crypto currencies**
 
 
 &nbsp;
-
 ## Licence
 
 Apache-2.0

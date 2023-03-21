@@ -26,7 +26,7 @@ export abstract class FilterPredicate<T> {
     }
   }
 
-  private handleLetterCasing(itemPair: ItemPair<any>, caseSensitive: boolean): void {
+  private handleLetterCasing(itemPair: ItemPair<any>, caseSensitive?: boolean): void {
     if (!caseSensitive) {
       this.transformAllLowerCase(itemPair);
     }

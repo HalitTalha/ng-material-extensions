@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, Host, Optional, Renderer2, Self } from '@angular/core';
+import { AfterViewInit, Directive, Host, Optional, Self } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CdkTableExporter, DataExtractorService, ServiceLocatorService } from 'cdk-table-exporter';
@@ -22,19 +22,18 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   }
 
   constructor(
-    renderer: Renderer2,
     serviceLocator: ServiceLocatorService,
     dataExtractor: DataExtractorService,
     @Host() @Self() @Optional() table: MatTable<any>
   ) {
-    super(renderer, serviceLocator, dataExtractor, table);
+    super(serviceLocator, dataExtractor, table);
   }
 
   /**
    * MatTable implementation of getPageCount
    */
   public getPageCount(): number {
-    return this.getPaginator().getNumberOfPages();
+    return this.getPaginator()?.lastPage() ?? 1;
   }
 
   /**
@@ -62,29 +61,33 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
    * MatTable implementation of goToPage
    */
   public goToPage(index: number): void {
-    this.getPaginator().pageIndex = index;
-    this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+    const paginator: MatPaginator | null = this.getPaginator();
+    if (paginator) {
+      paginator.pageIndex = index;
+      paginator._changePageSize(paginator.pageSize);
+    }
   }
 
   /**
    * MatTable implementation of getPageChangeObservable
    */
-  public getPageChangeObservable(): Observable<any> {
-    return this.getPaginator().page;
+  public getPageChangeObservable(): Observable<any> | undefined {
+    return this.getPaginator()?.page;
   }
 
   private getDataSource(): MatTableDataSource<any> {
     return this._cdkTable.dataSource as MatTableDataSource<any>;
   }
 
-  private getPaginator(): MatPaginator {
-    return this.getDataSource().paginator;
+  private getPaginator(): MatPaginator | null {
+    return this.getDataSource()?.paginator;
   }
 
   private enablePaginator(value: boolean) {
-    if (this.getPaginator()) {
-      this.getPaginator().disabled = !value;
-      this.getPaginator()._changePageSize(this.getPaginator().pageSize);
+    const paginator: MatPaginator | null = this.getPaginator();
+    if (paginator) {
+      paginator.disabled = !value;
+      paginator._changePageSize(paginator.pageSize);
     }
   }
 

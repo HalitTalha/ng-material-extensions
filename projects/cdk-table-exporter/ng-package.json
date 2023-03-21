@@ -2,12 +2,9 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/cdk-table-exporter",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "cdk-table-exporter": "cdk-table-exporter"
-    }
+    "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "xlsx",
     "angular/cdk",
     "file-saver"

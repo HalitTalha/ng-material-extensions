@@ -16,6 +16,6 @@ export abstract class FileExporter<T extends Options> implements Exporter<T> {
     });
   }
 
-  public abstract async createContent(rows: Array<any>, options?: T): Promise<any>;
+  public abstract createContent(rows: Array<any>, options?: T): Promise<any>;
   public abstract getMimeType(): Mime;
 }

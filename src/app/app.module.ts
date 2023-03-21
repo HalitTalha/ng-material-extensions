@@ -1,5 +1,5 @@
 
-import { MatTableFilterModule } from 'mat-table-filter';
+//import { MatTableFilterModule } from 'mat-table-filter';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableExporterModule } from 'mat-table-exporter';
@@ -34,6 +33,7 @@ import { BriefExporterComponent } from './components/examples/brief-exporter/bri
 import { CustomExporterComponent } from './components/examples/custom-exporter/custom-exporter.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { SelectionExporterComponent } from './components/examples/selection-exporter/selection-exporter.component';
+import { MatTableFilterModule } from 'mat-table-filter';
 
 export function markedOptions(): MarkedOptions {
 
