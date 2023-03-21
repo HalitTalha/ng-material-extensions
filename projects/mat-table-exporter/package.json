@@ -1,6 +1,6 @@
 {
   "name": "mat-table-exporter",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "license": "Apache-2.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
