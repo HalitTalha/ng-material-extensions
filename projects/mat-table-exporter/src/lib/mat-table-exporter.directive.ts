@@ -33,7 +33,12 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
    * MatTable implementation of getPageCount
    */
   public getPageCount(): number {
-    return this.getPaginator()?.lastPage() ?? 1;
+    const pageSize = this.getPageSize();
+    if (pageSize == 0) {
+      return 0;
+    }
+    const pageCount = this.getTotalItemsCount() / this.getPageSize();
+    return Math.ceil(pageCount) ?? 1;
   }
 
   /**
@@ -61,11 +66,9 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
    * MatTable implementation of goToPage
    */
   public goToPage(index: number): void {
-    const paginator: MatPaginator | null = this.getPaginator();
-    if (paginator) {
-      paginator.pageIndex = index;
-      paginator._changePageSize(paginator.pageSize);
-    }
+    const paginator: MatPaginator = this.getPaginator();
+    paginator.pageIndex = index;
+    paginator._changePageSize(paginator.pageSize);
   }
 
   /**
@@ -79,16 +82,14 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
     return this._cdkTable.dataSource as MatTableDataSource<any>;
   }
 
-  private getPaginator(): MatPaginator | null {
+  private getPaginator(): MatPaginator {
     return this.getDataSource()?.paginator as MatPaginator;
   }
 
   private enablePaginator(value: boolean) {
-    const paginator: MatPaginator | null = this.getPaginator();
-    if (paginator) {
+    const paginator: MatPaginator = this.getPaginator();
       paginator.disabled = !value;
       paginator._changePageSize(paginator.pageSize);
-    }
   }
 
 }
