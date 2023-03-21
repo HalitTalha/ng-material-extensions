@@ -57,8 +57,10 @@ You can change the debounce time also.
 
 &nbsp;
 ### Stackblitz demo [mat-table-filter-example](https://stackblitz.com/github/HalitTalha/mat-table-filter-example)
+
 &nbsp;
-##API
+
+## API
 
 ### MatTableFilterDirective
 
