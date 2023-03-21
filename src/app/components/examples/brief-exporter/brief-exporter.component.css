@@ -10,7 +10,3 @@
   overflow: auto;
   max-height: 500px;
 }
-
-button[mat-raised-button] {
-  margin: 3px;
-}

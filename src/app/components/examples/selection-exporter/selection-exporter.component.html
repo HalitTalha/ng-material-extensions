@@ -42,7 +42,7 @@
   </mat-table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
-<div class="export-buttons">
+<div>
   <button mat-raised-button (click)="exporter.exportTable('xlsx', {sheet: 'sheet_name', Props: {Author: 'Talha'}, columnWidths: [50, 5, 3]})">Excel</button>
   <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
   <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>

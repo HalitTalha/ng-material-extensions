@@ -1,7 +1,3 @@
 .mat-column-select {
   border-bottom: none !important;
 }
-
-button[mat-raised-button] {
-  margin: 3px;
-}
