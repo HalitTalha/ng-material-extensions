@@ -80,7 +80,7 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   }
 
   private getPaginator(): MatPaginator | null {
-    return this.getDataSource()?.paginator;
+    return this.getDataSource()?.paginator as MatPaginator;
   }
 
   private enablePaginator(value: boolean) {
