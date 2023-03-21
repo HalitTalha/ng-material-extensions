@@ -1,27 +1,25 @@
-# NgMaterialExtensions
+:star::star: https://halittalha.github.io/ng-material-extensions/ :star::star:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.
+# Mat Table Extensions
 
-## Development server
+This is an angular workspace that currently includes 3 library projects.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Project | Version | Downloads/Month
+--|--|--
+[mat-table-exporter](https://github.com/HalitTalha/mat-table-extensions/blob/master/projects/mat-table-exporter/README.md) | [![Node version](https://img.shields.io/npm/v/mat-table-exporter.svg?style=flat)](https://www.npmjs.com/package/mat-table-exporter) | ![Total Downloads](https://img.shields.io/npm/dm/mat-table-exporter.svg)
+[cdk-table-exporter](https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/cdk-table-exporter/README.md) | [![Node version](https://img.shields.io/npm/v/cdk-table-exporter.svg?style=flat)](https://www.npmjs.com/package/cdk-table-exporter) |![Total Downloads](https://img.shields.io/npm/dm/cdk-table-exporter.svg)
+[mat-table-filter](https://github.com/HalitTalha/mat-table-extensions/blob/master/projects/mat-table-filter/README.md)| [![Node version](https://img.shields.io/npm/v/mat-table-filter.svg?style=flat)](https://www.npmjs.com/package/mat-table-filter)|![Total Downloads](https://img.shields.io/npm/dm/mat-table-filter.svg)
 
-## Code scaffolding
+## Support & Donations
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Feel free to show your support. Donating supporters will be added into *Supporters* section inside the **README.md** of the repository.
 
-## Build
+[![GitHub Org's stars](https://img.shields.io/github/stars/HalitTalha/ng-material-extensions?logo=Github&style=for-the-badge)](https://github.com/HalitTalha/ng-material-extensions/stargazers) -> **Become a star-gazer, giving a star at Github** 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+[![Crypto Donation](https://img.shields.io/badge/_-DONATE-4d4d4e?logo=bitcoin&style=for-the-badge)](https://commerce.coinbase.com/checkout/3643d820-81aa-46ca-9973-877c1184e082) -> **Donate in crypto currencies**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Licence
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Apache-2.0
