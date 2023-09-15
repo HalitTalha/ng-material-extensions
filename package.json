@@ -33,7 +33,7 @@
     "file-saver-es": "^2.0.5",
     "lodash": "^4.17.21",
     "marked": "^4.0.0",
-    "ngx-markdown": "^15.1.2",
+    "ngx-markdown": "^16.0.0",
     "prismjs": "^1.29.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
