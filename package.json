@@ -1,6 +1,6 @@
 {
   "name": "ng-material-extensions",
-  "version": "14.0.0",
+  "version": "16.0.0",
   "license": "Apache-2.0",
   "description": "Extended features for @angular/material components",
   "author": "Halit Talha Türe",
