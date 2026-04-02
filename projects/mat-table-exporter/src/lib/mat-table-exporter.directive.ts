@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 
 @Directive({
   selector: '[matTableExporter]',
-  exportAs: 'matTableExporter'
+  exportAs: 'matTableExporter',
+  standalone: false,
 })
 export class MatTableExporterDirective extends CdkTableExporter implements AfterViewInit {
   /**
@@ -74,7 +75,7 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
   /**
    * MatTable implementation of getPageChangeObservable
    */
-  public getPageChangeObservable(): Observable<any> | undefined {
+  public getPageChangeObservable(): Observable<any> | any {
     return this.getPaginator()?.page;
   }
 
@@ -88,8 +89,10 @@ export class MatTableExporterDirective extends CdkTableExporter implements After
 
   private enablePaginator(value: boolean) {
     const paginator: MatPaginator = this.getPaginator();
+    if (paginator) {
       paginator.disabled = !value;
       paginator._changePageSize(paginator.pageSize);
+    }
   }
 
 }

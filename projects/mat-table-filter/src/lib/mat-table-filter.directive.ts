@@ -2,13 +2,14 @@ import { PropertyOptions } from './property-options';
 import { Directive, DoCheck, Input, Host, Self, Optional } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs';
 import { MatTableFilter } from './mat-table-filter.enum';
 import { MatTableFilterService } from './services/mat-table-filter.service';
 
 @Directive({
   selector: '[matTableFilter]',
-  exportAs: 'matTableFilter'
+  exportAs: 'matTableFilter',
+  standalone: false,
 })
 export class MatTableFilterDirective implements DoCheck {
   private _oldExampleEntity: any;

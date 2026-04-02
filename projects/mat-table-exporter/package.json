@@ -1,23 +1,31 @@
 {
   "name": "mat-table-exporter",
-  "version": "14.0.2",
-  "license": "Apache-2.0",
+  "version": "21.0.0",
   "description": "Provides exporting support for @angular/material tables",
   "author": "Halit Talha Türe",
-  "homepage": "https://halittalha.github.io/ng-material-extensions/",
+  "license": "Apache-2.0",
+  "homepage": "https://halittalha.github.io/ng-material-extensions",
   "repository": {
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-exporter"
   },
+  "scripts": {
+    "lib-chk": "npx ncu",
+    "lib-chk-up": "npx ncu -u"
+  },
   "peerDependencies": {
-    "@angular/cdk": "^14.2.7",
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
-    "@angular/material": "^14.2.7"
+    "@angular/cdk": "21.2.0",
+    "@angular/common": "21.2.0",
+    "@angular/core": "21.2.0",
+    "@angular/material": "21.2.0"
   },
   "dependencies": {
-    "cdk-table-exporter": "^15.0.0",
-    "tslib": "^2.3.0"
+    "cdk-table-exporter": "21.0.0",
+    "tslib": "2.8.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "npm-check-updates": "20.0.0"
   },
   "sideEffects": false,
   "keywords": [

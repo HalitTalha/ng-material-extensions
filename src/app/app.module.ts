@@ -1,6 +1,6 @@
 
 //import { MatTableFilterModule } from 'mat-table-filter';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -41,65 +41,54 @@ export function markedOptions(): MarkedOptions {
     gfm: true,
     breaks: false,
     pedantic: false,
-    smartLists: true,
-    smartypants: false,
+    // smartLists: true,
+    // smartypants: false,
   };
 }
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ExporterComponent,
-    FilterComponent,
-    ExampleViewerComponent,
-    ArrayFilterComponent,
-    CustomColumnFilterComponent,
-    SimpleFilterComponent,
-    PropertyOptionsComponent,
-    BriefExporterComponent,
-    CustomExporterComponent,
-    SelectionExporterComponent
-  ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    PortalModule,
-    MarkdownModule.forRoot({
-      loader: HttpClient,
-      markedOptions: {
-        provide: MarkedOptions,
-        useFactory: markedOptions,
-      },
-    }),
-    BrowserAnimationsModule,
-    MatTableFilterModule,
-    MatTableExporterModule,
-    MatIconModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatDividerModule,
-    MatTooltipModule,
-    MatSlideToggleModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatTableModule,
-    MatTabsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    ArrayFilterComponent,
-    BriefExporterComponent,
-    CustomColumnFilterComponent,
-    CustomExporterComponent,
-    SimpleFilterComponent,
-    PropertyOptionsComponent,
-    SelectionExporterComponent
+        AppComponent,
+        ExporterComponent,
+        FilterComponent,
+        ExampleViewerComponent,
+        ArrayFilterComponent,
+        CustomColumnFilterComponent,
+        SimpleFilterComponent,
+        PropertyOptionsComponent,
+        BriefExporterComponent,
+        CustomExporterComponent,
+        SelectionExporterComponent
+    ],
 
-  ]
-})
+    imports: [
+        BrowserModule,
+        FormsModule,
+        PortalModule,
+        MarkdownModule.forRoot({
+            loader: HttpClient,
+            markedOptions: {
+                provide: MarkedOptions,
+                useFactory: markedOptions,
+            },
+        }),
+        BrowserAnimationsModule,
+        MatTableFilterModule,
+        MatTableExporterModule,
+        MatIconModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatDividerModule,
+        MatTooltipModule,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatTableModule,
+        MatTabsModule],
+   providers: [provideHttpClient(withInterceptorsFromDi())],
+   bootstrap: [AppComponent],
+  })
 export class AppModule { }

@@ -22,7 +22,7 @@ export class XlsExporterService extends WorksheetExporter<ExcelOptions> {
       worksheet[XLSX_COLS] = this.convertToWch(options.columnWidths);
     }
     this.correctTypes(options);
-    utils.book_append_sheet(workBook, worksheet, options.sheet);
+    utils.book_append_sheet(workBook, worksheet, options.sheet as any);
     return write(workBook, options);
   }
 
